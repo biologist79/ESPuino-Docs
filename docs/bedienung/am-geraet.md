@@ -65,8 +65,41 @@ erst beim Loslassen/Stillstand.
 
 ## Neopixel-Anzeigen
 
-Status, Wiedergabefortschritt, Batterie u. a. Farb-Referenz z. B.: MediaHub-Download = Himmelblau,
-Firmware-Update (OTA) = Blau.
+Die Neopixel zeigen sehr viel Zustand an. (Anzahl/Ausrichtung sind im Webinterface einstellbar.)
+
+**Beim Booten**
+
+- Hochfahren: jede zweite LED, rotierend **orange**.
+- SD-Karte nicht einlesbar: LEDs blinken **rot** (dauerhaft, bis SD verfügbar bzw. bei aktivem
+  `SHUTDOWN_IF_SD_BOOT_FAILS`).
+
+**Status**
+
+- **Leerlauf:** vier langsam rotierende LEDs – **weiß** (WLAN verbunden) bzw. **grün** (WLAN aus
+  oder gerade beim Verbinden).
+- **Bluetooth:** vier langsam rotierende LEDs in **blau**.
+- **Fehler:** alle LEDs blinken 1× **rot** (Aktion nicht akzeptiert).
+- **OK:** alle LEDs blinken 1× **grün** (Aktion akzeptiert).
+- **Ausschalten:** wachsender roter Kreis bis zur Long-Press-Zeit.
+- **Tasten gesperrt:** Fortschritts-LEDs **rot**.
+
+**Wiedergabe**
+
+- **Busy** (Playlist wird erstellt): vier schnell rotierende **violette** LEDs.
+- **Titel-Fortschritt:** Regenbogen; LED-Anzahl entspricht dem Fortschritt.
+- **Playlist-Fortschritt:** kurz **blau** zu Beginn jedes Titels.
+- **Webstream:** zwei langsam rotierende LEDs, Farbe wandert regenbogenartig.
+- **Lautstärke:** Verlauf **grün → rot**; LED-Anzahl relativ zur Maximal-Lautstärke.
+- **Pause:** Fortschritts-LEDs **orange**.
+
+**Batterie** *(optional)*
+
+- **Unterspannung:** blinkt 3× **rot** (Schwelle im Webinterface einstellbar; optional
+  automatische Abschaltung).
+- Kurzer Druck auf den Encoder-Taster zeigt den Ladezustand als LED-Balken.
+
+**Weitere Anzeigen:** MediaHub-Download = Himmelblau, Firmware-Update (OTA) = Blau (siehe
+[Kapitel 11](../firmware/aktualisieren.md)).
 
 ## Kopfhörer-Detection, Lautstärke-Profile
 
