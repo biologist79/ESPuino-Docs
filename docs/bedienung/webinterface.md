@@ -280,6 +280,13 @@ Zusätzlich lassen sich Aktionen auf **gleichzeitig gedrückte Tasterpaare** leg
 Kombinationen von 0+1 bis 4+5, jeweils eine Aktion) – praktisch für selten gebrauchte Funktionen wie
 Neustart oder FTP-Start, ohne dafür einen eigenen Taster zu opfern.
 
+!!! tip "Weniger ist oft mehr"
+    Technisch kannst du hier eine Menge belegen – aber ein Dutzend Kombinationen wird sich kaum jemand
+    merken. Beschränke dich lieber auf ein, zwei wirklich sinnvolle. Bedenke außerdem: Gerade Kinder
+    drücken schon mal munter auf allen Tasten gleichzeitig herum und lösen dabei Aktionen aus, mit
+    denen du nicht rechnest – oder die du längst wieder vergessen hast. Eine übersichtliche Belegung
+    erspart dir hinterher das Rätselraten.
+
 Die zur Auswahl stehenden Aktionen entsprechen im Wesentlichen dem Modifikationskarten-Katalog, plus
 einiger Aktionen, die nur als Taster Sinn ergeben: Lauter/Leiser/Initiale Lautstärke,
 Batteriespannung anzeigen, Stop und Neustart, Schlafen nach fünf Titeln sowie eine Debug-Anzeige der
