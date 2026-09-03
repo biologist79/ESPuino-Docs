@@ -1,33 +1,44 @@
 # 15 · Entwicklung & Beitrag
 
-Für alle, die selbst am Code arbeiten oder beitragen wollen. Ausführlicheres steht in der
+ESPuino ist ein offenes Projekt, und Beiträge sind willkommen. Dieses Kapitel richtet sich an alle,
+die selbst am Code arbeiten, eigene Hardware unterstützen oder Verbesserungen zurückgeben möchten. Es
+gibt dir eine erste Orientierung; noch ausführlicher ist die
 [README des ESPuino-Repos](https://github.com/biologist79/ESPuino).
 
-## Projektstruktur
+## Wie der Code aufgebaut ist
 
-Der Firmware-Code liegt unter `src/`, grob nach Zuständigkeit:
+Der Firmware-Code liegt unter `src/` und ist nach Zuständigkeiten aufgeteilt. Wenn du dich das erste
+Mal hineinliest, hilft diese grobe Landkarte:
 
-- **Kern/Ablauf:** `main` (setup/loop), `System` (Betriebsmodus, Deep-Sleep, Neustart), `Cmd`
-  (Kommando-Dispatch für Karten/Taster/MQTT).
-- **Audio:** `AudioPlayer` (Playlist/Playmodi, Wiedergabe), `SdCard`.
-- **RFID:** `RfidCommon`, `RfidConfig`, `RfidRuntime` (Auto-Detect), `RfidMfrc522`, `RfidPn5180`.
-- **Eingabe:** `Button`, `RotaryEncoder`, `IrReceiver`, `HallEffectSensor`.
-- **Anzeige:** `Led` (Neopixel-Animationen).
-- **Netzwerk:** `Wlan`, `Web` (Webinterface/REST), `Mqtt`, `Ftp`.
-- **Sonstiges:** `Bluetooth`, `Battery`/`BatteryMeasureVoltage`, `Port` (GPIO + Port-Expander),
-  `Power`, `MediaHub`.
-- **Infrastruktur:** `Log`, `LogMessages_DE/EN/FR`, `Queues`, `MemX`, `Common`.
+- **Kern und Ablauf:** `main` enthält `setup()` und die `loop()`, `System` kümmert sich um
+  Betriebsmodus, Deep-Sleep und Neustart, und `Cmd` verteilt die Kommandos, die von Karten, Tasten
+  oder MQTT kommen.
+- **Audio:** `AudioPlayer` steuert Playlist, Abspielmodi und Wiedergabe, `SdCard` den Kartenzugriff.
+- **RFID:** `RfidCommon`, `RfidConfig`, `RfidRuntime` (die Auto-Erkennung) sowie die readerspezifischen
+  `RfidMfrc522` und `RfidPn5180`.
+- **Eingabe:** `Button`, `RotaryEncoder`, `IrReceiver` und `HallEffectSensor`.
+- **Anzeige:** `Led` mit allen Neopixel-Animationen.
+- **Netzwerk:** `Wlan`, `Web` (Webinterface und REST-Schnittstelle), `Mqtt` und `Ftp`.
+- **Weiteres:** `Bluetooth`, `Battery` / `BatteryMeasureVoltage`, `Port` (GPIOs und Port-Expander),
+  `Power` und `MediaHub`.
+- **Infrastruktur:** `Log` und die `LogMessages_*` (Übersetzungen), dazu `Queues`, `MemX` und
+  `Common`.
 
-## Eigene Boards definieren
+## Eigene Boards unterstützen
 
-Für abweichende Hardware `HAL 99` setzen → `settings-custom.h`. Dort werden – wie in den anderen
-`settings-<board>.h` – Pins und Feature-Flags vergeben (native GPIOs `0`–`39`, Port-Expander-Kanäle
-`100`–`115`). Siehe auch [Compile-Zeit-Konfiguration](../firmware/compile-zeit.md).
+Möchtest du ESPuino auf abweichender Hardware betreiben, ist der vorgesehene Weg das Board `HAL 99`,
+das die Datei `settings-custom.h` einbindet. Dort vergibst du – wie in den anderen `settings-<board>.h`
+– die Pins und setzt die Feature-Flags. Zur Erinnerung an die Nummernbereiche: native ESP32-GPIOs
+liegen bei `0`–`39`, die Kanäle des Port-Expanders bei `100`–`115`. Mehr dazu in der
+[Compile-Zeit-Konfiguration](../firmware/compile-zeit.md).
 
-## Coding-Konventionen, PRs, CI
+## Konventionen, Pull Requests und CI
 
-- **Formatierung:** `clang-format` (Konfiguration `.clang-format` im Repo) – vor dem Commit
-  anwenden.
-- **Branches:** Features branchen von `dev`, Pull Requests gehen gegen `dev`; `master` bekommt
-  periodische Release-Merges.
-- **CI:** GitHub Actions baut die Firmware (siehe `.github/workflows/`).
+Damit alles zusammenpasst, ein paar Spielregeln:
+
+- **Formatierung:** Der Code wird mit `clang-format` formatiert (die Regeln stehen in `.clang-format`
+  im Repo). Am besten vor jedem Commit anwenden.
+- **Branches:** Neue Features branchen von `dev` ab, und Pull Requests gehen ebenfalls gegen `dev`.
+  Der `master`-Branch bekommt in größeren Abständen die Release-Merges.
+- **CI:** GitHub Actions baut die Firmware automatisch – ein Blick nach `.github/workflows/` zeigt,
+  was dort passiert.

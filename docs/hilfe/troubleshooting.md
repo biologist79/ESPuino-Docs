@@ -1,75 +1,90 @@
 # 13 · Troubleshooting
 
-Die häufigsten Stolperfallen und was dagegen hilft.
+Nicht immer läuft alles auf Anhieb rund – das ist bei einem Selbstbauprojekt normal und kein Grund zur
+Verzweiflung. Dieses Kapitel geht die häufigsten Stolperfallen durch und erklärt jeweils, woran es
+meist liegt und was hilft. Wenn du das Problem hier nicht findest, ist das Forum die richtige nächste
+Anlaufstelle – am besten mit dem Log (siehe gleich) und ein paar Angaben zu deinem Gerät.
 
-## Serial-Monitor & Log im Browser
+## Zuerst: das Log ansehen
 
-Für fast jede Diagnose ist das Log der schnellste Weg:
+Bevor du lange rätst, lohnt sich fast immer ein Blick ins Log – es verrät dir oft direkt, woran es
+hakt. Du kommst auf zwei Wegen dran: bequem **im Browser** über das Stapel-Menü oben rechts im
+Webinterface, Eintrag **Log**; oder klassisch **seriell** über USB mit 115200 Baud. Wie ausführlich
+ESPuino protokolliert, steuert die Einstellung `SERIAL_LOGLEVEL`
+([Kapitel 12](../firmware/compile-zeit.md)).
 
-- **Im Browser:** Stapel-Menü oben rechts → **Log** zeigt die Konsolenausgabe direkt an.
-- **Seriell:** über USB mit **115200 Baud**. Die Ausführlichkeit steuert `SERIAL_LOGLEVEL`
-  ([Kapitel 12](../firmware/compile-zeit.md)).
+## Die RFID-Karte wird nicht zuverlässig erkannt
 
-## RFID liest nicht zuverlässig
+Wenn Karten mal erkannt werden und mal nicht, ist meistens der Abstand oder die Empfindlichkeit im
+Spiel. Leg die Karte etwas näher an den Leser, und dreh bei einem MFRC522 notfalls die
+Empfindlichkeit hoch (Einstellung **MFRC522 Gain**, 0–7). Nutzt du einen PN5180 und meldet ESPuino
+eine ruhende Karte fälschlich als „entfernt", hilft es, den **PN5180 Debounce** zu erhöhen (Standard
+500 ms) – die entsprechenden Einstellungen findest du im Tab Allgemein → RFID-Reader.
 
-- **Abstand** Karte ↔ Leser zu groß? Näher auflegen.
-- **PN5180 Debounce** erhöhen, wenn eine ruhende Karte fälschlich als „entfernt" gilt
-  (Tab Allgemein → RFID-Reader, Standard 500 ms).
-- **MFRC522 Gain** (0–7) höher stellen für mehr Empfindlichkeit.
-- **Sporadische Aussetzer** bei aktivem „Pause bei entfernter Karte": die Karte wird zwischendurch
-  kurz nicht erkannt und die Wiedergabe pausiert ungewollt. Debounce erhöhen, Abstand verringern –
-  oder die Option abschalten ([Kapitel 6](../bedienung/webinterface.md#tab-allgemein)).
-- **LPCD** ist als unzuverlässig bekannt – siehe [Kapitel 10 → LPCD](../vertiefung/erweiterte-themen.md#lpcd).
+Ein besonders häufiger Fall verdient eigene Erwähnung: Läuft die Wiedergabe mit der Option **„Pause,
+wenn die Karte entfernt wird"** und stoppt dann von selbst sporadisch, dann wird die Karte
+zwischendurch kurz nicht erkannt und ESPuino hält das für ein Abnehmen. Das ist ein bekannter
+Dauerbrenner. Verkleinere den Abstand zwischen Karte und Leser, erhöhe den Debounce – oder schalte
+die Option einfach ab, wenn sie bei dir mehr Ärger als Nutzen bringt. (Zu LPCD siehe die deutliche
+Warnung in [Kapitel 10](../vertiefung/erweiterte-themen.md#lpcd).)
 
-## SD-Karte wird nicht erkannt
+## Die SD-Karte wird nicht erkannt
 
-- Karte muss **FAT32** sein (nicht exFAT). Große Karten ggf. am Computer neu als FAT32
-  formatieren.
-- Beim Booten **rot blinkende LEDs** = SD nicht einlesbar. ESPuino bleibt in diesem Zustand, bis
-  eine Karte verfügbar ist (bzw. schläft bei aktivem `SHUTDOWN_IF_SD_BOOT_FAILS`).
-- Karte testweise tauschen – nicht jede (v. a. sehr billige/alte) läuft zuverlässig.
+Der mit Abstand häufigste Grund ist das Dateisystem: ESPuino braucht **FAT32**, viele Karten kommen
+aber als exFAT. Formatiere die Karte am Computer neu als FAT32 – bei Karten über 32 GB ist das fast
+immer nötig. Blinken die LEDs beim Booten dauerhaft **rot**, ist genau das das Signal „SD nicht
+lesbar"; ESPuino verharrt dann in diesem Zustand, bis eine brauchbare Karte steckt (beziehungsweise
+schläft ein, wenn `SHUTDOWN_IF_SD_BOOT_FAILS` aktiv ist). Hilft das Umformatieren nicht, probiere
+testweise eine andere Karte – gerade sehr billige oder sehr alte Karten laufen nicht immer zuverlässig.
 
-## Kein / verzerrter Sound
+## Kein oder verzerrter Ton
 
-- **Zu leise/zu laut:** Maximal-Lautstärken im Webinterface prüfen (Tab Allgemein → Wiedergabe).
-- **Verstärkung:** Auf der Complete stellt die Lötbrücke **JP2/JP3** die Verstärkung (+3 dB oder
-  +15 dB) ein – nur **eine** davon setzen.
-- **Mono/Stereo:** Bei nur einem Lautsprecher Mono-Wiedergabe aktivieren.
-- Für Kopfhörer die **Kopfhörerplatine** verwenden (siehe [Kapitel 7](../bedienung/am-geraet.md#kopfhorer-detection-lautstarke-profile)).
+Kommt gar kein Ton, prüf zuerst das Naheliegende: die Lautstärke und deren Maximalwerte im
+Webinterface (Tab Allgemein → Wiedergabe). Klingt es verzerrt, kann die **Verstärkung** zu hoch
+gewählt sein – auf der Complete stellt die Lötbrücke JP2/JP3 zwischen +3 dB und +15 dB um (es darf
+immer nur eine gesetzt sein). Hast du nur einen Lautsprecher, aktiviere die **Mono-Wiedergabe**. Und
+für Kopfhörer ist die kabelgebundene [Kopfhörerplatine](../bedienung/am-geraet.md#kopfhorer-detection-lautstarke-profile)
+der zuverlässige Weg.
 
-## Einzelne Titel machen Probleme (MP3)
+## Einzelne Titel spielen nicht oder stottern (MP3)
 
-Manche MP3s bereiten Ärger (spielen nicht, stottern) – häufig liegt es an **eingebettetem Coverart**
-oder ungewöhnlicher Kodierung. Oft hilft ein sauberes **Re-Encoding**, z. B. mit
-[ffmpeg](https://ffmpeg.org/):
+Manchmal ist nicht das Gerät schuld, sondern eine einzelne Datei. Gerade bei MP3s ist häufig
+**eingebettetes Coverart** die Ursache, oder eine ungewöhnliche Kodierung. In solchen Fällen hilft
+ein sauberes Neu-Kodieren, zum Beispiel mit [ffmpeg](https://ffmpeg.org/):
 
 ```bash
 ffmpeg -i problem.mp3 -vn -c:a libmp3lame -q:a 2 clean.mp3
 ```
 
-`-vn` entfernt das eingebettete Cover (technisch ein „Video"-Stream), `-q:a 2` liefert gute
-Qualität. Für einen ganzen Ordner die Datei-Schleife der Shell nutzen.
+Das `-vn` entfernt das eingebettete Cover (das technisch als „Video"-Spur mitläuft), `-q:a 2` sorgt
+für gute Qualität. Betrifft es einen ganzen Ordner, wickelst du den Befehl in eine kleine
+Datei-Schleife deiner Shell.
 
 ## WLAN-Probleme
 
-- ESP32 kann **nur 2,4 GHz** – ein reines 5-GHz-Netz funktioniert nicht.
-- Adresse immer mit **`http://`** aufrufen (`https` wird nicht unterstützt).
-- Erreichbar über IP oder – bei mDNS – `http://espuino.local` bzw. `.fritz.box`.
-- Bleiben die LEDs im Leerlauf **grün** statt weiß, besteht keine WLAN-Verbindung: näher an den
-  Router, neu starten oder Zugangsdaten erneut eingeben ([Erststart](../inbetriebnahme/erststart.md)).
+Zwei Dinge übersieht man leicht. Erstens: Der ESP32 funkt **nur auf 2,4 GHz** – ein reines
+5-GHz-Netz sieht er gar nicht. Zweitens: Die Adresse muss immer mit **`http://`** aufgerufen werden,
+`https` beherrscht ESPuino nicht (der Hintergrund steht in [Kapitel 5](../inbetriebnahme/erststart.md#das-webinterface-offnen)).
+Ansonsten gelten die üblichen Verdächtigen: zu große Entfernung zum Router, ein Tippfehler in den
+Zugangsdaten. Bleiben die LEDs im Leerlauf **grün** statt weiß, besteht keine Verbindung – dann neu
+starten, näher an den Router gehen oder die Zugangsdaten erneut eingeben.
 
-## Bootloops & Brownouts
+## Bootschleifen und Brownouts
 
-Meist ein **Stromversorgungsproblem**: eine zu schwache Quelle (dünnes USB-Kabel, schwaches
-Netzteil, fast leerer Akku) kann beim Einschalt-/Lautstärkespitzenstrom einen Brownout-Reset
-auslösen. Kräftigere Quelle / besseres Kabel probieren. Die Complete liefert über den Buck/Boost
-stabile 3,3 V und schaltet bei Unterspannung ab. *(Weitere Spezialfälle: TODO aus dem Forum.)*
+Startet ESPuino immer wieder neu oder geht mitten im Betrieb aus, steckt fast immer ein
+**Stromversorgungsproblem** dahinter. Eine zu schwache Quelle – ein dünnes USB-Kabel, ein schwaches
+Netzteil, ein fast leerer Akku – bricht beim Stromhunger im Einschaltmoment oder bei Lautstärkespitzen
+kurz ein und löst einen Brownout-Reset aus. Abhilfe schafft eine kräftigere Quelle und ein besseres
+Kabel. Zur Erinnerung: Die Complete liefert über ihren Buck/Boost-Regler stabile 3,3 V und schaltet
+bei Unterspannung sauber ab. *(Weitere Spezialfälle ergänzen wir aus dem Forum.)*
 
-## Bluetooth-Modus versehentlich aktiv
+## Aus Versehen im Bluetooth-Modus gelandet
 
-Kommst du im Bluetooth-Modus nicht mehr weiter, legst du einfach eine **unbekannte RFID-Karte** auf
-– das schaltet zurück in den Normal-Modus (alternativ der Button im Tab Bluetooth).
+Falls du im Bluetooth-Modus feststeckst und nicht mehr weiterkommst: Leg einfach eine **unbekannte
+RFID-Karte** auf – das bringt ESPuino zurück in den Normal-Modus. Alternativ geht das auch über den
+entsprechenden Button im Tab Bluetooth.
 
-!!! tip "Noch ein Problem?"
-    Frag im [Forum](https://forum.espuino.de) – am besten mit dem Log (siehe oben) und Angaben zu
-    Board, Firmware-Version und was genau passiert.
+!!! tip "Immer noch ein Problem?"
+    Dann frag im [Forum](https://forum.espuino.de) nach. Hilfreich ist, gleich das Log mitzuschicken
+    (siehe oben) und dazuzuschreiben, welches Board und welche Firmware-Version du verwendest und was
+    genau passiert.

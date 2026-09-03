@@ -1,22 +1,28 @@
 # 14 · Bestandsgeräte: mini4L
 
-Nur die **Unterschiede** zur Complete – kein vollständiger Doppel-Aufbau.
+Die **mini4L** ist der direkte Vorgänger der Complete. Sie wird nicht mehr verkauft, ist aber
+weiterhin voll unterstützt – wenn du also eine besitzt, bist du hier richtig. Damit dieses Handbuch
+nicht alles doppelt erklärt, beschränkt sich dieses Kapitel bewusst auf die **Unterschiede** zur
+Complete. Alles, was hier nicht erwähnt wird – und das ist der weitaus größte Teil, von der Bedienung
+bis zum Webinterface –, funktioniert bei der mini4L genau wie in den übrigen Kapiteln beschrieben.
 
-## Status
+## Was die mini4L ausmacht
 
-Direkter Vorgänger der Complete ([Forum #1661](https://forum.espuino.de/t/espuino-mini-4layer/1661)):
-eine Trägerplatine, in die ein selbst entwickeltes **D32-Pro-Develboard**
-([Forum #1109](https://forum.espuino.de/t/esp32-develboard-d32-pro-lifepo4/1109)) eingesteckt wird.
-HAL/Build-Target **`lolin_d32_pro_sdmmc_pe`**. Nicht mehr im Verkauf, aber weiterhin unterstützt.
+Anders als die Complete, die alles auf einer Platine vereint, besteht die mini4L aus zwei Teilen: einer
+Trägerplatine und einem darauf **eingesteckten Entwicklerboard** (einem eigens entwickelten D32-Pro-Board,
+siehe [Forum #1109](https://forum.espuino.de/t/esp32-develboard-d32-pro-lifepo4/1109)). Das
+Build-Target für die Firmware heißt entsprechend **`lolin_d32_pro_sdmmc_pe`**. Vorgestellt und
+diskutiert wird sie im [Forum #1661](https://forum.espuino.de/t/espuino-mini-4layer/1661).
 
-## Pinout & SD-MMC-Besonderheiten
+## Pinout und SD-MMC
 
-Die realen ESP32-GPIOs sind weitgehend **identisch zur Complete**: I²S 25/27/26, RFID-SPI
-21/18/23/19, RFID_BUSY 33 / RST 22, Encoder CLK 34 / DT 39, LED 12, Wakeup/PE-Interrupt 36,
-Batterie-ADC 35, IR 5. Die SD-Karte läuft über **SD-MMC (1-Bit)**: CLK 14, CMD 15, D0 2. Buttons
-Next/Prev/Play-Pause liegen wie bei der Complete auf PE 102/100/101.
+In der Praxis sind die realen ESP32-GPIOs **weitgehend identisch zur Complete**: I²S auf 25/27/26,
+die RFID-SPI-Leitungen auf 21/18/23/19, RFID_BUSY 33 und RST 22, der Encoder auf CLK 34 / DT 39, die
+LED auf 12, Wakeup und Port-Expander-Interrupt auf 36, die Batteriemessung auf 35 und der IR-Empfänger
+auf 5. Die SD-Karte läuft im **SD-MMC-Modus (1-Bit)** über CLK 14, CMD 15 und D0 2. Auch die Tasten
+Next, Prev und Play/Pause liegen wie bei der Complete auf den Port-Expander-Kanälen 102, 100 und 101.
 
-Abweichend sind einige **Port-Expander-Kanäle** (PCA9555):
+Die Unterschiede beschränken sich auf einige **Port-Expander-Kanäle**:
 
 | Signal | mini4L | Complete |
 | --- | --- | --- |
@@ -26,23 +32,14 @@ Abweichend sind einige **Port-Expander-Kanäle** (PCA9555):
 | Kopfhörer-Erkennung (`HP_DETECT`) | PE 107 | PE 108 |
 | Power (Peripherie-Abschaltung) | PE 115 | PE 114 |
 
-Der PN5180-IRQ ist standardmäßig deaktiviert (`99`); für LPCD auf GPIO 32 setzen.
+Der PN5180-IRQ ist bei der mini4L standardmäßig deaktiviert (Wert `99`); für LPCD würde man ihn auf
+GPIO 32 setzen.
 
-## Stromversorgung (Delta)
+## Firmware und Bedienung
 
-Die mini4L versorgt über einen **Linearregler (LDO)** statt Buck/Boost: nur USB/LiPo, mit
-Dropout-Verlust (bei fast leerem Akku kam am ESP32 zu wenig an). LFP wurde am LDO **vorbei**
-durchgeschleust. Hintergrund und Vergleich: [Kapitel 3 → Stromversorgung](../hardware/complete.md#stromversorgung).
-
-## Firmware-Build
-
-Build-Target `lolin_d32_pro_sdmmc_pe`. Sonst identisch zur Complete (siehe
-[Kapitel 11](../firmware/aktualisieren.md)).
-
-## Wo sich Aufbau & Bedienung unterscheiden
-
-Der Hauptunterschied ist die **Bauform**: bei der mini4L wird ein separates D32-Pro-Develboard auf
-die Trägerplatine gesteckt (die Complete integriert alles auf einer Platine). Die Verkabelung der
-Peripherie und die abweichenden Port-Expander-Kanäle (siehe oben) sind zu beachten; die
-Stromversorgung läuft über einen LDO statt Buck/Boost (siehe Delta oben). **Bedienung und
-Webinterface sind identisch** zur Complete.
+Die Firmware baust du mit dem Target `lolin_d32_pro_sdmmc_pe` – ansonsten gilt
+[Kapitel 11](../firmware/aktualisieren.md) unverändert. Der wichtigste Unterschied im Alltag ist
+letztlich ein Hardware-Detail: Bei der mini4L läuft die Stromversorgung über einen Linearregler (LDO)
+statt über den Buck/Boost-Regler der Complete. Was das bedeutet, ist in
+[Kapitel 3 → Stromversorgung](../hardware/complete.md#die-stromversorgung-und-warum-sie-so-wichtig-ist)
+ausführlich erklärt. **Bedienung und Webinterface sind vollständig identisch** zur Complete.
