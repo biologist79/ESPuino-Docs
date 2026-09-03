@@ -31,9 +31,9 @@ Ein paar Elemente begegnen dir auf jeder Seite, deshalb vorab:
 
 ## Tab Steuerung
 
-Der Tab Steuerung ist die Fernbedienung im Browser. Hier siehst du das Cover und die Infos zum
-laufenden Titel und bedienst die Wiedergabe mit den gewohnten Transport-Tasten (erster Titel,
-voriger, Play/Pause, nächster, letzter). Der **Lautstärke-Slider** wirkt sofort, und über das
+Der Tab Steuerung ist die Fernbedienung im Browser. Hier siehst du – sofern der Titel oder Webstream
+eines mitliefert – das Cover und die Infos zum laufenden Titel und bedienst die Wiedergabe mit den
+gewohnten Transport-Tasten (erster Titel, voriger, Play/Pause, nächster, letzter). Der **Lautstärke-Slider** wirkt sofort, und über das
 Equalizer-Symbol öffnest du drei Regler für Bass, Mitten und Höhen.
 
 Zwei Kleinigkeiten sind besonders nützlich: Der **Fortschrittsbalken** ist anklickbar – ein Klick
@@ -45,18 +45,19 @@ Modifikation (Schlaftimer, Wiederholung, Tastensperre …) direkt aus, ganz ohne
 <!-- Screenshot: RFID-Tab -->
 
 Dieser Tab ist das Herzstück, denn hier verknüpfst du Karten mit Inhalten. Er besteht aus zwei
-Bereichen: links dem Dateibrowser, rechts der eigentlichen Zuweisung.
+untereinander angeordneten Bereichen: dem Dateibrowser und der eigentlichen Zuweisung.
 
 ### Der Dateibrowser
 
-Links siehst du den Inhalt der SD-Karte. Über das **Suchfeld** filterst du, per **Upload** bringst du
-einzelne Dateien oder ganze Verzeichnisse (samt Unterordnern) in den ESPuino, und ein **Rechtsklick**
+Der Dateibrowser zeigt den Inhalt der SD-Karte. Über das **Suchfeld** filterst du, per **Upload**
+bringst du
+einzelne Dateien oder ganze Verzeichnisse (samt Unterordnern) auf den ESPuino, und ein **Rechtsklick**
 (am Handy: langes Antippen) auf einen Eintrag öffnet ein Kontextmenü zum Anlegen, Abspielen,
 Aktualisieren, Umbenennen, Löschen und Herunterladen.
 
 ### Eine Karte zuweisen
 
-Rechts weist du einer Karte einen Inhalt zu, in vier Schritten:
+Im Bereich darunter weist du einer Karte einen Inhalt zu, in vier Schritten:
 
 1. **RFID-Chip-Nummer:** Legst du eine Karte auf, wird die Nummer automatisch eingetragen. Du kannst
    sie auch von Hand eingeben oder eine [virtuelle Karte](https://forum.espuino.de/t/virtual-rfid-cards)
