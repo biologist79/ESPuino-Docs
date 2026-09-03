@@ -1,71 +1,82 @@
 # 10 · Erweiterte Themen
 
-Themen für alle, die mehr aus dem Gerät holen wollen.
+Die Grundfunktionen kennst du jetzt. Dieses Kapitel sammelt Themen für alle, die mehr aus ihrem
+ESPuino herausholen wollen – von der Einbindung in die Hausautomatisierung bis zur
+Hardware-Erweiterung. Du musst nichts davon nutzen; sieh es als Baukasten, aus dem du dir das
+herauspickst, was zu dir passt.
 
-## MQTT in Home Assistant einbinden
+## ESPuino in die Hausautomatisierung einbinden (MQTT)
 
-Alles, was per RFID/Taster steuerbar ist, lässt sich auch über **MQTT** steuern; umgekehrt meldet
-ESPuino jede Aktion und jeden Zustandswechsel per MQTT zurück (Lautstärke, Titel, Playmode …). So
-bindest du ihn in eine Hausautomatisierung ein.
+Alles, was sich per Karte oder Taste steuern lässt, kann ESPuino auch über **MQTT** entgegennehmen –
+und umgekehrt meldet er über MQTT jede Aktion und jeden Zustandswechsel zurück: die aktuelle
+Lautstärke, den laufenden Titel, den Abspielmodus und vieles mehr. Damit lässt er sich sauber in eine
+Hausautomatisierung einbinden, etwa um ihn abends automatisch leiser zu stellen oder in einer
+Übersicht anzuzeigen, was gerade läuft.
 
-- MQTT im Webinterface aktivieren/konfigurieren: [Kapitel 6 → Tab MQTT](../bedienung/webinterface.md#tab-mqtt).
-- Vollständige Topic-Referenz: [Anhang → MQTT-Topics](../referenz/anhang.md#mqtt-topics).
-- **Home Assistant:** [Integration im Forum](https://forum.espuino.de/t/home-assistant-integration/3763).
-- **openHAB:** Beispiel-Konfiguration im [openHAB-Verzeichnis des Repos](https://github.com/biologist79/ESPuino/tree/master/openHAB).
+Die Einrichtung selbst nimmst du im Webinterface vor
+([Kapitel 6 → Tab MQTT](../bedienung/webinterface.md#tab-mqtt)); welche Themen (Topics) es gibt und
+was sie bedeuten, steht vollständig im [Anhang → MQTT-Topics](../referenz/anhang.md#mqtt-topics). Für
+konkrete Systeme gibt es fertige Hilfestellungen: für **Home Assistant** eine
+[Integration im Forum](https://forum.espuino.de/t/home-assistant-integration/3763), und für **openHAB**
+eine Beispiel-Konfiguration im [openHAB-Verzeichnis des Repos](https://github.com/biologist79/ESPuino/tree/master/openHAB).
 
-## Energiesparen, Deep-Sleep, Sleep-Timer, Batterielaufzeit
+## Energiesparen, Deep-Sleep und Batterielaufzeit
 
-- **Automatischer Deep-Sleep:** Nach einer einstellbaren Inaktivitätszeit (`maxInactivityTime`,
-  Standard 10 min) legt sich ESPuino schlafen. Der Timer läuft **nicht**, solange Musik spielt oder
-  ein FTP-Client verbunden ist; jede Tasteneingabe setzt ihn zurück.
-- **Sleep-Timer:** per Modifikationskarte oder MQTT (nach Minuten, Track-Ende, Playlist-Ende oder
-  5 Titel). Der Timer-Status ist per MQTT live abfragbar
-  (`sleep_timer_state`, JSON mit `mode`/`remainingMinutes`/`remainingTracks`).
-- **Batterie:** Warnschwellen, Anzeige und optionale Abschaltung im Webinterface (Tab Allgemein →
-  Energie).
+ESPuino ist darauf ausgelegt, sparsam mit dem Akku umzugehen. Kernstück ist der **automatische
+Deep-Sleep**: Nach einer einstellbaren Zeit ohne Aktivität legt sich das Gerät in den Tiefschlaf und
+verbraucht dann fast nichts mehr. Standardmäßig sind das zehn Minuten (`maxInactivityTime`). Der Zähler
+läuft allerdings mit Bedacht: Solange Musik spielt oder ein FTP-Client verbunden ist, schläft ESPuino
+nicht ein, und jede Tasteneingabe setzt die Uhr zurück.
 
-## Virtual RFID Cards
+Zusätzlich kannst du einen **Sleep-Timer** setzen – per Modifikationskarte oder über MQTT –, der nach
+einer festen Zeit, nach dem aktuellen Titel, am Ende der Playlist oder nach fünf Titeln einschläft.
+Den aktuellen Timer-Status kannst du sogar per MQTT live abfragen (Topic `sleep_timer_state`, als
+JSON mit Modus und Restzeit). Und wenn du ESPuino im Akkubetrieb nutzt, findest du im Webinterface
+(Tab Allgemein → Energie) die Warnschwellen, die Anzeige und die optionale automatische Abschaltung
+bei zu niedriger Spannung.
 
-Zehn **virtuelle Karten** mit den IDs `900000000001` … `900000000010`. Du weist ihnen im
-Webinterface Inhalte oder Modifikationen zu – **genau wie einer echten Karte** (Chip-Nummer von
-Hand eintragen). Ausgelöst werden sie dann per **Taster** (kurz/lang), **Multi-Taster-Kombination**
-oder **MQTT**.
+## Virtuelle RFID-Karten
 
-So legst du häufige Aktionen auf einen Knopfdruck, ohne eine spezielle Karte bereitlegen zu müssen
-– z. B. „Lieblings-Playlist starten" auf eine Tastenkombination. Details:
+Nicht jede Aktion braucht eine physische Karte. ESPuino kennt zehn **virtuelle Karten** mit den IDs
+`900000000001` bis `900000000010`. Du weist ihnen im Webinterface Inhalte oder Modifikationen zu –
+ganz genauso, wie du es mit einer echten Karte tätest (du trägst die Chip-Nummer einfach von Hand
+ein). Ausgelöst werden sie dann per **Taster**, per **Tastenkombination** oder über **MQTT**.
+
+Der Nutzen: Du kannst häufige Aktionen auf einen Knopfdruck legen, ohne dafür jedes Mal eine spezielle
+Karte bereitzuhalten – etwa „Lieblings-Playlist starten" auf eine Tastenkombination. Mehr dazu im
 [Forum #3218](https://forum.espuino.de/t/virtual-rfid-cards/3218).
 
-## LPCD
+## LPCD: Aufwecken durch Kartenauflegen
 
-LPCD (Low Power Card Detection) weckt den ESPuino durch **Auflegen einer Karte** aus dem
-Deep-Sleep (statt per Tastendruck). Nur mit **PN5180**; braucht PN5180-Firmware ≥ 4.1, gesetzte
-Lötbrücken und einen RTC-fähigen GPIO für den IRQ.
+LPCD (Low Power Card Detection) ist eine Funktion, mit der ESPuino aus dem Deep-Sleep erwacht, sobald
+du eine Karte auflegst – statt dass du erst eine Taste drücken musst. Das klingt verlockend, hat aber
+technische Voraussetzungen: Es funktioniert nur mit dem **PN5180**, benötigt dessen Firmware in
+Version 4.1 oder neuer, gesetzte Lötbrücken und einen RTC-fähigen GPIO für das Wecksignal.
 
-!!! warning "Zurückhaltend – eher nicht empfohlen"
-    LPCD wird aktuell **nicht aktiv gepflegt**, wurde von Nutzern als **unzuverlässig** gemeldet
-    und **zieht mehr Strom** (der Reader bleibt im Deep-Sleep aktiv). Ein Ausbau wird erwogen. Wer
-    es nicht zwingend braucht, sollte es weglassen.
+!!! warning "Ehrliche Einschätzung: eher nicht empfehlenswert"
+    So schön die Idee ist – LPCD wird derzeit **nicht aktiv gepflegt**, immer wieder berichten Nutzer
+    von **Zuverlässigkeitsproblemen**, und es **verbraucht mehr Strom**, weil der Leser im Deep-Sleep
+    aktiv bleibt. Ein Rückbau der Funktion wird sogar erwogen. Wenn du sie nicht zwingend brauchst,
+    lässt du sie besser weg.
 
-## Port-Expander PCA9555
+## Der Port-Expander PCA9555
 
-Wenn die nativen GPIOs knapp werden (der ESP32 hat nur begrenzt freie Pins, einige nur als Input),
-erweitert ein **PCA9555** über I²C um **16 Kanäle** – zwei Ports mit je acht. Auf der **Complete ist
-er bereits an Bord**.
+Der ESP32 hat nur begrenzt freie Anschlüsse (GPIOs), und einige davon lassen sich ausschließlich als
+Eingang nutzen. Wird es eng, schafft ein **PCA9555**-Port-Expander Abhilfe: Er wird über I²C
+angebunden und stellt **16 zusätzliche Kanäle** bereit (zwei Ports zu je acht). Auf der Complete ist
+er bereits an Bord – du profitierst also automatisch davon.
 
-- **Nummerierung:** `100`–`115` (Port 0 = 100–107, Port 1 = 108–115) – daher tauchen im
-  [Pinout](../referenz/anhang.md#pinout-referenz-complete) Werte ≥ 100 auf.
-- **Aktivierung:** `PORT_EXPANDER_ENABLE`; I²C-Adresse `expanderI2cAddress` (Standard `0x20`, über
-  `A0`/`A1`/`A2` änderbar). Die I²C-GPIOs (`ext_IIC_CLK`/`ext_IIC_DATA`) und optional der
-  `PE_INTERRUPT_PIN` stehen im Board-Header.
-- **Typische Nutzung:** Eingänge (Taster, Kopfhörer-Erkennung, Encoder-Taster); Ausgänge nur in
-  Sonderfällen (Verstärker-Enable `GPIO_PA_EN`/`GPIO_HP_EN`).
+In der ESPuino-Konfiguration werden diese Kanäle mit den Nummern **`100` bis `115`** angesprochen
+(Port 0 sind 100–107, Port 1 sind 108–115). Deshalb tauchen in der
+[Pinout-Tabelle](../referenz/anhang.md#pinout-referenz-complete) Werte ab 100 auf. Typischerweise
+hängen Eingänge daran (Taster, Kopfhörer-Erkennung, der Encoder-Taster); Ausgänge nur in Sonderfällen
+wie dem Verstärker-Enable.
 
-!!! note "Interrupt"
-    Jede Änderung an einem Expander-Eingang löst einen Interrupt aus (und weckt den ESP32) – das
-    lässt sich nicht auf einzelne Pins begrenzen.
+!!! note "Gut zu wissen"
+    Jede Änderung an einem Expander-Eingang löst einen Interrupt aus und weckt den ESP32 – das lässt
+    sich technisch nicht auf einzelne Pins begrenzen. Details:
+    [Forum #306](https://forum.espuino.de/t/einsatz-des-port-expanders-pca9555/306).
 
-Mehr: [Forum #306](https://forum.espuino.de/t/einsatz-des-port-expanders-pca9555/306).
+## Headless- und Dauerbetrieb
 
-## Headless-/Dauerbetrieb
-
-*Optional – kann später ergänzt werden.*
+*Dieser Abschnitt ist optional und wird bei Bedarf ergänzt.*

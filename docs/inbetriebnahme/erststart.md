@@ -124,26 +124,30 @@ kommen ab Werk fast immer als exFAT, du musst sie also mit ziemlicher Sicherheit
 als FAT32 formatieren. (Windows bietet FAT32 für so große Karten im Standard-Dialog oft gar nicht an;
 dann hilft ein kleines Formatier-Tool.)
 
-Um Dateien auf die Karte zu bekommen, gibt es zwei Wege. Einzelne Dateien oder ganze Ordner kannst
-du bequem direkt im Webinterface hochladen (im Tab RFID, Bereich Dateien). Das ist praktisch
-für Nachschub zwischendurch, aber nicht besonders schnell: Über den Web-Upload sind bis zu etwa
-650 kiB/s drin (im langsameren SPI-Modus entsprechend weniger).
+Um Dateien auf die Karte zu bekommen, hast du mehrere Möglichkeiten – und für den Einstieg ist die
+Reihenfolge ziemlich klar:
 
-!!! tip "Die Grundausstattung lieber am Computer aufspielen"
-    Für die erste, größere Menge an Hörspielen und Titeln lohnt es sich, die SD-Karte einmal aus dem
-    ESPuino zu nehmen
-    und direkt am Computer zu befüllen – das geht um ein Vielfaches schneller als über das Netzwerk.
-    Den Web-Upload nutzt du danach nur noch für Ergänzungen. Wie du deine Musik sinnvoll in Ordner
-    strukturierst, damit die Abspielmodi wie gewünscht funktionieren, liest du in
-    [Kapitel 8 · Inhalte verwalten](../inhalte/verwalten.md).
+- **Am Computer vorbefüllen.** Nimm die SD-Karte einmal heraus und bespiele sie direkt am Rechner.
+  Das ist mit Abstand am schnellsten und für die erste, größere Grundausstattung auf jeden Fall der
+  sinnvollste Weg.
+- **Web-Upload.** Für Nachschub zwischendurch lädst du einzelne Dateien oder ganze Ordner bequem im
+  Webinterface hoch (Tab RFID, Bereich Dateien) – praktisch, aber langsamer (bis zu etwa 650 kiB/s,
+  im SPI-Modus entsprechend weniger).
+- **FTP.** Für größere Mengen über das Netzwerk ist FTP schneller als der Web-Upload. Der Dienst muss
+  dafür erst aktiviert werden (siehe unten sowie [Kapitel 6](../bedienung/webinterface.md#tab-ftp)).
+- **MediaHub.** Betreibst du mehrere ESPuinos, verteilt MediaHub die Inhalte zentral über das
+  Netzwerk (siehe [Kapitel 9](../inhalte/mediahub.md)).
+
+Wie du deine Inhalte anschließend sinnvoll in Ordner strukturierst, damit die Abspielmodi später
+genau das tun, was du erwartest, liest du in [Kapitel 8 · Inhalte verwalten](../inhalte/verwalten.md).
 
 ## Die erste Karte anlernen
 
 Jetzt kommt der schönste Moment: Wir verknüpfen eine RFID-Karte mit Musik. „Anlernen" heißt das
 deshalb, weil ESPuino sich merkt, *welche* Karte *welchen* Inhalt starten soll. Wichtig zu wissen –
 und für manche überraschend: Auf die Karte selbst wird dabei **nichts** geschrieben. ESPuino liest
-nur die eindeutige Nummer (die ID) der Karte und legt die Zuordnung intern ab. Du kannst also jede
-beliebige RFID-Karte, jeden Chip oder Aufkleber verwenden.
+nur die eindeutige Nummer (die ID) der Karte und legt die Zuordnung in seinem internen Speicher ab –
+dem sogenannten NVS. Du kannst also jede beliebige RFID-Karte, jeden Chip oder Aufkleber verwenden.
 
 So gehst du vor:
 
