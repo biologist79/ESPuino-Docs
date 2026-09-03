@@ -44,13 +44,23 @@ Lötbrücken und einen RTC-fähigen GPIO für den IRQ.
 
 ## Port-Expander PCA9555
 
-Wenn die GPIOs knapp werden, erweitert ein **PCA9555**-Port-Expander die Eingänge – zwei Ports mit
-je acht Kanälen, zusammen **16 Kanäle**. Auf der **Complete ist er bereits an Bord**.
+Wenn die nativen GPIOs knapp werden (der ESP32 hat nur begrenzt freie Pins, einige nur als Input),
+erweitert ein **PCA9555** über I²C um **16 Kanäle** – zwei Ports mit je acht. Auf der **Complete ist
+er bereits an Bord**.
 
-- Aktivierung über `PORT_EXPANDER_ENABLE`; in den Board-Einstellungen werden Kanäle wie GPIOs
-  vergeben, Wertebereich **`100`** (Port 0, Kanal 0) bis **`115`** (Port 1, Kanal 7) – daher tauchen
-  im [Pinout](../referenz/anhang.md#pinout-referenz-complete) Werte ≥ 100 auf.
-- Die I²C-Adresse (`expanderI2cAddress`) ist `0x20`, wenn `A0`/`A1`/`A2` auf GND liegen.
+- **Nummerierung:** `100`–`115` (Port 0 = 100–107, Port 1 = 108–115) – daher tauchen im
+  [Pinout](../referenz/anhang.md#pinout-referenz-complete) Werte ≥ 100 auf.
+- **Aktivierung:** `PORT_EXPANDER_ENABLE`; I²C-Adresse `expanderI2cAddress` (Standard `0x20`, über
+  `A0`/`A1`/`A2` änderbar). Die I²C-GPIOs (`ext_IIC_CLK`/`ext_IIC_DATA`) und optional der
+  `PE_INTERRUPT_PIN` stehen im Board-Header.
+- **Typische Nutzung:** Eingänge (Taster, Kopfhörer-Erkennung, Encoder-Taster); Ausgänge nur in
+  Sonderfällen (Verstärker-Enable `GPIO_PA_EN`/`GPIO_HP_EN`).
+
+!!! note "Interrupt"
+    Jede Änderung an einem Expander-Eingang löst einen Interrupt aus (und weckt den ESP32) – das
+    lässt sich nicht auf einzelne Pins begrenzen.
+
+Mehr: [Forum #306](https://forum.espuino.de/t/einsatz-des-port-expanders-pca9555/306).
 
 ## Headless-/Dauerbetrieb
 

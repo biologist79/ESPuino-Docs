@@ -13,7 +13,24 @@ Normal, Bluetooth-Quelle (an BT-Kopfhörer/-Box senden), Bluetooth-Senke (ESPuin
 
 ## Playmodi
 
-Vollständige Liste inkl. rekursiver Modi: [Anhang → Playmodi](../referenz/anhang.md#playmodi).
+Vollständige Liste mit Symbolen und Beschreibung:
+[Webinterface → Abspielmodi](webinterface.md#abspielmodi); technische IDs:
+[Anhang → Playmodi](../referenz/anhang.md#playmodi).
+
+### Rekursive Modi & Ordnerspringen
+
+Die **rekursiven** Abspielmodi beziehen auch **Unterordner** ein – sortiert, zufällig oder als
+Hörbuch (mit Positionsspeicherung). Wie tief gesucht wird, steuert die **Rekursionstiefe** (0–4,
+Standard 2; Tab Allgemein → Wiedergabe).
+
+Nur in rekursiven Modi funktioniert das **Ordnerspringen**: „nächster Ordner" springt zum ersten
+Titel des nächsten Ordners, „voriger Ordner" entsprechend zurück – anhand der alphabetischen
+Ordnerreihenfolge der generierten Playlist. Beide Aktionen lassen sich im Webinterface (erweiterte
+Einstellungen) auf Taster legen.
+
+!!! warning "Hörbuch rekursiv"
+    Im rekursiven Hörbuch-Modus wird die Playlist bei jedem Laden neu erzeugt. Kommen neue Ordner
+    hinzu, kann sich die gemerkte Position verschieben.
 
 ## Modifikationskarten
 
@@ -65,41 +82,46 @@ erst beim Loslassen/Stillstand.
 
 ## Neopixel-Anzeigen
 
-Die Neopixel zeigen sehr viel Zustand an. (Anzahl/Ausrichtung sind im Webinterface einstellbar.)
+Die Neopixel zeigen sehr viel Zustand an. Anzahl, Farbverlauf und Ausrichtung sind im Webinterface
+einstellbar – die Farben unten sind die Standardwerte.
 
 **Beim Booten**
 
-- Hochfahren: jede zweite LED, rotierend **orange**.
-- SD-Karte nicht einlesbar: LEDs blinken **rot** (dauerhaft, bis SD verfügbar bzw. bei aktivem
-  `SHUTDOWN_IF_SD_BOOT_FAILS`).
+- Hochfahren: die Hälfte der LEDs zirkuliert **orange**. Danach → Leerlauf, oder rotes Blinken bei
+  SD-Fehler.
 
-**Status**
+**Status / Leerlauf**
 
-- **Leerlauf:** vier langsam rotierende LEDs – **weiß** (WLAN verbunden) bzw. **grün** (WLAN aus
-  oder gerade beim Verbinden).
-- **Bluetooth:** vier langsam rotierende LEDs in **blau**.
-- **Fehler:** alle LEDs blinken 1× **rot** (Aktion nicht akzeptiert).
-- **OK:** alle LEDs blinken 1× **grün** (Aktion akzeptiert).
-- **Ausschalten:** wachsender roter Kreis bis zur Long-Press-Zeit.
+- **Leerlauf:** vier LEDs (90°-Versatz) zirkulieren – **weiß** = WLAN verbunden, **grün** = keine
+  Verbindung, **orange** = WLAN wird gesucht.
+- **Bluetooth aktiv:** vier LEDs (90°) zirkulieren **blau**.
+- **Playlist wird erstellt (Busy):** vier LEDs (90°) **violett**, schnell rotierend.
+- **OK:** alle LEDs kurz **grün** (Aktion akzeptiert). · **Fehler:** alle LEDs kurz **rot**
+  (Aktion abgelehnt).
+- **Ausschalten:** ein **roter** Kreis wächst, während die Encoder-Taste gehalten wird.
 - **Tasten gesperrt:** Fortschritts-LEDs **rot**.
 
 **Wiedergabe**
 
-- **Busy** (Playlist wird erstellt): vier schnell rotierende **violette** LEDs.
-- **Titel-Fortschritt:** Regenbogen; LED-Anzahl entspricht dem Fortschritt.
-- **Playlist-Fortschritt:** kurz **blau** zu Beginn jedes Titels.
-- **Webstream:** zwei langsam rotierende LEDs, Farbe wandert regenbogenartig.
-- **Lautstärke:** Verlauf **grün → rot**; LED-Anzahl relativ zur Maximal-Lautstärke.
-- **Pause:** Fortschritts-LEDs **orange**.
+- **Titel-Fortschritt:** je weiter, desto mehr LEDs; Farbverlauf (Standard grün→rot, konfigurierbar).
+- **Playlist-Fortschritt:** **blaue** LEDs fächern kurz zu Titelbeginn auf/zu.
+- **Webstream:** zwei sehr langsam (180° versetzt) rotierende LEDs in wechselnden Regenbogenfarben.
+- **Pause:** vier LEDs (90°) **orange**.
+- **Lautstärke:** prozentuale Anzeige, Verlauf **grün → rot**.
+- **IP-Ansage:** rotierende **gelbe** LEDs (zwei im Webradio-Modus, sonst vier).
+- **Endlosschleife (Rewind):** am Playlist-Ende klappen die Fortschritts-LEDs vor dem Neustart ein.
 
 **Batterie** *(optional)*
 
-- **Unterspannung:** blinkt 3× **rot** (Schwelle im Webinterface einstellbar; optional
-  automatische Abschaltung).
-- Kurzer Druck auf den Encoder-Taster zeigt den Ladezustand als LED-Balken.
+- **Unterspannung:** alle LEDs blinken **3× kurz rot**.
+- Kurzer Druck auf den Encoder-Taster zeigt die Batteriespannung als LED-Balken.
 
-**Weitere Anzeigen:** MediaHub-Download = Himmelblau, Firmware-Update (OTA) = Blau (siehe
-[Kapitel 11](../firmware/aktualisieren.md)).
+**Übertragung**
+
+- **MediaHub-Download** und **Firmware-Update (OTA):** **blaue** LEDs zeigen den Fortschritt (siehe
+  [Kapitel 11](../firmware/aktualisieren.md)).
+
+Vollständige Quelle: [Forum #86](https://forum.espuino.de/t/was-zeigt-der-neopixel-des-espuino-alles-an/86).
 
 ## Kopfhörer-Detection, Lautstärke-Profile
 

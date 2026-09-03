@@ -10,8 +10,10 @@ ESPuino einen Access-Point (Standard-Name `ESPuino`) mit einer Einrichtungsseite
 
 ## Überall gültig
 
-- **Herz-Symbol** oben rechts: Verbindungsanzeige. Grün (pulsierend) = Verbindung steht, rot =
-  unterbrochen, wird automatisch neu verbunden.
+- **Herz-Symbol** oben rechts: Verbindungsanzeige
+  ([Heartbeat](https://forum.espuino.de/t/heartbeat/4583)). Das Interface pingt alle 3 s den
+  ESPuino; **grün und pulsierend** = Antwort da / Verbindung steht, **rot** = ESPuino antwortet
+  nicht (Verbindung unterbrochen).
 - **Fragezeichen** neben Feldern: kurzer Hilfetext zur jeweiligen Einstellung.
 - **Stapel-Symbol** oben rechts: Menü mit Sprachauswahl (DE/EN/FR), **Dunkelmodus**,
   **Information** (Firmware-Stand, Speicher, Batterie), **Log** (Konsole im Browser), **Neustart**

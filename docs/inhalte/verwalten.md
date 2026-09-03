@@ -24,7 +24,7 @@ Wie Musik und Hörbücher auf den ESPuino kommen und wie man sie sinnvoll organi
 Die meisten Abspielmodi arbeiten **ordnerweise**, deshalb lohnt eine saubere Struktur – typischerweise
 **ein Ordner pro Hörbuch bzw. Album**:
 
-```
+```text
 /Hörspiele/
   Die drei ???/
     Folge 001/
@@ -69,10 +69,15 @@ bündeln.
 Die Zuordnungen zwischen Karten und Inhalten liegen im **NVS** des ESP32 (nicht auf der SD-Karte).
 Damit bei einem Defekt nichts verloren geht:
 
-- Bei **jeder** neuen Zuweisung wird automatisch eine `backup.txt` auf die SD-Karte geschrieben.
-- Über **Tab Tools** kannst du die Zuweisungen als `backup.txt` **exportieren** und wieder
-  **importieren** (Import ergänzt/überschreibt nur, löscht nichts). Details:
-  [Kapitel 6 → Tab Tools](../bedienung/webinterface.md#tab-tools).
+- Im SD-Hauptverzeichnis hält ESPuino automatisch eine **`backup.txt`** aktuell – bei **jeder**
+  neuen Zuweisung. Der Dateiname ist über `backupFile` in der `settings.h` änderbar.
+- Über **Tab Tools** lassen sich die Zuweisungen **exportieren** und wieder **importieren**. Der
+  Import **ergänzt/überschreibt nur, löscht nichts** – so überträgst du ein Backup auch von einem
+  ESPuino auf einen anderen. Details: [Kapitel 6 → Tab Tools](../bedienung/webinterface.md#tab-tools).
 
-!!! tip
-    Exportiere regelmäßig ein Backup und bewahre es außerhalb der SD-Karte auf.
+!!! tip "Exakt definierten Stand herstellen"
+    Sollen am Ende *genau* die Einträge des Backups vorhanden sein: erst **Alle Zuweisungen
+    löschen** (Tab Tools), dann importieren. Andere Einstellungen bleiben erhalten.
+
+Exportiere regelmäßig ein Backup und bewahre es außerhalb der SD-Karte auf. Mehr:
+[Forum #508](https://forum.espuino.de/t/die-backupfunktion-des-espuino/508).
