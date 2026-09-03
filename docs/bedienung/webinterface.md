@@ -199,8 +199,11 @@ wechseln; alternativ genügt es, eine unbekannte RFID-Karte aufzulegen.
 
 <!-- Screenshot: Allgemein-Tab -->
 
-Die allgemeinen Einstellungen sind in fünf Unterkladden aufgeteilt, und **jede hat ihre eigenen
-Speichern- und Reset-Buttons** – du speicherst also immer nur den Bereich, in dem du gerade bist.
+Die allgemeinen Einstellungen sind optisch in fünf Unterkladden aufgeteilt (Wiedergabe, RFID-Reader,
+Drehencoder & Taster, LED, Energie). Jede hat zwar ihren eigenen Speichern- und Reset-Button, aber
+lass dich davon nicht täuschen: Alle fünf gehören zu **einem** gemeinsamen Formular. Ein Klick auf
+Speichern sichert deshalb **alle** allgemeinen Einstellungen auf einmal – nicht nur die gerade
+sichtbare Unterkladde. Du musst also nicht in jeder Unterkladde einzeln speichern.
 
 ### Wiedergabe
 
