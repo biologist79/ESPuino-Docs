@@ -1,85 +1,101 @@
 # 6 · Das Webinterface
 
-Über das Webinterface konfigurierst und steuerst du praktisch alles – vom Zuweisen der
-RFID-Karten über WLAN bis zum Firmware-Update.
+Das Webinterface ist die Schaltzentrale deines ESPuino. Praktisch alles, was sich einstellen lässt,
+stellst du hier ein – von den Kartenzuweisungen über das WLAN bis zum Firmware-Update –, und ebenso
+steuerst du hier die laufende Wiedergabe. Dieses Kapitel führt dich einmal durch alle Bereiche. Du
+musst nicht alles auf einmal verstehen; sieh es als Nachschlagewerk, in dem du gezielt den Tab
+findest, den du gerade brauchst.
 
-Du erreichst es im Browser über die IP-Adresse des ESPuino oder – bei aktivem mDNS (Standard) –
-über `http://espuino.local` bzw. den vergebenen Hostnamen. Ist noch kein WLAN konfiguriert, öffnet
-ESPuino einen Access-Point (Standard-Name `ESPuino`) mit einer Einrichtungsseite (siehe
-[Erststart](../inbetriebnahme/erststart.md)).
+Erreichbar ist das Webinterface im Browser – am bequemsten über den Hostnamen (`http://espuino.local`
+bei aktivem mDNS), sonst über die IP-Adresse. Wie du das erste Mal dorthin kommst, ist in
+[Kapitel 5 · Erststart](../inbetriebnahme/erststart.md) beschrieben.
 
-## Überall gültig
+## Was überall gilt
 
-- **Herz-Symbol** oben rechts: Verbindungsanzeige
-  ([Heartbeat](https://forum.espuino.de/t/heartbeat/4583)). Das Interface pingt alle 3 s den
-  ESPuino; **grün und pulsierend** = Antwort da / Verbindung steht, **rot** = ESPuino antwortet
-  nicht (Verbindung unterbrochen).
-- **Fragezeichen** neben Feldern: kurzer Hilfetext zur jeweiligen Einstellung.
-- **Stapel-Symbol** oben rechts: Menü mit Sprachauswahl (DE/EN/FR), **Dunkelmodus**,
-  **Information** (Firmware-Stand, Speicher, Batterie), **Log** (Konsole im Browser), **Neustart**
-  und **Ausschalten**.
-- Gespeichert wird **pro Bereich** über den jeweiligen Button; die Beschriftung sagt, was
-  gespeichert wird.
+Ein paar Elemente begegnen dir auf jeder Seite, deshalb vorab:
+
+- Oben rechts pulsiert ein **Herz-Symbol** – die Verbindungsanzeige, im Forum „Heartbeat" genannt
+  ([#4583](https://forum.espuino.de/t/heartbeat/4583)). Das Interface schickt alle drei Sekunden eine
+  kleine Anfrage an den ESPuino; kommt eine Antwort, pulsiert das Herz grün, bleibt sie aus, wird es
+  rot. So siehst du jederzeit, ob die Verbindung steht.
+- Neben vielen Eingabefeldern sitzt ein **Fragezeichen**. Ein Klick darauf öffnet einen kurzen
+  Hilfetext – wenn du also mal nicht weißt, was eine Einstellung bewirkt, ist die Antwort meist nur
+  einen Klick entfernt.
+- Über das **Stapel-Symbol** ganz oben rechts erreichst du ein Menü mit Sprachauswahl (Deutsch,
+  Englisch, Französisch), dem **Dunkelmodus**, den **Informationen** (Firmware-Stand, Speicher,
+  Batterie), dem **Log** (die Konsolenausgabe direkt im Browser) sowie **Neustart** und
+  **Ausschalten**.
+- Gespeichert wird immer **pro Bereich**, über den jeweiligen Button. Die Beschriftung sagt dir dabei
+  genau, was gespeichert wird.
 
 ## Tab Steuerung
 
-Die Fernbedienung im Browser:
+Der Tab Steuerung ist die Fernbedienung im Browser. Hier siehst du das Cover und die Infos zum
+laufenden Titel und bedienst die Wiedergabe mit den gewohnten Transport-Tasten (erster Titel,
+voriger, Play/Pause, nächster, letzter). Der **Lautstärke-Slider** wirkt sofort, und über das
+Equalizer-Symbol öffnest du drei Regler für Bass, Mitten und Höhen.
 
-- Cover und Titelinfo (sofern vorhanden), Transport-Buttons (erster/voriger/Play-Pause/nächster/letzter).
-- **Lautstärke-Slider** (wirkt sofort) und **Equalizer** (Bass/Mitten/Höhen).
-- **Fortschrittsbalken** – anklickbar, springt zur angeklickten Position.
-- **Modifikation ausführen** – jede Modifikation direkt auslösen, ohne Karte (gleicher Katalog wie
-  die [Modifikationskarten](#modifikationskarten-alle-optionen)).
+Zwei Kleinigkeiten sind besonders nützlich: Der **Fortschrittsbalken** ist anklickbar – ein Klick
+springt direkt an die gewählte Stelle im Titel. Und über **Modifikation ausführen** löst du jede
+Modifikation (Schlaftimer, Wiederholung, Tastensperre …) direkt aus, ganz ohne eine Karte aufzulegen.
 
 ## Tab RFID
 
 <!-- Screenshot: RFID-Tab -->
 
-Das Herzstück: hier verknüpfst du Karten mit Inhalten. Zwei Bereiche.
+Dieser Tab ist das Herzstück, denn hier verknüpfst du Karten mit Inhalten. Er besteht aus zwei
+Bereichen: links dem Dateibrowser, rechts der eigentlichen Zuweisung.
 
-### Dateien
+### Der Dateibrowser
 
-Dateibrowser der SD-Karte: **Suchfeld**, **Upload** einzelner Dateien oder ganzer Verzeichnisse
-(inkl. Unterordner, mit Fortschritt), sowie ein Kontextmenü (Rechtsklick / langes Drücken): Ordner
-anlegen, abspielen, aktualisieren, umbenennen, löschen, herunterladen.
+Links siehst du den Inhalt der SD-Karte. Über das **Suchfeld** filterst du, per **Upload** bringst du
+einzelne Dateien oder ganze Verzeichnisse (samt Unterordnern) in den ESPuino, und ein **Rechtsklick**
+(am Handy: langes Antippen) auf einen Eintrag öffnet ein Kontextmenü zum Anlegen, Abspielen,
+Aktualisieren, Umbenennen, Löschen und Herunterladen.
 
-### RFID-Zuweisung
+### Eine Karte zuweisen
 
-1. **RFID-Chip-Nummer** – wird beim Auflegen automatisch gefüllt; alternativ 12-stellig von Hand
-   oder als [virtuelle Karte](https://forum.espuino.de/t/virtual-rfid-cards).
-2. Reiter **Musik** – Datei/Ordner im Browser wählen und **Abspielmodus** festlegen (siehe
-   Tabelle). Komfort: bei *Webradio* wird das Pfad-Feld mit `http://` vorbelegt.
-3. Reiter **Modifikation** – statt Musik eine Aktion zuweisen (siehe unten).
-4. **Zuweisung speichern**.
+Rechts weist du einer Karte einen Inhalt zu, in vier Schritten:
 
-#### Abspielmodi
+1. **RFID-Chip-Nummer:** Legst du eine Karte auf, wird die Nummer automatisch eingetragen. Du kannst
+   sie auch von Hand eingeben oder eine [virtuelle Karte](https://forum.espuino.de/t/virtual-rfid-cards)
+   verwenden.
+2. Im Reiter **Musik** wählst du im Dateibrowser eine Datei oder einen Ordner und legst den
+   **Abspielmodus** fest (siehe Tabelle). Wählst du *Webradio*, wird das Pfad-Feld bequem mit `http://`
+   vorbelegt.
+3. Im Reiter **Modifikation** weist du der Karte stattdessen eine Aktion zu.
+4. **Speichern** – fertig.
 
-In Dropdown-Reihenfolge. (Technische IDs/Konstanten: [Anhang → Playmodi](../referenz/anhang.md#playmodi).)
+#### Die Abspielmodi
+
+Die folgende Tabelle listet die Modi in der Reihenfolge, in der sie im Dropdown erscheinen. Die
+technischen IDs dazu stehen im [Anhang](../referenz/anhang.md#playmodi).
 
 | Modus | Bedeutung |
 | --- | --- |
 | 🎵 Einzelner Titel | Genau eine Datei, einmal. |
 | 🎵🔁 Einzelner Titel (Endlosschleife) | Eine Datei dauerhaft wiederholen. |
-| 🎲💤 Zufälliger Titel eines Ordners, danach schlafen | Ein zufälliger Titel, danach Deep Sleep – ideale Einschlaf-Karte. |
-| 📖 Hörbuch | Titel eines Ordners sortiert; **letzte Position wird gemerkt**. |
-| 📚 Hörbuch rekursiv | Wie Hörbuch, inkl. Unterordner; Position wird gemerkt. |
-| 📖🔁 Hörbuch (Endlosschleife) | Hörbuch, beginnt nach dem letzten Titel neu. |
+| 🎲💤 Zufälliger Titel eines Ordners, danach schlafen | Ein zufälliger Titel, danach Deep Sleep – die ideale Einschlaf-Karte. |
+| 📖 Hörbuch | Titel eines Ordners sortiert; **die letzte Position wird gemerkt**. |
+| 📚 Hörbuch rekursiv | Wie Hörbuch, inklusive Unterordner; Position wird gemerkt. |
+| 📖🔁 Hörbuch (Endlosschleife) | Hörbuch, beginnt nach dem letzten Titel wieder von vorn. |
 | 📁 Alle Titel (sortiert) | Ordner sortiert, **ohne** Positionsspeicherung. |
-| 🌳 Alle Titel + Unterordner (rekursiv, sortiert) | Wie oben inkl. Unterordner, ohne Positionsspeicherung. |
+| 🌳 Alle Titel + Unterordner (rekursiv, sortiert) | Wie oben, inklusive Unterordner, ohne Positionsspeicherung. |
 | 📁🔀 Alle Titel (zufällig) | Ordner in zufälliger Reihenfolge. |
 | 🌳🔀 Alle Titel + Unterordner (rekursiv, zufällig) | Zufällig über Ordner und Unterordner. |
 | 📁🔁 Alle Titel (sortiert, Endlosschleife) | Sortiert, endlos. |
 | 📁🔀🔁 Alle Titel (zufällig, Endlosschleife) | Zufällig, endlos. |
 | 🎲📁 Zufälliger Unterordner (sortiert) | Ein zufälliger Unterordner, sortiert. |
 | 🎲📁🔀 Zufälliger Unterordner (zufällig) | Ein zufälliger Unterordner, zufällig. |
-| 📻 Webradio | Stream-URL statt Datei (Pfad-Feld mit `http://` vorbelegt). |
-| 📃 Liste (.m3u) | Einträge einer lokalen `.m3u` – Dateien und Webstreams gemischt. |
+| 📻 Webradio | Eine Stream-URL statt einer Datei. |
+| 📃 Liste (.m3u) | Die Einträge einer lokalen `.m3u` – Dateien und Webstreams gemischt. |
 | 🌐 MediaHub | Inhalt **und** Abspielmodus kommen vom gewählten [MediaHub-Server](../inhalte/mediahub.md). |
 
-### Modifikationskarten — alle Optionen
+#### Modifikationskarten – alle Optionen
 
-Statt Musik lässt sich einer Karte eine Aktion zuordnen (oder im Tab Steuerung direkt auslösen).
-Technische IDs: [Anhang → Modifikationskarten](../referenz/anhang.md#modifikationskarten).
+Statt Musik lässt sich einer Karte eine Aktion zuordnen. Denselben Katalog findest du übrigens im Tab
+Steuerung unter „Modifikation ausführen", wo du die Aktion direkt und ohne Karte auslöst. Die
+technischen IDs stehen im [Anhang](../referenz/anhang.md#modifikationskarten).
 
 **Sperren & Schlafen:** 🔒 Tastensperre · 💤 Schlafe sofort · 💤 Schlafen nach 15 min / 30 min /
 1 h / 2 h (LEDs gedimmt) · 💤 Schlafen nach Ende des Titels · 💤 Schlafen nach Ende der Playlist.
@@ -87,181 +103,195 @@ Technische IDs: [Anhang → Modifikationskarten](../referenz/anhang.md#modifikat
 **Wiederholung:** 🔁 Playlist endlos · 🔂 Titel endlos.
 
 **Licht, Funk & Dienste:** 🌙 LEDs dimmen (Nachtmodus) · 📶 WLAN an/aus · 💡 Ambient Light ·
-📁 FTP aktivieren · 🔊 BT-Lautsprecher · 🎧 BT-Kopfhörer · 🔀 Modus wechseln *(BT nur bei
-Firmware mit Bluetooth)*.
+📁 FTP aktivieren · 🔊 BT-Lautsprecher · 🎧 BT-Kopfhörer · 🔀 Modus wechseln *(die
+Bluetooth-Aktionen nur bei Firmware mit Bluetooth)*.
 
 **Ansagen:** 🌐 IP-Adresse ansagen · 🕒 Uhrzeit ansagen.
 
 **Wiedergabesteuerung als Karte:** ⏯ Play/Pause · ⏮/⏭ Titel zurück/vor · ⏪/⏩ erster/letzter Titel ·
-📁 Ordner vor/zurück (nur rekursive Modi) · »/« Sekunden vor/zurück (`jumpOffset`).
+📁 Ordner vor/zurück (nur in rekursiven Modi) · »/« Sekunden vor/zurück.
 
 **Virtuelle Karten & Sonstiges:** 🏷 Virtuelle Karte 01–10 · 🗑 Zuordnung löschen (weist du *das*
-einer Karte zu, wird ihre Zuordnung gelöscht).
+einer Karte zu, wird ihre bestehende Zuordnung entfernt).
 
 ## Tab WLAN
 
 <!-- Screenshot: WLAN-Tab -->
 
-- **WLAN-Einstellungen** – „Start mit bestem WLAN" (stärkstes von mehreren), **Hostname**, sowie
-  Name/Passwort/Timeout des **Access-Points**.
-- **Netzwerke** – mehrere WLANs speicherbar (praktisch für unterwegs); optional pro Netzwerk eine
-  **statische IP**.
-- **Gespeicherte Netzwerke** – Liste, das verbundene ist hervorgehoben; löschen per Mülleimer.
+Hier verwaltest du alles rund um die Netzwerkverbindung. Unter **WLAN-Einstellungen** legst du fest,
+ob ESPuino beim Start das **stärkste** von mehreren bekannten Netzen wählt, wie der **Hostname**
+lautet und – für den Einrichtungsfall – wie der **Access-Point** heißt, ob er ein Passwort hat und
+wann er sich automatisch schließt. Unter **Netzwerke** hinterlegst du deine WLANs; es lassen sich
+mehrere speichern, was praktisch ist, wenn ESPuino auch mal mit zu den Großeltern reist. Optional
+kannst du pro Netzwerk eine **statische IP** setzen. Die **gespeicherten Netzwerke** schließlich
+listet alle hinterlegten WLANs auf; das gerade verbundene ist hervorgehoben, und über das
+Mülleimer-Symbol löschst du Einträge.
 
-!!! warning "Vorsicht"
-    Access-Point-Timeout **0** = schließt nie automatisch (Sicherheitsrisiko). Statische IP nur
-    nutzen, wenn du weißt was du tust – sonst ist ESPuino evtl. nicht mehr erreichbar.
+!!! warning "Zwei Vorsichtshinweise"
+    Ein Access-Point-Timeout von **0** bedeutet, dass sich der Einrichtungs-AP nie von selbst schließt
+    – das ist ein potenzielles Sicherheitsrisiko. Und eine **statische IP** solltest du nur setzen,
+    wenn du weißt, was du tust, sonst ist ESPuino unter Umständen nicht mehr erreichbar.
 
 ## Tab MQTT
 
-*Nur bei Firmware mit MQTT.* <!-- Screenshot: MQTT-Tab -->
+*Dieser Tab erscheint nur, wenn die Firmware mit MQTT-Unterstützung gebaut wurde.*
 
-Anbindung an den MQTT-Broker (z. B. Home Assistant): aktivieren, ClientId, Basis-Topic (optional),
-Geräte-ID, Server, Benutzer/Passwort (optional), Port. In ClientId und Geräte-ID ersetzt der
-Platzhalter `<MAC>` automatisch die MAC-Adresse. Darunter eine **Live-Vorschau der Topics**.
-Topic-Referenz: [Anhang → MQTT](../referenz/anhang.md#mqtt-topics).
+<!-- Screenshot: MQTT-Tab -->
+
+Hier bindest du ESPuino an deinen MQTT-Broker an, etwa für Home Assistant oder ioBroker. Du
+aktivierst MQTT und trägst ClientId, ein optionales Basis-Topic, die Geräte-ID, den Server, optional
+Benutzername und Passwort sowie den Port ein. In ClientId und Geräte-ID darfst du den Platzhalter
+`<MAC>` verwenden – er wird automatisch durch die MAC-Adresse ersetzt, was bei mehreren ESPuinos
+Gold wert ist. Praktischerweise siehst du unterhalb der Felder eine **Live-Vorschau der Topics**, die
+sich aus deinen Eingaben ergeben. Welche Topics es gibt, steht im
+[Anhang](../referenz/anhang.md#mqtt-topics).
 
 !!! warning "Neustart nötig"
-    Änderungen an den MQTT-Einstellungen greifen erst nach Neustart (wird nach dem Speichern
-    angeboten).
+    Änderungen an den MQTT-Einstellungen greifen erst nach einem Neustart – das Interface bietet ihn
+    nach dem Speichern gleich an.
 
 ## Tab FTP
 
-*Nur bei Firmware mit FTP.* <!-- Screenshot: FTP-Tab -->
+*Nur sichtbar, wenn die Firmware mit FTP-Unterstützung gebaut wurde.*
 
-Benutzer/Passwort für FTP. Der Server läuft aus Speichergründen nicht permanent: bei Bedarf über
-**FTP-Server starten** (oder am Gerät Pause + Next) aktivieren; nach dem nächsten Neustart wieder
-aus.
+<!-- Screenshot: FTP-Tab -->
 
-!!! tip
-    Für größere Datenmengen ist FTP schneller als der Web-Upload. Zeichenkodierung **CP437**
-    einstellen, damit Umlaute korrekt ankommen.
+Hier legst du Benutzernamen und Passwort für den FTP-Zugang fest. Aus Speichergründen läuft der
+FTP-Server nicht dauerhaft mit: Du startest ihn bei Bedarf über den Button **FTP-Server starten**
+(oder am Gerät über die Tastenkombination Pause/Play + Nächster Titel), und nach dem nächsten Neustart
+ist er wieder aus.
+
+!!! tip "Für große Datenmengen"
+    FTP ist deutlich schneller als der Web-Upload und damit die bessere Wahl, wenn du viel auf einmal
+    überträgst. Stell im FTP-Programm die Zeichenkodierung **CP437** ein, damit Umlaute korrekt
+    ankommen.
 
 ## Tab Bluetooth
 
-*Nur bei Firmware mit Bluetooth.* <!-- Screenshot: Bluetooth-Tab -->
+*Nur sichtbar, wenn die Firmware mit Bluetooth-Unterstützung gebaut wurde.*
 
-- **Bluetooth-Kopfhörer** (ESPuino sendet): Kopfhörer-Namen eintragen oder **Geräte suchen** und
-  aus der Liste übernehmen; optionales PIN-Feld. Dann **Kopfhörer-Modus starten**.
-- **Bluetooth-Lautsprecher** (ESPuino empfängt): ESPuino wird zur BT-Box.
+<!-- Screenshot: Bluetooth-Tab -->
 
-Im BT-Modus zeigt der Tab einen Button zurück in den Normal-Modus (alternativ eine unbekannte
-RFID-Karte auflegen).
+ESPuino kann Bluetooth in zwei Richtungen. Im Modus **Bluetooth-Kopfhörer** sendet ESPuino den Ton an
+ein Bluetooth-Gerät – du trägst den Namen deines Kopfhörers ein oder, noch einfacher, klickst auf
+**Geräte suchen** und übernimmst dein Gerät aus der Trefferliste (bei Bedarf gibt es ein Feld für den
+PIN-Code). Im Modus **Bluetooth-Lautsprecher** wird ESPuino umgekehrt selbst zur Box, auf die du vom
+Handy streamst. Im Bluetooth-Modus zeigt der Tab einen Button, um wieder in den Normal-Modus zu
+wechseln; alternativ genügt es, eine unbekannte RFID-Karte aufzulegen.
 
-!!! note "BT und WLAN"
+!!! note "Bluetooth und WLAN"
     Bluetooth und WLAN laufen **parallel**. Der Parallelbetrieb ist allerdings speicherknapp und
-    ungetestet – siehe [Kapitel 7 → Betriebsmodi](am-geraet.md#betriebsmodi).
+    ungetestet – mehr dazu in [Kapitel 7 → Betriebsmodi](am-geraet.md#betriebsmodi).
 
 ## Tab Allgemein
 
 <!-- Screenshot: Allgemein-Tab -->
 
-Fünf Unterkladden, **jede mit eigenen Speichern/Reset-Buttons**.
+Die allgemeinen Einstellungen sind in fünf Unterkladden aufgeteilt, und **jede hat ihre eigenen
+Speichern- und Reset-Buttons** – du speicherst also immer nur den Bereich, in dem du gerade bist.
 
 ### Wiedergabe
 
-- **Lautstärke** – Start- und Maximal-Lautstärke, getrennt für Lautsprecher und Kopfhörer (plus
-  Minimal-Lautstärke).
-- **Optionen** (je mit Hilfetext): Position beim Ausschalten/Kartenwechsel merken · letzte Karte
-  nach Neustart abspielen · Pause bei entfernter Karte (nur PN5180) · gleiche Karte nicht erneut
-  akzeptieren (optional: Pause→Play beim erneuten Auflegen) · Pause bei minimaler Lautstärke ·
-  letzte Lautstärke wiederherstellen · Mono-Wiedergabe · Lautstärkekurve (linear/logarithmisch).
-- **Wiedergabeliste** – Sortiermodus und maximale Rekursionstiefe.
+Hier stellst du das grundlegende Abspielverhalten ein. Unter **Lautstärke** legst du die
+Startlautstärke sowie die Maximalwerte getrennt für Lautsprecher und Kopfhörer fest (plus eine
+Minimal-Lautstärke, damit sich die Box nie ganz stummschalten lässt). Der Bereich **Optionen** ist
+eine Sammlung von Verhaltensschaltern, zu jedem gibt es einen Hilfetext am Fragezeichen: Position beim
+Ausschalten oder Kartenwechsel merken, letzte Karte nach Neustart abspielen, Pause bei entfernter
+Karte, dieselbe Karte nicht erneut akzeptieren, Pause bei minimaler Lautstärke, letzte Lautstärke
+wiederherstellen, Mono-Wiedergabe und die Lautstärkekurve (linear oder logarithmisch). Unter
+**Wiedergabeliste** wählst du schließlich den Sortiermodus und die maximale Rekursionstiefe.
 
-!!! warning "„Pause bei entfernter Karte" kann Ärger machen"
-    Die Option „Karte bleibt liegen, Entfernen pausiert/stoppt" ist beliebt, aber heikel: Wird die
-    Karte zwischendurch **kurz nicht erkannt** (Abstand, Störeinflüsse), pausiert die Wiedergabe
-    ungewollt – ein häufiger Grund für sporadische Aussetzer. Wenn es bei dir unzuverlässig läuft:
-    Abstand Karte ↔ Leser minimieren, den **PN5180 Debounce** erhöhen – oder die Option einfach
-    **abschalten**. (Nur PN5180.)
+!!! warning "Die Option „Pause bei entfernter Karte" kann Ärger machen"
+    Sie ist beliebt (Karte liegt auf, Abnehmen pausiert), aber heikel: Wird die Karte zwischendurch
+    kurz nicht erkannt, pausiert die Wiedergabe ungewollt – einer der häufigsten Gründe für sporadische
+    Aussetzer. Läuft es bei dir unzuverlässig, verkleinere den Abstand Karte↔Leser, erhöhe den PN5180
+    Debounce – oder schalte die Option ab. (Sie funktioniert nur mit dem PN5180.)
 
 ### RFID-Reader
 
 <!-- Screenshot: RFID-Reader -->
 
-- **PN5180 LPCD aktivieren** – Aufwecken durch Kartenauflegen (nur PN5180, Lötbrücken; bei MFRC522
-  ausgegraut). Einordnung/Einschränkungen: [Kapitel 10 → LPCD](../vertiefung/erweiterte-themen.md#lpcd).
-- **Reader-Typ** – *Auto-detect* (Standard), MFRC522 (SPI), MFRC522 (I²C) oder PN5180. Erkennung
-  zur Laufzeit, ohne Firmware-Neubau.
-- **MFRC522 Gain** – Empfindlichkeit (0–7, Standard 7).
-- **PN5180 Debounce** – wie lange eine Karte ununterbrochen *nicht* erkannt sein muss, bevor sie
-  als entfernt gilt (Standard 500 ms).
+In dieser Unterkladde geht es um den Kartenleser. Du kannst **LPCD** aktivieren (das Aufwecken durch
+Kartenauflegen; nur mit PN5180 und Lötbrücken, bei MFRC522 ausgegraut – die Einschränkungen dazu
+stehen in [Kapitel 10](../vertiefung/erweiterte-themen.md#lpcd)), den **Reader-Typ** festlegen
+(*Auto-detect* als Standard, oder gezielt MFRC522 bzw. PN5180), beim MFRC522 die Empfindlichkeit über
+den **Gain** (0–7) einstellen und beim PN5180 den **Debounce** anpassen – die Zeit, die eine Karte
+ununterbrochen *nicht* erkannt sein muss, bevor sie als entfernt gilt (Standard 500 ms).
 
 !!! warning "Neustart nötig"
-    Änderungen in dieser Unterkladde greifen erst nach Neustart.
+    Änderungen in dieser Unterkladde greifen erst nach einem Neustart.
 
 ### Drehencoder & Taster
 
 <!-- Screenshot: Drehencoder & Taster -->
 
-Legt fest, was die Bedienelemente tun. Alles hier landet im NVS und **überschreibt die
-Firmware-Standardbelegung** – die komplette Belegung ist also ohne Firmware-Neubau anpassbar
-(Standardbelegung: siehe [Kapitel 7 → Buttons](am-geraet.md#buttons-tastenkombinationen)).
+Hier legst du fest, was die Bedienelemente tun. Wichtig zu verstehen: Alles, was du hier einstellst,
+landet im internen Speicher (NVS) und **überschreibt die in der Firmware hinterlegte
+Standardbelegung** – du kannst die komplette Belegung also anpassen, ohne die Firmware neu zu bauen.
 
-- **Drehimpulsgeber** – steuert die Lautstärke; einzige Option: **Drehrichtung umkehren**.
-- **Taster-Zuordnungen** – Tabelle mit je einer Zeile pro Taster (Btn0–Btn5) und Spalten für
-  **kurzen**/**langen** Druck; `--` = keine Aktion. Btn0 = Next, Btn1 = Prev, Btn2 = Play/Pause,
-  Btn3 = Drehencoder-Taster, Btn4/5 = frei. Nicht vorhandene Taster einfach auf `--` lassen.
-- **Multi-Taster** – Aktionen auf gleichzeitig gedrückte Paare (`0+1` … `4+5`), je **eine** Aktion.
-- **Auswahl** – im Wesentlichen der Modifikationskarten-Katalog, plus nur-für-Taster-Aktionen:
-  🔊 Lauter / 🔉 Leiser / 🔈 Initiale Lautstärke · 🔋 Batteriespannung · ⏹ Stop · 🔄 Neustart ·
-  💤 Schlafen nach fünf Titeln · 📊 Taskauslastung (Debug). Die Karten-Aktion „🗑 Zuordnung löschen"
-  fehlt hier (ergibt nur beim Beschreiben einer Karte Sinn).
+Für den **Drehregler** gibt es nur eine Einstellung: die **Drehrichtung umkehren**, falls bei dir
+Rechtsdrehen leiser statt lauter macht. Darunter ordnest du in einer Tabelle jedem der sechs
+**Taster** (Btn0–Btn5) je eine Aktion für kurzen und langen Druck zu; `--` bedeutet „keine Aktion".
+Zusätzlich lassen sich Aktionen auf **gleichzeitig gedrückte Tasterpaare** legen (alle 15
+Kombinationen von 0+1 bis 4+5, jeweils eine Aktion) – praktisch für selten gebrauchte Funktionen wie
+Neustart oder FTP-Start, ohne dafür einen eigenen Taster zu opfern.
+
+Die zur Auswahl stehenden Aktionen entsprechen im Wesentlichen dem Modifikationskarten-Katalog, plus
+einiger Aktionen, die nur als Taster Sinn ergeben: Lauter/Leiser/Initiale Lautstärke,
+Batteriespannung anzeigen, Stop und Neustart, Schlafen nach fünf Titeln sowie eine Debug-Anzeige der
+Taskauslastung. Die Standardbelegung, mit der ESPuino ausgeliefert wird, findest du in
+[Kapitel 7 → Tasten](am-geraet.md#tasten-und-tastenkombinationen).
 
 ### LED
 
 <!-- Screenshot: LED -->
 
-- **Helligkeit** – nach dem Einschalten, im Nachtmodus, im Ambient-Light-Modus.
-- **LED-Einstellungen** – Anzahl Anzeige-/Kontroll-LEDs (Kontroll-LEDs mit Farbe pro LED), Punkte
-  im Leerlauf, Fortschritts-Farbverlauf (Farbton Start/Ende), Atmolight-Farbton/-Sättigung,
-  dimmbare Zwischenstufen, Start-LED-Offset, Pause-Zentrierung, Laufrichtung.
+Hier stellst du die Neopixel ein: die **Helligkeit** nach dem Einschalten, im Nachtmodus und im
+Ambient-Light-Modus, sowie unter **LED-Einstellungen** die Anzahl der Anzeige- und Kontroll-LEDs
+(Letztere mit frei wählbarer Farbe pro LED), die Zahl der Punkte im Leerlauf, den Farbverlauf der
+Fortschrittsanzeige, Farbton und Sättigung des Atmolights, die dimmbaren Zwischenstufen, den Offset
+der Start-LED, die Zentrierung der Pause-Anzeige und die Laufrichtung.
 
-!!! tip "Erstes Pixel positionieren"
+!!! tip "Das erste Pixel positionieren"
     Sitzt der Ring im Gehäuse „verdreht", legst du mit dem **Start-LED-Offset** fest, an welcher
-    physischen LED die Anzeige beginnt – so passt du den Nullpunkt des Rings an deine Einbaulage an,
-    ohne umzulöten ([Forum #4670](https://forum.espuino.de/t/neopixel-erstes-pixel-positionieren-geht-das/4670)).
+    physischen LED die Anzeige beginnt – so richtest du den Nullpunkt des Rings an deiner Einbaulage
+    aus, ohne umzulöten ([Forum #4670](https://forum.espuino.de/t/neopixel-erstes-pixel-positionieren-geht-das/4670)).
 
-!!! warning
-    Eine geänderte LED-Anzahl übernimmt ESPuino per automatischem Neustart.
+Eine geänderte LED-**Anzahl** übernimmt ESPuino übrigens per automatischem Neustart.
 
 ### Energie
 
 <!-- Screenshot: Energie -->
 
-- **Deep Sleep** – Inaktivitätszeit bis zum Schlafen.
-- **Batterie** *(nur bei aktiver Batteriemessung)* – Warnspannung, Spannungen für 0 %/100 %,
-  optional kritische Abschaltspannung, Messintervall.
+Zuletzt die Energie-Einstellungen: Unter **Deep Sleep** legst du fest, nach wie vielen Minuten
+Inaktivität sich ESPuino schlafen legt. Und wenn die Batteriemessung aktiv ist, stellst du unter
+**Batterie** die Warnspannung, die Spannungen für 0 % und 100 %, optional die kritische
+Abschaltspannung sowie das Messintervall ein.
 
 ## Tab Updates
 
 <!-- Screenshot: Updates -->
 
-- **Firmware-Update (Datei)** – `firmware.bin` wählen, **Firmware hochladen**, danach automatischer
-  Neustart.
-- **Firmware von GitHub laden** – holt fertige Builds direkt aus dem
-  [ESPuino-Firmware-Repo](https://github.com/biologist79/ESPuino-Firmware): Branch (**dev**/**master**)
-  wählen, **Nach Updates suchen**, letzte 10 Builds mit Datum/Commit-ID, **Installieren** – Board-
-  Variante und Sprache werden automatisch gewählt, Fortschritt am LED-Ring. Siehe
-  [Kapitel 11](../firmware/aktualisieren.md).
-
-*(Der GitHub-Bereich erscheint nur bei OTA-fähiger Firmware.)*
+An dieser Stelle findest du alles rund ums Firmware-Update. Du kannst entweder eine `firmware.bin` von
+Hand hochladen, oder – deutlich bequemer – über **Firmware von GitHub laden** direkt einen fertigen
+Build aus dem Repository holen. Ausführlich ist das in
+[Kapitel 11 · Firmware aktualisieren](../firmware/aktualisieren.md) beschrieben. Der GitHub-Bereich
+erscheint nur bei OTA-fähiger Firmware.
 
 ## Tab Tools
 
 <!-- Screenshot: Tools -->
 
-Rund um die gespeicherten RFID-Zuweisungen (liegen im **NVS**, nicht auf der SD-Karte):
-
-- **Zuweisungen anzeigen** – scrollbares Fenster, Einträge einzeln löschbar.
-- **Zuweisungen exportieren** – lädt `backup.txt` (wird zusätzlich bei jeder Zuweisung automatisch
-  auf die SD-Karte geschrieben). Regelmäßig machen!
-- **Zuweisungen importieren** – spielt ein Backup ein; ergänzt/überschreibt nur, löscht nichts.
-- **Alle Zuweisungen löschen** ⚠️ – entfernt sämtliche Zuweisungen aus dem NVS (mit Rückfrage).
+Dieser Tab dreht sich um die gespeicherten RFID-Zuweisungen, die – daran sei erinnert – nicht auf der
+SD-Karte liegen, sondern im internen Speicher (NVS). Du kannst dir alle **Zuweisungen anzeigen** (und
+einzelne direkt löschen), sie als `backup.txt` **exportieren** und wieder **importieren** (der Import
+ergänzt und überschreibt nur, löscht nie), oder mit dem roten Button **alle Zuweisungen löschen** (mit
+Sicherheitsabfrage). Wie du diese Funktionen zum Sichern und Übertragen nutzt, steht in
+[Kapitel 8 → Backup & Restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern).
 
 ## Tab Hilfe
 
 <!-- Screenshot: Hilfe -->
 
-Verweise auf das [Forum](https://forum.espuino.de) und die REST-API-Dokumentation (Swagger) – zum
-Skripten oder Einbinden in die Hausautomatisierung.
+Der Tab Hilfe verweist auf das [Forum](https://forum.espuino.de) und auf die REST-API-Dokumentation
+(Swagger) – Letzteres für alle, die ESPuino skripten oder in ihre Hausautomatisierung einbinden wollen.
