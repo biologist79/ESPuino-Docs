@@ -287,6 +287,15 @@ Neustart oder FTP-Start, ohne dafür einen eigenen Taster zu opfern.
     denen du nicht rechnest – oder die du längst wieder vergessen hast. Eine übersichtliche Belegung
     erspart dir hinterher das Rätselraten.
 
+!!! danger "Aussperr-Falle: „WLAN deaktivieren" auf einer Taste"
+    Eine der wählbaren Aktionen schaltet das **WLAN ab**. Legst du sie auf eine Taste oder
+    Tastenkombination und löst sie (womöglich versehentlich) aus, sperrst du dich damit aus dem
+    Webinterface aus – ohne WLAN keine Weboberfläche, und ohne Weboberfläche auch kein Weg mehr, das
+    WLAN wieder einzuschalten. Der einzige Ausweg ist dann, den **Flash zu löschen**; dabei wird das
+    NVS überschrieben, und **alle Einstellungen sind weg**. Genau deshalb ist die WLAN-Umschalt-Kombination
+    ab Werk deaktiviert. Willst du WLAN überhaupt umschaltbar haben, leg das lieber auf eine
+    **Modifikationskarte** – die solltest du dann allerdings nicht verlegen. 😄
+
 Die zur Auswahl stehenden Aktionen entsprechen im Wesentlichen dem Modifikationskarten-Katalog, plus
 einiger Aktionen, die nur als Taster Sinn ergeben: Lauter/Leiser/Initiale Lautstärke,
 Batteriespannung anzeigen, Stop und Neustart, Schlafen nach fünf Titeln sowie eine Debug-Anzeige der
