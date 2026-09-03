@@ -1,0 +1,117 @@
+site_name: ESPuino-Handbuch
+site_description: >-
+  Handbuch für den ESPuino – RFID-gesteuerter Audio-Player. Fokus auf die
+  Complete-Platine (mini4L als Vorgänger).
+site_author: biologist79
+# Beim Anlegen des GitHub-Repos ggf. anpassen:
+site_url: https://biologist79.github.io/ESPuino-Docs/
+repo_url: https://github.com/biologist79/ESPuino-Docs
+repo_name: ESPuino-Docs
+edit_uri: edit/main/docs/
+copyright: © biologist79 · ESPuino
+
+theme:
+  name: material
+  language: de
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.footer
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Dunkles Design
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Helles Design
+  icon:
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
+
+# Mehrsprachigkeit vorbereitet: Deutsch ist die Default-Sprache (die vorhandenen
+# .md-Dateien). Für Englisch/Französisch später einfach `seite.en.md` / `seite.fr.md`
+# daneben anlegen und unten `build: true` setzen. Fehlende Übersetzungen fallen auf
+# Deutsch zurück (fallback_to_default).
+plugins:
+  - search:
+      lang: [de, en, fr]
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: de
+          default: true
+          name: Deutsch
+          build: true
+        - locale: en
+          name: English
+          build: false   # auf true setzen, sobald *.en.md-Seiten existieren
+        - locale: fr
+          name: Français
+          build: false   # auf true setzen, sobald *.fr.md-Seiten existieren
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+
+extra:
+  social:
+    - icon: fontawesome/solid/comments
+      link: https://forum.espuino.de
+      name: ESPuino-Forum
+
+nav:
+  - Start: index.md
+  - "Teil 1 · Einstieg":
+      - "1 · Was ist ESPuino?": einstieg/was-ist-espuino.md
+      - "2 · Quickstart": einstieg/quickstart.md
+  - "Teil 2 · Hardware (Complete)":
+      - "3 · Die Complete-Platine": hardware/complete.md
+      - "4 · Anschließen & Einbau": hardware/aufbau.md
+  - "Teil 3 · Inbetriebnahme":
+      - "5 · Erststart": inbetriebnahme/erststart.md
+  - "Teil 4 · Bedienung":
+      - "6 · Das Webinterface": bedienung/webinterface.md
+      - "7 · Bedienung am Gerät": bedienung/am-geraet.md
+  - "Teil 5 · Inhalte":
+      - "8 · Inhalte verwalten": inhalte/verwalten.md
+      - "9 · MediaHub": inhalte/mediahub.md
+  - "Teil 6 · Vertiefung":
+      - "10 · Erweiterte Themen": vertiefung/erweiterte-themen.md
+  - "Teil 7 · Firmware & Build":
+      - "11 · Firmware aktualisieren": firmware/aktualisieren.md
+      - "12 · Compile-Zeit-Konfiguration": firmware/compile-zeit.md
+  - "Teil 8 · Hilfe":
+      - "13 · Troubleshooting": hilfe/troubleshooting.md
+  - "Teil 9 · Referenz & Legacy":
+      - "14 · Bestandsgeräte: mini4L": referenz/mini4l.md
+      - "15 · Entwicklung & Beitrag": referenz/entwicklung.md
+      - "16 · Anhang": referenz/anhang.md

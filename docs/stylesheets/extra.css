@@ -1,0 +1,16 @@
+/* ESPuino-Akzent (Blau der Web-UI-Kopfleiste) leicht angleichen */
+:root {
+  --md-primary-fg-color:        #2b52d4;
+  --md-primary-fg-color--light: #4f72e3;
+  --md-primary-fg-color--dark:  #23327a;
+  --md-accent-fg-color:         #2b52d4;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        #6f90f4;
+  --md-accent-fg-color:         #6f90f4;
+}
+
+/* Kompaktere Tabellen für die Referenz-Seiten */
+.md-typeset table:not([class]) {
+  font-size: 0.78rem;
+}
