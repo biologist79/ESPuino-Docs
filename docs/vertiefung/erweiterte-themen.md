@@ -26,9 +26,13 @@ bindest du ihn in eine Hausautomatisierung ein.
 
 ## Virtual RFID Cards
 
-Zehn **virtuelle Karten** mit den IDs `900000000001` … `900000000010`. Sie funktionieren wie echte
-Karten, werden aber per Kommando ausgelöst (z. B. über einen Taster, eine Multi-Taster-Kombination
-oder MQTT) – nützlich, um eine Aktion ohne physische Karte auszulösen. Details:
+Zehn **virtuelle Karten** mit den IDs `900000000001` … `900000000010`. Du weist ihnen im
+Webinterface Inhalte oder Modifikationen zu – **genau wie einer echten Karte** (Chip-Nummer von
+Hand eintragen). Ausgelöst werden sie dann per **Taster** (kurz/lang), **Multi-Taster-Kombination**
+oder **MQTT**.
+
+So legst du häufige Aktionen auf einen Knopfdruck, ohne eine spezielle Karte bereitlegen zu müssen
+– z. B. „Lieblings-Playlist starten" auf eine Tastenkombination. Details:
 [Forum #3218](https://forum.espuino.de/t/virtual-rfid-cards/3218).
 
 ## LPCD
