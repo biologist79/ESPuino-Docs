@@ -168,6 +168,13 @@ Fünf Unterkladden, **jede mit eigenen Speichern/Reset-Buttons**.
   letzte Lautstärke wiederherstellen · Mono-Wiedergabe · Lautstärkekurve (linear/logarithmisch).
 - **Wiedergabeliste** – Sortiermodus und maximale Rekursionstiefe.
 
+!!! warning "„Pause bei entfernter Karte" kann Ärger machen"
+    Die Option „Karte bleibt liegen, Entfernen pausiert/stoppt" ist beliebt, aber heikel: Wird die
+    Karte zwischendurch **kurz nicht erkannt** (Abstand, Störeinflüsse), pausiert die Wiedergabe
+    ungewollt – ein häufiger Grund für sporadische Aussetzer. Wenn es bei dir unzuverlässig läuft:
+    Abstand Karte ↔ Leser minimieren, den **PN5180 Debounce** erhöhen – oder die Option einfach
+    **abschalten**. (Nur PN5180.)
+
 ### RFID-Reader
 
 <!-- Screenshot: RFID-Reader -->
@@ -209,6 +216,11 @@ Firmware-Standardbelegung** – die komplette Belegung ist also ohne Firmware-Ne
 - **LED-Einstellungen** – Anzahl Anzeige-/Kontroll-LEDs (Kontroll-LEDs mit Farbe pro LED), Punkte
   im Leerlauf, Fortschritts-Farbverlauf (Farbton Start/Ende), Atmolight-Farbton/-Sättigung,
   dimmbare Zwischenstufen, Start-LED-Offset, Pause-Zentrierung, Laufrichtung.
+
+!!! tip "Erstes Pixel positionieren"
+    Sitzt der Ring im Gehäuse „verdreht", legst du mit dem **Start-LED-Offset** fest, an welcher
+    physischen LED die Anzeige beginnt – so passt du den Nullpunkt des Rings an deine Einbaulage an,
+    ohne umzulöten ([Forum #4670](https://forum.espuino.de/t/neopixel-erstes-pixel-positionieren-geht-das/4670)).
 
 !!! warning
     Eine geänderte LED-Anzahl übernimmt ESPuino per automatischem Neustart.

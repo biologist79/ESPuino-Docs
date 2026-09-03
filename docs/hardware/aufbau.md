@@ -55,6 +55,10 @@ Die Drehrichtung lässt sich später im Webinterface umkehren.
 *TODO: Gehäuse-Varianten, Kabelführung.* SD-Karte einsetzen: **FAT32** (Karten > 32 GB sind ab
 Werk oft exFAT und müssen neu als FAT32 formatiert werden).
 
+!!! tip "Inspiration"
+    Gehäuse-Ideen und fertige Bauten anderer gibt es in der Galerie
+    [„Zeigt her eure ESPuinos" (#554)](https://forum.espuino.de/t/zeigt-her-eure-espuinos/554).
+
 ## Nach dem Zusammenbau: Feinjustierung
 
 Beim ersten Start ([Kapitel 5](../inbetriebnahme/erststart.md)) im Webinterface an die Hardware

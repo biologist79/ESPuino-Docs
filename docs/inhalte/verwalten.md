@@ -56,7 +56,12 @@ Checkpoint gegen Stromausfall.
 ## Tags, Cover, Metadaten
 
 Liefert ein Titel (oder ein Webstream) ein **Cover** mit, zeigt das Webinterface es im Tab
-Steuerung an. *TODO: unterstützte Cover-Quellen/-Formate im Detail.*
+Steuerung an.
+
+!!! tip "Coverart kann Ärger machen"
+    Eingebettetes Coverart ist gelegentlich die Ursache, wenn eine MP3 nicht sauber spielt. Notfalls
+    die Datei ohne Cover neu kodieren – siehe
+    [Troubleshooting → MP3](../hilfe/troubleshooting.md#einzelne-titel-machen-probleme-mp3).
 
 ## Webradio
 

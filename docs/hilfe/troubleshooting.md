@@ -16,6 +16,9 @@ Für fast jede Diagnose ist das Log der schnellste Weg:
 - **PN5180 Debounce** erhöhen, wenn eine ruhende Karte fälschlich als „entfernt" gilt
   (Tab Allgemein → RFID-Reader, Standard 500 ms).
 - **MFRC522 Gain** (0–7) höher stellen für mehr Empfindlichkeit.
+- **Sporadische Aussetzer** bei aktivem „Pause bei entfernter Karte": die Karte wird zwischendurch
+  kurz nicht erkannt und die Wiedergabe pausiert ungewollt. Debounce erhöhen, Abstand verringern –
+  oder die Option abschalten ([Kapitel 6](../bedienung/webinterface.md#tab-allgemein)).
 - **LPCD** ist als unzuverlässig bekannt – siehe [Kapitel 10 → LPCD](../vertiefung/erweiterte-themen.md#lpcd).
 
 ## SD-Karte wird nicht erkannt
@@ -33,6 +36,19 @@ Für fast jede Diagnose ist das Log der schnellste Weg:
   +15 dB) ein – nur **eine** davon setzen.
 - **Mono/Stereo:** Bei nur einem Lautsprecher Mono-Wiedergabe aktivieren.
 - Für Kopfhörer die **Kopfhörerplatine** verwenden (siehe [Kapitel 7](../bedienung/am-geraet.md#kopfhorer-detection-lautstarke-profile)).
+
+## Einzelne Titel machen Probleme (MP3)
+
+Manche MP3s bereiten Ärger (spielen nicht, stottern) – häufig liegt es an **eingebettetem Coverart**
+oder ungewöhnlicher Kodierung. Oft hilft ein sauberes **Re-Encoding**, z. B. mit
+[ffmpeg](https://ffmpeg.org/):
+
+```bash
+ffmpeg -i problem.mp3 -vn -c:a libmp3lame -q:a 2 clean.mp3
+```
+
+`-vn` entfernt das eingebettete Cover (technisch ein „Video"-Stream), `-q:a 2` liefert gute
+Qualität. Für einen ganzen Ordner die Datei-Schleife der Shell nutzen.
 
 ## WLAN-Probleme
 
