@@ -27,12 +27,14 @@ und pioarduino** selbst eine passende Firmware kompilieren. Wie das geht, steht 
 
 Damit ESPuino dir Musik über das Netzwerk zugänglich machen und sich bequem konfigurieren lassen
 kann, braucht er Zugang zu deinem WLAN. Beim allerersten Start kennt er dein WLAN aber noch gar
-nicht – niemand hat ihm ja Netzwerkname und Passwort verraten. Aus diesem Henne-Ei-Problem hilft
+nicht. Aus diesem Henne-Ei-Problem hilft
 sich ESPuino, indem er **selbst ein WLAN aufspannt**, in das du dich einklinken kannst, um ihm dann
 dein „richtiges" WLAN mitzuteilen.
 
-Dieses Einrichtungs-WLAN heißt standardmäßig **`ESPuino`** und ist offen (kein Passwort). Geh also
-an deinem Computer oder Smartphone in die WLAN-Auswahl und verbinde dich mit dem Netzwerk `ESPuino`.
+Dieses Einrichtungs-WLAN heißt standardmäßig **`ESPuino`** und ist zunächst offen, also ohne Passwort.
+(Es lässt sich später übrigens umbenennen und mit einem Passwort absichern – aber dazu später mehr, im
+[Tab WLAN](../bedienung/webinterface.md#tab-wlan).) Geh also an deinem Computer oder Smartphone in die
+WLAN-Auswahl und verbinde dich mit dem Netzwerk `ESPuino`.
 Sobald die Verbindung steht, weist ESPuino deinem Gerät automatisch eine Adresse zu, und du kannst
 die Einrichtungsseite im Browser aufrufen. Sie liegt unter der festen Adresse **`http://192.168.4.1`**.
 Bei vielen Geräten öffnet sich diese Seite sogar von selbst (als sogenanntes „Captive Portal", das
