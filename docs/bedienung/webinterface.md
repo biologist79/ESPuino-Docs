@@ -15,9 +15,10 @@ bei aktivem mDNS), sonst über die IP-Adresse. Wie du das erste Mal dorthin komm
 Ein paar Elemente begegnen dir auf jeder Seite, deshalb vorab:
 
 - Oben rechts pulsiert ein **Herz-Symbol** – die Verbindungsanzeige, im Forum „Heartbeat" genannt
-  ([#4583](https://forum.espuino.de/t/heartbeat/4583)). Das Interface schickt alle drei Sekunden eine
-  kleine Anfrage an den ESPuino; kommt eine Antwort, pulsiert das Herz grün, bleibt sie aus, wird es
-  rot. So siehst du jederzeit, ob die Verbindung steht.
+  ([#4583](https://forum.espuino.de/t/heartbeat/4583)). Es überwacht die Verbindung zwischen deinem
+  **Webbrowser** und dem **ESPuino**: Die geöffnete Seite schickt alle drei Sekunden eine kleine
+  Anfrage an das Gerät; kommt eine Antwort zurück, pulsiert das Herz grün, bleibt sie aus, wird es
+  rot. So siehst du jederzeit, ob die Seite noch mit deinem ESPuino in Kontakt steht.
 - Neben vielen Eingabefeldern sitzt ein **Fragezeichen**. Ein Klick darauf öffnet einen kurzen
   Hilfetext – wenn du also mal nicht weißt, was eine Einstellung bewirkt, ist die Antwort meist nur
   einen Klick entfernt.
