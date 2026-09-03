@@ -29,7 +29,7 @@ Verbindungen, die der Käufer selbst lötet (JST-Stecker):
 
 - **RFID-Reader** – 10-polig
 - **Lautsprecher** – 2-polig
-- **Neopixel-Ring** – 3-polig
+- **Neopixel** (Ring, Reihe oder einzelne LED) – 3-polig
 - **Buttons** – je 2-polig (bis zu fünf)
 
 ## Drehencoder

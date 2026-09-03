@@ -5,7 +5,26 @@ mitziehen.
 
 ## Pinout-Referenz Complete
 
-*TODO: aus `settings-complete.h` (I²S, RFID, Buttons, Rotary, Wakeup, Batterie-ADC …).*
+Aus `settings-complete.h`. **Wichtig:** Werte **≥ 100** sind **Port-Expander-Kanäle** (PCA9555,
+Kanal = Wert − 100), keine direkten ESP32-GPIOs. `99` = ungenutzt/Dummy.
+
+| Funktion | Signal | Pin |
+| --- | --- | --- |
+| **Audio (I²S)** | DOUT / BCLK / LRC | GPIO 25 / 27 / 26 |
+| **RFID (SPI)** | CS / SCK / MOSI / MISO | GPIO 21 / 18 / 23 / 19 |
+| RFID (nur PN5180) | RST / BUSY / IRQ | GPIO 22 / 33 / 32 |
+| **SD-Karte** | SD-MMC 1-Bit: CLK / CMD / D0 | GPIO 14 / 15 / 2 |
+| **Drehencoder** | CLK / DT | GPIO 34 / 39 |
+| Drehencoder | Taster | PE 105 |
+| **Buttons** | Previous / Pause-Play / Next | PE 100 / 101 / 102 |
+| Buttons | Button 4 / Button 5 | PE 103 / 104 |
+| **Neopixel** | LED-Signal | GPIO 12 |
+| **Power** | Peripherie-Abschaltung (`POWER`) | PE 114 |
+| Power | Verstärker (`GPIO_PA_EN`) | PE 113 |
+| **Batterie** | Spannungsmessung (ADC) | GPIO 35 |
+| **Kopfhörer** | Buchsen-Erkennung (`HP_DETECT`) | PE 108 |
+| **Wakeup / PE-Interrupt** | Aufwecken aus Deep-Sleep | GPIO 36 |
+| **IR (optional)** | IR-Empfänger | GPIO 5 |
 
 ## Playmodi
 
@@ -89,7 +108,9 @@ Muster: `[<base_topic>/]device_id/topic[/<setter_token>]`. Kommandos nutzen den 
 
 ## REST-API
 
-*TODO: aus `REST-API.yaml` des ESPuino-Repos generieren/einbetten.*
+Die vollständige REST-API ist als OpenAPI-Spezifikation direkt im Firmware-Repo gepflegt:
+[REST-API.yaml](https://github.com/biologist79/ESPuino/blob/master/REST-API.yaml). So bleibt sie
+mit dem Code synchron. *(Optional später: als interaktive Swagger-Seite ins Handbuch einbetten.)*
 
 ## Verweise auf Forum-Threads
 
@@ -103,4 +124,5 @@ Muster: `[<base_topic>/]device_id/topic[/<setter_token>]`. Kommandos nutzen den 
 
 ## Changelog
 
-*TODO: aus `changelog.md` des ESPuino-Repos übernehmen oder verlinken.*
+Der aktuelle Changelog wird im Firmware-Repo gepflegt und dort fortlaufend ergänzt:
+[changelog.md](https://github.com/biologist79/ESPuino/blob/master/changelog.md).
