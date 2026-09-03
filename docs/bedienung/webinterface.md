@@ -72,6 +72,7 @@ In Dropdown-Reihenfolge. (Technische IDs/Konstanten: [Anhang → Playmodi](../re
 | 🎲📁🔀 Zufälliger Unterordner (zufällig) | Ein zufälliger Unterordner, zufällig. |
 | 📻 Webradio | Stream-URL statt Datei (Pfad-Feld mit `http://` vorbelegt). |
 | 📃 Liste (.m3u) | Einträge einer lokalen `.m3u` – Dateien und Webstreams gemischt. |
+| 🌐 MediaHub | Inhalt **und** Abspielmodus kommen vom gewählten [MediaHub-Server](../inhalte/mediahub.md). |
 
 ### Modifikationskarten — alle Optionen
 
