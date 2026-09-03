@@ -73,8 +73,9 @@ Rückmelde-Instrument. Gerade jetzt beim Verbinden lohnt sich ein Blick darauf:
 
 - **Vier langsam kreisende weiße LEDs** bedeuten: Die WLAN-Verbindung steht und ESPuino ist bereit.
   Das ist das Signal, auf das du wartest.
-- **Grüne LEDs** heißen dagegen: Es besteht (noch) keine Verbindung. Das ist beim Verbinden kurz
-  normal; bleibt es aber dauerhaft grün, hat die Verbindung nicht geklappt.
+- **Grüne LEDs** heißen dagegen: Es besteht (noch) keine WLAN-Verbindung. Das ist beim Verbinden
+  kurz normal; bleibt es aber dauerhaft grün, ist entweder die Verbindung nicht zustande gekommen
+  oder es sind noch gar keine Zugangsdaten hinterlegt.
 
 Wenn es bei Grün bleibt, ist das kein Grund zur Sorge – meist steckt eine der drei üblichen Ursachen
 dahinter: ein Tippfehler im Passwort, zu große Entfernung zum Router, oder schlicht ein noch nicht
@@ -95,10 +96,12 @@ verwenden. Der zweite Weg ist die direkte Eingabe der **IP-Adresse**, die ESPuin
 bekommen hat; die findest du zum Beispiel in der Geräteliste deines Routers.
 
 !!! warning "Immer `http://`, niemals `https://`"
-    ESPuino spricht bewusst nur unverschlüsseltes **HTTP** – für ein Gerät im eigenen Heimnetz ist
-    das der pragmatische Weg. Ruf die Adresse deshalb immer mit `http://` auf. Manche Browser
-    ergänzen von sich aus ein `https://`; dann lädt die Seite nicht, und du musst das `http://`
-    von Hand voranstellen.
+    ESPuino spricht bewusst nur unverschlüsseltes **HTTP**. Das hat einen handfesten Grund:
+    Verschlüsselung (HTTPS/TLS) kostet einiges an Arbeitsspeicher, und davon hat der ESP32 ohnehin
+    nicht viel im Überfluss – für ein Gerät im eigenen Heimnetz ist unverschlüsseltes HTTP daher der
+    pragmatische Weg. Ruf die Adresse deshalb immer mit `http://` auf. Manche Browser ergänzen von
+    sich aus ein `https://`; dann lädt die Seite nicht, und du musst das `http://` von Hand
+    voranstellen.
 
 ### Kurzer Einschub: statische IP-Adresse
 

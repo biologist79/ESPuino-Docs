@@ -1,32 +1,50 @@
 # 9 · Mehrere ESPuinos zentral verwalten: MediaHub
 
-MediaHub ist eine **optionale** Möglichkeit, die RFID-Kartenzuweisungen **zentral** zu verwalten –
-statt jedes Gerät einzeln über SD-Karte und NVS zu konfigurieren.
+## Welches Problem MediaHub löst
 
-!!! info "Detail-Dokumentation"
-    Die vollständige Doku (Setup, Betrieb) lebt im
-    [MediaHub-Repo](https://github.com/biologist79/ESPuino-Mediahub). Ausführliche Diskussion:
-    [Forum #4607](https://forum.espuino.de/t/espuino-mediahub/4607). Dieses Kapitel gibt nur
-    Konzept und Einstieg.
+Solange du einen einzigen ESPuino betreibst, ist alles einfach: Du legst deine Kartenzuordnungen im
+Webinterface an, und sie liegen im Speicher genau dieses Geräts. Sobald aber mehrere ESPuinos im
+Haushalt stehen – im Kinderzimmer, im Wohnzimmer, eines für unterwegs –, wird die Pflege mühsam. Jede
+neue Karte müsstest du auf jedem Gerät einzeln anlernen, und die SD-Karten getrennt bestücken.
 
-## Konzept & wann es sich lohnt
+Genau hier setzt **MediaHub** an. MediaHub ist eine **optionale** Zusatzkomponente, mit der du die
+Kartenzuordnungen **zentral** an einer Stelle verwaltest, statt auf jedem Gerät für sich. Wer nur
+einen ESPuino hat, braucht MediaHub nicht – für alle anderen kann es die Verwaltung deutlich
+entspannen.
 
-MediaHub ist ein kleiner, selbst gehosteter Server (Docker-Container im eigenen Netz), der die
-Zuweisungen hält. Sinnvoll, sobald **mehrere ESPuinos** im Haushalt betrieben werden und man
-Karten nicht auf jedem Gerät separat pflegen möchte.
+!!! info "Wo die vollständige Anleitung liegt"
+    Dieses Kapitel gibt dir das Konzept und den Einstieg. Die ausführliche Dokumentation zu Einrichtung
+    und Betrieb wird direkt im [MediaHub-Repository](https://github.com/biologist79/ESPuino-Mediahub)
+    gepflegt, und die ausführliche Diskussion läuft im
+    [Forum-Thread #4607](https://forum.espuino.de/t/espuino-mediahub/4607).
 
-## MediaHub-Server aufsetzen
+## Wie es funktioniert
 
-Kurz gefasst (Details im MediaHub-Repo):
+MediaHub ist ein kleiner, **selbst gehosteter Server**, der als Docker-Container in deinem eigenen
+Netzwerk läuft – die Daten bleiben also bei dir zu Hause, nichts wandert in eine fremde Cloud. Dieser
+Server hält die zentralen Kartenzuordnungen.
+
+Am ESPuino selbst hinterlegst du dann im Webinterface, welche MediaHub-Server es gibt. Legst du eine
+Karte auf, die für MediaHub konfiguriert ist, fragt der ESPuino beim Server nach, was zu dieser Karte
+gehört, und lädt die benötigten Dateien beim ersten Mal auf seine SD-Karte herunter. Danach hält er
+sie synchron. Änderst du also zentral etwas, ziehen die Geräte nach. Auch Webradio-Streams lassen
+sich auf diesem Weg zuweisen.
+
+## Den MediaHub-Server einrichten
+
+Der Server wird als Docker-Container gestartet. Die Kurzfassung sieht so aus (die vollständigen
+Details stehen im MediaHub-Repository):
 
 ```bash
-cp env-example .env       # eigene Einstellungen in .env, nicht in der compose-Datei
+cp env-example .env       # eigene Einstellungen kommen in die .env
 mkdir -p data
 chown -R 33:33 data
 docker compose up -d --build
 ```
 
-Aktualisieren bleibt konfliktfrei, weil die eigenen Einstellungen in `.env` liegen:
+Der Kniff dabei: Deine persönlichen Einstellungen liegen in der Datei `.env`, nicht in den
+mitgelieferten Dateien. Das hat einen praktischen Grund – ein späteres Update bleibt dadurch
+konfliktfrei:
 
 ```bash
 git pull
@@ -35,12 +53,13 @@ docker compose up -d --build
 
 ## Karten zentral zuweisen
 
-Am ESPuino wird im Tab RFID der/die MediaHub-Server registriert. Eine Karte mit Playmode
-**MediaHub** holt beim Auflegen ihr Manifest vom Server, lädt die referenzierten Dateien beim
-ersten Mal auf die SD-Karte und hält sie danach synchron (Force-Refresh, Prüfsummen). Auch
-Webradio/Webstreams sind möglich.
+Im Tab RFID des ESPuino registrierst du deinen MediaHub-Server (oder mehrere davon). Eine Karte, die
+du dem Modus MediaHub zuordnest, holt sich beim Auflegen ihr „Manifest" vom Server – also die
+Information, was sie abspielen soll –, lädt die Dateien beim ersten Mal herunter und hält sie danach
+per Prüfsumme aktuell.
 
-## Verweis
+## Weiterführend
 
-- [ESPuino-Mediahub (GitHub)](https://github.com/biologist79/ESPuino-Mediahub)
-- [Forum-Thread #4607](https://forum.espuino.de/t/espuino-mediahub/4607)
+- [ESPuino-Mediahub auf GitHub](https://github.com/biologist79/ESPuino-Mediahub) – die vollständige
+  Dokumentation.
+- [Forum-Thread #4607](https://forum.espuino.de/t/espuino-mediahub/4607) – Vorstellung und Diskussion.

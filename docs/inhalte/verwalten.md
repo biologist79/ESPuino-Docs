@@ -1,28 +1,29 @@
 # 8 · Inhalte verwalten
 
-Wie Musik und Hörbücher auf den ESPuino kommen und wie man sie sinnvoll organisiert.
+Ein ESPuino ist nur so gut wie das, was auf seiner SD-Karte liegt. Dieses Kapitel dreht sich deshalb
+darum, wie du deine Musik und Hörbücher auf das Gerät bekommst und – mindestens genauso wichtig – wie
+du sie so organisierst, dass die Abspielmodi später genau das tun, was du erwartest. Ein bisschen
+Ordnung am Anfang erspart dir später viel Sucherei.
 
-## Unterstützte Formate & Quellen
+## Welche Formate und Quellen funktionieren
 
-**Audioformate** (lokale Dateien auf der SD-Karte):
+ESPuino spielt die gängigen Audioformate direkt von der SD-Karte ab. Konkret sind das **MP3**,
+**AAC** (also `.m4a`), **FLAC**, **OPUS**, **OGG/Vorbis** und **WAV**. Für die allermeisten
+Sammlungen ist damit alles abgedeckt; MP3 ist der Klassiker, verlustfreie Formate wie FLAC gehen
+ebenso.
 
-- **MP3**
-- **AAC** (`.m4a`)
-- **FLAC**
-- **OPUS**
-- **OGG / Vorbis**
-- **WAV**
+Neben lokalen Dateien kennt ESPuino noch zwei weitere Quellen. Zum einen **Webradio**: Hier gibst du
+statt einer Datei eine Stream-Adresse (`http://…`) an, und ESPuino spielt den Sender ab, solange er
+im WLAN ist. Zum anderen **lokale `.m3u`-Listen** – einfache Textdateien, die eine Reihe von Titeln
+auflisten. Praktisch daran: Eine solche Liste darf Dateien von der SD-Karte und Webstreams **bunt
+mischen**.
 
-**Quellen:**
+## Eine sinnvolle Ordnerstruktur
 
-- Lokale Dateien von der **SD-Karte** (FAT32-formatiert).
-- **Webradio** – eine Stream-URL (`http://…`).
-- **Lokale `.m3u`-Listen** – dürfen Dateien von der SD-Karte und Webstreams beliebig mischen.
-
-## Empfohlene Ordnerstruktur
-
-Die meisten Abspielmodi arbeiten **ordnerweise**, deshalb lohnt eine saubere Struktur – typischerweise
-**ein Ordner pro Hörbuch bzw. Album**:
+Der wichtigste Gedanke bei der Ablage: Die meisten Abspielmodi arbeiten **ordnerweise**. Ein Ordner
+ist also die natürliche Einheit für ein Hörbuch, ein Hörspiel oder ein Album. Es lohnt sich deshalb,
+gleich von Anfang an sauber pro Titel bzw. pro Werk einen eigenen Ordner anzulegen. Eine bewährte
+Struktur sieht zum Beispiel so aus:
 
 ```text
 /Hörspiele/
@@ -36,53 +37,68 @@ Die meisten Abspielmodi arbeiten **ordnerweise**, deshalb lohnt eine saubere Str
   Lieblingslieder/
 ```
 
-- Für den **Hörbuch-Modus** ist der Ordner die Einheit, deren **Position gemerkt** wird.
-- **Rekursive Modi** beziehen Unterordner mit ein – praktisch für verschachtelte Sammlungen.
-- **Zufalls-Unterordner-Modi** wählen einen zufälligen Unterordner (z. B. „irgendein Hörspiel").
+Warum diese Sorgfalt? Weil die Ordnerstruktur direkt bestimmt, was eine Karte abspielen kann. Im
+**Hörbuch-Modus** ist der Ordner die Einheit, für die sich ESPuino die zuletzt gehörte Position
+merkt. Die **rekursiven Modi** beziehen zusätzlich alle Unterordner mit ein – ideal für verschachtelte
+Sammlungen. Und es gibt sogar Modi, die einen **zufälligen Unterordner** auswählen, sodass eine
+einzige Karte für „irgendein Hörspiel aus der Sammlung" stehen kann.
 
-!!! tip "Dateinamen für die richtige Reihenfolge"
-    ESPuino sortiert **natürlich** (`01`, `02`, … `10` statt `1, 10, 2`). Nummeriere Titel am
-    Anfang des Dateinamens, dann stimmt die Reihenfolge. Der Sortiermodus ist im Webinterface
-    einstellbar (Tab Allgemein → Wiedergabe).
+!!! tip "Dateinamen mit führender Nummer"
+    ESPuino sortiert **natürlich** – das heißt, `1, 2, 10` landen in genau dieser Reihenfolge und
+    nicht als `1, 10, 2`. Nummerierst du deine Titel am Anfang des Dateinamens (`01 - …`, `02 - …`),
+    stimmt die Reihenfolge zuverlässig. Den Sortiermodus selbst kannst du im Webinterface anpassen
+    (Tab Allgemein → Wiedergabe).
 
-## Position bei Hörbüchern
+## Wie ESPuino sich bei Hörbüchern die Position merkt
 
-Im **Hörbuch-Modus** wird die letzte Abspielposition gespeichert – beim nächsten Auflegen geht es
-dort weiter. Gespeichert wird u. a. bei Track-Wechsel, Pause, Track-/Playlist-Ende. Ob auch bei
-**Kartenwechsel** und beim **Ausschalten** gespeichert wird, ist im Webinterface einstellbar
-(standardmäßig aus). Für lange Kapitel gibt es zusätzlich einen optionalen periodischen
-Checkpoint gegen Stromausfall.
+Der Hörbuch-Modus ist der Grund, warum viele überhaupt zu ESPuino greifen, deshalb ein eigener
+Absatz dazu. In diesem Modus speichert ESPuino die zuletzt gehörte Stelle, sodass beim nächsten
+Auflegen der Karte genau dort weitergeht, wo zuletzt Schluss war. Gespeichert wird an den sinnvollen
+Momenten – beim Wechsel des Titels, beim Pausieren, am Ende eines Titels oder der Playlist.
 
-## Tags, Cover, Metadaten
+Zwei Fälle sind standardmäßig **abgeschaltet**, lassen sich aber im Webinterface einschalten: das
+Speichern beim **Wechsel auf eine andere Karte** und das Speichern beim **Ausschalten**. Und für
+sehr lange Kapitel gibt es zusätzlich einen optionalen Checkpoint, der die Position in Abständen
+sichert – als Schutz davor, bei einem plötzlichen Stromausfall den Fortschritt einer ganzen Stunde
+zu verlieren.
 
-Liefert ein Titel (oder ein Webstream) ein **Cover** mit, zeigt das Webinterface es im Tab
-Steuerung an.
+## Cover und Metadaten
 
-!!! tip "Coverart kann Ärger machen"
-    Eingebettetes Coverart ist gelegentlich die Ursache, wenn eine MP3 nicht sauber spielt. Notfalls
-    die Datei ohne Cover neu kodieren – siehe
-    [Troubleshooting → MP3](../hilfe/troubleshooting.md#einzelne-titel-machen-probleme-mp3).
+Bringt ein Titel (oder ein Webstream) ein eingebettetes **Cover** mit, zeigt das Webinterface es im
+Tab Steuerung an. Für die Wiedergabe selbst spielt das keine Rolle – es ist reine Kosmetik auf dem
+Bildschirm.
+
+!!! tip "Wenn Coverart Ärger macht"
+    Ausgerechnet eingebettetes Coverart ist gelegentlich die Ursache, wenn eine einzelne MP3 nicht
+    sauber spielt oder stottert. Falls dir so eine Datei begegnet, hilft meist ein sauberes
+    Neu-Kodieren ohne Cover – wie das mit ffmpeg geht, steht in
+    [Kapitel 13 → MP3](../hilfe/troubleshooting.md#einzelne-titel-machen-probleme-mp3).
 
 ## Webradio
 
-Für einen Sender legst du eine Karte im Modus **📻 Webradio** an und trägst die Stream-URL ein (das
-Feld ist mit `http://` vorbelegt). Mehrere Sender/Titel lassen sich über eine **`.m3u`-Liste**
-bündeln.
+Einen Radiosender richtest du ein, indem du einer Karte den Modus **📻 Webradio** zuweist und die
+Stream-Adresse einträgst (das Feld ist praktischerweise schon mit `http://` vorbelegt). Möchtest du
+mehrere Sender oder eine gemischte Liste auf einer Karte bündeln, nimmst du dafür eine **`.m3u`-Datei**.
 
-## Backup & Restore
+## Backup & Restore: deine Kartenzuordnungen sichern
 
-Die Zuordnungen zwischen Karten und Inhalten liegen im **NVS** des ESP32 (nicht auf der SD-Karte).
-Damit bei einem Defekt nichts verloren geht:
+Ein Punkt, den man leicht übersieht, bis es zu spät ist: Die Zuordnungen zwischen Karten und Inhalten
+liegen **nicht** auf der SD-Karte, sondern im internen Speicher (NVS) des ESP32. Geht die Platine
+einmal kaputt, wäre diese oft mühsam aufgebaute Zuordnungsliste verloren – wenn du sie nicht
+gesichert hast.
 
-- Im SD-Hauptverzeichnis hält ESPuino automatisch eine **`backup.txt`** aktuell – bei **jeder**
-  neuen Zuweisung. Der Dateiname ist über `backupFile` in der `settings.h` änderbar.
-- Über **Tab Tools** lassen sich die Zuweisungen **exportieren** und wieder **importieren**. Der
-  Import **ergänzt/überschreibt nur, löscht nichts** – so überträgst du ein Backup auch von einem
-  ESPuino auf einen anderen. Details: [Kapitel 6 → Tab Tools](../bedienung/webinterface.md#tab-tools).
+Zum Glück nimmt ESPuino dir das weitgehend ab. Im Hauptverzeichnis der SD-Karte hält er automatisch
+eine Datei **`backup.txt`** aktuell und schreibt sie bei **jeder** neuen Zuweisung fort (der Dateiname
+lässt sich über `backupFile` in der `settings.h` ändern). Über den **Tab Tools** kannst du diese
+Zuordnungen außerdem jederzeit von Hand **exportieren** und wieder **importieren**. Der Import ist
+dabei bewusst gutmütig: Er **ergänzt und überschreibt nur, löscht aber nie** – du kannst ein Backup
+also gefahrlos einspielen und sogar von einem ESPuino auf einen anderen übertragen.
 
-!!! tip "Exakt definierten Stand herstellen"
-    Sollen am Ende *genau* die Einträge des Backups vorhanden sein: erst **Alle Zuweisungen
-    löschen** (Tab Tools), dann importieren. Andere Einstellungen bleiben erhalten.
+!!! tip "Einen exakt definierten Stand herstellen"
+    Sollen am Ende *genau* die Einträge aus deinem Backup vorhanden sein und sonst keine, gehst du in
+    zwei Schritten vor: erst im Tab Tools **alle Zuweisungen löschen**, dann das Backup importieren.
+    Andere Einstellungen bleiben davon unberührt. Hintergrund:
+    [Forum #508](https://forum.espuino.de/t/die-backupfunktion-des-espuino/508).
 
-Exportiere regelmäßig ein Backup und bewahre es außerhalb der SD-Karte auf. Mehr:
-[Forum #508](https://forum.espuino.de/t/die-backupfunktion-des-espuino/508).
+Der wichtigste Rat zum Schluss: Exportiere hin und wieder ein Backup und bewahre es **außerhalb der
+SD-Karte** auf – dann bist du auch dann abgesichert, wenn die Karte selbst einmal den Geist aufgibt.
