@@ -144,7 +144,8 @@ Mülleimer-Symbol löschst du Einträge.
 
 ## Tab MQTT
 
-*Dieser Tab erscheint nur, wenn die Firmware mit MQTT-Unterstützung gebaut wurde.*
+*MQTT-Unterstützung ist standardmäßig einkompiliert, dieser Tab also normalerweise vorhanden – er
+fehlt nur, wenn die Firmware bewusst ohne MQTT gebaut wurde.*
 
 <!-- Screenshot: MQTT-Tab -->
 
@@ -162,7 +163,8 @@ sich aus deinen Eingaben ergeben. Welche Topics es gibt, steht im
 
 ## Tab FTP
 
-*Nur sichtbar, wenn die Firmware mit FTP-Unterstützung gebaut wurde.*
+*FTP-Unterstützung ist standardmäßig einkompiliert, dieser Tab also normalerweise vorhanden – er
+fehlt nur, wenn die Firmware bewusst ohne FTP gebaut wurde.*
 
 <!-- Screenshot: FTP-Tab -->
 
