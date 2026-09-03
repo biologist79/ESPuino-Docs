@@ -225,7 +225,7 @@ Hilfetext am Fragezeichen:
 | Position beim Ausschalten merken | Sichert die Hörbuch-Position **zusätzlich** beim Ausschalten. |
 | Position bei Kartenwechsel merken | Sichert die Position **zusätzlich** beim Wechsel auf eine andere Karte. |
 | Letzte Karte nach Neustart abspielen | Setzt nach einem Neustart automatisch die zuletzt gespielte Karte fort. |
-| Pause bei entfernter Karte | Pausiert, wenn die Karte vom Leser genommen wird (nur PN5180 – siehe Warnung unten). |
+| Pause bei entfernter Karte | Pausiert, wenn die Karte vom Leser genommen wird (RC522 und PN5180 – siehe Warnung unten). |
 | Gleiche Karte nicht erneut akzeptieren | Ignoriert erneutes Auflegen derselben Karte; optional Pause↔Play statt Neustart. |
 | Pause bei minimaler Lautstärke | Pausiert, sobald die Lautstärke das Minimum erreicht. |
 | Letzte Lautstärke wiederherstellen | Stellt nach einem Neustart die zuletzt genutzte Lautstärke wieder her. |
@@ -245,8 +245,9 @@ nicht den Fortschritt einer ganzen Stunde kostet. Standardmäßig ist es aus (0)
 !!! warning "Die Option „Pause bei entfernter Karte" kann Ärger machen"
     Sie ist beliebt (Karte liegt auf, Abnehmen pausiert), aber heikel: Wird die Karte zwischendurch
     kurz nicht erkannt, pausiert die Wiedergabe ungewollt – einer der häufigsten Gründe für sporadische
-    Aussetzer. Läuft es bei dir unzuverlässig, verkleinere den Abstand Karte↔Leser, erhöhe den PN5180
-    Debounce – oder schalte die Option ab. (Sie funktioniert nur mit dem PN5180.)
+    Aussetzer. Läuft es bei dir unzuverlässig, verkleinere den Abstand Karte↔Leser, erhöhe – falls du
+    einen PN5180 nutzt – dessen Debounce, oder schalte die Option ab. (Die Option selbst funktioniert
+    mit RC522 und PN5180; nur die Debounce-Einstellung ist dem PN5180 vorbehalten.)
 
 ### RFID-Reader
 

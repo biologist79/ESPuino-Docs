@@ -24,8 +24,9 @@ eine ruhende Karte fälschlich als „entfernt", hilft es, den **PN5180 Debounce
 Ein besonders häufiger Fall verdient eigene Erwähnung: Läuft die Wiedergabe mit der Option **„Pause,
 wenn die Karte entfernt wird"** und stoppt dann von selbst sporadisch, dann wird die Karte
 zwischendurch kurz nicht erkannt und ESPuino hält das für ein Abnehmen. Das ist ein bekannter
-Dauerbrenner. Verkleinere den Abstand zwischen Karte und Leser, erhöhe den Debounce – oder schalte
-die Option einfach ab, wenn sie bei dir mehr Ärger als Nutzen bringt. (Zu LPCD siehe die deutliche
+Dauerbrenner. Verkleinere den Abstand zwischen Karte und Leser, erhöhe – beim PN5180 – dessen
+Debounce, oder schalte die Option einfach ab, wenn sie bei dir mehr Ärger als Nutzen bringt. (Die
+Option gibt es für RC522 und PN5180; nur der Debounce ist PN5180-spezifisch.) (Zu LPCD siehe die deutliche
 Warnung in [Kapitel 10](../vertiefung/erweiterte-themen.md#lpcd).)
 
 ## Die SD-Karte wird nicht erkannt
