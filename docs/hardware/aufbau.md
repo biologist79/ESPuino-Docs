@@ -63,7 +63,7 @@ Der Drehencoder muss nicht gelötet werden – er wird einfach über einen fünf
 verwendest. Falls sich später herausstellt, dass „lauter" und „leiser" vertauscht sind, ist das kein
 Grund zum Umlöten: Die Drehrichtung lässt sich im Webinterface umkehren.
 
-## Der Einbau ins Gehäuse
+## Der Einbau ins Gehäuse { #einbau-ins-gehause }
 
 Als **Referenz-Design** dient die **[BioBox 3D](https://forum.espuino.de/t/biobox-3d/3130)**, ein
 3D-druckbares Gehäuse für Complete oder mini4L. Sie gibt eine gute Vorstellung davon, wie ein

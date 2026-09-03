@@ -114,7 +114,7 @@ werden – ein MediaHub-Download oder ein Firmware-Update –, läuft der Fortsc
 Die vollständige Aufstellung pflegt der Entwickler im
 [Forum #86](https://forum.espuino.de/t/was-zeigt-der-neopixel-des-espuino-alles-an/86).
 
-## Kopfhörer und Lautstärke-Profile
+## Kopfhörer und Lautstärke-Profile { #kopfhorer-detection-lautstarke-profile }
 
 ESPuino kann erkennen, ob ein Kopfhörer eingesteckt ist, und dafür ein eigenes Lautstärke-Maximum
 verwenden – praktisch, weil Kopfhörer bei gleicher Einstellung deutlich lauter wirken als ein

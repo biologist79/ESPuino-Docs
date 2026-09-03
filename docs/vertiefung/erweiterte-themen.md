@@ -46,7 +46,7 @@ Der Nutzen: Du kannst häufige Aktionen auf einen Knopfdruck legen, ohne dafür 
 Karte bereitzuhalten – etwa „Lieblings-Playlist starten" auf eine Tastenkombination. Mehr dazu im
 [Forum #3218](https://forum.espuino.de/t/virtual-rfid-cards/3218).
 
-## LPCD: Aufwecken durch Kartenauflegen
+## LPCD: Aufwecken durch Kartenauflegen { #lpcd }
 
 LPCD (Low Power Card Detection) ist eine Funktion, mit der ESPuino aus dem Deep-Sleep erwacht, sobald
 du eine Karte auflegst – statt dass du erst eine Taste drücken musst. Das klingt verlockend, hat aber

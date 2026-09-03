@@ -68,7 +68,7 @@ Im Bereich darunter weist du einer Karte einen Inhalt zu, in vier Schritten:
 3. Im Reiter **Modifikation** weist du der Karte stattdessen eine Aktion zu.
 4. **Speichern** – fertig.
 
-#### Die Abspielmodi
+#### Die Abspielmodi { #abspielmodi }
 
 Die folgende Tabelle listet die Modi in der Reihenfolge, in der sie im Dropdown erscheinen. Die
 technischen IDs dazu stehen im [Anhang](../referenz/anhang.md#playmodi).
@@ -208,13 +208,24 @@ sichtbare Unterkladde. Du musst also nicht in jeder Unterkladde einzeln speicher
 ### Wiedergabe
 
 Hier stellst du das grundlegende Abspielverhalten ein. Unter **Lautstärke** legst du die
-Startlautstärke sowie die Maximalwerte getrennt für Lautsprecher und Kopfhörer fest (plus eine
-Minimal-Lautstärke, damit sich die Box nie ganz stummschalten lässt). Der Bereich **Optionen** ist
-eine Sammlung von Verhaltensschaltern, zu jedem gibt es einen Hilfetext am Fragezeichen: Position beim
-Ausschalten oder Kartenwechsel merken, letzte Karte nach Neustart abspielen, Pause bei entfernter
-Karte, dieselbe Karte nicht erneut akzeptieren, Pause bei minimaler Lautstärke, letzte Lautstärke
-wiederherstellen, Mono-Wiedergabe und die Lautstärkekurve (linear oder logarithmisch). Unter
-**Wiedergabeliste** wählst du schließlich den Sortiermodus und die maximale Rekursionstiefe.
+Startlautstärke und die Maximalwerte getrennt für Lautsprecher und Kopfhörer fest, dazu eine
+Minimal-Lautstärke, damit sich die Box nie ganz stummschalten lässt. Unter **Wiedergabeliste** wählst
+du den Sortiermodus und die maximale Rekursionstiefe.
+
+Der Bereich **Optionen** ist eine Sammlung von Verhaltensschaltern – zu jedem gibt es zusätzlich einen
+Hilfetext am Fragezeichen:
+
+| Option | Wirkung |
+| --- | --- |
+| Position beim Ausschalten merken | Sichert die Hörbuch-Position auch beim Ausschalten. |
+| Position bei Kartenwechsel merken | Sichert die Position auch beim Wechsel auf eine andere Karte. |
+| Letzte Karte nach Neustart abspielen | Setzt nach einem Neustart automatisch die zuletzt gespielte Karte fort. |
+| Pause bei entfernter Karte | Pausiert, wenn die Karte vom Leser genommen wird (nur PN5180 – siehe Warnung unten). |
+| Gleiche Karte nicht erneut akzeptieren | Ignoriert erneutes Auflegen derselben Karte; optional Pause↔Play statt Neustart. |
+| Pause bei minimaler Lautstärke | Pausiert, sobald die Lautstärke das Minimum erreicht. |
+| Letzte Lautstärke wiederherstellen | Stellt nach einem Neustart die zuletzt genutzte Lautstärke wieder her. |
+| Mono-Wiedergabe | Für Aufbauten mit nur einem Lautsprecher. |
+| Lautstärkekurve | Linear oder logarithmisch. |
 
 !!! warning "Die Option „Pause bei entfernter Karte" kann Ärger machen"
     Sie ist beliebt (Karte liegt auf, Abnehmen pausiert), aber heikel: Wird die Karte zwischendurch
@@ -226,12 +237,14 @@ wiederherstellen, Mono-Wiedergabe und die Lautstärkekurve (linear oder logarith
 
 <!-- Screenshot: RFID-Reader -->
 
-In dieser Unterkladde geht es um den Kartenleser. Du kannst **LPCD** aktivieren (das Aufwecken durch
-Kartenauflegen; nur mit PN5180 und Lötbrücken, bei MFRC522 ausgegraut – die Einschränkungen dazu
-stehen in [Kapitel 10](../vertiefung/erweiterte-themen.md#lpcd)), den **Reader-Typ** festlegen
-(*Auto-detect* als Standard, oder gezielt MFRC522 bzw. PN5180), beim MFRC522 die Empfindlichkeit über
-den **Gain** (0–7) einstellen und beim PN5180 den **Debounce** anpassen – die Zeit, die eine Karte
-ununterbrochen *nicht* erkannt sein muss, bevor sie als entfernt gilt (Standard 500 ms).
+In dieser Unterkladde geht es um den Kartenleser:
+
+| Einstellung | Bedeutung |
+| --- | --- |
+| **PN5180 LPCD** | Aufwecken aus dem Deep-Sleep durch Kartenauflegen. Nur mit PN5180 und gesetzten Lötbrücken (bei MFRC522 ausgegraut). Einschränkungen: [Kapitel 10](../vertiefung/erweiterte-themen.md#lpcd). |
+| **Reader-Typ** | *Auto-detect* (Standard), MFRC522 (SPI oder I²C) oder PN5180. |
+| **MFRC522 Gain** | Empfindlichkeit des MFRC522 (0–7, Standard 7). |
+| **PN5180 Debounce** | Wie lange eine Karte ununterbrochen *nicht* erkannt sein muss, bevor sie als entfernt gilt (Standard 500 ms). |
 
 !!! warning "Neustart nötig"
     Änderungen in dieser Unterkladde greifen erst nach einem Neustart.
@@ -261,11 +274,20 @@ Taskauslastung. Die Standardbelegung, mit der ESPuino ausgeliefert wird, findest
 
 <!-- Screenshot: LED -->
 
-Hier stellst du die Neopixel ein: die **Helligkeit** nach dem Einschalten, im Nachtmodus und im
-Ambient-Light-Modus, sowie unter **LED-Einstellungen** die Anzahl der Anzeige- und Kontroll-LEDs
-(Letztere mit frei wählbarer Farbe pro LED), die Zahl der Punkte im Leerlauf, den Farbverlauf der
-Fortschrittsanzeige, Farbton und Sättigung des Atmolights, die dimmbaren Zwischenstufen, den Offset
-der Start-LED, die Zentrierung der Pause-Anzeige und die Laufrichtung.
+Hier stellst du die Neopixel ein. Die **Helligkeit** lässt sich getrennt für den Normalbetrieb, den
+Nachtmodus und das Ambient-Light festlegen. Unter **LED-Einstellungen** kommen die Details dazu:
+
+| Einstellung | Bedeutung |
+| --- | --- |
+| Anzahl Anzeige-LEDs | Wie viele LEDs Status und Fortschritt anzeigen. |
+| Anzahl Kontroll-LEDs | Zusätzliche LEDs, jede mit frei wählbarer Farbe. |
+| Punkte im Leerlauf | Anzahl der Punkte in der Leerlauf-Animation. |
+| Fortschritts-Farbverlauf | Farbton für Beginn und Ende der Fortschrittsanzeige. |
+| Atmolight | Farbton und Sättigung des Ambient-Lights. |
+| Dimmbare Zwischenstufen | Feinheit der Helligkeitsabstufung. |
+| Start-LED-Offset | Ab welcher physischen LED die Anzeige beginnt (siehe Tipp). |
+| Pause-Zentrierung | Zentriert die Pause-Anzeige. |
+| Laufrichtung | Kehrt die Drehrichtung der Effekte um. |
 
 !!! tip "Das erste Pixel positionieren"
     Sitzt der Ring im Gehäuse „verdreht", legst du mit dem **Start-LED-Offset** fest, an welcher
@@ -278,10 +300,15 @@ Eine geänderte LED-**Anzahl** übernimmt ESPuino übrigens per automatischem Ne
 
 <!-- Screenshot: Energie -->
 
-Zuletzt die Energie-Einstellungen: Unter **Deep Sleep** legst du fest, nach wie vielen Minuten
-Inaktivität sich ESPuino schlafen legt. Und wenn die Batteriemessung aktiv ist, stellst du unter
-**Batterie** die Warnspannung, die Spannungen für 0 % und 100 %, optional die kritische
-Abschaltspannung sowie das Messintervall ein.
+Unter **Deep Sleep** legst du fest, nach wie vielen Minuten Inaktivität sich ESPuino schlafen legt.
+Ist die Batteriemessung aktiv, kommen unter **Batterie** diese Werte hinzu:
+
+| Einstellung | Bedeutung |
+| --- | --- |
+| Warnspannung | Ab dieser Spannung warnt der Neopixel vor niedrigem Akku. |
+| Spannung für 0 % / 100 % | Legt die Grenzen der Ladezustands-Anzeige fest (abhängig vom Akkutyp). |
+| Kritische Abschaltspannung | Optional: ESPuino schaltet unterhalb automatisch ab. |
+| Messintervall | Wie oft die Batteriespannung gemessen wird. |
 
 ## Tab Updates
 

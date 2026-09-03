@@ -46,7 +46,7 @@ immer nur eine gesetzt sein). Hast du nur einen Lautsprecher, aktiviere die **Mo
 für Kopfhörer ist die kabelgebundene [Kopfhörerplatine](../bedienung/am-geraet.md#kopfhorer-detection-lautstarke-profile)
 der zuverlässige Weg.
 
-## Einzelne Titel spielen nicht oder stottern (MP3)
+## Einzelne Titel spielen nicht oder stottern (MP3) { #einzelne-titel-machen-probleme-mp3 }
 
 Manchmal ist nicht das Gerät schuld, sondern eine einzelne Datei. Gerade bei MP3s ist häufig
 **eingebettetes Coverart** die Ursache, oder eine ungewöhnliche Kodierung. In solchen Fällen hilft
