@@ -59,8 +59,12 @@ Auf der Einrichtungsseite hinterlegst du jetzt dein eigenes WLAN. Das sind drei 
    Webinterface wiederzufinden. Hast du mehrere ESPuinos, gib jedem einen eigenen, sprechenden Namen
    (etwa `espuino-kinderzimmer`).
 
-Wenn du gespeichert hast, startet ESPuino neu und versucht, sich mit deinem WLAN zu verbinden. Ob
-das geklappt hat, verrät dir der LED-Ring – dazu jetzt.
+Sobald du speicherst, musst du nicht mehr auf gut Glück neu starten und hoffen. ESPuino probiert die
+Zugangsdaten **gleich aus**, während die Einrichtungsseite geöffnet bleibt, und zeigt dir direkt
+dort, wie es läuft – ob er sich gerade verbindet, ob es fehlgeschlagen ist oder ob die Verbindung
+steht. Klappt es nicht, korrigierst du einfach die Eingabe, ohne von vorn beginnen zu müssen. Und sobald
+ESPuino im WLAN ist, meldet dir auch der LED-Ring den Verbindungsstatus – wie du ihn liest, zeigt
+der nächste Abschnitt.
 
 ### Die Neopixel als Statusanzeige lesen
 
