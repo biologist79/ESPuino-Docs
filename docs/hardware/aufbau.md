@@ -52,10 +52,17 @@ Die Drehrichtung lässt sich später im Webinterface umkehren.
 
 ## Einbau ins Gehäuse
 
-*TODO: Gehäuse-Varianten, Kabelführung.* SD-Karte einsetzen: **FAT32** (Karten > 32 GB sind ab
-Werk oft exFAT und müssen neu als FAT32 formatiert werden).
+Als **Referenz-Design** dient die **[BioBox 3D](https://forum.espuino.de/t/biobox-3d/3130)** – ein
+3D-druckbares Gehäuse für Complete oder mini4L. Eckdaten: 12-cm-Würfel, Wabengitter-Lautsprecher mit
+Neopixelring-Vertiefung, drei Tasten + Drehencoder oben, USB-C und Kopfhörerbuchse hinten,
+Akkuhalterung (18650/26650/32700), Revisionsöffnung unten. Bestückt u. a. mit PN5180,
+24-LED-Neopixelring und Visaton-Lautsprecher. Dateien als **STL und Fusion 360** zum Download,
+Druckempfehlung: PETG, 5 Wandschichten, 35 % Infill (~17 h).
 
-!!! tip "Inspiration"
+SD-Karte einsetzen: **FAT32** (Karten > 32 GB sind ab Werk oft exFAT und müssen neu als FAT32
+formatiert werden).
+
+!!! tip "Weitere Inspiration"
     Gehäuse-Ideen und fertige Bauten anderer gibt es in der Galerie
     [„Zeigt her eure ESPuinos" (#554)](https://forum.espuino.de/t/zeigt-her-eure-espuinos/554).
 
