@@ -212,13 +212,18 @@ Startlautstärke und die Maximalwerte getrennt für Lautsprecher und Kopfhörer 
 Minimal-Lautstärke, damit sich die Box nie ganz stummschalten lässt. Unter **Wiedergabeliste** wählst
 du den Sortiermodus und die maximale Rekursionstiefe.
 
+Ein Wort zur **Positionsspeicherung** vorab, weil mehrere der Optionen daran hängen: ESPuino merkt
+sich die zuletzt gehörte Stelle **nur im Hörbuch-Modus**, und standardmäßig nur an den natürlichen
+Punkten – beim **Pausieren** und beim **Titelwechsel**. Die beiden folgenden „…merken"-Optionen
+erweitern das um zusätzliche Speicherzeitpunkte.
+
 Der Bereich **Optionen** ist eine Sammlung von Verhaltensschaltern – zu jedem gibt es zusätzlich einen
 Hilfetext am Fragezeichen:
 
 | Option | Wirkung |
 | --- | --- |
-| Position beim Ausschalten merken | Sichert die Hörbuch-Position auch beim Ausschalten. |
-| Position bei Kartenwechsel merken | Sichert die Position auch beim Wechsel auf eine andere Karte. |
+| Position beim Ausschalten merken | Sichert die Hörbuch-Position **zusätzlich** beim Ausschalten. |
+| Position bei Kartenwechsel merken | Sichert die Position **zusätzlich** beim Wechsel auf eine andere Karte. |
 | Letzte Karte nach Neustart abspielen | Setzt nach einem Neustart automatisch die zuletzt gespielte Karte fort. |
 | Pause bei entfernter Karte | Pausiert, wenn die Karte vom Leser genommen wird (nur PN5180 – siehe Warnung unten). |
 | Gleiche Karte nicht erneut akzeptieren | Ignoriert erneutes Auflegen derselben Karte; optional Pause↔Play statt Neustart. |
@@ -226,6 +231,16 @@ Hilfetext am Fragezeichen:
 | Letzte Lautstärke wiederherstellen | Stellt nach einem Neustart die zuletzt genutzte Lautstärke wieder her. |
 | Mono-Wiedergabe | Für Aufbauten mit nur einem Lautsprecher. |
 | Lautstärkekurve | Linear oder logarithmisch. |
+
+Zusätzlich gibt es ein **Speicherintervall**, mit dem ESPuino die Position im Hörbuch-Modus
+**zyklisch** (alle n Sekunden) sichert – gedacht für lange Kapitel, damit ein plötzlicher Stromausfall
+nicht den Fortschritt einer ganzen Stunde kostet. Standardmäßig ist es aus (0).
+
+!!! warning "Zyklisches Speichern belastet den Flash-Speicher"
+    Jedes Speichern schreibt in den Flash-Speicher, und der nutzt sich mit jedem Schreibvorgang ein
+    kleines Stück ab. Wähle das Intervall deshalb nicht unnötig kurz und setze die Funktion nur dort
+    ein, wo sie wirklich lohnt (lange Hörbücher). Bei kurzen Titeln, die ohnehin an jeder Titelgrenze
+    speichern, bringt sie nichts.
 
 !!! warning "Die Option „Pause bei entfernter Karte" kann Ärger machen"
     Sie ist beliebt (Karte liegt auf, Abnehmen pausiert), aber heikel: Wird die Karte zwischendurch
