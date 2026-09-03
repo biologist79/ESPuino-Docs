@@ -32,9 +32,11 @@ sich ESPuino, indem er **selbst ein WLAN aufspannt**, in das du dich einklinken 
 dein „richtiges" WLAN mitzuteilen.
 
 Dieses Einrichtungs-WLAN heißt standardmäßig **`ESPuino`** und ist zunächst offen, also ohne Passwort.
-(Es lässt sich später übrigens umbenennen und mit einem Passwort absichern – aber dazu später mehr, im
-[Tab WLAN](../bedienung/webinterface.md#tab-wlan).) Geh also an deinem Computer oder Smartphone in die
-WLAN-Auswahl und verbinde dich mit dem Netzwerk `ESPuino`.
+Es ist nur der Notnagel für die Ersteinrichtung und verschwindet wieder, sobald ESPuino in deinem
+WLAN angemeldet ist. (Umbenennen und mit einem Passwort absichern kannst du es später im
+[Tab WLAN](../bedienung/webinterface.md#tab-wlan) – dort steht auch, warum du diesen offenen
+Access-Point nicht dauerhaft aktiv lassen solltest.) Geh also an deinem Computer oder Smartphone in
+die WLAN-Auswahl und verbinde dich mit dem Netzwerk `ESPuino`.
 Sobald die Verbindung steht, weist ESPuino deinem Gerät automatisch eine Adresse zu, und du kannst
 die Einrichtungsseite im Browser aufrufen. Sie liegt unter der festen Adresse **`http://192.168.4.1`**.
 Bei vielen Geräten öffnet sich diese Seite sogar von selbst (als sogenanntes „Captive Portal", das

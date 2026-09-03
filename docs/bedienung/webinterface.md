@@ -129,10 +129,18 @@ kannst du pro Netzwerk eine **statische IP** setzen. Die **gespeicherten Netzwer
 listet alle hinterlegten WLANs auf; das gerade verbundene ist hervorgehoben, und über das
 Mülleimer-Symbol löschst du Einträge.
 
-!!! warning "Zwei Vorsichtshinweise"
-    Ein Access-Point-Timeout von **0** bedeutet, dass sich der Einrichtungs-AP nie von selbst schließt
-    – das ist ein potenzielles Sicherheitsrisiko. Und eine **statische IP** solltest du nur setzen,
-    wenn du weißt, was du tust, sonst ist ESPuino unter Umständen nicht mehr erreichbar.
+!!! warning "Access-Point-Timeout: bitte nicht auf 0 lassen"
+    Kurz zum Hintergrund: Den Einrichtungs-Access-Point spannt ESPuino nur dann auf, wenn er sich in
+    kein bekanntes WLAN einloggen konnte – er ist also ein Notnagel für die Ersteinrichtung. Dieser
+    AP ist standardmäßig ungeschützt, und solange er offen ist, kann sich **jeder** damit verbinden
+    und im Webinterface beliebige Dinge anstellen. Ist er nur kurz offen, ist das vertretbar. Ein
+    Timeout von **0** bedeutet aber, dass ESPuino den AP **nie** von selbst schließt – und damit hast
+    du ein dauerhaftes Sicherheitsproblem. Lass den Wert deshalb nicht auf 0 stehen (oder vergib
+    zumindest ein AP-Passwort).
+
+!!! warning "Statische IP nur mit Bedacht"
+    Eine **statische IP** solltest du nur setzen, wenn du weißt, was du tust. Passt die Konfiguration
+    nicht zu deinem Netz, ist ESPuino unter Umständen nicht mehr erreichbar.
 
 ## Tab MQTT
 
