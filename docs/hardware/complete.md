@@ -29,8 +29,8 @@ Ladezustand. Zusätzlich gibt es eine **Unterspannungs-Abschaltung**.
 
 ## Anschlüsse, Bedienelemente, Pinout
 
-*TODO: Pinout-Tabelle (aus dem Board-Header `settings-complete.h`); siehe auch
-[Anhang → Pinout](../referenz/anhang.md).*
+Die vollständige Pin-Belegung steht im
+[Anhang → Pinout-Referenz Complete](../referenz/anhang.md#pinout-referenz-complete).
 
 ## Komponentenwahl
 
