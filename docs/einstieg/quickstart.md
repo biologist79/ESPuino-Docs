@@ -18,8 +18,8 @@ So kommst du zum ersten Sound:
    trägst du dein eigenes WLAN samt Passwort ein und vergibst einen Hostnamen.
 3. **Nach dem Neustart** erreichst du das Webinterface unter `http://espuino.local` (oder der
    IP-Adresse). Vier kreisende weiße LEDs zeigen: Verbindung steht.
-4. **Musik auf die SD-Karte bringen** – für den Anfang am schnellsten direkt am Computer (die Karte
-   muss FAT32 sein). Details in [Kapitel 8](../inhalte/verwalten.md).
+4. **Inhalte auf die SD-Karte bringen** (Hörspiele, Hörbücher, Musik) – für den Anfang am schnellsten
+   direkt am Computer (die Karte muss FAT32 sein). Details in [Kapitel 8](../inhalte/verwalten.md).
 5. **Erste Karte anlernen:** im Tab RFID eine noch unbekannte Karte auflegen (ihre Nummer erscheint
    automatisch), im Dateibrowser Ordner oder Datei wählen, Abspielmodus festlegen und speichern.
 6. **Karte auflegen – Musik läuft.** 🎉

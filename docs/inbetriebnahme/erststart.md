@@ -116,19 +116,22 @@ du für den Erststart brauchst.
     Nutze diese Option nur, wenn du weißt, was du tust – im Zweifel bleib bei der automatischen
     Vergabe.
 
-## Musik auf die SD-Karte bringen
+## Inhalte auf die SD-Karte bringen
 
-ESPuino spielt seine Musik von der SD-Karte. Damit er sie lesen kann, muss die Karte im Dateisystem
-**FAT32** formatiert sein – nicht exFAT, das viele größere Karten ab Werk mitbringen. Größere Karten
-(über 32 GB) musst du deshalb unter Umständen erst am Computer neu als FAT32 formatieren.
+ESPuino spielt seine Inhalte – ob Hörspiele, Hörbücher oder Musik – von der SD-Karte. Damit er sie
+lesen kann, muss die Karte im Dateisystem **FAT32** formatiert sein – nicht exFAT. Karten über 32 GB
+kommen ab Werk fast immer als exFAT, du musst sie also mit ziemlicher Sicherheit erst am Computer neu
+als FAT32 formatieren. (Windows bietet FAT32 für so große Karten im Standard-Dialog oft gar nicht an;
+dann hilft ein kleines Formatier-Tool.)
 
-Wie die Musik auf die Karte kommt, hast du zwei Möglichkeiten. Einzelne Dateien oder ganze Ordner
-kannst du bequem direkt im Webinterface hochladen (im Tab RFID, Bereich Dateien). Das ist praktisch
+Um Dateien auf die Karte zu bekommen, gibt es zwei Wege. Einzelne Dateien oder ganze Ordner kannst
+du bequem direkt im Webinterface hochladen (im Tab RFID, Bereich Dateien). Das ist praktisch
 für Nachschub zwischendurch, aber nicht besonders schnell: Über den Web-Upload sind bis zu etwa
 650 kiB/s drin (im langsameren SPI-Modus entsprechend weniger).
 
 !!! tip "Die Grundausstattung lieber am Computer aufspielen"
-    Für die erste, größere Menge Musik lohnt es sich, die SD-Karte einmal aus dem ESPuino zu nehmen
+    Für die erste, größere Menge an Hörspielen und Titeln lohnt es sich, die SD-Karte einmal aus dem
+    ESPuino zu nehmen
     und direkt am Computer zu befüllen – das geht um ein Vielfaches schneller als über das Netzwerk.
     Den Web-Upload nutzt du danach nur noch für Ergänzungen. Wie du deine Musik sinnvoll in Ordner
     strukturierst, damit die Abspielmodi wie gewünscht funktionieren, liest du in

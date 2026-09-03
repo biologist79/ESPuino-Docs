@@ -1,67 +1,76 @@
 # 11 · Firmware aktualisieren
 
-Es gibt zwei Wege ohne Kompilieren – das **Firmware-Tool im Browser** (per USB) und das **Update
-über das Webinterface** (per WLAN/OTA) – sowie das **eigene Kompilieren** für Fortgeschrittene.
+Die Firmware ist die Software, die auf deinem ESPuino läuft. Sie wird laufend weiterentwickelt –
+Fehler werden behoben, neue Funktionen kommen dazu. Von Zeit zu Zeit lohnt sich deshalb ein Update.
+Dieses Kapitel zeigt dir die Wege dorthin, von „ganz bequem" bis „volle Kontrolle".
 
-## Wann lohnt sich ein Update überhaupt?
+Es gibt im Wesentlichen drei Routen, und für die allermeisten sind die ersten beiden gemeint: das
+**Firmware-Tool im Browser** (über ein USB-Kabel) und das **Update über das Webinterface** (über
+WLAN). Nur wer eigene, abweichende Hardware betreibt oder besondere Compile-Zeit-Optionen braucht,
+muss die dritte Route gehen und die Firmware **selbst kompilieren**.
 
-*TODO: Bugfixes/neue Features vs. „läuft doch"; Blick in den [Changelog](../referenz/anhang.md#changelog).*
+## Wann sich ein Update überhaupt lohnt
 
-## Firmware-Tool im Browser (Flashen & Löschen)
+Ein pauschales „immer aktualisieren" gibt es nicht. Läuft dein ESPuino zufrieden, gibt es keinen
+Zwang. Ein Update lohnt sich, wenn dich ein konkreter Fehler stört, der behoben wurde, oder wenn
+eine neue Funktion dazugekommen ist, die du haben möchtest. Was sich zwischen den Versionen getan
+hat, hältst du am besten über den [Changelog](../referenz/anhang.md#changelog) nach.
 
-Der komfortabelste Weg für den **Erst-Flash** oder eine **Wiederherstellung** (wenn das
-Webinterface nicht mehr erreichbar ist): das browserbasierte
-**[ESPuino Firmware Tool](https://biologist79.github.io/ESPuino-Firmware-Tool/)** – keine
-Software-Installation nötig.
+## Der bequemste Weg: das Firmware-Tool im Browser
+
+Für den **allerersten Flash** oder für eine **Wiederherstellung** – etwa, wenn das Webinterface
+einmal nicht mehr erreichbar ist – ist das browserbasierte
+**[ESPuino Firmware Tool](https://biologist79.github.io/ESPuino-Firmware-Tool/)** die komfortabelste
+Lösung. Du brauchst dafür keine Software zu installieren; alles läuft direkt im Browser.
 
 <!-- Screenshot: Firmware-Tool im Browser -->
 
-Es kann Firmware flashen (App oder komplett), den **Flash löschen** (kompletter Reset), eine
-**serielle Konsole** anzeigen und eigene Firmware hochladen.
+Das Tool kann Firmware flashen (nur die App oder komplett), den **Flash-Speicher löschen** (also das
+Gerät auf einen sauberen Stand zurücksetzen), eine serielle Konsole zur Fehlersuche anzeigen und auch
+eigene Firmware hochladen. Voraussetzung ist ein Browser mit Unterstützung für **Web Serial** (etwa
+Chrome, Edge, Opera, Brave oder Vivaldi) und eine USB-Verbindung zum ESPuino.
 
-**Voraussetzung:** ein Browser mit **Web-Serial**-Unterstützung (z. B. Chrome, Edge, Opera, Brave,
-Vivaldi) und eine USB-Verbindung zum ESPuino.
+Der Ablauf ist geradlinig: ESPuino per **USB** anschließen, im Tool Sprache und **Branch**
+(master oder dev) wählen, die **Plattform** deines Boards auswählen, den gewünschten Firmware-Build
+festlegen und die USB-Geschwindigkeit setzen (höchstens 460 800 Baud). Dann die passende Aktion
+starten, bei der Nachfrage den seriellen Port auswählen und den Fortschritt beobachten.
 
-**Ablauf:**
+!!! danger "Die richtige Plattform ist entscheidend"
+    Wähle unbedingt exakt die Plattform, die zu deinem Board passt. Die **falsche Plattform** kann im
+    schlimmsten Fall die Hardware beschädigen.
 
-1. ESPuino per **USB** anschließen.
-2. Sprache und **Branch** (master/dev) wählen.
-3. **Plattform** wählen (Complete, mini4L …).
-4. Firmware-Build wählen und USB-Geschwindigkeit setzen (max. 460 800 Baud).
-5. Aktion starten (Flashen / Löschen), bei der Abfrage den **seriellen Port** wählen.
-6. Fortschritt und serielle Ausgabe beobachten.
+## Der Weg über WLAN: Update im Webinterface
 
-!!! danger "Richtige Plattform wählen!"
-    Die Auswahl der **falschen Plattform** kann die Hardware beschädigen. Wähle exakt dein Board.
-
-## Update über das Webinterface (OTA)
-
-Läuft der ESPuino und ist im WLAN, geht ein Update auch ganz ohne USB – über **Tab Updates** im
-Webinterface ([Kapitel 6](../bedienung/webinterface.md#tab-updates)):
+Läuft dein ESPuino bereits und ist im WLAN, geht ein Update auch ganz ohne Kabel – direkt im
+Webinterface, im **Tab Updates** ([Kapitel 6](../bedienung/webinterface.md#tab-updates)).
 
 <!-- Screenshot: Tab Updates / GitHub-Update -->
 
-- **Firmware von GitHub laden** ([Forum #4582](https://forum.espuino.de/t/firmware-update-direkt-von-github/4582)) –
-  Branch (master/dev) wählen, „Nach Updates suchen", aus den letzten ~10 Builds (Datum + Commit-ID,
-  Hover zeigt die Commit-Message) einen **Installieren**. **Board-Variante und Sprache** werden
-  automatisch gewählt. Den Download übernimmt der **Browser** (per JavaScript), nicht der ESP32 –
-  der Flash-Fortschritt läuft am Neopixel blau. Nur für Plattformen mit automatischen Builds.
-- **Firmware-Update per Datei** – eine `firmware.bin` hochladen.
+Am elegantesten ist die Variante **Firmware von GitHub laden**
+([Forum #4582](https://forum.espuino.de/t/firmware-update-direkt-von-github/4582)): Du wählst den
+Branch (master oder dev), klickst auf „Nach Updates suchen" und bekommst die letzten Builds
+aufgelistet, jeweils mit Datum und Commit-ID (fährst du mit der Maus über die ID, siehst du die
+zugehörige Änderungsbeschreibung). Ein Klick auf „Installieren" genügt – die passende **Board-Variante
+und Sprache werden automatisch gewählt**. Interessantes Detail am Rande: Der eigentliche Download
+läuft im **Browser** (per JavaScript), nicht auf dem ESP32 selbst – auch das wieder eine Frage des
+knappen Speichers. Den Flash-Fortschritt zeigt dir währenddessen der Neopixel-Ring in Blau.
 
-!!! info "Auto-Detect"
-    Die **RFID-Variante** im Dateinamen spielt seit Mai 2026 **keine Rolle mehr** – RC522/PN5180
-    werden automatisch erkannt.
+Alternativ kannst du im selben Tab auch eine **Firmware-Datei** (`firmware.bin`) von Hand hochladen.
 
-## Selbst kompilieren
+!!! info "Auto-Detect macht die Dateiwahl einfacher"
+    Früher musstest du beim Update auf die RFID-Variante im Dateinamen achten. Seit Mai 2026 erkennt
+    ESPuino den Reader (RC522 oder PN5180) automatisch – dieser Stolperstein ist also weggefallen.
 
-Nur nötig, wenn die vorgefertigte Firmware nicht reicht (eigene Compile-Zeit-Optionen, siehe
-[Kapitel 12](compile-zeit.md)):
+## Der Weg für Fortgeschrittene: selbst kompilieren
 
-- Voraussetzungen: **VS Code + PlatformIO**
-- Repo klonen und mit Git aktuell halten
-- Build-Targets: **`complete`** und **`lolin_d32_pro_sdmmc_pe`** (mini4L)
+Manchmal reicht die vorgefertigte Firmware nicht: Du betreibst eigene Hardware, oder du willst eine
+Option setzen, die nur zur Compile-Zeit verfügbar ist (siehe [Kapitel 12](compile-zeit.md)). Dann
+baust du dir die Firmware selbst. Dafür brauchst du **VS Code** mit der **pioarduino**-Erweiterung,
+klonst das ESPuino-Repository und hältst es mit Git aktuell.
 
-!!! warning "Nur diese Targets werden unterstützt"
-    Aktiv unterstützt sind ausschließlich **`complete`** und **`lolin_d32_pro_sdmmc_pe`** (mini4L).
-    Weitere Environments in `platformio.ini` sind alt/Legacy. Der **ESP32-S3 wird nicht
-    unterstützt** (kann kein klassisches Bluetooth).
+!!! warning "Nur zwei Boards werden unterstützt"
+    Fertige Firmware wird **ausschließlich** für die Targets **`complete`** und
+    **`lolin_d32_pro_sdmmc_pe`** (mini4L) automatisch gebaut. Weitere Einträge in der `platformio.ini`
+    sind alt bzw. Legacy. Der **ESP32-S3 wird nicht unterstützt**, weil er kein klassisches Bluetooth
+    beherrscht. Baust du also etwas Eigenes, führt kein Weg an dieser Route vorbei – fertige Firmware
+    zum bloßen Aufspielen gibt es dafür nicht.

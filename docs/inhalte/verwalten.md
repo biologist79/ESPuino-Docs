@@ -1,8 +1,8 @@
 # 8 · Inhalte verwalten
 
 Ein ESPuino ist nur so gut wie das, was auf seiner SD-Karte liegt. Dieses Kapitel dreht sich deshalb
-darum, wie du deine Musik und Hörbücher auf das Gerät bekommst und – mindestens genauso wichtig – wie
-du sie so organisierst, dass die Abspielmodi später genau das tun, was du erwartest. Ein bisschen
+darum, wie du deine Hörspiele, Hörbücher und Musik auf das Gerät bekommst und – mindestens genauso
+wichtig – wie du sie so organisierst, dass die Abspielmodi später genau das tun, was du erwartest. Ein bisschen
 Ordnung am Anfang erspart dir später viel Sucherei.
 
 ## Welche Formate und Quellen funktionieren
