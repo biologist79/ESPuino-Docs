@@ -80,7 +80,7 @@ im Zweifel einfach hier nach:
 | --- | --- |
 | RFID | Kontaktlose Karte oder Tag, mit der ein Inhalt gestartet wird. ESPuino liest nur die ID, es schreibt nichts auf die Karte. |
 | NVS | „Non-Volatile Storage" – der interne Speicher des ESP32, in dem Einstellungen und Kartenzuordnungen liegen. Ein normales Firmware-Update überschreibt ihn **nicht**; deine Einstellungen bleiben also erhalten. |
-| HAL | „Hardware Abstraction Layer" – wählt beim Kompilieren, für welches Board (mit welchen Pins) die Firmware gebaut wird. |
+| HAL | „Hardware Abstraction Layer" – wählt beim Kompilieren, für welches Board (mit welchen Pins) die Firmware gebaut wird; oft auch **Plattform** genannt (z. B. `complete`, `lolin_d32_pro_sdmmc_pe`, `lolin_d32_pro`). |
 | Neopixel | Adressierbare LED(s) zur Status- und Fortschrittsanzeige. |
 | Deep-Sleep | Der stromsparende Tiefschlaf, in den sich ESPuino nach Inaktivität legt. |
 | Playmode | Der Abspielmodus einer Karte (Einzeltitel, Hörbuch, ganzer Ordner …). |
