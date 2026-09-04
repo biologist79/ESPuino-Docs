@@ -1,11 +1,13 @@
-# ESPuino-Handbuch
+# ESPuino Handbook
 
-Quelltext des ESPuino-Handbuchs, gebaut mit [MkDocs](https://www.mkdocs.org/) +
-[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/). Ziel: die verstreute
-Forum-Dokumentation an einem Ort bündeln. Fokus auf die **Complete**-Platine, die **mini4L**
-nur als Delta.
+Source of the ESPuino handbook, built with [MkDocs](https://www.mkdocs.org/) +
+[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/). The goal is to gather the
+scattered forum documentation in one place. It focuses on the **Complete** board, with the
+**mini4L** covered only as a delta.
 
-## Lokal bauen
+**📖 Read it online: <https://biologist79.github.io/ESPuino-Docs/>**
+
+## Build locally
 
 ```bash
 python -m venv .venv
@@ -14,19 +16,19 @@ pip install -r requirements.txt
 mkdocs serve                     # http://127.0.0.1:8000
 ```
 
-`mkdocs build --strict` erzeugt die statische Site nach `site/` (im CI so gebaut).
+`mkdocs build --strict` builds the static site into `site/` (this is how CI builds it).
 
-## Veröffentlichen
+## Publishing
 
-Der Workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) baut bei jedem Push
-auf `main` und deployt nach GitHub Pages. Nach dem ersten Push in den Repo-Einstellungen unter
-**Settings → Pages** die Quelle auf **GitHub Actions** stellen.
+The workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds on every push
+to `main` and deploys to GitHub Pages. After the first push, go to **Settings → Pages** in the
+repository settings and set the source to **GitHub Actions**.
 
-Selbst-Hosting: `site/` ist reines statisches HTML und kann von jedem Webserver ausgeliefert werden.
+Self-hosting: `site/` is plain static HTML and can be served by any web server.
 
-## Struktur
+## Structure
 
-Die Navigation ist in `mkdocs.yml` definiert (9 Teile, 16 Kapitel). Jedes Kapitel liegt als
-Markdown-Datei unter `docs/`. Referenz-Tabellen (Playmodi, Modifikationskarten, MQTT-Topics,
-`settings.h`-Migration) im [Anhang](docs/referenz/anhang.md) sind aus dem Firmware-Code abgeleitet
-und sollten bei Änderungen dort mitgezogen werden.
+The navigation is defined in `mkdocs.yml` (9 parts, 17 chapters). Each chapter is a Markdown file
+under `docs/`. The reference tables (play modes, modification cards, MQTT topics, `settings.h`
+migration) in the [appendix](docs/referenz/anhang.md) are derived from the firmware code and should
+be kept in sync when it changes.
