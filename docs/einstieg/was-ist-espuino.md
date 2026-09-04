@@ -48,7 +48,7 @@ weißt du später, wo du was findest:
 
 - **[ESPuino](https://github.com/biologist79/ESPuino)** ist die **Firmware**, also die Software, die
   auf dem Gerät läuft. Sie ist der Gegenstand dieses Handbuchs.
-- **ESPuino-Firmware** stellt **fertig gebaute Firmware-Versionen** bereit, die du ohne eigenes
+- **[ESPuino-Firmware](https://github.com/biologist79/ESPuino-Firmware)** stellt **fertig gebaute Firmware-Versionen** bereit, die du ohne eigenes
   Kompilieren aufspielen kannst.
 - **[MediaHub](https://github.com/biologist79/ESPuino-Mediahub)** ist eine optionale Zusatzkomponente,
   um die Kartenzuweisungen mehrerer ESPuinos **zentral** zu verwalten (siehe
