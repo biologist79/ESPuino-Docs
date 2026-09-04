@@ -17,8 +17,9 @@ groß, wie laut und wie bunt deine Box wird – wie vielfältig das ausfällt, z
 
 Ein Punkt ist wichtig zu verstehen, weil er später manches erklärt: **Auf die Karten selbst wird
 nichts geschrieben.** ESPuino liest lediglich die eindeutige Nummer (die ID) einer Karte
-und merkt sich intern, welcher Inhalt dazu gehört. Du kannst also jede beliebige RFID-Karte, jeden
-Chip oder Aufkleber verwenden, und dieselbe Karte später jederzeit neu belegen.
+und merkt sich intern, welcher Inhalt dazu gehört. Du kannst also handelsübliche RFID-Karten, Chips
+oder Aufkleber verwenden – konkret die Standards **ISO-14443** und (nur mit dem PN5180-Reader)
+**ISO-15693** – und dieselbe Karte später jederzeit neu belegen.
 
 ## Woraus besteht ein ESPuino?
 
