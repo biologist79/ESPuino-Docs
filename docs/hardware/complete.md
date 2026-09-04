@@ -45,6 +45,12 @@ beisteuern möchtest (Details und Preise stehen in der
 - **Set 1** – die Platine samt der nötigen **Anschlussleitungen**.
 - **Set 2** – wie Set 1, zusätzlich mit der **Kopfhörerplatine**.
 
+!!! note "Akkutyp bei der Bestellung angeben"
+    Bei der Bestellung musst du angeben, ob du die **LiPo-** oder die **LFP-Version** möchtest. Der
+    passende Akkutyp wird ab Werk über die Lötbrücken auf der Platine vorkonfiguriert – du musst
+    daran also nichts selbst einstellen (mehr dazu bei den Lötbrücken in
+    [Kapitel 4](aufbau.md#die-lotbrucken)).
+
 ## Anschlüsse, Bedienelemente, Pinout
 
 Welche Funktion auf welchem Anschluss liegt, ist vollständig im
