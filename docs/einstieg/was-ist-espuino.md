@@ -84,4 +84,4 @@ im Zweifel einfach hier nach:
 | Neopixel | Adressierbare LED(s) zur Status- und Fortschrittsanzeige. Oft als Ring angeordnet; idealerweise ist die LED-Anzahl **durch vier teilbar**, weil mehrere Animationen darauf ausgelegt sind. |
 | Deep-Sleep | Der stromsparende Tiefschlaf, in den sich ESPuino nach Inaktivität legt. |
 | Playmode | Der Abspielmodus einer Karte (Einzeltitel, Hörbuch, ganzer Ordner …). Alle Modi im Detail: [Kapitel 6 → Abspielmodi](../bedienung/webinterface.md#abspielmodi). |
-| Modifikationskarte | Eine Karte, die keine Musik startet, sondern eine Funktion auslöst – etwa einen Schlaftimer. |
+| Modifikationskarte | Eine Karte, die keine Inhalte startet, sondern eine Funktion auslöst – etwa einen Schlaftimer. Alle Aktionen im Detail: [Kapitel 6 → Modifikationskarten](../bedienung/webinterface.md#modifikationskarten-alle-optionen). |
