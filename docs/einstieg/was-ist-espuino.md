@@ -14,8 +14,8 @@ Akkuladung, LED-Anzeige, Tasten und Drehregler. Trotzdem bleibt ESPuino ein offe
 Selbstbauprojekt: Der Quellcode ist frei, die Hardware dokumentiert, und du entscheidest selbst, wie
 groß, wie laut und wie bunt deine Box wird.
 
-Wichtig ist ein Punkt, der ESPuino von vielen kommerziellen Boxen unterscheidet: **Auf die Karten
-selbst wird nichts geschrieben.** ESPuino liest lediglich die eindeutige Nummer (die ID) einer Karte
+Ein Punkt ist wichtig zu verstehen, weil er später manches erklärt: **Auf die Karten selbst wird
+nichts geschrieben.** ESPuino liest lediglich die eindeutige Nummer (die ID) einer Karte
 und merkt sich intern, welcher Inhalt dazu gehört. Du kannst also jede beliebige RFID-Karte, jeden
 Chip oder Aufkleber verwenden, und dieselbe Karte später jederzeit neu belegen.
 
