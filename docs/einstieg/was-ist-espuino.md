@@ -66,7 +66,7 @@ Complete ist die **mini4L**, in die ein eigens entwickeltes ESP32-Board gesteckt
 
 Die **Complete** ist die konsequente Weiterentwicklung dieser Linie: Sie bietet funktional im Kern
 das Gleiche wie die mini4L, vereint aber alles (bis auf die Kopfhörerplatine) auf einer einzigen
-Platine. Das senkt die Kosten und reduziert den Aufbau erheblich. Genau deshalb dreht sich dieses
+Platine. Das senkt die Kosten und vereinfacht den Aufbau erheblich. Genau deshalb dreht sich dieses
 Handbuch um die Complete; die mini4L kommt als jüngster Vorgänger noch vor, aber nur dort, wo sie
 sich von der Complete unterscheidet ([Kapitel 14](../referenz/mini4l.md)). Ältere Stufen behandeln
 wir nicht.
