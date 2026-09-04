@@ -79,4 +79,17 @@ wie dem Verstärker-Enable.
 
 ## Headless- und Dauerbetrieb
 
-*Dieser Abschnitt ist optional und wird bei Bedarf ergänzt.*
+Nicht jeder ESPuino ist eine mobile Kinderbox. Manche laufen dauerhaft am Netzteil – etwa als
+Internetradio in der Küche – oder ganz ohne die üblichen Bedienelemente. Beides ist problemlos
+möglich.
+
+Für den **Dauerbetrieb** ist wichtig zu wissen: Solange etwas abgespielt wird – eine Datei oder ein
+Webstream –, geht ESPuino **nicht** in den Deep-Sleep. Ein Radiosender läuft also endlos weiter. Der
+automatische Schlaf greift nur, wenn nichts läuft und eine Weile keine Eingabe kommt; wer das gar
+nicht möchte, stellt die Inaktivitätszeit im Webinterface (Tab Allgemein → Energie) entsprechend hoch.
+Am Dauer-Netzteil spielen Akku-Themen ohnehin keine Rolle.
+
+Für den **Headless-Betrieb** gilt: Tasten, Drehencoder und sogar die Neopixel sind allesamt optional.
+Ein ESPuino lässt sich vollständig über das Webinterface und – falls gewünscht – über MQTT steuern,
+und die RFID-Karten funktionieren davon unabhängig. So kannst du eine bewusst reduzierte Box bauen
+oder ESPuino nahtlos in eine Hausautomatisierung einbinden.
