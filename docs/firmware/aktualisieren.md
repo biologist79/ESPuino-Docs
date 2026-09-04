@@ -65,8 +65,83 @@ Alternativ kannst du im selben Tab auch eine **Firmware-Datei** (`firmware.bin`)
 
 Manchmal reicht die vorgefertigte Firmware nicht: Du betreibst eigene Hardware, oder du willst eine
 Option setzen, die nur zur Compile-Zeit verfügbar ist (siehe [Kapitel 12](compile-zeit.md)). Dann
-baust du dir die Firmware selbst. Dafür brauchst du **VS Code** mit der **pioarduino**-Erweiterung,
-klonst das ESPuino-Repository und hältst es mit Git aktuell.
+baust du dir die Firmware selbst. Der folgende Ablauf orientiert sich am
+[Forum-Leitfaden #891](https://forum.espuino.de/t/espuino-in-platformio-anlegen-und-mit-git-aktuell-halten/891).
+
+!!! info "pioarduino statt PlatformIO"
+    Der Forum-Leitfaden spricht noch von **PlatformIO**. Inzwischen ist **pioarduino** die bessere
+    Wahl: Zwischen Espressif (dem Hersteller des ESP32) und den Machern von PlatformIO gibt es einen
+    Streit, weshalb pioarduino – ein Community-Fork – die Espressif-Toolchains aktueller unterstützt.
+    ESPuinos `platformio.ini` ist bereits darauf ausgelegt. Überall, wo unten „pioarduino" steht,
+    meint der Leitfaden also das, was früher PlatformIO war.
+
+### Vorbereiten
+
+Du brauchst drei Dinge: **Visual Studio Code**, die **pioarduino-Erweiterung** (installierst du in
+VS Code über den Extensions-Marktplatz) und **Git**. Damit Git deine späteren Commits zuordnen kann,
+hinterlegst du einmalig deine Identität:
+
+```bash
+git config --global user.name "Dein Name"
+git config --global user.email "deine@mail.de"
+```
+
+### Repository holen und öffnen
+
+Klone das ESPuino-Repository und öffne den Ordner in VS Code:
+
+```bash
+git clone https://github.com/biologist79/ESPuino
+```
+
+In VS Code geht das auch bequem über `Strg`+`Umschalt`+`P` → „Git: Clone". Anschließend wählst du
+unten in der Statusleiste das **Environment** passend zu deinem Board – also `env:complete` oder
+`env:lolin_d32_pro_sdmmc_pe` (mini4L).
+
+### Eigene Einstellungen
+
+Möchtest du Compile-Zeit-Optionen ändern, tust du das nicht direkt in den mitgelieferten Dateien,
+sondern in einer eigenen `settings-override.h` (siehe [Kapitel 12](compile-zeit.md)). So überschreibt
+ein späteres Update deine Anpassungen nicht.
+
+### Bauen und flashen
+
+In der pioarduino-Seitenleiste wählst du **„Upload and Monitor"** – das kompiliert die Firmware,
+spielt sie über USB auf und öffnet gleich die serielle Konsole.
+
+### Mit Git aktuell halten
+
+Damit du Updates einspielen kannst, ohne dir deine eigenen Anpassungen zu zerschießen, arbeitest du
+am besten auf einem **eigenen Branch** statt direkt auf `dev` oder `master`. Einmalig einrichten:
+
+```bash
+git checkout dev
+git pull
+git branch MeinGeraet
+git checkout MeinGeraet
+```
+
+Deine Änderungen machst du nun auf `MeinGeraet`. Zum Aktualisieren holst du den neuen Stand von `dev`
+und setzt deinen Branch per Rebase obendrauf:
+
+```bash
+git checkout dev
+git pull
+git checkout MeinGeraet
+git rebase dev
+```
+
+Hast du nur kleine, unwichtige lokale Änderungen, tut es auch der einfachere Weg über `git stash`:
+
+```bash
+git stash      # eigene Änderungen zur Seite legen
+git pull       # Update holen
+git stash pop  # eigene Änderungen wieder anwenden
+```
+
+!!! tip "Nicht direkt auf dev oder master committen"
+    Halte deine Anpassungen immer auf einem eigenen Branch. Committest du direkt auf `dev` oder
+    `master`, gibt es beim nächsten `git pull` fast zwangsläufig Konflikte.
 
 !!! warning "Nur zwei Boards werden unterstützt"
     Fertige Firmware wird **ausschließlich** für die Targets **`complete`** und
