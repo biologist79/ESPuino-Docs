@@ -48,8 +48,9 @@ beisteuern möchtest (Details und Preise stehen in der
 !!! note "Akkutyp bei der Bestellung angeben"
     Bei der Bestellung musst du angeben, ob du die **LiPo-** oder die **LFP-Version** möchtest. Der
     passende Akkutyp wird ab Werk über die Lötbrücken auf der Platine vorkonfiguriert – du musst
-    daran also nichts selbst einstellen (mehr dazu bei den Lötbrücken in
-    [Kapitel 4](aufbau.md#die-lotbrucken)).
+    daran also nichts selbst einstellen. Möchtest du später doch auf den anderen Akkutyp wechseln,
+    lässt sich das aber jederzeit nachträglich ändern, indem du ein bis zwei Lötbrücken umsetzt (mehr
+    dazu bei den Lötbrücken in [Kapitel 4](aufbau.md#die-lotbrucken)).
 
 ## Anschlüsse, Bedienelemente, Pinout
 
