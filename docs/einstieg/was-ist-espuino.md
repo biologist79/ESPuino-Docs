@@ -37,7 +37,7 @@ Gehäuse).
 | **Neopixel** | Adressierbare LED(s) für Status und Fortschritt – am häufigsten ein Ring, es geht aber auch eine Reihe oder eine einzelne LED. Formal optional, in der Praxis aber **kaum verzichtbar**: Sie sind das zentrale Rückmelde-Instrument (Verbindung, Fortschritt, Batterie, Fehler …). **Dringend empfohlen.** |
 | **Lautsprecher** | Für den Ton. Kopfhörer sind optional über eine separate Kopfhörerplatine möglich. |
 | **Drehencoder + bis zu 5 Tasten** | Die Bedienung am Gerät; beides ist optional. Das Standardlayout sieht drei Tasten und den Drehencoder vor. |
-| **Akku** | Für den mobilen Betrieb (LiFePO4 oder LiPo, jeweils mit Schutzschaltung). Ebenfalls optional – ESPuino läuft auch einfach am USB-Netzteil. |
+| **Akku** | Für den mobilen Betrieb (LiFePO4 oder LiPo, jeweils **mit Schutzschaltung**). Ebenfalls optional – ESPuino läuft auch einfach am USB-Netzteil. Details in [Kapitel 4 · Der Akku](../hardware/akku.md). |
 | **Gehäuse** | Meist 3D-gedruckt. Ein fertiges Referenzdesign findest du in [Kapitel 5](../hardware/aufbau.md#einbau-ins-gehause). |
 
 Ausführlicher ist das auch in der [FAQ im Forum](https://forum.espuino.de/t/oft-gestellte-fragen-faq/24)
