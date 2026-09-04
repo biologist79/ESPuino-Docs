@@ -11,8 +11,8 @@ das Gleiche wie die frühere mini4L, ist aber günstiger und deutlich schneller 
 Kopfhörerplatine bleibt eine separate, optionale Ergänzung.
 
 Für dich heißt das konkret: Du bekommst die Platine **fertig bestückt**. SMD-Löten – also das feine
-Löten winziger Bauteile – übernimmt niemand von euch; das ist bereits erledigt. Was noch zu tun
-bleibt, sind ein paar Drähte und Stecker, und das ist in [Kapitel 4](aufbau.md) beschrieben.
+Löten winziger Bauteile – ist bereits ab Werk erledigt. Was noch zu tun bleibt, sind ein paar Drähte
+und Stecker, und das ist in [Kapitel 4](aufbau.md) beschrieben.
 
 ## Die Stromversorgung – und warum sie so wichtig ist
 
