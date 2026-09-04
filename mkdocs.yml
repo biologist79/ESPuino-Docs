@@ -51,6 +51,7 @@ extra_css:
 plugins:
   - search:
       lang: [de, en, fr]
+  - glightbox
   - i18n:
       docs_structure: suffix
       fallback_to_default: true
