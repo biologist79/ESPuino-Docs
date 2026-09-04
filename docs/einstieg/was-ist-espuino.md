@@ -31,7 +31,7 @@ Gehäuse).
 | --- | --- |
 | **Complete-Platine** | Das Fundament. Sie bringt ESP32-WROVER, Verstärker, Laderegler, Spannungsüberwachung, Port-Expander und SD-Slot schon mit. |
 | **RFID-Reader** | Liest die Karten. Zur Wahl stehen der günstige RC522 oder der leistungsfähigere PN5180. |
-| **SD-Karte** | Speichert deine Musik. Muss **FAT32** formatiert sein. |
+| **SD-Karte** | Speichert deine Inhalte. Muss **FAT32** formatiert sein; 32 bis 64 GB sind im Normalfall ausreichend. |
 | **Neopixel** | Adressierbare LED(s) für Status und Fortschritt – am häufigsten ein Ring, es geht aber auch eine Reihe oder eine einzelne LED. Optional, aber sehr empfehlenswert. |
 | **Lautsprecher** | Für den Ton. Kopfhörer sind optional über eine separate Kopfhörerplatine möglich. |
 | **Drehencoder + bis zu 5 Tasten** | Die Bedienung am Gerät. Beides ist optional. |
