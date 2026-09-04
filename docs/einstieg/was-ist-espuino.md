@@ -85,3 +85,5 @@ im Zweifel einfach hier nach:
 | Deep-Sleep | Der stromsparende Tiefschlaf, in den sich ESPuino nach Inaktivität legt. |
 | Playmode | Der Abspielmodus einer Karte (Einzeltitel, Hörbuch, ganzer Ordner …). Alle Modi im Detail: [Kapitel 6 → Abspielmodi](../bedienung/webinterface.md#abspielmodi). |
 | Modifikationskarte | Eine Karte, die keine Inhalte startet, sondern eine Funktion auslöst – etwa einen Schlaftimer. Alle Aktionen im Detail: [Kapitel 6 → Modifikationskarten](../bedienung/webinterface.md#modifikationskarten-alle-optionen). |
+| LiPo | Lithium-Polymer-Akku. Nennspannung ~3,7 V, Ladeschluss 4,2 V. Hohe Energiedichte (viel Kapazität pro Größe/Gewicht), dafür empfindlicher und weniger langlebig. |
+| LFP | Lithium-Eisenphosphat-Akku (LiFePO₄). Nennspannung ~3,2–3,3 V, Ladeschluss ~3,6 V. Sehr sicher und langlebig, dafür geringere Energiedichte (weniger Kapazität) und niedrigere Spannung. |
