@@ -35,7 +35,15 @@ schützt, bevor der Akku zu tief entladen wird. Kurz gesagt: stabile Versorgung 
 
 ## Versionen & Lieferumfang
 
-*TODO: aktuelle Revision und Lieferumfang; gegen den aktuellen Stand prüfen.*
+Die aktuelle Revision der Complete ist **5.1**.
+
+Beim Kauf hast du drei Varianten – welche für dich passt, hängt davon ab, wie viel du selbst
+beisteuern möchtest (Details und Preise stehen in der
+[Preisliste #3344](https://forum.espuino.de/t/preisliste/3344)):
+
+- **Nur die Platine** – die fertig bestückte Complete allein, ohne weiteres Zubehör.
+- **Set 1** – die Platine samt der nötigen **Anschlussleitungen**.
+- **Set 2** – wie Set 1, zusätzlich mit der **Kopfhörerplatine**.
 
 ## Anschlüsse, Bedienelemente, Pinout
 
