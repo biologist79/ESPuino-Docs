@@ -12,6 +12,7 @@ copyright: © biologist79 · ESPuino
 
 theme:
   name: material
+  custom_dir: overrides
   language: de
   features:
     - navigation.sections
@@ -40,6 +41,9 @@ theme:
         name: Helles Design
   icon:
     repo: fontawesome/brands/github
+
+hooks:
+  - hooks.py
 
 extra_css:
   - stylesheets/extra.css
