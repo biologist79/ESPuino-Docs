@@ -83,5 +83,5 @@ im Zweifel einfach hier nach:
 | HAL | „Hardware Abstraction Layer" – wählt beim Kompilieren, für welches Board (mit welchen Pins) die Firmware gebaut wird; oft auch **Plattform** genannt (z. B. `complete`, `lolin_d32_pro_sdmmc_pe`, `lolin_d32_pro`). |
 | Neopixel | Adressierbare LED(s) zur Status- und Fortschrittsanzeige. Oft als Ring angeordnet; idealerweise ist die LED-Anzahl **durch vier teilbar**, weil mehrere Animationen darauf ausgelegt sind. |
 | Deep-Sleep | Der stromsparende Tiefschlaf, in den sich ESPuino nach Inaktivität legt. |
-| Playmode | Der Abspielmodus einer Karte (Einzeltitel, Hörbuch, ganzer Ordner …). |
+| Playmode | Der Abspielmodus einer Karte (Einzeltitel, Hörbuch, ganzer Ordner …). Alle Modi im Detail: [Kapitel 6 → Abspielmodi](../bedienung/webinterface.md#abspielmodi). |
 | Modifikationskarte | Eine Karte, die keine Musik startet, sondern eine Funktion auslöst – etwa einen Schlaftimer. |
