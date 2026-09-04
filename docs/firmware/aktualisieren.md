@@ -143,9 +143,11 @@ git stash pop  # eigene Änderungen wieder anwenden
     Halte deine Anpassungen immer auf einem eigenen Branch. Committest du direkt auf `dev` oder
     `master`, gibt es beim nächsten `git pull` fast zwangsläufig Konflikte.
 
-!!! warning "Nur zwei Boards werden unterstützt"
-    Fertige Firmware wird **ausschließlich** für die Targets **`complete`** und
-    **`lolin_d32_pro_sdmmc_pe`** (mini4L) automatisch gebaut. Weitere Einträge in der `platformio.ini`
-    sind alt bzw. Legacy. Der **ESP32-S3 wird nicht unterstützt**, weil er kein klassisches Bluetooth
-    beherrscht. Baust du also etwas Eigenes, führt kein Weg an dieser Route vorbei – fertige Firmware
-    zum bloßen Aufspielen gibt es dafür nicht.
+!!! info "Wofür es fertige Firmware gibt"
+    Fertige Firmware wird automatisch für **drei** Targets gebaut – **`complete`**,
+    **`lolin_d32_pro_sdmmc_pe`** (mini4L) und **`lolin_d32_pro`** –, jeweils für die Branches **dev**
+    und **master** und in **drei Sprachen** (DE/EN/FR). Die aktuellen Produkte sind Complete und
+    mini4L; der `lolin_d32_pro` ist ein älteres Board, für das es aber weiterhin Builds gibt. Für
+    abweichende **Eigenbauten** gibt es dagegen nichts zum bloßen Aufspielen – die musst du selbst
+    kompilieren. Und der **ESP32-S3 wird nicht unterstützt**, weil er kein klassisches Bluetooth
+    beherrscht.

@@ -12,9 +12,9 @@ ist das ab Werk der Fall – du musst also nichts flashen und kannst direkt losl
 
 Hast du deinen ESPuino dagegen **selbst gebaut**, kommt zuerst die Firmware. Hier gibt es eine
 Einschränkung, die du kennen solltest: Fertige, vorgebaute Firmware wird nur für die wenigen
-Plattformen automatisch erzeugt, die offiziell unterstützt werden (Complete und mini4L). Für
-abweichende Eigenbauten gibt es also **nichts zum bloßen Aufspielen** – du musst dir mit **VS Code
-und pioarduino** selbst eine passende Firmware kompilieren. Wie das geht, steht in
+Plattformen automatisch erzeugt, für die es fertige Builds gibt (Complete, mini4L und das ältere
+`lolin_d32_pro`). Für abweichende Eigenbauten gibt es also **nichts zum bloßen Aufspielen** – du
+musst dir mit **VS Code und pioarduino** selbst eine passende Firmware kompilieren. Wie das geht, steht in
 [Kapitel 11 · Firmware aktualisieren](../firmware/aktualisieren.md); komm danach hierher zurück.
 
 !!! note "Der allererste Start dauert einen Moment"
