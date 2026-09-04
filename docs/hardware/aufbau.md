@@ -30,17 +30,34 @@ du weißt, dass du sie brauchst.
 
 ## Die Lötbrücken
 
-Auf der Rückseite sitzen einige Lötbrücken, über die grundlegende Eigenschaften eingestellt werden.
-Die gute Nachricht: Sie sind bei deiner Complete bereits **werkseitig passend zu deiner Bestellung**
-gesetzt, du musst hier im Normalfall gar nichts tun. Zur Orientierung – und falls du später doch
-einmal etwas ändern willst – hier ihre Bedeutung:
+Auf der Rückseite sitzen mehrere Lötbrücken (Jumper), über die grundlegende Eigenschaften der Platine
+festgelegt werden – vor allem der Akkutyp, die Verstärkung und die RFID-Versorgung. Die gute Nachricht
+vorweg: Sie sind bei deiner Complete bereits **werkseitig passend zu deiner Bestellung** gesetzt
+(typisch: JP2 auf +3 dB, JP4 automatisch, JP5 und JP6 je nach Akkutyp, JP8 im Standard). Im Normalfall
+musst du hier also gar nichts anfassen. Willst du später etwas ändern – etwa den Akkutyp wechseln –,
+findest du unten, was jeder Jumper bedeutet. Vorher aber das Wichtigste:
 
-| Brücke | Wofür |
-| --- | --- |
-| JP2 / JP3 | Lautsprecher-Verstärkung (+3 dB oder +15 dB) – es wird immer nur **eine** von beiden gesetzt. |
-| JP5 / JP6 | Wahl des Akkutyps (LiPo oder LFP). |
-| JP8 | Stromversorgung des RFID-Readers – **muss** gesetzt sein (1+2 oder 2+3). |
-| JP1 | nur nötig für den **PN5180 mit LPCD**. |
+!!! danger "Erst lesen, dann löten"
+    - **JP5 nur bei LiPo setzen – niemals bei LFP!** JP5 stellt die Ladeschluss-Spannung: gesetzt =
+      **4,2 V** (LiPo), offen = **3,6 V** (LFP). Setzt du JP5, während ein **LFP-Akku** angeschlossen
+      ist, wird dieser überladen – **Brandgefahr!**
+    - **Der Spannungswächter (JP6) und die RFID-Versorgung (JP8) müssen gesetzt sein** – sonst
+      funktioniert die Complete bzw. der Kartenleser überhaupt nicht.
+
+| Jumper | Funktion | Stellungen |
+| --- | --- | --- |
+| **JP2 / JP3** | Grundverstärkung des Audio-Verstärkers | **Nie beide zugleich!** JP2 = +3 dB · JP3 = +15 dB · keiner = +9 dB (Standard). Empfehlung: JP2 (+3 dB) für eine feinere Lautstärke-Abstufung per Software. |
+| **JP4** | Interne Lade-LED | Ab Rev. 5.1 automatisch geschlossen (kein Löten nötig); davor 1+2 zum Aktivieren. |
+| **JP5** | Ladeschluss-Spannung | gesetzt = 4,2 V (**LiPo**), offen = 3,6 V (**LFP**) – ⚠️ siehe Warnung oben. |
+| **JP6** | Unterspannungs-Wächter | 1+2 = **LFP** (~2,75 V), 2+3 = **LiPo** (~3,15 V). Einer von beiden **muss** gesetzt sein. |
+| **JP8** | RFID-Versorgung / LPCD | 2+3 = Standard (empfohlen), 1+2 = LPCD-Modus. **Muss** gesetzt sein. |
+| **JP1** | LPCD beim PN5180 | 1+2 = LPCD aktiv (IRQ auf GPIO 32, belegt dann Ext-Connector 1), offen = kein LPCD. Nur zusammen mit JP8 (1+2) sinnvoll. |
+
+!!! note "Akkutyp später wechseln"
+    Der Akkutyp steckt in **JP5** (Ladespannung) und **JP6** (Spannungswächter) – das sind die ein bis
+    zwei Brücken, mit denen sich LiPo ↔ LFP nachträglich umstellen lässt. Denk danach daran, auch die
+    Batterie-Spannungsschwellen im Webinterface anzupassen (siehe
+    [Feinjustierung](#nach-dem-zusammenbau-die-feinjustierung)).
 
 ## Die Drähte anlöten
 

@@ -14,10 +14,9 @@ Für dich heißt das konkret: Du bekommst die Platine **fertig bestückt**. SMD-
 Löten winziger Bauteile – ist bereits ab Werk erledigt. Was noch zu tun bleibt, sind ein paar Drähte
 und Stecker, und das ist in [Kapitel 4](aufbau.md) beschrieben.
 
-## Die Stromversorgung – und warum sie so wichtig ist
+## Die Stromversorgung { #die-stromversorgung-und-warum-sie-so-wichtig-ist }
 
-Ein Detail verdient besondere Aufmerksamkeit, weil es die Complete spürbar zuverlässiger macht als
-ihre Vorgänger: die Stromversorgung. ESPuino soll an ganz unterschiedlichen Quellen laufen – am
+ESPuino soll an ganz unterschiedlichen Quellen laufen – am
 USB-Netzteil, an einem LiPo-Akku oder an einem LiFePO4-Akku (LFP). Und egal, welche davon gerade
 anliegt und wie voll der Akku ist: Hinten müssen stabile **3,3 Volt** für den ESP32 herauskommen.
 
@@ -65,8 +64,9 @@ Ein Teil der Bauteile hängt von deinen Vorlieben ab. Hier die Entscheidungen, d
 - **RFID-Reader:** Zur Wahl stehen der **RC522** (günstig, für die meisten völlig ausreichend) und
   der **PN5180** (empfindlicher, größere Reichweite, und Voraussetzung für das optionale
   LPCD-Aufwecken). Dank Auto-Erkennung (siehe unten) legst du dich nicht per Firmware fest.
-- **SD-Karte:** Eine ganz normale Karte, **FAT32** formatiert. Sehr große oder sehr billige Karten
-  laufen erfahrungsgemäß nicht immer zuverlässig.
+- **SD-Karte:** Eine ganz normale Karte, **FAT32** formatiert. Karten ab 64 GB kommen ab Werk als
+  exFAT und müssen erst umformatiert werden (siehe Hinweis). Sehr große oder sehr billige Karten
+  laufen zudem nicht immer zuverlässig.
 - **Akku:** LiPo oder LFP – je nach Wahl werden am Board die passenden Lötbrücken gesetzt (siehe
   [Kapitel 4](aufbau.md)). Oder du lässt den Akku ganz weg und betreibst ESPuino am USB-Netzteil.
 - **Lautsprecher:** nach Geschmack und Gehäusegröße.
@@ -77,6 +77,13 @@ Ein Teil der Bauteile hängt von deinen Vorlieben ab. Hier die Entscheidungen, d
     Früher musste man beim Flashen die passende Firmware-Variante für RC522 oder PN5180 wählen. Seit
     Mai 2026 **erkennt ESPuino den Reader automatisch** zur Laufzeit. Die Reader-Wahl ist damit eine
     reine Hardware-Entscheidung, um die du dich beim Firmware-Update nicht mehr kümmern musst.
+
+!!! tip "Große Karten auf FAT32 formatieren"
+    Karten ab 64 GB (SDXC) sind ab Werk als exFAT formatiert. Windows bietet FAT32 für so große
+    Karten im Standard-Dialog nicht an – hier hilft ein Tool wie „FAT32 Format" (guiformat). Den
+    offiziellen [SD Card Formatter](https://www.sdcard.org/downloads/formatter/) kannst du gut nutzen,
+    um eine Karte sauber zurückzusetzen; er formatiert große Karten aber nach SD-Norm als exFAT – für
+    FAT32 brauchst du also zusätzlich das genannte Tool.
 
 ## Bestellen & Zubehör
 
