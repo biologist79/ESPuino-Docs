@@ -1,4 +1,4 @@
-# 4 · Anschließen & Einbau
+# 5 · Anschließen & Einbau
 
 Die gute Nachricht zuerst: Der Aufbau der Complete ist überschaubar. Die Platine kommt **fertig
 bestückt** zu dir – das gesamte SMD-Löten der winzigen Bauteile ist bereits erledigt, und auch die
@@ -116,7 +116,7 @@ Sollte die angezeigte Spannung trotzdem nicht zur Realität passen – etwa wenn
 Akku als „nicht ganz voll" gemeldet wird –, lässt sich die Messung **kalibrieren**: Vergleiche die
 ESPuino-Anzeige mit einer Messung per Multimeter und trage die Differenz über den Parameter
 `offsetVoltage` in der `settings-complete.h` ein (siehe
-[Kapitel 12](../firmware/compile-zeit.md#werte-nur-per-settingsh-kein-webinterface)).
+[Kapitel 13](../firmware/compile-zeit.md#werte-nur-per-settingsh-kein-webinterface)).
 
 Ansonsten ist jetzt der richtige Moment, um bei Bedarf die **Neopixel-Drehrichtung** und die
 **Drehencoder-Richtung** zu korrigieren, die **Tastenbelegung** anzupassen und die ersten

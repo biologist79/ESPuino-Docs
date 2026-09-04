@@ -1,4 +1,4 @@
-# 8 · Inhalte verwalten
+# 9 · Inhalte verwalten
 
 Ein ESPuino ist nur so gut wie das, was auf seiner SD-Karte liegt. Dieses Kapitel dreht sich deshalb
 darum, wie du deine Hörspiele, Hörbücher und Musik auf das Gerät bekommst und – mindestens genauso
@@ -72,7 +72,7 @@ Bildschirm.
     Ausgerechnet eingebettetes Coverart ist gelegentlich die Ursache, wenn eine einzelne MP3 nicht
     sauber spielt oder stottert. Falls dir so eine Datei begegnet, hilft meist ein sauberes
     Neu-Kodieren ohne Cover – wie das mit ffmpeg geht, steht in
-    [Kapitel 13 → MP3](../hilfe/troubleshooting.md#einzelne-titel-machen-probleme-mp3).
+    [Kapitel 14 → MP3](../hilfe/troubleshooting.md#einzelne-titel-machen-probleme-mp3).
 
 ## Webradio
 

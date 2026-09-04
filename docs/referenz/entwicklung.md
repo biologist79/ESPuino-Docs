@@ -1,4 +1,4 @@
-# 15 · Entwicklung & Beitrag
+# 16 · Entwicklung & Beitrag
 
 ESPuino ist ein offenes Projekt, und Beiträge sind willkommen. Dieses Kapitel richtet sich an alle,
 die selbst am Code arbeiten, eigene Hardware unterstützen oder Verbesserungen zurückgeben möchten. Es

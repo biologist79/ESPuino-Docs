@@ -1,4 +1,4 @@
-# 13 · Troubleshooting
+# 14 · Troubleshooting
 
 Nicht immer läuft alles auf Anhieb rund – das ist bei einem Selbstbauprojekt normal und kein Grund zur
 Verzweiflung. Dieses Kapitel geht die häufigsten Stolperfallen durch und erklärt jeweils, woran es
@@ -11,7 +11,7 @@ Bevor du lange rätst, lohnt sich fast immer ein Blick ins Log – es verrät di
 hakt. Du kommst auf zwei Wegen dran: bequem **im Browser** über das Stapel-Menü oben rechts im
 Webinterface, Eintrag **Log**; oder klassisch **seriell** über USB mit 115200 Baud. Wie ausführlich
 ESPuino protokolliert, steuert die Einstellung `SERIAL_LOGLEVEL`
-([Kapitel 12](../firmware/compile-zeit.md)).
+([Kapitel 13](../firmware/compile-zeit.md)).
 
 ## Die RFID-Karte wird nicht zuverlässig erkannt
 
@@ -27,7 +27,7 @@ zwischendurch kurz nicht erkannt und ESPuino hält das für ein Abnehmen. Das is
 Dauerbrenner. Verkleinere den Abstand zwischen Karte und Leser, erhöhe – beim PN5180 – dessen
 Debounce, oder schalte die Option einfach ab, wenn sie bei dir mehr Ärger als Nutzen bringt. (Die
 Option gibt es für RC522 und PN5180; nur der Debounce ist PN5180-spezifisch.) (Zu LPCD siehe die deutliche
-Warnung in [Kapitel 10](../vertiefung/erweiterte-themen.md#lpcd).)
+Warnung in [Kapitel 11](../vertiefung/erweiterte-themen.md#lpcd).)
 
 ## Die SD-Karte wird nicht erkannt
 
@@ -65,7 +65,7 @@ Datei-Schleife deiner Shell.
 
 Zwei Dinge übersieht man leicht. Erstens: Der ESP32 funkt **nur auf 2,4 GHz** – ein reines
 5-GHz-Netz sieht er gar nicht. Zweitens: Die Adresse muss immer mit **`http://`** aufgerufen werden,
-`https` beherrscht ESPuino nicht (der Hintergrund steht in [Kapitel 5](../inbetriebnahme/erststart.md#das-webinterface-offnen)).
+`https` beherrscht ESPuino nicht (der Hintergrund steht in [Kapitel 6](../inbetriebnahme/erststart.md#das-webinterface-offnen)).
 Ansonsten gelten die üblichen Verdächtigen: zu große Entfernung zum Router, ein Tippfehler in den
 Zugangsdaten. Bleiben die LEDs im Leerlauf **grün** statt weiß, besteht keine Verbindung – dann neu
 starten, näher an den Router gehen oder die Zugangsdaten erneut eingeben.

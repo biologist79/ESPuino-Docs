@@ -1,4 +1,4 @@
-# 5 · Erststart
+# 6 · Erststart
 
 Dein ESPuino ist zusammengebaut, mit Strom versorgt – per USB-Netzteil oder, falls verbaut, per
 Akku – und die SD-Karte steckt. Jetzt soll zum ersten Mal Musik aus dem Lautsprecher kommen. Dieses Kapitel begleitet dich durch genau diesen
@@ -15,7 +15,7 @@ Einschränkung, die du kennen solltest: Fertige, vorgebaute Firmware wird nur f�
 Plattformen automatisch erzeugt, für die es fertige Builds gibt (Complete, mini4L und das ältere
 `lolin_d32_pro`). Für abweichende Eigenbauten gibt es also **nichts zum bloßen Aufspielen** – du
 musst dir mit **VS Code und pioarduino** selbst eine passende Firmware kompilieren. Wie das geht, steht in
-[Kapitel 11 · Firmware aktualisieren](../firmware/aktualisieren.md); komm danach hierher zurück.
+[Kapitel 12 · Firmware aktualisieren](../firmware/aktualisieren.md); komm danach hierher zurück.
 
 !!! note "Der allererste Start dauert einen Moment"
     Beim ersten Einschalten legt ESPuino intern eine Reihe von Grundeinstellungen an. In der
@@ -85,7 +85,7 @@ Wenn es bei Grün bleibt, ist das kein Grund zur Sorge – meist steckt eine der
 dahinter: ein Tippfehler im Passwort, zu große Entfernung zum Router, oder schlicht ein noch nicht
 abgeschlossener Verbindungsversuch. Starte ESPuino testweise neu, geh näher an den Router, und gib
 notfalls die Zugangsdaten noch einmal in Ruhe ein. Eine ausführlichere Fehlersuche zum Thema WLAN
-findest du in [Kapitel 13 · Troubleshooting](../hilfe/troubleshooting.md#wlan-probleme).
+findest du in [Kapitel 14 · Troubleshooting](../hilfe/troubleshooting.md#wlan-probleme).
 
 ## Das Webinterface öffnen
 
@@ -138,12 +138,12 @@ Reihenfolge ziemlich klar:
   Webinterface hoch (Tab RFID, Bereich Dateien) – praktisch, aber langsamer (bis zu etwa 650 kiB/s,
   im SPI-Modus entsprechend weniger).
 - **FTP.** Für größere Mengen über das Netzwerk ist FTP schneller als der Web-Upload. Der Dienst muss
-  dafür erst aktiviert werden (siehe unten sowie [Kapitel 6](../bedienung/webinterface.md#tab-ftp)).
+  dafür erst aktiviert werden (siehe unten sowie [Kapitel 7](../bedienung/webinterface.md#tab-ftp)).
 - **MediaHub.** Betreibst du mehrere ESPuinos, verteilt MediaHub die Inhalte zentral über das
-  Netzwerk (siehe [Kapitel 9](../inhalte/mediahub.md)).
+  Netzwerk (siehe [Kapitel 10](../inhalte/mediahub.md)).
 
 Wie du deine Inhalte anschließend sinnvoll in Ordner strukturierst, damit die Abspielmodi später
-genau das tun, was du erwartest, liest du in [Kapitel 8 · Inhalte verwalten](../inhalte/verwalten.md).
+genau das tun, was du erwartest, liest du in [Kapitel 9 · Inhalte verwalten](../inhalte/verwalten.md).
 
 ## Die erste Karte anlernen
 
@@ -194,6 +194,6 @@ Aufleuchten). Nach dem nächsten Neustart ist FTP wieder aus.
 ## Wie es weitergeht
 
 Damit läuft dein ESPuino. Alles, was du hier angerissen hast, ist an anderer Stelle ausführlich
-beschrieben: die komplette Bedienoberfläche in [Kapitel 6 · Das Webinterface](../bedienung/webinterface.md),
-die Bedienung am Gerät mit allen Tasten und Anzeigen in [Kapitel 7](../bedienung/am-geraet.md), und
-das Organisieren deiner Musik in [Kapitel 8](../inhalte/verwalten.md). Viel Freude beim Hören.
+beschrieben: die komplette Bedienoberfläche in [Kapitel 7 · Das Webinterface](../bedienung/webinterface.md),
+die Bedienung am Gerät mit allen Tasten und Anzeigen in [Kapitel 8](../bedienung/am-geraet.md), und
+das Organisieren deiner Musik in [Kapitel 9](../inhalte/verwalten.md). Viel Freude beim Hören.

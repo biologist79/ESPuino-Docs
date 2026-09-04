@@ -1,4 +1,4 @@
-# 7 · Bedienung am Gerät
+# 8 · Bedienung am Gerät
 
 Das Webinterface ist zum Einrichten da – im Alltag bedienst du deinen ESPuino aber am Gerät selbst:
 mit Karten, Tasten, dem Drehregler und mit einem Blick auf den LED-Ring. Dieses Kapitel erklärt, wie

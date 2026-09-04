@@ -1,4 +1,4 @@
-# 6 · Das Webinterface
+# 7 · Das Webinterface
 
 Das Webinterface ist die Schaltzentrale deines ESPuino. Praktisch alles, was sich einstellen lässt,
 stellst du hier ein – von den Kartenzuweisungen über das WLAN bis zum Firmware-Update –, und ebenso
@@ -8,7 +8,7 @@ findest, den du gerade brauchst.
 
 Erreichbar ist das Webinterface im Browser – am bequemsten über den Hostnamen (`http://espuino.local`
 bei aktivem mDNS), sonst über die IP-Adresse. Wie du das erste Mal dorthin kommst, ist in
-[Kapitel 5 · Erststart](../inbetriebnahme/erststart.md) beschrieben.
+[Kapitel 6 · Erststart](../inbetriebnahme/erststart.md) beschrieben.
 
 ## Was überall gilt
 
@@ -193,7 +193,7 @@ wechseln; alternativ genügt es, eine unbekannte RFID-Karte aufzulegen.
 
 !!! note "Bluetooth und WLAN"
     Bluetooth und WLAN laufen **parallel**. Der Parallelbetrieb ist allerdings speicherknapp und
-    ungetestet – mehr dazu in [Kapitel 7 → Betriebsmodi](am-geraet.md#betriebsmodi).
+    ungetestet – mehr dazu in [Kapitel 8 → Betriebsmodi](am-geraet.md#betriebsmodi).
 
 ## Tab Allgemein
 
@@ -257,7 +257,7 @@ In dieser Unterkladde geht es um den Kartenleser:
 
 | Einstellung | Bedeutung |
 | --- | --- |
-| **PN5180 LPCD** | Aufwecken aus dem Deep-Sleep durch Kartenauflegen. Nur mit PN5180 und gesetzten Lötbrücken (bei MFRC522 ausgegraut). Einschränkungen: [Kapitel 10](../vertiefung/erweiterte-themen.md#lpcd). |
+| **PN5180 LPCD** | Aufwecken aus dem Deep-Sleep durch Kartenauflegen. Nur mit PN5180 und gesetzten Lötbrücken (bei MFRC522 ausgegraut). Einschränkungen: [Kapitel 11](../vertiefung/erweiterte-themen.md#lpcd). |
 | **Reader-Typ** | *Auto-detect* (Standard), MFRC522 (SPI oder I²C) oder PN5180. |
 | **MFRC522 Gain** | Empfindlichkeit des MFRC522 (0–7, Standard 7). |
 | **PN5180 Debounce** | Wie lange eine Karte ununterbrochen *nicht* erkannt sein muss, bevor sie als entfernt gilt (Standard 500 ms). |
@@ -300,7 +300,7 @@ Die zur Auswahl stehenden Aktionen entsprechen im Wesentlichen dem Modifikations
 einiger Aktionen, die nur als Taster Sinn ergeben: Lauter/Leiser/Initiale Lautstärke,
 Batteriespannung anzeigen, Stop und Neustart, Schlafen nach fünf Titeln sowie eine Debug-Anzeige der
 Taskauslastung. Die Standardbelegung, mit der ESPuino ausgeliefert wird, findest du in
-[Kapitel 7 → Tasten](am-geraet.md#tasten-und-tastenkombinationen).
+[Kapitel 8 → Tasten](am-geraet.md#tasten-und-tastenkombinationen).
 
 ### LED
 
@@ -349,7 +349,7 @@ Ist die Batteriemessung aktiv, kommen unter **Batterie** diese Werte hinzu:
 An dieser Stelle findest du alles rund ums Firmware-Update. Du kannst entweder eine `firmware.bin` von
 Hand hochladen, oder – deutlich bequemer – über **Firmware von GitHub laden** direkt einen fertigen
 Build aus dem Repository holen. Ausführlich ist das in
-[Kapitel 11 · Firmware aktualisieren](../firmware/aktualisieren.md) beschrieben. Der GitHub-Bereich
+[Kapitel 12 · Firmware aktualisieren](../firmware/aktualisieren.md) beschrieben. Der GitHub-Bereich
 erscheint nur bei OTA-fähiger Firmware.
 
 ## Tab Tools
@@ -361,7 +361,7 @@ SD-Karte liegen, sondern im internen Speicher (NVS). Du kannst dir alle **Zuweis
 einzelne direkt löschen), sie als `backup.txt` **exportieren** und wieder **importieren** (der Import
 ergänzt und überschreibt nur, löscht nie), oder mit dem roten Button **alle Zuweisungen löschen** (mit
 Sicherheitsabfrage). Wie du diese Funktionen zum Sichern und Übertragen nutzt, steht in
-[Kapitel 8 → Backup & Restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern).
+[Kapitel 9 → Backup & Restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern).
 
 ## Tab Hilfe
 

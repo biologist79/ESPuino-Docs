@@ -1,4 +1,4 @@
-# 16 · Anhang
+# 17 · Anhang
 
 Nachschlage-Referenz. Die Tabellen sind aus dem Firmware-Code abgeleitet – bei Code-Änderungen
 mitziehen.

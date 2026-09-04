@@ -36,7 +36,7 @@ Gehäuse).
 | **Lautsprecher** | Für den Ton. Kopfhörer sind optional über eine separate Kopfhörerplatine möglich. |
 | **Drehencoder + bis zu 5 Tasten** | Die Bedienung am Gerät; beides ist optional. Das Standardlayout sieht drei Tasten und den Drehencoder vor. |
 | **Akku** | Für den mobilen Betrieb (LiFePO4 oder LiPo, jeweils mit Schutzschaltung). Ebenfalls optional – ESPuino läuft auch einfach am USB-Netzteil. |
-| **Gehäuse** | Meist 3D-gedruckt. Ein fertiges Referenzdesign findest du in [Kapitel 4](../hardware/aufbau.md#einbau-ins-gehause). |
+| **Gehäuse** | Meist 3D-gedruckt. Ein fertiges Referenzdesign findest du in [Kapitel 5](../hardware/aufbau.md#einbau-ins-gehause). |
 
 Ausführlicher ist das auch in der [FAQ im Forum](https://forum.espuino.de/t/oft-gestellte-fragen-faq/24)
 beschrieben.
@@ -52,7 +52,7 @@ weißt du später, wo du was findest:
   Kompilieren aufspielen kannst.
 - **[MediaHub](https://github.com/biologist79/ESPuino-Mediahub)** ist eine optionale Zusatzkomponente,
   um die Kartenzuweisungen mehrerer ESPuinos **zentral** zu verwalten (siehe
-  [Kapitel 9](../inhalte/mediahub.md)).
+  [Kapitel 10](../inhalte/mediahub.md)).
 - Das **[Forum](https://forum.espuino.de)** ist der Ort für Fragen, Ankündigungen und Austausch mit
   anderen. Dieses Handbuch bündelt das Wissen; die Diskussion lebt weiter im Forum.
 
@@ -68,7 +68,7 @@ Die **Complete** ist die konsequente Weiterentwicklung dieser Linie: Sie bietet 
 das Gleiche wie die mini4L, vereint aber alles (bis auf die Kopfhörerplatine) auf einer einzigen
 Platine. Das senkt die Kosten und vereinfacht den Aufbau erheblich. Genau deshalb dreht sich dieses
 Handbuch um die Complete; die mini4L kommt als jüngster Vorgänger noch vor, aber nur dort, wo sie
-sich von der Complete unterscheidet ([Kapitel 14](../referenz/mini4l.md)). Ältere Stufen behandeln
+sich von der Complete unterscheidet ([Kapitel 15](../referenz/mini4l.md)). Ältere Stufen behandeln
 wir nicht.
 
 ## Kleines Glossar
@@ -83,7 +83,7 @@ im Zweifel einfach hier nach:
 | HAL | „Hardware Abstraction Layer" – wählt beim Kompilieren, für welches Board (mit welchen Pins) die Firmware gebaut wird; oft auch **Plattform** genannt (z. B. `complete`, `lolin_d32_pro_sdmmc_pe`, `lolin_d32_pro`). |
 | Neopixel | Adressierbare LED(s) zur Status- und Fortschrittsanzeige. Oft als Ring angeordnet; idealerweise ist die LED-Anzahl **durch vier teilbar**, weil mehrere Animationen darauf ausgelegt sind. |
 | Deep-Sleep | Der stromsparende Tiefschlaf, in den sich ESPuino nach Inaktivität legt. |
-| Playmode | Der Abspielmodus einer Karte (Einzeltitel, Hörbuch, ganzer Ordner …). Alle Modi im Detail: [Kapitel 6 → Abspielmodi](../bedienung/webinterface.md#abspielmodi). |
-| Modifikationskarte | Eine Karte, die keine Inhalte startet, sondern eine Funktion auslöst – etwa einen Schlaftimer. Alle Aktionen im Detail: [Kapitel 6 → Modifikationskarten](../bedienung/webinterface.md#modifikationskarten-alle-optionen). |
+| Playmode | Der Abspielmodus einer Karte (Einzeltitel, Hörbuch, ganzer Ordner …). Alle Modi im Detail: [Kapitel 7 → Abspielmodi](../bedienung/webinterface.md#abspielmodi). |
+| Modifikationskarte | Eine Karte, die keine Inhalte startet, sondern eine Funktion auslöst – etwa einen Schlaftimer. Alle Aktionen im Detail: [Kapitel 7 → Modifikationskarten](../bedienung/webinterface.md#modifikationskarten-alle-optionen). |
 | LiPo | Lithium-Polymer-Akku. Nennspannung ~3,7 V, Ladeschluss 4,2 V. Hohe Energiedichte (viel Kapazität pro Größe/Gewicht), dafür empfindlicher und weniger langlebig. |
 | LFP | Lithium-Eisenphosphat-Akku (LiFePO₄). Nennspannung ~3,2–3,3 V, Ladeschluss ~3,6 V. Sehr sicher und langlebig, dafür geringere Energiedichte (weniger Kapazität) und niedrigere Spannung. |
