@@ -12,7 +12,8 @@ Der Name verrät die Herkunft: Im Herzen steckt ein Mikrocontroller der **ESP32*
 Kern herum ist über die Jahre ein erstaunlich vollständiges Gerät gewachsen – mit Verstärker,
 Akkuladung, LED-Anzeige, Tasten und Drehregler. Trotzdem bleibt ESPuino ein offenes Bastel- und
 Selbstbauprojekt: Der Quellcode ist frei, die Hardware dokumentiert, und du entscheidest selbst, wie
-groß, wie laut und wie bunt deine Box wird.
+groß, wie laut und wie bunt deine Box wird – wie vielfältig das ausfällt, zeigt die Galerie
+[„Zeigt her eure ESPuinos"](https://forum.espuino.de/t/zeigt-her-eure-espuinos/554).
 
 Ein Punkt ist wichtig zu verstehen, weil er später manches erklärt: **Auf die Karten selbst wird
 nichts geschrieben.** ESPuino liest lediglich die eindeutige Nummer (die ID) einer Karte
