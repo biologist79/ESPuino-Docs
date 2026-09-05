@@ -124,7 +124,7 @@ kann sonst einen vollen LFP-Akku für halb leer halten oder umgekehrt. Als Anhal
 Sollte die angezeigte Spannung trotzdem nicht zur Realität passen – etwa wenn ein frisch geladener
 Akku als „nicht ganz voll" gemeldet wird –, lässt sich die Messung **kalibrieren**: Vergleiche die
 ESPuino-Anzeige mit einer Messung per Multimeter und trage die Differenz als **Korrekturwert** in den
-Batterie-Einstellungen des Webinterface ein. Der Wert wird nach einem Neustart wirksam.
+Batterie-Einstellungen des Webinterface ein. Der Wert wird direkt nach dem Speichern übernommen.
 
 !!! info "Seit September 2026 im Webinterface"
     Dieser Korrekturwert (`offsetVoltage`) lässt sich **seit September 2026 direkt im Webinterface**
