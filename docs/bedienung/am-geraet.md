@@ -14,7 +14,7 @@ vom Handy streamst. Zwischen den Modi wechselst du über Modifikationskarten ode
 
 !!! note "Bluetooth und WLAN"
     Bluetooth und WLAN laufen bei ESPuino **parallel**. Sei dir aber bewusst, dass der Speicher dabei
-    knapp wird und dieser Parallelbetrieb ungetestet ist – im Zweifel nutzt du nur eines von beiden.
+    knapp wird und dieser Parallelbetrieb wenig getestet ist – im Zweifel nutzt du nur eines von beiden.
 
 ## Abspielmodi
 
@@ -52,7 +52,8 @@ IDs listet der [Anhang](../referenz/anhang.md#modifikationskarten).
 Die folgende Belegung ist der **Auslieferungszustand** – im Webinterface (Stichwort „dynamisches
 Button-Layout") kannst du sie komplett anpassen. Auf der [Complete](../hardware/complete.md) sind die Tasten physisch so
 zugeordnet: Button 0 ist Next, Button 1 ist Previous, Button 2 ist Play/Pause, Button 3 der Taster im
-Drehencoder, und Button 4 und 5 sind optionale, frei belegbare Tasten.
+Drehencoder, und Button 4 und 5 sind optionale, frei belegbare Tasten. Diese Nummern sind fest und
+lassen sich nicht ändern; sie spielen aber ohnehin nur für Programmierer eine Rolle.
 
 Ein **kurzer** und ein **langer** Druck lösen jeweils unterschiedliche Aktionen aus:
 
@@ -68,6 +69,11 @@ Ein **kurzer** und ein **langer** Druck lösen jeweils unterschiedliche Aktionen
 Dazu kommt eine besonders praktische Geste: **einen Button halten und gleichzeitig am Drehregler
 drehen.** Solange du die Taste hältst, führt das Drehen deren Sonderaktion aus. Standardmäßig steuert
 das Halten von Next ein Vor- und Zurückspulen im Titel, das Halten von Play/Pause die LED-Helligkeit.
+
+Beim Spulen zeigt dir der LED-Ring das Sprungziel an, noch bevor es übernommen wird: Der Ring färbt
+sich **gelb**, und eine **blaue** Markierung wandert beim Drehen an die Stelle, zu der gesprungen wird
+(hast du nur eine einzelne LED, leuchtet sie stattdessen einfach blau). Kurz nachdem du aufhörst zu
+drehen – standardmäßig rund zwei Sekunden –, springt die Wiedergabe an die markierte Stelle.
 
 Und schließlich lassen sich Aktionen auf **gleichzeitig gedrückte Tastenpaare** legen. Ab Werk starten
 Next und Play/Pause zusammen den FTP-Server, Previous und Play/Pause lassen die IP-Adresse ansagen.
@@ -91,27 +97,50 @@ Der LED-Ring ist ESPuinos Sprache – er teilt dir mit einem Blick mit, was gera
 der LEDs, der Farbverlauf und die Laufrichtung lassen sich im Webinterface einstellen; die folgenden
 Farben sind die Standardwerte.
 
-**Beim Booten** zirkuliert die Hälfte der LEDs in **Orange**. Danach geht es entweder in den Leerlauf
-über – oder es blinkt bei einem SD-Problem rot.
+**Beim Booten**
 
-**Im Status/Leerlauf** verraten dir vier langsam kreisende LEDs den Verbindungszustand: **weiß** heißt
-WLAN verbunden, **grün** keine Verbindung, **orange** WLAN wird gerade gesucht. Ist Bluetooth aktiv,
-kreisen sie **blau**. Wird gerade eine Playlist erstellt, drehen sich vier LEDs schnell in **violett**.
-Eine akzeptierte Aktion quittiert ESPuino mit einem kurzen **grünen** Aufblinken aller LEDs, eine
-abgelehnte mit einem kurzen **roten**. Beim Ausschalten wächst ein **roter** Kreis, solange du die
-Taste hältst, und sind die Tasten gesperrt, färben sich die Fortschritts-LEDs rot.
+| Situation | LED-Anzeige |
+| --- | --- |
+| Bootvorgang | Die halbe LED-Zahl kreist in **Orange**. Danach folgt der Leerlauf – oder rotes Blinken bei einem SD-Problem. |
 
-**Während der Wiedergabe** zeigt ein Farbverlauf (standardmäßig grün→rot) als LED-Anzahl den
-**Titelfortschritt**; kurz zu Beginn jedes Titels fächern **blaue** LEDs den Playlist-Fortschritt auf.
-Ein Webstream läuft als zwei sehr langsam kreisende LEDs in wechselnden Regenbogenfarben, eine Pause
-als vier **orange** LEDs. Eine Lautstärkeänderung erscheint als grün→roter Balken, eine IP-Ansage als
-rotierende **gelbe** LEDs.
+**Im Status / Leerlauf**
 
-**Bei aktivierter Batteriemessung** blinkt ESPuino bei Unterspannung dreimal kurz **rot**; ein kurzer
-Druck auf den Encoder-Taster zeigt dir den Ladezustand als LED-Balken. Und wenn Daten übertragen
-werden – ein MediaHub-Download oder ein Firmware-Update –, läuft der Fortschritt in **Blau**.
+| Situation | LED-Anzeige |
+| --- | --- |
+| WLAN verbunden | Vier langsam kreisende LEDs in **Weiß**. |
+| Keine Verbindung | Vier langsam kreisende LEDs in **Grün**. |
+| WLAN wird gesucht | Vier langsam kreisende LEDs in **Orange**. |
+| Bluetooth aktiv | Vier kreisende LEDs in **Blau**. |
+| Playlist wird erstellt | Vier LEDs drehen schnell in **Violett**. |
+| Aktion akzeptiert | Kurzes **grünes** Aufblinken aller LEDs. |
+| Aktion abgelehnt | Kurzes **rotes** Aufblinken aller LEDs. |
+| Ausschalten (Taste halten) | Ein **roter** Kreis wächst, solange du die Taste hältst. |
+| Tasten gesperrt | Die Fortschritts-LEDs färben sich **rot**. |
 
-Die vollständige Aufstellung pflegt der Entwickler im
+*Die kreisenden Verbindungs-LEDs (weiß/grün/orange/blau) siehst du nur im **Leerlauf**, also wenn
+ESPuino gerade nichts abspielt. Sobald Wiedergabe läuft, zeigt der Ring stattdessen den Titelfortschritt
+(siehe unten).*
+
+**Während der Wiedergabe**
+
+| Situation | LED-Anzeige |
+| --- | --- |
+| Titelfortschritt | Farbverlauf (standardmäßig grün→rot) als Zahl leuchtender LEDs. |
+| Playlist-Fortschritt | Kurz zu Titelbeginn fächern **blaue** LEDs auf. |
+| Webstream | Zwei sehr langsam kreisende LEDs in wechselnden Regenbogenfarben. |
+| Pause | Vier **orange** LEDs. |
+| Lautstärke ändern | Grün→roter Balken. |
+| IP-Ansage | Rotierende **gelbe** LEDs. |
+
+**Bei Batteriemessung & Datenübertragung**
+
+| Situation | LED-Anzeige |
+| --- | --- |
+| Unterspannung | Dreimal kurzes **rotes** Blinken. |
+| Ladezustand abfragen | Kurzer Druck auf den Encoder-Taster zeigt ihn als LED-Balken. |
+| Download / Firmware-Update | Der Fortschritt läuft in **Blau**. |
+
+Mehr dazu im
 [Forum #86](https://forum.espuino.de/t/was-zeigt-der-neopixel-des-espuino-alles-an/86).
 
 ## Kopfhörer und Lautstärke-Profile { #kopfhorer-detection-lautstarke-profile }
