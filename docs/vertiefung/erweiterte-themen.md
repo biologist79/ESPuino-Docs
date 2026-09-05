@@ -51,7 +51,7 @@ Karte bereitzuhalten – etwa „Lieblings-Playlist starten" auf eine Tastenkomb
 LPCD (Low Power Card Detection) ist eine Funktion, mit der ESPuino aus dem Deep-Sleep erwacht, sobald
 du eine Karte auflegst – statt dass du erst eine Taste drücken musst. Das klingt verlockend, hat aber
 technische Voraussetzungen: Es funktioniert nur mit dem **PN5180**, benötigt dessen Firmware in
-Version 4.1 oder neuer, gesetzte Lötbrücken und einen RTC-fähigen GPIO für das Wecksignal.
+Version 4.1 oder neuer, gesetzte Lötbrücken auf der Complete und einen RTC-fähigen GPIO für das Wecksignal.
 
 !!! warning "Ehrliche Einschätzung: eher nicht empfehlenswert"
     So schön die Idee ist – LPCD wird derzeit **nicht aktiv gepflegt**, immer wieder berichten Nutzer
@@ -73,9 +73,12 @@ hängen Eingänge daran (Taster, Kopfhörer-Erkennung, der Encoder-Taster); Ausg
 wie dem Verstärker-Enable.
 
 !!! note "Gut zu wissen"
-    Jede Änderung an einem Expander-Eingang löst einen Interrupt aus und weckt den ESP32 – das lässt
-    sich technisch nicht auf einzelne Pins begrenzen. Details:
-    [Forum #306](https://forum.espuino.de/t/einsatz-des-port-expanders-pca9555/306).
+    Jede Änderung an einem Expander-Eingang löst einen Interrupt aus und weckt den ESP32. Sich auf
+    einzelne Pins zu beschränken ist zwar möglich, aber ein ziemlicher Hack, den man selbst
+    einprogrammieren muss: Ein als **Ausgang** konfigurierter Pin wirft keinen Interrupt mehr. Pins auf
+    Ausgang zu setzen ist allerdings nicht ungefährlich – wie das geht und worauf man achten muss,
+    steht in [Forum #2613](https://forum.espuino.de/t/aufwecken-nur-ueber-drehencoder/2613). Zum
+    Port-Expander allgemein siehe [Forum #306](https://forum.espuino.de/t/einsatz-des-port-expanders-pca9555/306).
 
 ## Headless- und Dauerbetrieb
 
@@ -91,5 +94,7 @@ Am Dauer-Netzteil spielen Akku-Themen ohnehin keine Rolle.
 
 Für den **Headless-Betrieb** gilt: Tasten, Drehencoder und sogar die Neopixel sind allesamt optional.
 Ein ESPuino lässt sich vollständig über das Webinterface und – falls gewünscht – über MQTT steuern,
-und die RFID-Karten funktionieren davon unabhängig. So kannst du eine bewusst reduzierte Box bauen
-oder ESPuino nahtlos in eine Hausautomatisierung einbinden.
+und die RFID-Karten funktionieren davon unabhängig. Dank der [Modifikationskarten](../bedienung/webinterface.md#modifikationskarten-alle-optionen)
+lässt er sich sogar **vollständig per Karte** bedienen – ganz ohne Tasten und Bildschirm. So kannst du
+eine bewusst reduzierte Box bauen oder ESPuino nahtlos in eine Hausautomatisierung einbinden.
+Theoretisch ist damit fast alles machbar – ob es in der Praxis Sinn ergibt, musst du selbst entscheiden.
