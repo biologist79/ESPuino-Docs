@@ -146,7 +146,7 @@ git stash pop  # eigene Änderungen wieder anwenden
 !!! info "Wofür es fertige Firmware gibt"
     Fertige Firmware wird automatisch für **drei** Targets gebaut – **`complete`**,
     **`lolin_d32_pro_sdmmc_pe`** (mini4L) und **`lolin_d32_pro`** –, jeweils für die Branches **dev**
-    und **master** und in **drei Sprachen** (DE/EN/FR). Die aktuellen Produkte sind Complete und
+    und **master** und in **drei Sprachen** (DE/EN/FR). Die aktuellen Produkte sind [Complete](../hardware/complete.md) und
     mini4L; der `lolin_d32_pro` ist ein älteres Board, für das es aber weiterhin Builds gibt. Für
     abweichende **Eigenbauten** gibt es dagegen nichts zum bloßen Aufspielen – die musst du selbst
     kompilieren. Und der **ESP32-S3 wird nicht unterstützt**, weil er kein klassisches Bluetooth

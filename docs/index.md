@@ -7,7 +7,7 @@ laufen weiter im [ESPuino-Forum](https://forum.espuino.de); dieses Handbuch ist 
 **Nachschlage-Quelle**.
 
 !!! info "Fokus dieses Handbuchs"
-    Beschrieben wird die aktuelle **Complete**-Platine. Der direkte Vorgänger **mini4L** kommt
+    Beschrieben wird die aktuelle [**Complete**-Platine](hardware/complete.md). Der direkte Vorgänger **mini4L** kommt
     nur als Delta vor (Kapitel 15). Ältere Entwicklungsstufen (frühe Eigenbauten, Streifenraster,
     Carrier-PCBs) werden nicht behandelt.
 

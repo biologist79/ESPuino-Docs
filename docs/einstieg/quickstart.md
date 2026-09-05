@@ -7,13 +7,14 @@ das ausführliche [Kapitel 6 · Erststart](../inbetriebnahme/erststart.md); dort
 Ruhe erklärt.
 
 !!! tip "Voraussetzung"
-    Bei der **Complete** ist die Firmware ab Werk installiert – du musst also nichts flashen.
+    Bei der [**Complete**](../hardware/complete.md) ist die Firmware ab Werk installiert – du musst also nichts flashen.
     (Selbstbauten mit abweichender Hardware müssen ihre Firmware zuerst selbst kompilieren, siehe
     [Kapitel 12](../firmware/aktualisieren.md).)
 
 So kommst du zum ersten Sound:
 
-1. **Einschalten.** Beim ersten Start spannt ESPuino ein eigenes WLAN namens `ESPuino` auf.
+1. **Einschalten.** Beim ersten Start spannt ESPuino ein eigenes WLAN namens `ESPuino` auf; vier
+   grüne LEDs signalisieren diesen Einrichtungsmodus.
 2. **Mit diesem WLAN verbinden** und im Browser `http://192.168.4.1` öffnen. Auf der Einrichtungsseite
    trägst du dein eigenes WLAN samt Passwort ein und vergibst einen Hostnamen.
 3. **Nach dem Neustart** erreichst du das Webinterface unter `http://espuino.local` (oder der

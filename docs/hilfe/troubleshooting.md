@@ -42,8 +42,8 @@ testweise eine andere Karte – gerade sehr billige oder sehr alte Karten laufen
 
 Kommt gar kein Ton, prüf zuerst das Naheliegende: die Lautstärke und deren Maximalwerte im
 Webinterface (Tab Allgemein → Wiedergabe). Klingt es verzerrt, kann die **Verstärkung** zu hoch
-gewählt sein – auf der Complete stellt die Lötbrücke JP2/JP3 zwischen +3 dB und +15 dB um (es darf
-immer nur eine gesetzt sein). Hast du nur einen Lautsprecher, aktiviere die **Mono-Wiedergabe**. Und
+gewählt sein – auf der [Complete](../hardware/complete.md) stellt eine Lötbrücke die Grundverstärkung – ohne Brücke
++9 dB, mit JP2 +3 dB, mit JP3 +15 dB (immer nur eine setzen). Hast du nur einen Lautsprecher, aktiviere die **Mono-Wiedergabe**. Und
 für Kopfhörer ist die kabelgebundene [Kopfhörerplatine](../bedienung/am-geraet.md#kopfhorer-detection-lautstarke-profile)
 der zuverlässige Weg.
 

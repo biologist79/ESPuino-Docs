@@ -24,8 +24,8 @@ oder Aufkleber verwenden – konkret die Standards **ISO-14443** und (nur mit de
 ## Woraus besteht ein ESPuino?
 
 Das ist die Frage, die am häufigsten gestellt wird – deshalb gleich zu Beginn eine Übersicht. Die
-folgende Liste beschreibt einen typischen ESPuino auf Basis der **Complete**-Platine, um die es in
-diesem Handbuch geht. Vieles davon steckt bei der Complete schon fertig auf der Platine; du ergänzt
+folgende Liste beschreibt einen typischen ESPuino auf Basis der
+[**Complete**-Platine](../hardware/complete.md), um die es in diesem Handbuch geht. Vieles davon steckt bei der Complete schon fertig auf der Platine; du ergänzt
 nur noch die Teile, die von deinen Wünschen abhängen (welcher Lautsprecher, welcher Akku, welches
 Gehäuse).
 
@@ -33,10 +33,10 @@ Gehäuse).
 | --- | --- |
 | **Complete-Platine** | Das Fundament. Sie bringt ESP32-WROVER, Verstärker, Laderegler, Spannungsüberwachung, Port-Expander und SD-Slot schon mit. |
 | **RFID-Reader** | Liest die Karten. Zur Wahl stehen der günstige RC522 oder der leistungsfähigere PN5180. |
-| **SD-Karte** | Speichert deine Inhalte. Muss **FAT32** formatiert sein; 32 bis 64 GB sind im Normalfall ausreichend. |
+| **microSD-Karte** | Speichert deine Inhalte. Muss **FAT32** formatiert sein; 32 bis 64 GB sind im Normalfall ausreichend. |
 | **Neopixel** | Adressierbare LED(s) für Status und Fortschritt – am häufigsten ein Ring, es geht aber auch eine Reihe oder eine einzelne LED. Formal optional, in der Praxis aber **kaum verzichtbar**: Sie sind das zentrale Rückmelde-Instrument (Verbindung, Fortschritt, Batterie, Fehler …). **Dringend empfohlen.** |
 | **Lautsprecher** | Für den Ton. Kopfhörer sind optional über eine separate Kopfhörerplatine möglich. |
-| **Drehencoder + bis zu 5 Tasten** | Die Bedienung am Gerät; beides ist optional. Das Standardlayout sieht drei Tasten und den Drehencoder vor. |
+| **Drehencoder + bis zu 5 Taster** | Die Bedienung am Gerät; beides ist optional. Das Standardlayout sieht drei Taster und den Drehencoder vor. |
 | **Akku** | Für den mobilen Betrieb (LiFePO4 oder LiPo, jeweils **mit Schutzschaltung**). Ebenfalls optional – ESPuino läuft auch einfach am USB-Netzteil. Details in [Kapitel 4 · Der Akku](../hardware/akku.md). |
 | **Gehäuse** | Meist 3D-gedruckt. Ein fertiges Referenzdesign findest du in [Kapitel 5](../hardware/aufbau.md#einbau-ins-gehause). |
 
@@ -61,10 +61,10 @@ weißt du später, wo du was findest:
 ## Ein Blick zurück: die Entwicklungslinie
 
 ESPuino ist über mehrere Jahre gewachsen, und es lohnt sich, das kurz einzuordnen – schon weil dir
-im Forum noch ältere Aufbauten begegnen. Am Anfang standen echte Eigenbauten, bei denen einzelne
+im [Forum](https://forum.espuino.de) noch ältere Aufbauten begegnen. Am Anfang standen echte Eigenbauten, bei denen einzelne
 Module zusammengesteckt und verdrahtet wurden. Daraus wurden Aufbauten auf Streifenrasterplatinen,
 später Carrier-Platinen, die fertige Entwicklerboards aufnahmen. Der direkte Vorgänger der heutigen
-Complete ist die **mini4L**, in die ein eigens entwickeltes ESP32-Board gesteckt wurde.
+Complete ist die [**mini4L**](../referenz/mini4l.md), in die ein eigens entwickeltes ESP32-Board gesteckt wurde.
 
 Die **Complete** ist die konsequente Weiterentwicklung dieser Linie: Sie bietet funktional im Kern
 das Gleiche wie die mini4L, vereint aber alles (bis auf die Kopfhörerplatine) auf einer einzigen
@@ -84,7 +84,7 @@ im Zweifel einfach hier nach:
 | NVS | „Non-Volatile Storage" – der interne Speicher des ESP32, in dem Einstellungen und Kartenzuordnungen liegen. Ein normales Firmware-Update überschreibt ihn **nicht**; deine Einstellungen bleiben also erhalten. |
 | HAL | „Hardware Abstraction Layer" – wählt beim Kompilieren, für welches Board (mit welchen Pins) die Firmware gebaut wird; oft auch **Plattform** genannt (z. B. `complete`, `lolin_d32_pro_sdmmc_pe`, `lolin_d32_pro`). |
 | Neopixel | Adressierbare LED(s) zur Status- und Fortschrittsanzeige. Oft als Ring angeordnet; idealerweise ist die LED-Anzahl **durch vier teilbar**, weil mehrere Animationen darauf ausgelegt sind. |
-| Deep-Sleep | Der stromsparende Tiefschlaf, in den sich ESPuino nach Inaktivität legt. |
+| Deep-Sleep | Der stromsparende Tiefschlaf, in den ESPuino nach einer gewissen Inaktivität wechselt – oder wenn man ihn „ausschaltet". Ein echtes, vollständiges Abschalten (Strom ganz weg) ist standardmäßig nicht vorgesehen, aber möglich; es geht mit einer etwas längeren Bootzeit beim nächsten Einschalten einher. |
 | Playmode | Der Abspielmodus einer Karte (Einzeltitel, Hörbuch, ganzer Ordner …). Alle Modi im Detail: [Kapitel 7 → Abspielmodi](../bedienung/webinterface.md#abspielmodi). |
 | Modifikationskarte | Eine Karte, die keine Inhalte startet, sondern eine Funktion auslöst – etwa einen Schlaftimer. Alle Aktionen im Detail: [Kapitel 7 → Modifikationskarten](../bedienung/webinterface.md#modifikationskarten-alle-optionen). |
 | LiPo | Lithium-Polymer-Akku. Nennspannung ~3,7 V, Ladeschluss 4,2 V. Hohe Energiedichte (viel Kapazität pro Größe/Gewicht), dafür empfindlicher und weniger langlebig. |

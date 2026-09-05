@@ -3,29 +3,6 @@
 Nachschlage-Referenz. Die Tabellen sind aus dem Firmware-Code abgeleitet – bei Code-Änderungen
 mitziehen.
 
-## Pinout-Referenz Complete
-
-Aus `settings-complete.h`. **Wichtig:** Werte **≥ 100** sind **Port-Expander-Kanäle** (PCA9555,
-Kanal = Wert − 100), keine direkten ESP32-GPIOs. `99` = ungenutzt/Dummy.
-
-| Funktion | Signal | Pin |
-| --- | --- | --- |
-| **Audio (I²S)** | DOUT / BCLK / LRC | GPIO 25 / 27 / 26 |
-| **RFID (SPI)** | CS / SCK / MOSI / MISO | GPIO 21 / 18 / 23 / 19 |
-| RFID (nur PN5180) | RST / BUSY / IRQ | GPIO 22 / 33 / 32 |
-| **SD-Karte** | SD-MMC 1-Bit: CLK / CMD / D0 | GPIO 14 / 15 / 2 |
-| **Drehencoder** | CLK / DT | GPIO 34 / 39 |
-| Drehencoder | Taster | PE 105 |
-| **Buttons** | Previous / Pause-Play / Next | PE 100 / 101 / 102 |
-| Buttons | Button 4 / Button 5 | PE 103 / 104 |
-| **Neopixel** | LED-Signal | GPIO 12 |
-| **Power** | Peripherie-Abschaltung (`POWER`) | PE 114 |
-| Power | Verstärker (`GPIO_PA_EN`) | PE 113 |
-| **Batterie** | Spannungsmessung (ADC) | GPIO 35 |
-| **Kopfhörer** | Buchsen-Erkennung (`HP_DETECT`) | PE 108 |
-| **Wakeup / PE-Interrupt** | Aufwecken aus Deep-Sleep | GPIO 36 |
-| **IR (optional)** | IR-Empfänger | GPIO 5 |
-
 ## Playmodi
 
 | Kategorie | ID | Konstante |

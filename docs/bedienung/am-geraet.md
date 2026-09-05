@@ -50,7 +50,7 @@ IDs listet der [Anhang](../referenz/anhang.md#modifikationskarten).
 ## Tasten und Tastenkombinationen
 
 Die folgende Belegung ist der **Auslieferungszustand** – im Webinterface (Stichwort „dynamisches
-Button-Layout") kannst du sie komplett anpassen. Auf der Complete sind die Tasten physisch so
+Button-Layout") kannst du sie komplett anpassen. Auf der [Complete](../hardware/complete.md) sind die Tasten physisch so
 zugeordnet: Button 0 ist Next, Button 1 ist Previous, Button 2 ist Play/Pause, Button 3 der Taster im
 Drehencoder, und Button 4 und 5 sind optionale, frei belegbare Tasten.
 

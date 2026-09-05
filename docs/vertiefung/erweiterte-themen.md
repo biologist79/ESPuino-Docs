@@ -63,12 +63,12 @@ Version 4.1 oder neuer, gesetzte Lötbrücken und einen RTC-fähigen GPIO für d
 
 Der ESP32 hat nur begrenzt freie Anschlüsse (GPIOs), und einige davon lassen sich ausschließlich als
 Eingang nutzen. Wird es eng, schafft ein **PCA9555**-Port-Expander Abhilfe: Er wird über I²C
-angebunden und stellt **16 zusätzliche Kanäle** bereit (zwei Ports zu je acht). Auf der Complete ist
+angebunden und stellt **16 zusätzliche Kanäle** bereit (zwei Ports zu je acht). Auf der [Complete](../hardware/complete.md) ist
 er bereits an Bord – du profitierst also automatisch davon.
 
 In der ESPuino-Konfiguration werden diese Kanäle mit den Nummern **`100` bis `115`** angesprochen
 (Port 0 sind 100–107, Port 1 sind 108–115). Deshalb tauchen in der
-[Pinout-Tabelle](../referenz/anhang.md#pinout-referenz-complete) Werte ab 100 auf. Typischerweise
+[Pinout-Tabelle](../hardware/complete.md#pinout-referenz-complete) Werte ab 100 auf. Typischerweise
 hängen Eingänge daran (Taster, Kopfhörer-Erkennung, der Encoder-Taster); Ausgänge nur in Sonderfällen
 wie dem Verstärker-Enable.
 

@@ -7,7 +7,7 @@ Karte auflegst und ein Titel losspielt. Wir gehen die Schritte einzeln durch und
 auch, *warum* etwas passiert – dann kannst du im Zweifel selbst einschätzen, ob alles seine
 Richtigkeit hat.
 
-Eine Annahme vorweg: Auf deinem ESPuino ist bereits eine Firmware installiert. Bei der **Complete**
+Eine Annahme vorweg: Auf deinem ESPuino ist bereits eine Firmware installiert. Bei der [**Complete**](../hardware/complete.md)
 ist das ab Werk der Fall – du musst also nichts flashen und kannst direkt loslegen.
 
 Hast du deinen ESPuino dagegen **selbst gebaut**, kommt zuerst die Firmware. Hier gibt es eine

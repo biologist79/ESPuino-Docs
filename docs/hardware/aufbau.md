@@ -1,6 +1,6 @@
 # 5 · Anschließen & Einbau
 
-Die gute Nachricht zuerst: Der Aufbau der Complete ist überschaubar. Die Platine kommt **fertig
+Die gute Nachricht zuerst: Der Aufbau der [Complete](complete.md) ist überschaubar. Die Platine kommt **fertig
 bestückt** zu dir – das gesamte SMD-Löten der winzigen Bauteile ist bereits erledigt, und auch die
 Lötbrücken, die dein Gerät konfigurieren, sind ab Werk passend zu deiner Bestellung gesetzt. Was
 bleibt, ist übersichtlich: ein paar Drähte anlöten, den Drehencoder einstecken, alles ins Gehäuse

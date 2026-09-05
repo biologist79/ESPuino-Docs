@@ -1,6 +1,6 @@
 # 15 · Bestandsgeräte: mini4L
 
-Die **mini4L** ist der direkte Vorgänger der Complete. Sie wird nicht mehr verkauft, ist aber
+Die **mini4L** ist der direkte Vorgänger der [Complete](../hardware/complete.md). Sie wird nicht mehr verkauft, ist aber
 weiterhin voll unterstützt – wenn du also eine besitzt, bist du hier richtig. Damit dieses Handbuch
 nicht alles doppelt erklärt, beschränkt sich dieses Kapitel bewusst auf die **Unterschiede** zur
 Complete. Alles, was hier nicht erwähnt wird – und das ist der weitaus größte Teil, von der Bedienung
