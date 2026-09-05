@@ -48,3 +48,20 @@ Der Akkutyp wird auf der Platine über Lötbrücken eingestellt – ab Werk je n
     Platinenaufdruck ab. Es gab schon Packs mit vertauschter Belegung, und eine falsche Polung kann
     die Platine zerstören. Hinweise dazu auch beim
     [Eremit-Pack](https://www.eremit.de/p/3-2v-6000mah-pack-mit-schutz-arduino-aio-jst-ph-2-0-stecker).
+
+## Wie voll ist der Akku?
+
+ESPuino zeigt den Ladestand über die Neopixel und im Webinterface an. Für das Verständnis ist wichtig,
+**wie** diese Anzeige zustande kommt: ESPuino misst die **Akkuspannung** und schließt daraus auf den
+Füllstand. Das kommt ohne Zusatzhardware aus, hat aber eine prinzipielle Schwäche – besonders bei
+**LFP**. Deren Spannung bleibt über weite Teile der Entladung nahezu konstant (rund 3,2 V über einen
+großen Ladungsbereich), sodass sich aus ihr nur grob ablesen lässt, wie voll der Akku wirklich ist.
+Bei **LiPo** ist die Entladekurve steiler und die Schätzung entsprechend genauer.
+
+Wirklich exakt wäre die Anzeige nur mit einem **Coulomb-Zähler**, der die tatsächlich entnommene
+Ladung mitzählt. So ein Baustein ist auf der Complete derzeit **nicht** verbaut – die Ladeanzeige
+bleibt also eine Schätzung über die Spannung, mit der genannten Unschärfe bei LFP.
+
+!!! note "Während des Ladens"
+    Läuft gerade ein Ladevorgang über USB, ist die gemessene Spannung künstlich erhöht und damit nicht
+    aussagekräftig. Eine verlässliche Ladestandsanzeige gibt es daher nur im **reinen Akkubetrieb**.

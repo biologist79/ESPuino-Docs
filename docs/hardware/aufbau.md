@@ -16,7 +16,7 @@ zum [Encoder-Bausatz (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/
       Exemplare mit **vertauschter Polarität**. Verlass dich niemals blind darauf, dass Plus und Minus
       dort liegen, wo du sie erwartest – gleiche die Anschlüsse vor dem ersten Anstecken **unbedingt**
       mit dem Aufdruck auf der Platine ab.
-    - **Verlass dich nie auf die Kabelfarben.** Farben von Anschlussleitungen sind nicht genormt;
+    - **Verlass dich nie auf die Litzenfarben.** Farben von Anschlussleitungen sind nicht genormt;
       maßgeblich ist immer der Aufdruck auf der Platine. Besonders kritisch ist das beim **Neopixel**:
       Vertauschst du hier die Polarität, entsteht ein Kurzschluss, der im schlimmsten Fall die ganze
       Platine zerstört.
@@ -41,15 +41,19 @@ findest du unten, was jeder Jumper bedeutet. Vorher aber das Wichtigste:
     - **JP5 nur bei LiPo setzen – niemals bei LFP!** JP5 stellt die Ladeschluss-Spannung: gesetzt =
       **4,2 V** (LiPo), offen = **3,6 V** (LFP). Setzt du JP5, während ein **LFP-Akku** angeschlossen
       ist, wird dieser überladen – **Brandgefahr!**
+    - **JP6 muss zum Akkutyp passen.** JP6 wählt die Unterspannungs-Schwelle: **LFP (~2,75 V)** oder
+      **LiPo (~3,15 V)**. Steht JP6 auf **LFP**, obwohl ein **LiPo** angeschlossen ist, schaltet der
+      Wächter erst bei 2,75 V ab – der LiPo wird dann **zu tief entladen** und kann Schaden nehmen. Der
+      Wächter muss also immer zur eingesetzten Akkuchemie passen.
     - **Der Spannungswächter (JP6) und die RFID-Versorgung (JP8) müssen gesetzt sein** – sonst
       funktioniert die Complete bzw. der Kartenleser überhaupt nicht.
 
 | Jumper | Funktion | Stellungen |
 | --- | --- | --- |
-| **JP2 / JP3** | Grundverstärkung des Audio-Verstärkers | **Nie beide zugleich!** JP2 = +3 dB · JP3 = +15 dB · keiner = +9 dB (Standard). Empfehlung: JP2 (+3 dB) für eine feinere Lautstärke-Abstufung per Software. |
-| **JP4** | Interne Lade-LED | Ab Rev. 5.1 automatisch geschlossen (kein Löten nötig); davor 1+2 zum Aktivieren. |
+| **JP2 / JP3** | Grundverstärkung des Audio-Verstärkers | **Nie beide zugleich!**<br>JP2 = +3 dB<br>JP3 = +15 dB<br>keiner = +9 dB<br>**Ab Werk gesetzt: JP2 (+3 dB)** – laut genug und feinere Lautstärke-Abstufung per Software. |
+| **JP4** | Interne Lade-LED | Schließt den Stromkreis der **On-Board-LED**, die den Ladevorgang anzeigt (blinkt/leuchtet/aus – siehe [Kapitel 3 → Laden & Lade-LED](complete.md#laden-lade-led)). Ab Rev. 5.1 ab Werk geschlossen (kein Löten nötig); davor mit 1+2 zu aktivieren. |
 | **JP5** | Ladeschluss-Spannung | gesetzt = 4,2 V (**LiPo**), offen = 3,6 V (**LFP**) – ⚠️ siehe Warnung oben. |
-| **JP6** | Unterspannungs-Wächter | 1+2 = **LFP** (~2,75 V), 2+3 = **LiPo** (~3,15 V). Einer von beiden **muss** gesetzt sein. |
+| **JP6** | Unterspannungs-Wächter | 1+2 = **LFP** (~2,75 V), 2+3 = **LiPo** (~3,15 V). Einer von beiden **muss** gesetzt sein und **zum Akkutyp passen** – ⚠️ siehe Warnung oben. |
 | **JP8** | RFID-Versorgung / LPCD | 2+3 = Standard (empfohlen), 1+2 = LPCD-Modus. **Muss** gesetzt sein. |
 | **JP1** | LPCD beim PN5180 | 1+2 = LPCD aktiv (IRQ auf GPIO 32, belegt dann Ext-Connector 1), offen = kein LPCD. Nur zusammen mit JP8 (1+2) sinnvoll. |
 
@@ -57,20 +61,25 @@ findest du unten, was jeder Jumper bedeutet. Vorher aber das Wichtigste:
     Der Akkutyp steckt in **JP5** (Ladespannung) und **JP6** (Spannungswächter) – das sind die ein bis
     zwei Brücken, mit denen sich LiPo ↔ LFP nachträglich umstellen lässt. Denk danach daran, auch die
     Batterie-Spannungsschwellen im Webinterface anzupassen (siehe
-    [Feinjustierung](#nach-dem-zusammenbau-die-feinjustierung)).
+    [Feinjustierung](#nach-dem-zusammenbau-die-feinjustierung)), damit der Füllstand über den
+    **LED-Ring** korrekt signalisiert wird.
 
 ## Die Drähte anlöten
 
-Jetzt kommen die Verbindungen, die du selbst herstellst. Sie laufen über JST-Steckverbinder, und du
-orientierst dich – siehe Warnung oben – **immer am Platinenaufdruck**, nie an der Kabelfarbe.
+Jetzt kommen die Verbindungen, die du selbst herstellst. Sie laufen über JST-PH-Steckverbinder (2 mm), und du
+orientierst dich – siehe Warnung oben – **immer am Platinenaufdruck**, nie an der Litzenfarbe.
 Anzuschließen sind:
 
 - der **RFID-Reader**: Der RC522 braucht nicht alle Adern; ungenutzte wickelst du zur Sicherheit mit
   Isolierband ab. Der PN5180 nutzt dagegen alle Anschlüsse.
 - der **Lautsprecher** (zweipolig).
-- der **Neopixel** – ob Ring, Reihe oder einzelne LED – über drei Leitungen (GND, 5 V, Daten). Hier
-  gilt noch einmal besonders: auf die Polung achten.
+- der **Neopixel** – ob Ring, Reihe oder einzelne LED – über drei Leitungen (GND, 5 V, Daten). Die
+  Datenleitung ist auf den Ringen meist als **DI** (Data In) und **DO** (Data Out) beschriftet;
+  angeschlossen wird an **DI**. Hier gilt noch einmal besonders: auf die Polung achten – bei LEDs ist
+  eine **Verpolung besonders heikel**, weil sie sich wie ein **Kurzschluss** verhält.
 - die **Tasten** (jeweils zweipolig).
+- der **Drehencoder**: wird nur in den fünfpoligen Anschluss **gesteckt**, nicht gelötet (mehr dazu
+  gleich unten).
 - optional die **Kopfhörerplatine**, die du in den sechspoligen Anschluss steckst.
 
 ## Der Drehencoder
@@ -114,9 +123,12 @@ kann sonst einen vollen LFP-Akku für halb leer halten oder umgekehrt. Als Anhal
 
 Sollte die angezeigte Spannung trotzdem nicht zur Realität passen – etwa wenn ein frisch geladener
 Akku als „nicht ganz voll" gemeldet wird –, lässt sich die Messung **kalibrieren**: Vergleiche die
-ESPuino-Anzeige mit einer Messung per Multimeter und trage die Differenz über den Parameter
-`offsetVoltage` in der `settings-complete.h` ein (siehe
-[Kapitel 13](../firmware/compile-zeit.md#werte-nur-per-settingsh-kein-webinterface)).
+ESPuino-Anzeige mit einer Messung per Multimeter und trage die Differenz als **Korrekturwert** in den
+Batterie-Einstellungen des Webinterface ein. Der Wert wird nach einem Neustart wirksam.
+
+!!! info "Seit September 2026 im Webinterface"
+    Dieser Korrekturwert (`offsetVoltage`) lässt sich **seit September 2026 direkt im Webinterface**
+    setzen. In älterer Firmware ging das nur über `offsetVoltage` in der `settings-complete.h`.
 
 Ansonsten ist jetzt der richtige Moment, um bei Bedarf die **Neopixel-Drehrichtung** und die
 **Drehencoder-Richtung** zu korrigieren, die **Tastenbelegung** anzupassen und die ersten

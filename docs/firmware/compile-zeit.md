@@ -51,9 +51,13 @@ auch [Anhang → Pinout](../referenz/anhang.md).
 | --- | --- | --- |
 | `jumpOffset = 30` | `settings.h` | Sprung-Sekunden beim **Button**-Seek (kein NVS-Override) |
 | `deepsleepTimeAfterBootFails = 20` | `settings.h` | Auto-Neustart nach SD-Bootfehler (Sekunden) |
-| `offsetVoltage`, `rdiv1`, `rdiv2`, `inputAttenuation` | `settings-complete.h` | Batterie-Kalibrierung (Spannungsteiler/ADC) |
+| `rdiv1`, `rdiv2`, `inputAttenuation` | `settings-complete.h` | Batterie-Kalibrierung (Spannungsteiler/ADC) |
 | `RC_*`, `IR_DEBOUNCE` | `settings-complete.h` | IR-Fernbedienungscodes |
 | Pin-Definitionen | Board-Header | s. o. |
+
+!!! info "`offsetVoltage` jetzt im Webinterface"
+    Der Batterie-**Korrekturwert** `offsetVoltage` ist **seit September 2026** im Webinterface
+    einstellbar (Batterie-Einstellungen) und daher hier nicht mehr aufgeführt.
 
 !!! tip "Nuance Seek-Schritt"
     Der **Rotary**-Seek-Schritt ist dagegen im Webinterface einstellbar (`rotSeekStep`, Default

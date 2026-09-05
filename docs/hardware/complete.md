@@ -49,7 +49,9 @@ liefern; deshalb musste man dort den Regler kurzerhand umgehen.
 Die Complete löst das grundsätzlich mit einem **Buck/Boost-Schaltregler**. Der kann eine zu hohe
 Spannung heruntersetzen *und* eine zu niedrige hochsetzen und liefert dadurch konstant 3,3 V –
 unabhängig von Quelle und Ladezustand. Dazu kommt eine **Unterspannungs-Abschaltung**, die das Gerät
-schützt, bevor der Akku zu tief entladen wird.
+schützt, bevor der Akku zu tief entladen wird. Dennoch sei an dieser Stelle vorweggenommen, dass
+dieser Schutz niemals die Abschaltfunktion eines [BMS](akku.md) ersetzt, das zwingend im verwendeten
+Akkupack eingebaut sein muss.
 
 Beide Eingänge – USB-C und Akku – sind zudem **gegen Verpolung geschützt**. Der eingebaute
 **Laderegler** lädt den Akku mit fest eingestellten **maximal 1 A**. Damit dieser Ladestrom einen
@@ -58,10 +60,6 @@ Akku **mindestens 2000 mAh** haben. Die Unterspannungs-Abschaltung greift je nac
 unterschiedlichen Schwellen: bei **LFP etwa 2,75 V**, bei **LiPo etwa 3,15 V**. Diese Werte liegen
 bewusst mit etwas Reserve über der absoluten Entladegrenze – das schont den Akku und verhindert, dass
 kurze Stromspitzen (etwa bei lautem Ton) das Gerät gleich abschalten.
-
-Kurz gesagt: stabile Versorgung ohne Kompromisse. Dennoch sei an dieser Stelle vorweggenommen, dass
-dieser Schutz niemals die Abschaltfunktion eines [BMS](akku.md) ersetzt, das zwingend im verwendeten
-Akkupack eingebaut sein muss.
 
 ## Laden & Lade-LED
 
@@ -112,28 +110,30 @@ Digital-Analog-Wandler. Er liefert **rund 1 Watt an einem 4-Ohm-Lautsprecher** �
 kompakte Hörbox in Zimmerlautstärke. Bewährt haben sich kleine Breitbandlautsprecher wie der
 **Visaton FR 7** (4 Ω).
 
-Ein Unterschied zur mini4L: Die Complete hat **nur einen Verstärker** und treibt damit **einen
-Lautsprecher** (Mono). Hast du zwei kleine Lautsprecher verbaut, kannst du im Webinterface die
-**Mono-Wiedergabe** aktivieren, damit beide dasselbe Signal bekommen – ein zweiter, getrennt
-angesteuerter Kanal ist es aber nicht.
+Ein Unterschied zur mini4L: Die Complete hat **nur einen Verstärker** und damit **einen
+Lautsprecherausgang**. „Mono" im Sinne von *ein Kanal fällt weg* trifft es dabei nicht – auf dem
+Ausgang liegen **beide Stereokanäle zusammengemischt** (Summe aus links und rechts), es geht also
+nichts verloren. Es ist damit ein einkanaliger Ausgang – für eine kompakte Hörbox genau das Richtige.
+Am **Kopfhörerausgang** (über die separate Kopfhörerplatine) steht dir Stereo zur Verfügung.
 
 Die **Grundverstärkung** stellst du per Lötbrücke ein: **ohne** Brücke sind es **+9 dB**, mit **JP2**
-**+3 dB** und mit **JP3** **+15 dB** – es darf immer nur eine der beiden gesetzt sein. Für die
-Feinregelung im Alltag gibt es zusätzlich die 21-stufige Lautstärke in der Software. Die Details zu
-diesen Lötbrücken stehen bei den [Lötbrücken in Kapitel 5](aufbau.md#die-lotbrucken).
+**+3 dB** und mit **JP3** **+15 dB** – es darf immer nur eine der beiden gesetzt sein. **Ab Werk ist
+JP2 gesetzt** (+3 dB). Das ist für eine Hörbox erfahrungsgemäß laut genug und hat einen angenehmen
+Nebeneffekt: Bei der niedrigeren Grundverstärkung liegen die **21 Lautstärkestufen der Software enger
+beieinander**, sodass sich die Lautstärke **feiner regeln** lässt. Die Details zu diesen Lötbrücken
+stehen bei den [Lötbrücken in Kapitel 5](aufbau.md#die-lotbrucken).
 
 ## Versionen & Lieferumfang
 
-Die aktuelle Revision der Complete ist **5.1**.
+Die aktuelle Revision der Complete ist **5.1**. Sie vereint beide Akkuvarianten auf **einer Platine** –
+ob LFP oder LiPo, legst du über die Lötbrücken **JP5/JP6** fest (siehe
+[Kapitel 5](aufbau.md#die-lotbrucken)). Der **Reset-Taster** wird seit 09/2026 ab Werk bestückt.
 
-Gegenüber den Vorgängerrevisionen 5.0/5.0.1 bündelt die **5.1** beide Akkuvarianten auf **einer
-einzigen Platine**: Ob LFP oder LiPo, entscheidet sich jetzt über die Lötbrücken **JP5/JP6** statt
-über zwei getrennte Platinenversionen. Außerdem ist der **Reset-Taster ab Werk bestückt**, die
-Lötbrücke **JP4** (interne Lade-LED) ist bereits geschlossen, und die früher separate Brücke **JP7**
-ist entfallen. Begegnet dir im Forum noch eine ältere Revision, findest du die genauen Unterschiede
-bei den [Lötbrücken in Kapitel 5](aufbau.md#die-lotbrucken).
+Von den wenigen früheren Platinen (Rev. 5.0/5.0.1) sind nur eine Handvoll im Umlauf; falls du eine
+solche besitzt, sind die kleinen Abweichungen bei den [Lötbrücken in Kapitel 5](aufbau.md#die-lotbrucken)
+vermerkt.
 
-Beim Kauf hast du drei Varianten – welche für dich passt, hängt davon ab, wie viel du selbst
+Beim Kauf hast du die Auswahl zwischen drei Varianten – welche für dich passt, hängt davon ab, wie viel du selbst
 beisteuern möchtest (Details und Preise stehen in der
 [Preisliste #3344](https://forum.espuino.de/t/preisliste/3344)):
 
@@ -150,13 +150,18 @@ beisteuern möchtest (Details und Preise stehen in der
 
 ## Anschlüsse, Bedienelemente, Pinout
 
-Welche Funktion auf welchem Anschluss liegt, zeigt die folgende Pinout-Referenz – beim Verkabeln
+Welche Funktion auf welchem Anschluss liegt, zeigt die folgende Pinout-Referenz – beim Verdrahten
 schlägst du hier im Zweifel nach.
 
 ### Pinout-Referenz { #pinout-referenz-complete }
 
 Aus `settings-complete.h`. **Wichtig:** Werte **≥ 100** sind **Port-Expander-Kanäle** (PCA9555,
-Kanal = Wert − 100), keine direkten ESP32-GPIOs. `99` = ungenutzt/Dummy.
+Kanal = Wert − 100), keine direkten ESP32-GPIOs; `99` = ungenutzt/Dummy.
+
+Der Unterschied ist praktisch relevant: Ein Port-Expander-Kanal lässt sich **nicht so universell**
+einsetzen wie ein echter GPIO. Er taugt im Wesentlichen dazu, **auf einen Taster zu reagieren**
+(Eingang) oder **etwas zu schalten** (Ausgang) – und selbst das muss für eigene Erweiterungen erst
+**programmiert** werden. Mehr zum Port-Expander steht in [Kapitel 11](../vertiefung/erweiterte-themen.md).
 
 | Funktion | Signal | Pin |
 | --- | --- | --- |
@@ -200,9 +205,9 @@ sodass man sie kaum verwechselt. Diese Übersicht zeigt, was wohin gehört:
 | Power-Off-Switch | 2-polig | optionaler echter Ausschalter |
 | Akku | 2-polig | LiPo oder LFP mit BMS |
 
-!!! warning "Nie auf die Kabelfarben verlassen"
+!!! warning "Nie auf die Litzenfarben verlassen"
     Steckerbelegungen richten sich nach der **Beschriftung auf der Platine**, nicht nach der Farbe der
-    Litzen an einem fertigen Kabel. Gleiche vor dem Anstecken immer Signal für Signal mit dem
+    Litzen an einer fertigen Leitung. Gleiche vor dem Anstecken immer Signal für Signal mit dem
     Platinenaufdruck ab.
 
 ### RFID-Steckerbelegung { #rfid-steckerbelegung }
@@ -236,13 +241,16 @@ Ein Teil der Bauteile hängt von deinen Vorlieben ab. Hier die Entscheidungen, d
 - **RFID-Reader:** Zur Wahl stehen der **RC522** (günstig, für die meisten völlig ausreichend) und
   der **PN5180** (empfindlicher, größere Reichweite, und Voraussetzung für das optionale
   LPCD-Aufwecken). Dank Auto-Erkennung (siehe unten) legst du dich nicht per Firmware fest.
-- **microSD-Karte:** Eine ganz normale microSD-Karte, **FAT32** formatiert. Karten ab 64 GB kommen ab Werk als
-  exFAT und müssen erst umformatiert werden (siehe Hinweis). Sehr große oder sehr billige Karten
-  laufen zudem nicht immer zuverlässig.
+- **microSD-Karte:** Eine ganz normale microSD-Karte, **FAT32** formatiert. Karten ab 64 GB sind ab Werk normalerweise
+  exFAT-formatiert und müssen erst umformatiert werden (siehe Hinweis). Sehr große oder sehr billige Karten
+  laufen zudem nicht immer zuverlässig. Solltest du auf Probleme stoßen, probiere es im Zweifel mit
+  einer anderen (kleineren) Karte.
 - **Akku:** optional – ESPuino läuft auch dauerhaft am USB-Netzteil. Für den mobilen Betrieb ist die
   Wahl zwischen **LFP** und **LiPo** wichtig genug für ein eigenes Kapitel: siehe
   [Kapitel 4 · Der Akku](akku.md).
-- **Lautsprecher:** nach Geschmack und Gehäusegröße; ein 4-Ohm-Breitbänder wie der Visaton FR 7 passt gut.
+- **Lautsprecher:** nach Geschmack und Gehäusegröße; ein 4-Ohm-Breitbänder wie der Visaton FR 7 passt
+  gut. Der Verstärker leistet maximal **1 W** – ein übermäßig großer Lautsprecher bringt hier also
+  nichts.
 - **Kopfhörer:** optional über die separate **Kopfhörerplatine** (mit dem MS6324-Chip,
   [Forum #1099](https://forum.espuino.de/t/kopfhoererplatine-basierend-auf-ms6324-und-tda1308-bzw-lm4808m/1099)).
 

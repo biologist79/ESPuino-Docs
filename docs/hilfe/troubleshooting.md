@@ -73,10 +73,10 @@ starten, näher an den Router gehen oder die Zugangsdaten erneut eingeben.
 ## Bootschleifen und Brownouts
 
 Startet ESPuino immer wieder neu oder geht mitten im Betrieb aus, steckt fast immer ein
-**Stromversorgungsproblem** dahinter. Eine zu schwache Quelle – ein dünnes USB-Kabel, ein schwaches
+**Stromversorgungsproblem** dahinter. Eine zu schwache Quelle – eine dünne USB-Leitung, ein schwaches
 Netzteil, ein fast leerer Akku – bricht beim Stromhunger im Einschaltmoment oder bei Lautstärkespitzen
-kurz ein und löst einen Brownout-Reset aus. Abhilfe schafft eine kräftigere Quelle und ein besseres
-Kabel. Zur Erinnerung: Die Complete liefert über ihren Buck/Boost-Regler stabile 3,3 V und schaltet
+kurz ein und löst einen Brownout-Reset aus. Abhilfe schafft eine kräftigere Quelle und eine bessere
+Leitung. Zur Erinnerung: Die Complete liefert über ihren Buck/Boost-Regler stabile 3,3 V und schaltet
 bei Unterspannung sauber ab. *(Weitere Spezialfälle ergänzen wir aus dem Forum.)*
 
 ## Aus Versehen im Bluetooth-Modus gelandet

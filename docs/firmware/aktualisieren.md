@@ -5,7 +5,7 @@ Fehler werden behoben, neue Funktionen kommen dazu. Von Zeit zu Zeit lohnt sich 
 Dieses Kapitel zeigt dir die Wege dorthin, von „ganz bequem" bis „volle Kontrolle".
 
 Es gibt im Wesentlichen drei Routen, und für die allermeisten sind die ersten beiden gemeint: das
-**Firmware-Tool im Browser** (über ein USB-Kabel) und das **Update über das Webinterface** (über
+**Firmware-Tool im Browser** (über eine USB-Leitung) und das **Update über das Webinterface** (über
 WLAN). Nur wer eigene, abweichende Hardware betreibt oder besondere Compile-Zeit-Optionen braucht,
 muss die dritte Route gehen und die Firmware **selbst kompilieren**.
 
@@ -41,7 +41,7 @@ starten, bei der Nachfrage den seriellen Port auswählen und den Fortschritt beo
 
 ## Der Weg über WLAN: Update im Webinterface
 
-Läuft dein ESPuino bereits und ist im WLAN, geht ein Update auch ganz ohne Kabel – direkt im
+Läuft dein ESPuino bereits und ist im WLAN, geht ein Update auch ganz ohne Leitung – direkt im
 Webinterface, im **Tab Updates** ([Kapitel 7](../bedienung/webinterface.md#tab-updates)).
 
 <!-- Screenshot: Tab Updates / GitHub-Update -->
