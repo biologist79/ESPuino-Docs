@@ -20,15 +20,27 @@ entspannen.
 
 ## Wie es funktioniert
 
-MediaHub ist ein kleiner, **selbst gehosteter Server**, der als Docker-Container in deinem eigenen
-Netzwerk läuft – die Daten bleiben also bei dir zu Hause, nichts wandert in eine fremde Cloud. Dieser
-Server hält die zentralen Kartenzuordnungen.
+MediaHub ist ein kleiner, **selbst gehosteter Serverdienst**, der als Docker-Container in deinem
+eigenen Netzwerk läuft – die Daten bleiben also bei dir zu Hause, nichts wandert in eine fremde Cloud.
+Dieser Serverdienst hält die zentralen Kartenzuordnungen.
 
 Am ESPuino selbst hinterlegst du dann im Webinterface, welche MediaHub-Server es gibt. Legst du eine
 Karte auf, die für MediaHub konfiguriert ist, fragt der ESPuino beim Server nach, was zu dieser Karte
-gehört, und lädt die benötigten Dateien beim ersten Mal auf seine SD-Karte herunter. Danach hält er
-sie synchron. Änderst du also zentral etwas, ziehen die Geräte nach. Auch Webradio-Streams lassen
-sich auf diesem Weg zuweisen.
+gehört, und lädt die benötigten Dateien beim ersten Mal auf seine SD-Karte herunter. Danach spielt er
+lokal von der eigenen Karte.
+
+Änderst du zentral etwas, geschieht die Aktualisierung **nicht von selbst**: Du stößt sie am MediaHub
+mit **„Force Refresh"** an. Der ESPuino bemerkt die neue Fassung dann beim nächsten Auflegen, lädt die
+geänderten Dateien nach und spielt anschließend den aktuellen Stand. Auch Webradio-Streams lassen sich
+auf diesem Weg zuweisen.
+
+!!! note "Was zentral ist – und was nicht"
+    MediaHub nimmt dir das **Auflegen der Karten nicht** ab: Jede Karte musst du weiterhin **einmal pro
+    Gerät** auflegen und dort auf MediaHub verweisen. Der Grund: Sonst bräuchtest du am MediaHub selbst
+    einen eigenen RFID-Reader, um die ID der Karte überhaupt zu kennen. Zentral ist nur die
+    **eigentliche Verknüpfung zum Inhalt** – also welche Dateien bzw. welcher Stream und welcher
+    Abspielmodus zu einer Karte gehören. Diese Zuordnung pflegst du einmal am MediaHub, und alle Geräte
+    ziehen sie von dort.
 
 ## Den MediaHub-Server einrichten
 
