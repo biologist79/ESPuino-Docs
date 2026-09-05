@@ -170,13 +170,13 @@ fehlt nur, wenn die Firmware bewusst ohne FTP gebaut wurde.*
 
 Hier legst du Benutzernamen und Passwort für den FTP-Zugang fest. Aus Speichergründen läuft der
 FTP-Server nicht dauerhaft mit: Du startest ihn bei Bedarf über den Button **FTP-Server starten**
-(oder am Gerät über die Tastenkombination Pause/Play + Nächster Titel), und nach dem nächsten Neustart
+(oder am Gerät über eine Tastenkombination), und nach dem nächsten Neustart
 ist er wieder aus.
 
 !!! tip "Für große Datenmengen"
-    FTP ist deutlich schneller als der Web-Upload und damit die bessere Wahl, wenn du viel auf einmal
-    überträgst. Stell im FTP-Programm die Zeichenkodierung **CP437** ein, damit Umlaute korrekt
-    ankommen.
+    Für große Mengen ist inzwischen der **Web-Upload die bessere Wahl** – er wurde optimiert und ist
+    heute schneller als FTP (das kaum noch jemand nutzt). Bleibst du dennoch bei FTP, stell im
+    FTP-Programm die Zeichenkodierung **CP437** ein, damit Umlaute korrekt ankommen.
 
 ## Tab Bluetooth
 

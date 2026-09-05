@@ -23,6 +23,11 @@ musst dir mit **VS Code und pioarduino** selbst eine passende Firmware kompilier
     Wert noch nicht gefunden wurde. Das ist normal: Diese Werte werden gerade erst erzeugt, und beim
     zweiten Start sind die Meldungen verschwunden. Lass dich davon also nicht beirren.
 
+    Eine serielle Konsole hat allerdings nicht jeder – normalerweise bräuchtest du dafür eine
+    Entwicklungsumgebung. Falls du trotzdem einmal mitlesen möchtest: Das
+    [ESPuino-Firmware-Tool](https://biologist79.github.io/ESPuino-Firmware-Tool/) bringt eine solche
+    Konsole direkt im Browser mit.
+
 ## Der Access-Point-Modus: warum ESPuino zuerst ein eigenes WLAN aufspannt
 
 Damit ESPuino dir Musik über das Netzwerk zugänglich machen und sich bequem konfigurieren lassen
@@ -134,11 +139,14 @@ Reihenfolge ziemlich klar:
 - **Am Computer vorbefüllen.** Nimm die SD-Karte einmal heraus und bespiele sie direkt am Rechner.
   Das ist mit Abstand am schnellsten und für die erste, größere Grundausstattung auf jeden Fall der
   sinnvollste Weg.
-- **Web-Upload.** Für Nachschub zwischendurch lädst du einzelne Dateien oder ganze Ordner bequem im
-  Webinterface hoch (Tab RFID, Bereich Dateien) – praktisch, aber langsamer (bis zu etwa 650 kiB/s,
-  im SPI-Modus entsprechend weniger).
-- **FTP.** Für größere Mengen über das Netzwerk ist FTP schneller als der Web-Upload. Der Dienst muss
-  dafür erst aktiviert werden (siehe unten sowie [Kapitel 7](../bedienung/webinterface.md#tab-ftp)).
+- **Web-Upload.** Der bequeme Standardweg: Du lädst einzelne Dateien oder ganze Ordner direkt im
+  Webinterface hoch (Tab RFID, Bereich Dateien). Der Web-Upload wurde optimiert und ist inzwischen
+  **auch für größere Mengen der schnellste Weg** – bis zu etwa **650 kiB/s** (im SPI-Modus
+  entsprechend weniger, den Complete und mini4L jedoch nicht verwenden).
+- **FTP.** Eine Alternative über das Netzwerk – sie wird aber nur von wenigen genutzt und ist nicht
+  auf Tempo optimiert; der Web-Upload ist heute in aller Regel schneller. Der Dienst muss zudem erst
+  aktiviert werden (siehe unten sowie [Kapitel 7](../bedienung/webinterface.md#tab-ftp)). Sinnvoll
+  vor allem, wenn du ohnehin mit einem FTP-Programm arbeitest.
 - **MediaHub.** Betreibst du mehrere ESPuinos, verteilt MediaHub die Inhalte zentral über das
   Netzwerk (siehe [Kapitel 10](../inhalte/mediahub.md)).
 
@@ -151,12 +159,14 @@ Jetzt kommt der schönste Moment: Wir verknüpfen eine RFID-Karte mit Musik. „
 deshalb, weil ESPuino sich merkt, *welche* Karte *welchen* Inhalt starten soll. Wichtig zu wissen –
 und für manche überraschend: Auf die Karte selbst wird dabei **nichts** geschrieben. ESPuino liest
 nur die eindeutige Nummer (die ID) der Karte und legt die Zuordnung in seinem internen Speicher ab –
-dem sogenannten NVS. Du kannst also jede beliebige RFID-Karte, jeden Chip oder Aufkleber verwenden.
+dem sogenannten NVS. Du kannst also handelsübliche RFID-Karten, Chips oder Aufkleber verwenden –
+konkret die Standards **ISO-14443** und (nur mit dem PN5180-Reader) **ISO-15693**. Ganz „beliebig"
+ist es also nicht, aber die allermeisten gängigen Tags passen.
 
 So gehst du vor:
 
-1. **Leg eine noch unbenutzte Karte auf den Leser.** ESPuino erkennt sofort, dass er diese Karte
-   noch nicht kennt.
+1. **Leg eine noch unbenutzte Karte auf den Leser.** Sofern der RFID-Reader diese Karte lesen kann,
+   erkennt ESPuino sofort, dass er diese Karte noch nicht kennt.
 2. **Achte auf die Neopixel:** Sie quittieren das Auflegen mit einem kurzen **roten** Aufleuchten.
    Das ist keine Fehlermeldung, sondern schlicht das Zeichen „unbekannte Karte erkannt".
 3. **Die Kartennummer erscheint automatisch** im Webinterface im passenden Eingabefeld – eine
@@ -184,12 +194,12 @@ Der erste betrifft die **Lautstärke**. Im Tab Allgemein kannst du eine Maximal-
 (auf einer Skala von 0 bis 21), und zwar getrennt für Lautsprecher und Kopfhörer. So kann die Box
 gar nicht erst unangenehm laut werden – gerade bei Kindern eine dankbare Einstellung.
 
-Der zweite betrifft **FTP**, falls du größere Musikmengen später doch übers Netzwerk übertragen
-willst. FTP läuft aus gutem Grund nicht ständig mit: Es würde dauerhaft Arbeitsspeicher belegen, den
-ESPuino zum Beispiel fürs Webradio besser gebrauchen kann. Deshalb aktivierst du den FTP-Dienst nur
-bei Bedarf – entweder im Tab FTP oder direkt am Gerät, indem du **Pause/Play und die
-Nächster-Titel-Taste gleichzeitig** drückst (die Neopixel bestätigen das mit einem kurzen grünen
-Aufleuchten). Nach dem nächsten Neustart ist FTP wieder aus.
+Der zweite betrifft **FTP**, falls du es später einmal nutzen möchtest – die meisten brauchen es
+nicht, denn der Web-Upload ist schneller und bequemer. FTP läuft aus gutem Grund nicht ständig mit:
+Es würde dauerhaft Arbeitsspeicher belegen, den ESPuino zum Beispiel fürs Webradio besser gebrauchen
+kann. Deshalb aktivierst du den FTP-Dienst nur bei Bedarf – entweder im Tab FTP oder über eine
+**Tastenkombination am Gerät** (die Neopixel bestätigen das mit einem kurzen grünen Aufleuchten). Nach
+dem nächsten Neustart ist FTP wieder aus.
 
 ## Wie es weitergeht
 

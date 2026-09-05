@@ -8,8 +8,11 @@ Anlaufstelle – am besten mit dem Log (siehe gleich) und ein paar Angaben zu de
 ## Zuerst: das Log ansehen
 
 Bevor du lange rätst, lohnt sich fast immer ein Blick ins Log – es verrät dir oft direkt, woran es
-hakt. Du kommst auf zwei Wegen dran: bequem **im Browser** über das Stapel-Menü oben rechts im
-Webinterface, Eintrag **Log**; oder klassisch **seriell** über USB mit 115200 Baud. Wie ausführlich
+hakt. Du kommst auf mehreren Wegen dran: bequem **im Browser** über das Stapel-Menü oben rechts im
+Webinterface, Eintrag **Log**; oder **seriell** über USB mit 115200 Baud. Für die serielle Konsole
+brauchst du keine Entwicklungsumgebung – das
+[ESPuino-Firmware-Tool](https://biologist79.github.io/ESPuino-Firmware-Tool/) bringt eine solche
+Konsole direkt im Browser mit (mehr dazu unten unter „Wenn nichts mehr geht"). Wie ausführlich
 ESPuino protokolliert, steuert die Einstellung `SERIAL_LOGLEVEL`
 ([Kapitel 13](../firmware/compile-zeit.md)).
 
@@ -84,6 +87,39 @@ bei Unterspannung sauber ab. *(Weitere Spezialfälle ergänzen wir aus dem Forum
 Falls du im Bluetooth-Modus feststeckst und nicht mehr weiterkommst: Leg einfach eine **unbekannte
 RFID-Karte** auf – das bringt ESPuino zurück in den Normal-Modus. Alternativ geht das auch über den
 entsprechenden Button im Tab Bluetooth.
+
+## Wenn nichts mehr geht: Gerät zurücksetzen
+
+Reagiert dein ESPuino gar nicht mehr, hängt beim Booten oder ist das Webinterface partout nicht
+erreichbar, ist das **[ESPuino-Firmware-Tool](https://biologist79.github.io/ESPuino-Firmware-Tool/)**
+der Rettungsanker. Es läuft komplett **im Browser** – du brauchst nur eine USB-Verbindung und keine
+Entwicklungsumgebung. Voraussetzung ist ein Browser mit **WebSerial** (Chrome, Edge, Firefox ab
+Version 151, Opera, Brave oder Vivaldi); wähle eine Baudrate von **höchstens 460 800**, höhere Werte
+führen zu Abbrüchen.
+
+Je nach Lage hilft eine dieser Stufen – von harmlos nach drastisch:
+
+- **Konsole mitlesen.** Die integrierte serielle Konsole zeigt Boot- und Log-Ausgaben in Echtzeit;
+  oft steht dort direkt, woran es hakt.
+- **Nur die App neu aufspielen.** Läuft das Gerät noch teilweise, ist aber das Webinterface nicht
+  erreichbar, spielt **„App-Update"** allein die Firmware neu auf. Deine **Einstellungen und
+  Kartenzuweisungen bleiben dabei erhalten**.
+- **Letzte Rettung: komplett löschen und neu aufspielen.** Hilft nichts mehr, löschst du das
+  **gesamte Flash** (im Tool ausdrücklich „nur im Notfall") und spielst mit **„Complete-Flash /
+  Recovery"** alles frisch auf.
+
+!!! danger "Vollständiges Löschen wischt deine Daten"
+    Ein komplettes Flash-Löschen setzt auch das **NVS** zurück – **Kartenzuweisungen,
+    WLAN-Zugangsdaten und alle Einstellungen sind dann weg**. Sichere sie vorher über die
+    **Backup-Funktion** ([Kapitel 9 → Backup & Restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern));
+    die Kartenzuweisungen lassen sich damit anschließend wiederherstellen.
+
+!!! warning "Richtige Plattform und Branch wählen"
+    Beim Flashen musst du die **passende Plattform** (z. B. Complete) und den **Branch** wählen. Eine
+    falsche Auswahl kann im schlimmsten Fall die **Hardware beschädigen**.
+
+Wie das Flashen im Detail abläuft, steht in
+[Kapitel 12 · Firmware aktualisieren](../firmware/aktualisieren.md).
 
 !!! tip "Immer noch ein Problem?"
     Dann frag im [Forum](https://forum.espuino.de) nach. Hilfreich ist, gleich das Log mitzuschicken
