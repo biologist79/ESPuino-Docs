@@ -41,7 +41,7 @@ starten, bei der Nachfrage den seriellen Port auswählen und den Fortschritt beo
 
 ## Der Weg über WLAN: Update im Webinterface
 
-Läuft dein ESPuino bereits und ist im WLAN, geht ein Update auch ganz ohne Leitung – direkt im
+Läuft dein ESPuino bereits und ist im WLAN, geht ein Update auch ganz ohne USB – direkt im
 Webinterface, im **Tab Updates** ([Kapitel 7](../bedienung/webinterface.md#tab-updates)).
 
 <!-- Screenshot: Tab Updates / GitHub-Update -->
