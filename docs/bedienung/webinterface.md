@@ -99,22 +99,63 @@ Statt Musik lässt sich einer Karte eine Aktion zuordnen. Denselben Katalog find
 Steuerung unter „Modifikation ausführen", wo du die Aktion direkt und ohne Karte auslöst. Die
 technischen IDs stehen im [Anhang](../referenz/anhang.md#modifikationskarten).
 
-**Sperren & Schlafen:** 🔒 Tastensperre · 💤 Schlafe sofort · 💤 Schlafen nach 15 min / 30 min /
-1 h / 2 h (LEDs gedimmt) · 💤 Schlafen nach Ende des Titels · 💤 Schlafen nach Ende der Playlist.
+**Sperren & Schlafen**
 
-**Wiederholung:** 🔁 Playlist endlos · 🔂 Titel endlos.
+| Aktion | Wirkung |
+| --- | --- |
+| 🔒 Tastensperre | Sperrt Tasten und Drehencoder am Gerät, damit versehentliches Drücken nichts auslöst. |
+| 💤 Schlafe sofort | Versetzt ESPuino umgehend in den Deep-Sleep. |
+| 💤 Schlafen nach 15 min / 30 min / 1 h / 2 h | Startet einen Schlaftimer; nach der gewählten Zeit schaltet ESPuino ab. |
+| 💤 Schlafen nach Ende des Titels | ESPuino schläft ein, sobald der laufende Titel zu Ende ist. |
+| 💤 Schlafen nach Ende der Playlist | ESPuino schläft ein, wenn die aktuelle Playlist durchgelaufen ist. |
 
-**Licht, Funk & Dienste:** 🌙 LEDs dimmen (Nachtmodus) · 📶 WLAN an/aus · 💡 Ambient Light ·
-📁 FTP aktivieren · 🔊 BT-Lautsprecher · 🎧 BT-Kopfhörer · 🔀 Modus wechseln *(die
-Bluetooth-Aktionen nur bei Firmware mit Bluetooth)*.
+*Bei allen Schlaf-Modi dimmt ESPuino die LEDs – so erkennst du auf einen Blick, dass ein Schlaftimer
+aktiv ist.*
 
-**Ansagen:** 🌐 IP-Adresse ansagen · 🕒 Uhrzeit ansagen.
+**Wiederholung**
 
-**Wiedergabesteuerung als Karte:** ⏯ Play/Pause · ⏮/⏭ Titel zurück/vor · ⏪/⏩ erster/letzter Titel ·
-📁 Ordner vor/zurück (nur in rekursiven Modi) · »/« Sekunden vor/zurück.
+| Aktion | Wirkung |
+| --- | --- |
+| 🔁 Playlist endlos | Wiederholt die gesamte Playlist endlos. |
+| 🔂 Titel endlos | Wiederholt den aktuellen Titel endlos. |
 
-**Virtuelle Karten & Sonstiges:** 🏷 Virtuelle Karte 01–10 · 🗑 Zuordnung löschen (weist du *das*
-einer Karte zu, wird ihre bestehende Zuordnung entfernt).
+**Licht, Funk & Dienste**
+
+| Aktion | Wirkung |
+| --- | --- |
+| 🌙 LEDs dimmen (Nachtmodus) | Dimmt die Neopixel dauerhaft – angenehm etwa im abgedunkelten Kinderzimmer. |
+| 📶 WLAN an/aus | Schaltet das WLAN ein oder aus (aus spart Strom und erlaubt reinen Offline-Betrieb). |
+| 💡 Ambient Light | Schaltet eine dauerhafte Stimmungsbeleuchtung der LEDs um. |
+| 📁 FTP aktivieren | Startet den FTP-Dienst (bis zum nächsten Neustart). |
+| 🔊 BT-Lautsprecher | Schaltet ESPuino in den **Bluetooth-Lautsprecher-Modus** (BT-Senke): Er empfängt Audio von einem gekoppelten Gerät, z. B. dem Handy, und gibt es aus. |
+| 🎧 BT-Kopfhörer | Schaltet ESPuino in den **Bluetooth-Kopfhörer-Modus** (BT-Quelle): Er sendet seinen Ton an einen gekoppelten Bluetooth-Kopfhörer oder -Lautsprecher. |
+| 🔀 Modus wechseln | Schaltet der Reihe nach durch die Betriebsmodi (Normal ↔ Bluetooth). |
+
+*Die drei Bluetooth-Aktionen sind nur bei einer Firmware mit Bluetooth-Unterstützung verfügbar.*
+
+**Ansagen**
+
+| Aktion | Wirkung |
+| --- | --- |
+| 🌐 IP-Adresse ansagen | Sagt die aktuelle IP-Adresse per Sprachausgabe an – praktisch, um die Adresse fürs Webinterface herauszufinden. |
+| 🕒 Uhrzeit ansagen | Sagt die aktuelle Uhrzeit an. |
+
+**Wiedergabesteuerung als Karte**
+
+| Aktion | Wirkung |
+| --- | --- |
+| ⏯ Play/Pause | Pausiert die Wiedergabe oder setzt sie fort. |
+| ⏮ / ⏭ Titel zurück / vor | Springt zum vorherigen bzw. nächsten Titel. |
+| ⏪ / ⏩ erster / letzter Titel | Springt zum ersten bzw. letzten Titel der Playlist. |
+| 📁 Ordner vor / zurück | Springt einen Ordner vor oder zurück (nur in rekursiven Modi). |
+| » / « Sekunden vor / zurück | Spult einige Sekunden vor bzw. zurück. |
+
+**Virtuelle Karten & Sonstiges**
+
+| Aktion | Wirkung |
+| --- | --- |
+| 🏷 Virtuelle Karte 01–10 | Verweist auf eine von zehn **virtuellen Karten** – Zuordnungen, die sich ohne physische Karte auslösen lassen (etwa per Tastenkombination oder MQTT). |
+| 🗑 Zuordnung löschen | Weist du *diese* Aktion einer Karte zu, wird beim nächsten Auflegen die bestehende Zuordnung dieser Karte entfernt. |
 
 ## Tab WLAN
 
@@ -149,7 +190,8 @@ fehlt nur, wenn die Firmware bewusst ohne MQTT gebaut wurde.*
 
 <!-- Screenshot: MQTT-Tab -->
 
-Hier bindest du ESPuino an deinen MQTT-Broker an, etwa für Home Assistant oder ioBroker. Du
+Hier bindest du ESPuino an deinen MQTT-Broker an, etwa für [Home Assistant](https://www.home-assistant.io/),
+[ioBroker](https://www.iobroker.net/) oder [openHAB](https://www.openhab.org/). Du
 aktivierst MQTT und trägst ClientId, ein optionales Basis-Topic, die Geräte-ID, den Server, optional
 Benutzername und Passwort sowie den Port ein. In ClientId und Geräte-ID darfst du den Platzhalter
 `<MAC>` verwenden – er wird automatisch durch die MAC-Adresse ersetzt, was bei mehreren ESPuinos
@@ -175,8 +217,7 @@ ist er wieder aus.
 
 !!! tip "Für große Datenmengen"
     Für große Mengen ist inzwischen der **Web-Upload die bessere Wahl** – er wurde optimiert und ist
-    heute schneller als FTP (das kaum noch jemand nutzt). Bleibst du dennoch bei FTP, stell im
-    FTP-Programm die Zeichenkodierung **CP437** ein, damit Umlaute korrekt ankommen.
+    heute schneller als FTP (das kaum noch jemand nutzt).
 
 ## Tab Bluetooth
 
@@ -232,9 +273,10 @@ Hilfetext am Fragezeichen:
 | Mono-Wiedergabe | Für Aufbauten mit nur einem Lautsprecher. |
 | Lautstärkekurve | Linear oder logarithmisch. |
 
-Zusätzlich gibt es ein **Speicherintervall**, mit dem ESPuino die Position im Hörbuch-Modus
-**zyklisch** (alle n Sekunden) sichert – gedacht für lange Kapitel, damit ein plötzlicher Stromausfall
-nicht den Fortschritt einer ganzen Stunde kostet. Standardmäßig ist es aus (0).
+Zusätzlich gibt es die Option **„Wiedergabeposition langer Hörbücher automatisch speichern alle _n_
+Sekunden"**, mit der ESPuino die Position im Hörbuch-Modus **zyklisch** sichert – gedacht für lange
+Kapitel (Dateien ab 5 Minuten), damit ein plötzlicher Stromausfall nicht den Fortschritt einer ganzen
+Stunde kostet. Standardmäßig ist die Option aus; empfohlen werden 30–60 Sekunden.
 
 !!! warning "Zyklisches Speichern belastet den Flash-Speicher"
     Jedes Speichern schreibt in den Flash-Speicher, und der nutzt sich mit jedem Schreibvorgang ein
@@ -257,7 +299,7 @@ In dieser Unterkladde geht es um den Kartenleser:
 
 | Einstellung | Bedeutung |
 | --- | --- |
-| **PN5180 LPCD** | Aufwecken aus dem Deep-Sleep durch Kartenauflegen. Nur mit PN5180 und gesetzten Lötbrücken (bei MFRC522 ausgegraut). Einschränkungen: [Kapitel 11](../vertiefung/erweiterte-themen.md#lpcd). |
+| **PN5180 LPCD** | Aufwecken aus dem Deep-Sleep durch Kartenauflegen. Nur mit PN5180 und passend gesetzten Lötbrücken – bei der Complete musst du dafür die Lötbrücken **JP1/JP8** anpassen ([Kapitel 5](../hardware/aufbau.md#die-lotbrucken)); bei MFRC522 ist die Option ausgegraut. Einschränkungen: [Kapitel 11](../vertiefung/erweiterte-themen.md#lpcd). |
 | **Reader-Typ** | *Auto-detect* (Standard), MFRC522 (SPI oder I²C) oder PN5180. |
 | **MFRC522 Gain** | Empfindlichkeit des MFRC522 (0–7, Standard 7). |
 | **PN5180 Debounce** | Wie lange eine Karte ununterbrochen *nicht* erkannt sein muss, bevor sie als entfernt gilt (Standard 500 ms). |
