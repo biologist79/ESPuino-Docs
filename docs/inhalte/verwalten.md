@@ -60,7 +60,8 @@ Zwei Fälle sind standardmäßig **abgeschaltet**, lassen sich aber im Webinterf
 Speichern beim **Wechsel auf eine andere Karte** und das Speichern beim **Ausschalten**. Und für
 sehr lange Kapitel gibt es zusätzlich einen optionalen Checkpoint, der die Position in Abständen
 sichert – als Schutz davor, bei einem plötzlichen Stromausfall den Fortschritt einer ganzen Stunde
-zu verlieren.
+zu verlieren. Wo du diese Optionen findest und einstellst, steht im
+[Kapitel 7 → Tab Allgemein · Wiedergabe](../bedienung/webinterface.md#wiedergabe).
 
 ## Cover und Metadaten
 
@@ -79,6 +80,13 @@ Bildschirm.
 Einen Radiosender richtest du ein, indem du einer Karte den Modus **📻 Webradio** zuweist und die
 Stream-Adresse einträgst (das Feld ist praktischerweise schon mit `http://` vorbelegt). Möchtest du
 mehrere Sender oder eine gemischte Liste auf einer Karte bündeln, nimmst du dafür eine **`.m3u`-Datei**.
+
+Bevorzuge nach Möglichkeit **`http://` gegenüber `https://`** – HTTPS kostet auf dem ESP32 deutlich
+mehr Arbeitsspeicher.
+
+!!! tip "HTTPS-Stream? Erst `http` probieren"
+    Hast du nur eine `https://`-Adresse, probiere einfach, ob derselbe Sender auch über `http://`
+    läuft – das schont den Arbeitsspeicher und funktioniert in der Praxis oft.
 
 ## Backup & Restore: deine Kartenzuordnungen sichern
 
