@@ -35,6 +35,14 @@ Der Ablauf ist geradlinig: ESPuino per **USB** anschließen, im Tool Sprache und
 festlegen und die USB-Geschwindigkeit setzen (höchstens 460 800 Baud). Dann die passende Aktion
 starten, bei der Nachfrage den seriellen Port auswählen und den Fortschritt beobachten.
 
+!!! tip "Welchen Branch nehmen: master oder dev?"
+    - **master** ist der stabile Zweig – gründlicher getestet, dafür manchmal etwas älter.
+    - **dev** ist der Entwicklungszweig – immer am Puls der Zeit, aber weniger getestet.
+
+    In der Praxis läuft `dev` erstaunlich rund; im Forum fiel augenzwinkernd schon der Satz „der dev
+    ist der bessere master". Wenn du auf Nummer sicher gehen willst, nimm **master**; magst du die
+    neuesten Funktionen und Fixes, ist **dev** einen Versuch wert. 🙂
+
 !!! danger "Die richtige Plattform ist entscheidend"
     Wähle unbedingt exakt die Plattform, die zu deinem Board passt. Die **falsche Plattform** kann im
     schlimmsten Fall die Hardware beschädigen.
