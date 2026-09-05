@@ -340,6 +340,7 @@ Ist die Batteriemessung aktiv, kommen unter **Batterie** diese Werte hinzu:
 | Warnspannung | Ab dieser Spannung warnt der Neopixel vor niedrigem Akku. |
 | Spannung für 0 % / 100 % | Legt die Grenzen der Ladezustands-Anzeige fest (abhängig vom Akkutyp). |
 | Kritische Abschaltspannung | Optional: ESPuino schaltet unterhalb automatisch ab. |
+| Korrekturwert | Feinkorrektur der gemessenen Spannung (± in Hundertstel-Volt). Weicht die Anzeige von einer Multimeter-Messung ab, trägst du hier die Differenz ein. Details in [Kapitel 5 · Feinjustierung](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
 | Messintervall | Wie oft die Batteriespannung gemessen wird. |
 
 ## Tab Updates
