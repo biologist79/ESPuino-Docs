@@ -5,6 +5,13 @@ die selbst am Code arbeiten, eigene Hardware unterstützen oder Verbesserungen z
 gibt dir eine erste Orientierung; noch ausführlicher ist die
 [README des ESPuino-Repos](https://github.com/biologist79/ESPuino).
 
+!!! note "Auch ohne Programmieren helfen: mittesten!"
+    Ein ehrliches Wort vorweg: Am **Testen** beteiligen sich inzwischen leider nur noch wenige – dabei
+    lebt das Projekt genau davon. Und dafür musst du keine Zeile Code schreiben: Spiel neue
+    **`dev`-Builds** auf, nutze sie im Alltag und melde im [Forum](https://forum.espuino.de) zurück,
+    was gut läuft und was nicht. Jede Rückmeldung hilft, Fehler früh zu finden und ESPuino stabil zu
+    halten.
+
 ## Wie der Code aufgebaut ist
 
 Der Firmware-Code liegt unter `src/` und ist nach Zuständigkeiten aufgeteilt. Wenn du dich das erste
@@ -38,7 +45,11 @@ Damit alles zusammenpasst, ein paar Spielregeln:
 
 - **Formatierung:** Der Code wird mit `clang-format` formatiert (die Regeln stehen in `.clang-format`
   im Repo). Am besten vor jedem Commit anwenden.
-- **Branches:** Neue Features branchen von `dev` ab, und Pull Requests gehen ebenfalls gegen `dev`.
-  Der `master`-Branch bekommt in größeren Abständen die Release-Merges.
+- **Branches:** Neue Features branchen von `dev` ab, und Pull Requests gehen **immer gegen `dev` –
+  nie gegen `master`**. Der `master`-Branch bekommt nur in größeren Abständen die Release-Merges.
+- **Größere Features vorher ankündigen:** Planst du eine umfangreichere Änderung, kündige das Feature
+  bitte **vorab im [Forum](https://forum.espuino.de)** an, damit man gemeinsam über die Sinnhaftigkeit
+  sprechen kann. So vermeidest du, viel Arbeit in eine Richtung zu stecken, die fürs Gesamtprojekt
+  am Ende nicht zielführend ist.
 - **CI:** GitHub Actions baut die Firmware automatisch – ein Blick nach `.github/workflows/` zeigt,
   was dort passiert.
