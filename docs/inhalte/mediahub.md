@@ -1,4 +1,4 @@
-# 10 · Mehrere ESPuinos zentral verwalten: MediaHub
+# 11 · Mehrere ESPuinos zentral verwalten: MediaHub
 
 ## Welches Problem MediaHub löst
 

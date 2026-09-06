@@ -83,7 +83,7 @@ es daher nur im reinen Akkubetrieb (mehr dazu in [Kapitel 4](akku.md)).
 
 Im Normalfall „schaltet" der **Taster im Drehencoder** den ESPuino ein und aus – tatsächlich geht er
 dabei in den stromsparenden **Deep-Sleep** und wacht auf Tastendruck sofort wieder auf (siehe
-[Glossar](../einstieg/was-ist-espuino.md) und [Kapitel 8](../bedienung/am-geraet.md)). Für die meisten
+[Glossar](../einstieg/was-ist-espuino.md) und [Kapitel 9](../bedienung/am-geraet.md)). Für die meisten
 ist das völlig ausreichend.
 
 Wer den Ruhestrom noch weiter senken möchte, kann einen **echten Ausschalter** vorsehen. Die Complete
@@ -161,7 +161,7 @@ Kanal = Wert − 100), keine direkten ESP32-GPIOs; `99` = ungenutzt/Dummy.
 Der Unterschied ist praktisch relevant: Ein Port-Expander-Kanal lässt sich **nicht so universell**
 einsetzen wie ein echter GPIO. Er taugt im Wesentlichen dazu, **auf einen Taster zu reagieren**
 (Eingang) oder **etwas zu schalten** (Ausgang) – und selbst das muss für eigene Erweiterungen erst
-**programmiert** werden. Mehr zum Port-Expander steht in [Kapitel 11](../vertiefung/erweiterte-themen.md).
+**programmiert** werden. Mehr zum Port-Expander steht in [Kapitel 12](../vertiefung/erweiterte-themen.md).
 
 | Funktion | Signal | Pin |
 | --- | --- | --- |
@@ -301,7 +301,7 @@ entnimmst du am besten dem 3D-Modell.
       – nur für Erfahrene.
     - Der **PCA9555-Port-Expander** stellt zusätzliche Ein-/Ausgänge bereit; er bedient intern unter
       anderem die Taster und einige Steuerleitungen und ist auch in
-      [Kapitel 11](../vertiefung/erweiterte-themen.md) Thema.
+      [Kapitel 12](../vertiefung/erweiterte-themen.md) Thema.
 
 ## Bestellen & Zubehör
 

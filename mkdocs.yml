@@ -104,23 +104,24 @@ nav:
   - "Teil 2 · Hardware (Complete)":
       - "3 · Die Complete-Platine": hardware/complete.md
       - "4 · Der Akku": hardware/akku.md
-      - "5 · Anschließen & Einbau": hardware/aufbau.md
+      - "5 · Anschließen": hardware/aufbau.md
+      - "6 · Das Gehäuse": hardware/gehaeuse.md
   - "Teil 3 · Inbetriebnahme":
-      - "6 · Erststart": inbetriebnahme/erststart.md
+      - "7 · Erststart": inbetriebnahme/erststart.md
   - "Teil 4 · Bedienung":
-      - "7 · Das Webinterface": bedienung/webinterface.md
-      - "8 · Bedienung am Gerät": bedienung/am-geraet.md
+      - "8 · Das Webinterface": bedienung/webinterface.md
+      - "9 · Bedienung am Gerät": bedienung/am-geraet.md
   - "Teil 5 · Inhalte":
-      - "9 · Inhalte verwalten": inhalte/verwalten.md
-      - "10 · MediaHub": inhalte/mediahub.md
+      - "10 · Inhalte verwalten": inhalte/verwalten.md
+      - "11 · MediaHub": inhalte/mediahub.md
   - "Teil 6 · Vertiefung":
-      - "11 · Erweiterte Themen": vertiefung/erweiterte-themen.md
+      - "12 · Erweiterte Themen": vertiefung/erweiterte-themen.md
   - "Teil 7 · Firmware & Build":
-      - "12 · Firmware aktualisieren": firmware/aktualisieren.md
-      - "13 · Compile-Zeit-Konfiguration": firmware/compile-zeit.md
+      - "13 · Firmware aktualisieren": firmware/aktualisieren.md
+      - "14 · Compile-Zeit-Konfiguration": firmware/compile-zeit.md
   - "Teil 8 · Hilfe":
-      - "14 · Troubleshooting": hilfe/troubleshooting.md
+      - "15 · Troubleshooting": hilfe/troubleshooting.md
   - "Teil 9 · Referenz & Legacy":
-      - "15 · Bestandsgeräte: mini4L": referenz/mini4l.md
-      - "16 · Entwicklung & Beitrag": referenz/entwicklung.md
-      - "17 · Anhang": referenz/anhang.md
+      - "16 · Bestandsgeräte: mini4L": referenz/mini4l.md
+      - "17 · Entwicklung & Beitrag": referenz/entwicklung.md
+      - "18 · Anhang": referenz/anhang.md

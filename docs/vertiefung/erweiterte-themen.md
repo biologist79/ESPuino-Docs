@@ -1,4 +1,4 @@
-# 11 · Erweiterte Themen
+# 12 · Erweiterte Themen
 
 Die Grundfunktionen kennst du jetzt. Dieses Kapitel sammelt Themen für alle, die mehr aus ihrem
 ESPuino herausholen wollen – von der Einbindung in die Hausautomatisierung bis zur
@@ -14,7 +14,7 @@ Hausautomatisierung einbinden, etwa um ihn abends automatisch leiser zu stellen 
 Übersicht anzuzeigen, was gerade läuft.
 
 Die Einrichtung selbst nimmst du im Webinterface vor
-([Kapitel 7 → Tab MQTT](../bedienung/webinterface.md#tab-mqtt)); welche Themen (Topics) es gibt und
+([Kapitel 8 → Tab MQTT](../bedienung/webinterface.md#tab-mqtt)); welche Themen (Topics) es gibt und
 was sie bedeuten, steht vollständig im [Anhang → MQTT-Topics](../referenz/anhang.md#mqtt-topics). Für
 konkrete Systeme gibt es fertige Hilfestellungen: für **Home Assistant** eine
 [Integration im Forum](https://forum.espuino.de/t/home-assistant-integration/3763), und für **openHAB**

@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# pre-commit hook: automatically optimize any staged images before the commit
+# is written, then re-stage the shrunk versions. Only touches added/modified
+# PNG/JPEG files. Enable once per clone with:
+#
+#   git config core.hooksPath tools/hooks
+#
+set -euo pipefail
+
+# Staged, added/copied/modified image files.
+imgs="$(git diff --cached --name-only --diff-filter=ACM | grep -Ei '\.(png|jpe?g)$' || true)"
+[ -z "$imgs" ] && exit 0
+
+changed=""
+while IFS= read -r f; do
+	[ -z "$f" ] && continue
+	[ -f "$f" ] || continue
+	before="$(stat -f%z "$f" 2>/dev/null || stat -c%s "$f" 2>/dev/null || echo 0)"
+	tools/optimize-images.sh "$f" >/dev/null 2>&1 || true
+	after="$(stat -f%z "$f" 2>/dev/null || stat -c%s "$f" 2>/dev/null || echo 0)"
+	if [ "$before" != "$after" ]; then
+		git add "$f"
+		changed="$changed $f"
+	fi
+done <<EOF
+$imgs
+EOF
+
+[ -n "$changed" ] && echo "pre-commit: optimized image(s):$changed"
+exit 0

@@ -1,4 +1,4 @@
-# 9 · Inhalte verwalten
+# 10 · Inhalte verwalten
 
 Ein ESPuino ist nur so gut wie das, was auf seiner SD-Karte liegt. Dieses Kapitel dreht sich deshalb
 darum, wie du deine Hörspiele, Hörbücher und Musik auf das Gerät bekommst und – mindestens genauso
@@ -61,7 +61,7 @@ Speichern beim **Wechsel auf eine andere Karte** und das Speichern beim **Aussch
 sehr lange Kapitel gibt es zusätzlich einen optionalen Checkpoint, der die Position in Abständen
 sichert – als Schutz davor, bei einem plötzlichen Stromausfall den Fortschritt einer ganzen Stunde
 zu verlieren. Wo du diese Optionen findest und einstellst, steht im
-[Kapitel 7 → Tab Allgemein · Wiedergabe](../bedienung/webinterface.md#wiedergabe).
+[Kapitel 8 → Tab Allgemein · Wiedergabe](../bedienung/webinterface.md#wiedergabe).
 
 ## Cover und Metadaten
 
@@ -73,7 +73,7 @@ Bildschirm.
     Ausgerechnet eingebettetes Coverart ist gelegentlich die Ursache, wenn eine einzelne MP3 nicht
     sauber spielt oder stottert. Falls dir so eine Datei begegnet, hilft meist ein sauberes
     Neu-Kodieren ohne Cover – wie das mit ffmpeg geht, steht in
-    [Kapitel 14 → MP3](../hilfe/troubleshooting.md#einzelne-titel-machen-probleme-mp3).
+    [Kapitel 15 → MP3](../hilfe/troubleshooting.md#einzelne-titel-machen-probleme-mp3).
 
 ## Webradio
 

@@ -26,6 +26,23 @@ repository settings and set the source to **GitHub Actions**.
 
 Self-hosting: `site/` is plain static HTML and can be served by any web server.
 
+## Images
+
+Put images under `docs/assets/` and reference them from the Markdown. MkDocs does **not** process
+images itself, so they are shrunk by a small helper instead of shipping full-resolution originals:
+
+- **Automatic (recommended):** a pre-commit hook optimizes any staged PNG/JPEG before it is committed
+  (downscale to max 1600 px wide, recompress). Enable it once per clone:
+  ```bash
+  git config core.hooksPath tools/hooks
+  ```
+- **Manual:** run `tools/optimize-images.sh` (all images under `docs/assets/`) or
+  `tools/optimize-images.sh path/to/img.png` for a single file.
+
+The script uses [ImageMagick](https://imagemagick.org/) (`mogrify`) when available and otherwise falls
+back to macOS' built-in `sips` (no install needed). It is idempotent — an already-optimized image is
+left untouched, so it never degrades quality on repeated runs.
+
 ## Structure
 
 The navigation is defined in `mkdocs.yml` (9 parts, 17 chapters). Each chapter is a Markdown file

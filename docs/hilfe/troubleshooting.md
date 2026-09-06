@@ -1,4 +1,4 @@
-# 14 · Troubleshooting
+# 15 · Troubleshooting
 
 Nicht immer läuft alles auf Anhieb rund – das ist bei einem Selbstbauprojekt normal und kein Grund zur
 Verzweiflung. Dieses Kapitel geht die häufigsten Stolperfallen durch und erklärt jeweils, woran es
@@ -19,7 +19,7 @@ brauchst du keine Entwicklungsumgebung – das
 [ESPuino-Firmware-Tool](https://biologist79.github.io/ESPuino-Firmware-Tool/) bringt eine solche
 Konsole direkt im Browser mit (mehr dazu unten unter „Wenn nichts mehr geht"). Wie ausführlich
 ESPuino protokolliert, steuert die Einstellung `SERIAL_LOGLEVEL`
-([Kapitel 13](../firmware/compile-zeit.md)).
+([Kapitel 14](../firmware/compile-zeit.md)).
 
 !!! warning "USB-Leitung mit Datenadern nötig"
     Für den seriellen Zugriff braucht die USB-Leitung **Datenadern**. Reine **Ladeleitungen** übertragen
@@ -42,7 +42,7 @@ zwischendurch kurz nicht erkannt und ESPuino hält das für ein Abnehmen. Das is
 Dauerbrenner. Verkleinere den Abstand zwischen Karte und Leser, erhöhe – beim PN5180 – dessen
 Debounce, oder schalte die Option einfach ab, wenn sie bei dir mehr Ärger als Nutzen bringt. (Die
 Option gibt es für RC522 und PN5180; nur der Debounce ist PN5180-spezifisch.) (Zu LPCD siehe die deutliche
-Warnung in [Kapitel 11](../vertiefung/erweiterte-themen.md#lpcd).)
+Warnung in [Kapitel 12](../vertiefung/erweiterte-themen.md#lpcd).)
 
 !!! tip "Im Forum stöbern lohnt sich"
     Rund um die Kartenerkennung gibt es im [Forum](https://forum.espuino.de) schon zahlreiche
@@ -110,7 +110,7 @@ Datei-Schleife deiner Shell.
 
 Zwei Dinge übersieht man leicht. Erstens: Der ESP32 funkt **nur auf 2,4 GHz** – ein reines
 5-GHz-Netz sieht er gar nicht. Zweitens: Die Adresse muss immer mit **`http://`** aufgerufen werden,
-`https` beherrscht ESPuino nicht (der Hintergrund steht in [Kapitel 6](../inbetriebnahme/erststart.md#das-webinterface-offnen)).
+`https` beherrscht ESPuino nicht (der Hintergrund steht in [Kapitel 7](../inbetriebnahme/erststart.md#das-webinterface-offnen)).
 Ansonsten gelten die üblichen Verdächtigen: zu große Entfernung zum Router, ein Tippfehler in den
 Zugangsdaten. Bleiben die LEDs im Leerlauf **grün** statt weiß, besteht keine Verbindung – dann neu
 starten, näher an den Router gehen oder die Zugangsdaten erneut eingeben.
@@ -163,7 +163,7 @@ Je nach Lage hilft eine dieser Stufen – von harmlos nach drastisch:
     Ein komplettes Flash-Löschen setzt auch das **NVS** zurück – **Kartenzuweisungen,
     WLAN-Zugangsdaten und alle weiteren Einstellungen sind dann weg**. Wiederherstellen lassen sich
     davon nur die **Kartenzuweisungen**: Sie liegen in der `backup.txt`
-    ([Kapitel 9 → Backup & Restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern))
+    ([Kapitel 10 → Backup & Restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern))
     und lassen sich anschließend wieder importieren. **WLAN-Zugangsdaten und die übrigen Einstellungen
     lassen sich derzeit nicht sichern** – die musst du nach einem vollständigen Löschen von Hand neu
     eingeben.
@@ -173,7 +173,7 @@ Je nach Lage hilft eine dieser Stufen – von harmlos nach drastisch:
     falsche Auswahl kann im schlimmsten Fall die **Hardware beschädigen**.
 
 Wie das Flashen im Detail abläuft, steht in
-[Kapitel 12 · Firmware aktualisieren](../firmware/aktualisieren.md).
+[Kapitel 13 · Firmware aktualisieren](../firmware/aktualisieren.md).
 
 !!! tip "Immer noch ein Problem?"
     Dann frag im [Forum](https://forum.espuino.de) nach. Hilfreich ist, gleich das Log mitzuschicken

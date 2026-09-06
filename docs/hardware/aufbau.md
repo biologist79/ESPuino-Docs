@@ -1,4 +1,4 @@
-# 5 · Anschließen & Einbau
+# 5 · Anschließen
 
 Die gute Nachricht zuerst: Der Aufbau der [Complete](complete.md) ist überschaubar. Die Platine kommt **fertig
 bestückt** zu dir – das gesamte SMD-Löten der winzigen Bauteile ist bereits erledigt, und auch die
@@ -106,24 +106,8 @@ Adapterplatine – und zwar auf **entgegengesetzte Seiten**.
 Falls sich später herausstellt, dass „lauter" und „leiser" vertauscht sind, ist das kein Grund zum
 Umlöten: Die Drehrichtung lässt sich im Webinterface umkehren.
 
-## Der Einbau ins Gehäuse { #einbau-ins-gehause }
-
-Als **Referenz-Design** dient die **[BioBox 3D](https://forum.espuino.de/t/biobox-3d/3130)**, ein
-3D-druckbares Gehäuse für Complete oder mini4L. Sie gibt eine gute Vorstellung davon, wie ein
-fertiger ESPuino aussehen kann: ein Würfel mit rund 12 cm Kantenlänge, vorn ein Wabengitter für den
-Lautsprecher mit einer Vertiefung für den Neopixelring, oben drei Tasten und der Drehencoder, hinten
-USB-C und Kopfhörerbuchse, unten eine Revisionsöffnung und eine Akkuhalterung (für 18650-, 26650-
-oder 32700-Zellen). Die Druckdateien gibt es als STL und als Fusion-360-Datei; empfohlen werden PETG,
-fünf Wandschichten und 35 % Infill (etwa 17 Stunden Druckzeit).
-
-Beim Einsetzen der SD-Karte noch einmal der Hinweis auf das Dateisystem: Sie muss **FAT32** sein.
-Karten über 32 GB sind ab Werk oft exFAT-formatiert und müssen dann erst neu als FAT32 formatiert
-werden.
-
-!!! tip "Weitere Inspiration"
-    Wie vielfältig ESPuinos aussehen können, zeigt die Galerie
-    [„Zeigt her eure ESPuinos" (#554)](https://forum.espuino.de/t/zeigt-her-eure-espuinos/554) – eine
-    schöne Fundgrube für eigene Gehäuse-Ideen.
+Ist alles angeschlossen, geht es weiter mit dem [Einbau ins Gehäuse](gehaeuse.md) und der
+Feinjustierung unten.
 
 ## Nach dem Zusammenbau: die Feinjustierung
 

@@ -1,4 +1,4 @@
-# 12 · Firmware aktualisieren
+# 13 · Firmware aktualisieren
 
 Die Firmware ist die Software, die auf deinem ESPuino läuft. Sie wird laufend weiterentwickelt –
 Fehler werden behoben, neue Funktionen kommen dazu. Von Zeit zu Zeit lohnt sich deshalb ein Update.
@@ -50,7 +50,7 @@ starten, bei der Nachfrage den seriellen Port auswählen und den Fortschritt beo
 ## Der Weg über WLAN: Update im Webinterface
 
 Läuft dein ESPuino bereits und ist im WLAN, geht ein Update auch ganz ohne USB – direkt im
-Webinterface, im **Tab Updates** ([Kapitel 7](../bedienung/webinterface.md#tab-updates)).
+Webinterface, im **Tab Updates** ([Kapitel 8](../bedienung/webinterface.md#tab-updates)).
 
 <!-- Screenshot: Tab Updates / GitHub-Update -->
 
@@ -72,7 +72,7 @@ Alternativ kannst du im selben Tab auch eine **Firmware-Datei** (`firmware.bin`)
 ## Der Weg für Fortgeschrittene: selbst kompilieren
 
 Manchmal reicht die vorgefertigte Firmware nicht: Du betreibst eigene Hardware, oder du willst eine
-Option setzen, die nur zur Compile-Zeit verfügbar ist (siehe [Kapitel 13](compile-zeit.md)). Dann
+Option setzen, die nur zur Compile-Zeit verfügbar ist (siehe [Kapitel 14](compile-zeit.md)). Dann
 baust du dir die Firmware selbst. Der folgende Ablauf orientiert sich am
 [Forum-Leitfaden #891](https://forum.espuino.de/t/espuino-in-platformio-anlegen-und-mit-git-aktuell-halten/891).
 
@@ -109,7 +109,7 @@ unten in der Statusleiste das **Environment** passend zu deinem Board – also `
 ### Eigene Einstellungen
 
 Möchtest du Compile-Zeit-Optionen ändern, tust du das nicht direkt in den mitgelieferten Dateien,
-sondern in einer eigenen `settings-override.h` (siehe [Kapitel 13](compile-zeit.md)). So überschreibt
+sondern in einer eigenen `settings-override.h` (siehe [Kapitel 14](compile-zeit.md)). So überschreibt
 ein späteres Update deine Anpassungen nicht.
 
 ### Bauen und flashen

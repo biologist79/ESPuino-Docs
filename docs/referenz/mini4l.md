@@ -1,4 +1,4 @@
-# 15 · Bestandsgeräte: mini4L
+# 16 · Bestandsgeräte: mini4L
 
 Die **mini4L** ist der direkte Vorgänger der [Complete](../hardware/complete.md). Sie wird nicht mehr verkauft, ist aber
 weiterhin voll unterstützt – wenn du also eine besitzt, bist du hier richtig. Damit dieses Handbuch
@@ -38,7 +38,7 @@ GPIO 32 setzen.
 ## Firmware und Bedienung
 
 Die Firmware baust du mit dem Target `lolin_d32_pro_sdmmc_pe` – ansonsten gilt
-[Kapitel 12](../firmware/aktualisieren.md) unverändert. Der wichtigste Unterschied im Alltag ist
+[Kapitel 13](../firmware/aktualisieren.md) unverändert. Der wichtigste Unterschied im Alltag ist
 letztlich ein Hardware-Detail: Bei der mini4L läuft die Stromversorgung über einen Linearregler (LDO)
 statt über den Buck/Boost-Regler der Complete. Was das bedeutet, ist in
 [Kapitel 3 → Stromversorgung](../hardware/complete.md#die-stromversorgung-und-warum-sie-so-wichtig-ist)
