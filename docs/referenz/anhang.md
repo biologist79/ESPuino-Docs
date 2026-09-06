@@ -83,6 +83,23 @@ Muster: `[<base_topic>/]device_id/topic[/<setter_token>]`. Kommandos nutzen den 
 | `software_revision` | State | Firmware-Revision |
 | `battery_voltage` / `battery_soc` | State | Spannung / Ladung % (falls Batteriemessung) |
 
+### Beispiel: `sleep_timer_state`
+
+Das Topic `sleep_timer_state` liefert den Schlaftimer als ein JSON-Objekt. Je nach Modus ist entweder
+`remainingMinutes` oder `remainingTracks` gesetzt (das jeweils andere Feld ist `0`):
+
+```json
+{"mode":"OFF","remainingMinutes":0,"remainingTracks":0}
+{"mode":"MINUTES","remainingMinutes":29,"remainingTracks":0}
+{"mode":"EOT","remainingMinutes":0,"remainingTracks":1}
+{"mode":"EO5T","remainingMinutes":0,"remainingTracks":3}
+{"mode":"EOP","remainingMinutes":0,"remainingTracks":7}
+```
+
+`mode` ist einer von **OFF** (kein Timer), **MINUTES** (Restminuten), **EOT** (Ende des Titels),
+**EO5T** (nach fünf Titeln) und **EOP** (Ende der Playlist). Bei `EO5T`/`EOP` zählt `remainingTracks`
+die verbleibenden Titel.
+
 ## REST-API
 
 Die vollständige REST-API ist als OpenAPI-Spezifikation direkt im Firmware-Repo gepflegt:
