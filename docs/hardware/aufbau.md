@@ -84,10 +84,27 @@ Anzuschließen sind:
 
 ## Der Drehencoder
 
-Der Drehencoder muss nicht gelötet werden – er wird einfach über einen fünfpoligen JST-PH-Stecker
-**eingesteckt**, sofern du den [ESPuino-Encoder-Bausatz](https://forum.espuino.de/t/drehencoder-by-espuino/2414)
-verwendest. Falls sich später herausstellt, dass „lauter" und „leiser" vertauscht sind, ist das kein
-Grund zum Umlöten: Die Drehrichtung lässt sich im Webinterface umkehren.
+An die ESPuino-Platine wird der Drehencoder **ohne Löten** angeschlossen – über einen fünfpoligen,
+verpolsicheren JST-PH-Stecker, den du einfach einsteckst. Praktisch dafür ist der
+[ESPuino-Encoder-Bausatz](https://forum.espuino.de/t/drehencoder-by-espuino/2414). Er besteht aus:
+
+- dem **Drehencoder** selbst,
+- einer kleinen **Adapterplatine** (mit drei bereits bestückten Pull-up-Widerständen),
+- einer fünfpoligen **JST-PH-Buchse** und
+- der passenden **Anschlussleitung**.
+
+Den Bausatz selbst musst du allerdings **zusammenlöten**: Drehencoder und JST-Buchse kommen auf die
+Adapterplatine – und zwar auf **entgegengesetzte Seiten**.
+
+!!! danger "Auf die richtige Seite löten!"
+    Der **Drehencoder** wird von der Seite eingesetzt, auf der das **Rechteck aufgedruckt** ist; die
+    **JST-Buchse** kommt auf die **andere Seite**. Zur Kontrolle: Der Aufdruck (Rechteck bzw. Nummer)
+    muss am Ende vom jeweiligen Bauteil **verdeckt** sein. Lötest du verkehrt herum, passt es nicht
+    sauber zusammen und der Encoder funktioniert nicht. Die genaue Bebilderung dazu steht im
+    [Encoder-Thread (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/2414).
+
+Falls sich später herausstellt, dass „lauter" und „leiser" vertauscht sind, ist das kein Grund zum
+Umlöten: Die Drehrichtung lässt sich im Webinterface umkehren.
 
 ## Der Einbau ins Gehäuse { #einbau-ins-gehause }
 
@@ -113,13 +130,21 @@ werden.
 Ist alles verbaut, folgt der [erste Start](../inbetriebnahme/erststart.md). Ein paar Einstellungen
 solltest du dabei einmalig an deine konkrete Hardware anpassen – am bequemsten gleich im Webinterface.
 
-Am wichtigsten sind die **Batterie-Spannungsschwellen**, denn sie hängen vom Akkutyp ab. ESPuino
-kann sonst einen vollen LFP-Akku für halb leer halten oder umgekehrt. Als Anhaltspunkt:
+Am wichtigsten sind die **Batterie-Spannungsschwellen**, denn sie hängen vom Akkutyp ab. Wichtig zu
+verstehen: **ESPuino weiß gar nicht, ob ein LFP- oder ein LiPo-Akku angeschlossen ist** – die Firmware
+kann das nicht feststellen. Genau deshalb musst du die passenden Spannungsschwellen selbst einstellen,
+sonst hält ESPuino womöglich einen vollen LFP-Akku für halb leer oder umgekehrt. **Ab Werk sind die
+Schwellen für LFP hinterlegt** – nutzt du einen LiPo, stellst du sie entsprechend um. Als Anhaltspunkt:
 
 | Akku | Warnung ab | erste LED ab | alle LEDs ab |
 | --- | --- | --- | --- |
-| **LFP** | 3,0 V | 2,9 V | 3,25 V |
+| **LFP** (Standard) | 3,0 V | 2,9 V | 3,25 V |
 | **LiPo** | 3,2 V | 3,1 V | 4,2 V |
+
+Die Akkuspannung misst der ESP32 über seinen eingebauten **ADC** (Analog-Digital-Wandler) – den Baustein,
+der eine analoge Spannung in einen Zahlenwert übersetzt, mit dem die Firmware rechnen kann. Dieser ADC
+ist allerdings **kein Präzisionswunder**: Die Anzeige wird nicht auf das letzte Millivolt genau, in der
+Praxis aber durchaus **recht gut**.
 
 Sollte die angezeigte Spannung trotzdem nicht zur Realität passen – etwa wenn ein frisch geladener
 Akku als „nicht ganz voll" gemeldet wird –, lässt sich die Messung **kalibrieren**: Vergleiche die
