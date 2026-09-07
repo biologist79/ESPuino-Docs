@@ -49,15 +49,56 @@ Karte bereitzuhalten – etwa „Lieblings-Playlist starten" auf eine Tastenkomb
 ## LPCD: Aufwecken durch Kartenauflegen { #lpcd }
 
 LPCD (Low Power Card Detection) ist eine Funktion, mit der ESPuino aus dem Deep-Sleep erwacht, sobald
-du eine Karte auflegst – statt dass du erst eine Taste drücken musst. Das klingt verlockend, hat aber
-technische Voraussetzungen: Es funktioniert nur mit dem **PN5180**, benötigt dessen Firmware in
-Version 4.1 oder neuer, gesetzte Lötbrücken auf der Complete und einen RTC-fähigen GPIO für das Wecksignal.
+du eine Karte auflegst – statt dass du erst eine Taste drücken musst. Gerade für eine Kinderbox ist
+das ein reizvoller Gedanke: Karte drauf, Musik läuft, ganz ohne den Umweg über einen Knopf.
 
-!!! warning "Ehrliche Einschätzung: eher nicht empfehlenswert"
+Technisch steckt Folgendes dahinter. Normalerweise wird der RFID-Leser zusammen mit allem anderen
+abgeschaltet, wenn ESPuino in den Tiefschlaf geht – es soll ja gerade möglichst wenig Strom fließen. Bei
+aktiviertem LPCD bleibt er stattdessen versorgt und tastet in kurzen Abständen selbstständig danach,
+ob eine Karte in seiner Nähe liegt. Wird er fündig, zieht er seine **IRQ-Leitung** auf GND. Diese
+Leitung führt zu einem **RTC-fähigen GPIO** des ESP32, also zu einem Anschluss, der auch im Tiefschlaf
+noch überwacht wird – und genau dieser Pegelwechsel weckt den Prozessor. Aus Sicht des ESP32 ist das
+derselbe Mechanismus wie ein Tastendruck.
+
+Interessant ist, was unmittelbar danach geschieht. Der ESP32 startet dabei durchaus – aber bevor er
+die übrige Hardware in Betrieb nimmt, schiebt er eine gezielte Prüfung dazwischen: Er lädt nur die
+für LPCD nötigen Einstellungen, fährt den Leser hoch, sucht zuerst nach einer ISO-14443-Karte, dann
+nach einer ISO-15693-Karte, und schlägt die gefundene Kennung in seinem internen Speicher nach. Erst
+wenn dort eine **bekannte** Karte hinterlegt ist, fährt er vollständig hoch und beginnt zu spielen.
+War es dagegen ein Fehlalarm – oder lag eine Karte auf, der noch gar kein Inhalt zugewiesen ist –,
+legt er sich sofort wieder schlafen, noch bevor Neopixel und übrige Peripherie überhaupt aktiv
+werden. Von einer fehlerhaften Erkennung bekommst du deshalb im Normalfall nichts mit; sie kostet
+lediglich ein wenig Strom.
+
+Damit LPCD funktioniert, müssen allerdings mehrere Voraussetzungen zusammenkommen:
+
+| Voraussetzung | Was gilt |
+| --- | --- |
+| **Reader** | Nur der **PN5180**. Mit einem RC522 ist LPCD nicht möglich; im Webinterface lässt sich die Option dann nicht auswählen. |
+| **PN5180-Firmware** | Mindestens **Version 4.0**. Welche Version dein Leser mitbringt, meldet ESPuino beim Start im Log. Ein Firmware-Update des Readers ist machbar, aber ein spürbares Stück Arbeit. |
+| **Lötbrücken** | Bei der [Complete](../hardware/complete.md) müssen **JP8** und **JP1** jeweils auf **1+2** stehen (siehe [Kapitel 5 → Die Lötbrücken](../hardware/aufbau.md#die-lotbrucken)). Ab Werk ist die Standard-Beschaltung gesetzt, nicht die LPCD-Variante. |
+| **IRQ-Anschluss** | Die IRQ-Leitung braucht einen RTC-fähigen GPIO. Bei der Complete ist das **GPIO 32**, der dann für anderes nicht mehr zur Verfügung steht (er belegt den Ext-Connector 1). Bei der [mini4L](../referenz/mini4l.md) steht `RFID_IRQ` ab Werk auf `99`, ist also aus, und müsste erst auf 32 geändert werden. |
+| **Aktivierung** | Ein Häkchen im Webinterface unter [Allgemein → RFID](../bedienung/webinterface.md#tab-allgemein): **„PN5180 LPCD aktivieren"**. |
+
+Baust du dir ein eigenes Board, ist die Auswahl beim IRQ-Pin begrenzt: RTC-fähig sind bei diesem ESP32
+die GPIOs **0, 4, 12, 13, 14, 15, 25, 26, 27, 32, 33, 34, 35, 36 und 39** – nur einer davon kommt für
+das Wecksignal in Frage.
+
+!!! note "Nicht mehr über die settings.h"
+    In älteren Anleitungen – auch im
+    [Forum-Thread #1664](https://forum.espuino.de/t/was-ist-lpcd-und-wie-funktioniert-es/1664), der die
+    Funktion ansonsten schön erklärt – wird LPCD über ein `PN5180_ENABLE_LPCD` in der `settings.h`
+    eingeschaltet. Das trifft nicht mehr zu: Die Funktion ist inzwischen eine reine
+    Laufzeit-Einstellung und wird ausschließlich im Webinterface gesetzt. Ein entsprechender Eintrag
+    in einer eigenen `settings-override.h` bleibt wirkungslos.
+
+Zu bedenken ist außerdem, dass sich LPCD und ein **harter Ausschalter** gegenseitig ausschließen –
+beides zusammen geht nicht (siehe [Kapitel 3](../hardware/complete.md)).
+
+!!! warning "Was du vorher wissen solltest"
     So schön die Idee ist – LPCD wird derzeit **nicht aktiv gepflegt**, immer wieder berichten Nutzer
     von **Zuverlässigkeitsproblemen**, und es **verbraucht mehr Strom**, weil der Leser im Deep-Sleep
-    aktiv bleibt. Ein Rückbau der Funktion wird sogar erwogen. Wenn du sie nicht zwingend brauchst,
-    lässt du sie besser weg.
+    aktiv bleibt.
 
 ## Der Port-Expander PCA9555
 
