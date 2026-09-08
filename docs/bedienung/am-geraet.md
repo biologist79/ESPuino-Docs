@@ -14,7 +14,7 @@ vom Handy streamst. Zwischen den Modi wechselst du über Modifikationskarten ode
 
 !!! note "Bluetooth und WLAN"
     Bluetooth und WLAN laufen bei ESPuino **parallel**. Sei dir aber bewusst, dass der Speicher dabei
-    knapp wird und dieser Parallelbetrieb wenig getestet ist – im Zweifel nutzt du nur eines von beiden.
+    knapp wird und dieser Parallelbetrieb wenig getestet ist.
 
 ## Abspielmodi
 
@@ -63,8 +63,8 @@ Ein **kurzer** und ein **langer** Druck lösen jeweils unterschiedliche Aktionen
 | 1 · Previous | Voriger Titel | Erster Titel |
 | 2 · Play/Pause | Play/Pause | Play/Pause |
 | 3 · Encoder-Taster | Batteriespannung messen | Deep-Sleep |
-| 4 (optional) | Seek zurück | Lautstärke + |
-| 5 (optional) | Seek vor | Lautstärke − |
+| 4 (optional) | Sprung zurück (n Sekunden) | Lautstärke + |
+| 5 (optional) | Sprung vor (n Sekunden) | Lautstärke − |
 
 Dazu kommt eine besonders praktische Geste: **einen Button halten und gleichzeitig am Drehregler
 drehen.** Solange du die Taste hältst, führt das Drehen deren Sonderaktion aus. Standardmäßig steuert
@@ -87,7 +87,7 @@ Next und Play/Pause zusammen den FTP-Server, Previous und Play/Pause lassen die 
 Der Drehregler steuert im Normalfall die Lautstärke: nach rechts lauter, nach links leiser. Ist das
 bei dir vertauscht, musst du nichts umlöten – du kehrst die Drehrichtung einfach im Webinterface um.
 Neben dem reinen Drehen kann der Encoder aber mehr: die schon erwähnte „halten und drehen"-Geste sowie
-eine **Seek-Vorschau**. Bei letzterer zeigt dir das Drehen zunächst die Zielposition per LED-Cursor an
+eine **Sprung-Vorschau**. Bei letzterer zeigt dir das Drehen zunächst die Zielposition per LED-Cursor an
 und springt erst dann dorthin, wenn du loslässt oder kurz wartest – so triffst du eine Stelle genauer,
 ohne blind hin- und herzuspulen.
 

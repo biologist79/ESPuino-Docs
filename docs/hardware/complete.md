@@ -106,7 +106,7 @@ knapp wird – lauter Ton und gleichzeitiges Laden –, solltest du ein **USB-Ne
 ## Der Verstärker und der Ton
 
 Für den Ton sorgt ein **MAX98357A**, ein kleiner Class-D-Verstärker mit integriertem
-Digital-Analog-Wandler. Er liefert **rund 1 Watt an einem 4-Ohm-Lautsprecher** – genug für eine
+Digital-Analog-Wandler. Er liefert an 3,3 V **rund 1 Watt an einem 4-Ohm-Lautsprecher** – genug für eine
 kompakte Hörbox in Zimmerlautstärke. Bewährt haben sich kleine Breitbandlautsprecher wie der
 **Visaton FR 7** (4 Ω).
 
@@ -210,29 +210,9 @@ sodass man sie kaum verwechselt. Diese Übersicht zeigt, was wohin gehört:
     Litzen an einer fertigen Leitung. Gleiche vor dem Anstecken immer Signal für Signal mit dem
     Platinenaufdruck ab.
 
-### RFID-Steckerbelegung { #rfid-steckerbelegung }
-
-Der RFID-Anschluss der Complete ist ein **10-poliger Stecker**. Die Belegung orientiert sich am
-PN5180, der alle Leitungen nutzt; der RC522 kommt mit weniger aus. Welcher Reader steckt, **erkennt
-die Firmware automatisch** – die Belegung ist reine Hardware. In der folgenden Tabelle steht „–" für
-das, was der RC522 nicht benötigt.
-
-| Anschluss (Complete) | PN5180 | RC522 | Bedeutung |
-| --- | --- | --- | --- |
-| **5 V** | +5 V | – | Liefert nur 3,3 V, versorgt den PN5180 aber dennoch |
-| **3,3 V** | +3,3 V | 3,3 V | Spannungsversorgung |
-| **RST** | RST | – | Reset (nur PN5180) |
-| **CS** | NSS | SDA | SPI: Chip-/Slave-Select |
-| **MOSI** | MOSI | MOSI | SPI: Master Out, Slave In |
-| **MISO** | MISO | MISO | SPI: Master In, Slave Out |
-| **SCK** | SCK | SCK | SPI: Takt |
-| **BUSY** | BUSY | – | Busy (nur PN5180) |
-| **IRQ** | IRQ | – | Interrupt (nur PN5180) |
-| **GND** | GND | GND | Masse |
-
-Für den **RC522** sind also nur die SPI-Leitungen (CS/MOSI/MISO/SCK) plus **3,3 V** und **GND**
-nötig; RST, BUSY und IRQ lässt man weg (sie bewirken dort nichts). Quelle:
-[Forum → ESPuino Complete (#3817)](https://forum.espuino.de/t/espuino-complete/3817).
+Die genaue Belegung des **RFID-Steckers** – 10-polig, mit den Unterschieden zwischen PN5180 und RC522 –
+steht dort, wo du sie brauchst: in
+[Kapitel 5 → RFID-Steckerbelegung](aufbau.md#rfid-steckerbelegung).
 
 ## Die Komponenten auswählen
 

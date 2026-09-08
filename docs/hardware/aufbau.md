@@ -3,7 +3,7 @@
 Die gute Nachricht zuerst: Der Aufbau der [Complete](complete.md) ist überschaubar. Die Platine kommt **fertig
 bestückt** zu dir – das gesamte SMD-Löten der winzigen Bauteile ist bereits erledigt, und auch die
 Lötbrücken, die dein Gerät konfigurieren, sind ab Werk passend zu deiner Bestellung gesetzt. Was
-bleibt, ist übersichtlich: ein paar Drähte anlöten, den Drehencoder einstecken, alles ins Gehäuse
+bleibt, ist übersichtlich: ein paar Drähte anlöten, den Drehencoder anschließen, alles ins Gehäuse
 bringen. Kein SMD, keine Spezialkenntnisse.
 
 Als Begleitung beim Aufbau eignet sich das ausführliche
@@ -24,9 +24,11 @@ zum [Encoder-Bausatz (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/
 ## Was du bekommst
 
 Bereits bestückt sind unter anderem der ESP32-WROVER, der Verstärker, der Laderegler, die
-Spannungsüberwachung, der Port-Expander und der SD-Slot. Ein paar optionale Steckverbinder (etwa für
-I²C) bleiben bewusst unbestückt, damit die Platine übersichtlich bleibt – die brauchst du nur, wenn
-du weißt, dass du sie brauchst.
+Spannungsüberwachung, der Port-Expander und der SD-Slot. Ein paar optionale Steckverbinder bleiben
+dagegen bewusst unbestückt – allen voran der für **I²C**. Dahinter stecken zwei Überlegungen: Zum
+einen wird I²C bislang schlicht nicht gebraucht. Zum anderen ist der I²C-Anschluss genauso
+**fünfpolig** wie der für den Drehencoder, die beiden ließen sich also leicht verwechseln. Bleibt der
+I²C-Stecker unbestückt, kann das gar nicht erst passieren.
 
 ## Die Lötbrücken
 
@@ -71,32 +73,73 @@ orientierst dich – siehe Warnung oben – **immer am Platinenaufdruck**, nie a
 Anzuschließen sind:
 
 - der **RFID-Reader**: Der RC522 braucht nicht alle Adern; ungenutzte wickelst du zur Sicherheit mit
-  Isolierband ab. Der PN5180 nutzt dagegen alle Anschlüsse.
+  Isolierband ab. Der PN5180 nutzt dagegen alle Anschlüsse. Welche Ader wohin gehört, steht in der
+  [nachfolgenden Steckerbelegung](#rfid-steckerbelegung).
 - der **Lautsprecher** (zweipolig).
 - der **Neopixel** – ob Ring, Reihe oder einzelne LED – über drei Leitungen (GND, 5 V, Daten). Die
   Datenleitung ist auf den Ringen meist als **DI** (Data In) und **DO** (Data Out) beschriftet;
   angeschlossen wird an **DI**. Hier gilt noch einmal besonders: auf die Polung achten – bei LEDs ist
   eine **Verpolung besonders heikel**, weil sie sich wie ein **Kurzschluss** verhält.
 - die **Tasten** (jeweils zweipolig).
-- der **Drehencoder**: wird nur in den fünfpoligen Anschluss **gesteckt**, nicht gelötet (mehr dazu
-  gleich unten).
+- der **Drehencoder**: kommt in den fünfpoligen Anschluss. Mit dem ESPuino-Encoder-Bausatz wird er nur
+  **gesteckt**, bei einem anderen Encoder lötest du die Leitungen selbst an (mehr dazu gleich unten).
 - optional die **Kopfhörerplatine**, die du in den sechspoligen Anschluss steckst.
+
+### RFID-Steckerbelegung { #rfid-steckerbelegung }
+
+Der RFID-Anschluss der [Complete](complete.md) ist ein **10-poliger Stecker**. Die Belegung orientiert
+sich am PN5180, der alle Leitungen nutzt; der RC522 kommt mit weniger aus. Welcher Reader steckt,
+**erkennt die Firmware automatisch** – die Belegung ist reine Hardware. In der folgenden Tabelle steht
+„–" für das, was der RC522 nicht benötigt.
+
+| Anschluss (Complete) | PN5180 | RC522 | Bedeutung |
+| --- | --- | --- | --- |
+| **5 V** | +5 V | – | Liefert nur 3,3 V, versorgt den PN5180 aber dennoch |
+| **3,3 V** | +3,3 V | 3,3 V | Spannungsversorgung |
+| **RST** | RST | – | Reset (nur PN5180) |
+| **CS** | NSS | SDA | SPI: Chip-/Slave-Select |
+| **MOSI** | MOSI | MOSI | SPI: Master Out, Slave In |
+| **MISO** | MISO | MISO | SPI: Master In, Slave Out |
+| **SCK** | SCK | SCK | SPI: Takt |
+| **BUSY** | BUSY | – | Busy (nur PN5180) |
+| **IRQ** | IRQ | – | Interrupt (nur PN5180) |
+| **GND** | GND | GND | Masse |
+
+Für den **RC522** sind also nur die SPI-Leitungen (CS/MOSI/MISO/SCK) plus **3,3 V** und **GND**
+nötig; RST, BUSY und IRQ lässt man weg (sie bewirken dort nichts). Quelle:
+[Forum → ESPuino Complete (#3817)](https://forum.espuino.de/t/espuino-complete/3817).
 
 ## Der Drehencoder
 
-An die ESPuino-Platine wird der Drehencoder **ohne Löten** angeschlossen – über einen fünfpoligen,
-verpolsicheren JST-PH-Stecker, den du einfach einsteckst. Praktisch dafür ist der
-[ESPuino-Encoder-Bausatz](https://forum.espuino.de/t/drehencoder-by-espuino/2414). Er besteht aus:
+Für den Drehencoder sitzt auf der ESPuino-Platine ein **fünfpoliger, verpolsicherer JST-PH-Anschluss**.
+Wie der Encoder dort hineinkommt, hängt davon ab, wofür du dich entscheidest:
+
+- Mit dem **[ESPuino-Encoder-Bausatz](https://forum.espuino.de/t/drehencoder-by-espuino/2414)** wird
+  **nichts gelötet, was die Verkabelung angeht**: Ihm liegt eine fertig konfektionierte Leitung mit
+  **Steckern an beiden Enden** bei – eine Seite in die ESPuino-Platine, die andere in die
+  Adapterplatine des Encoders. Gelötet wird nur der Bausatz selbst, siehe gleich unten.
+- Nimmst du einen **beliebigen anderen Drehencoder**, bekommst du lediglich eine fünfpolige
+  **JST-PH-Anschlussleitung**: Deren Stecker kommt in die ESPuino-Platine, die **losen Drähte am
+  anderen Ende lötest du selbst** an deinen Encoder an.
+
+!!! warning "Eigener Encoder: Pull-up-Widerstände nicht vergessen"
+    Setzt du einen eigenen Drehencoder ein, achte darauf, dass auf dessen Platine
+    **Pull-up-Widerstände** bestückt sind. Bei fertigen Encoder-Modulen ist das normalerweise der Fall –
+    ein kurzer Blick lohnt sich trotzdem: Fehlen sie, kommt es zu **„Ghost-Touches"**, ESPuino
+    registriert dann Drehbewegungen, die gar nicht stattgefunden haben. Beim ESPuino-Encoder-Bausatz
+    sind sie bereits an Bord, dort musst du dich darum nicht kümmern.
+
+Der Bausatz besteht aus:
 
 - dem **Drehencoder** selbst,
 - einer kleinen **Adapterplatine** (mit drei bereits bestückten Pull-up-Widerständen),
 - einer fünfpoligen **JST-PH-Buchse** und
 - der passenden **Anschlussleitung**.
 
-Den Bausatz selbst musst du allerdings **zusammenlöten**: Drehencoder und JST-Buchse kommen auf die
+Zusammenlöten musst du ihn allerdings selbst: Drehencoder und JST-Buchse kommen auf die
 Adapterplatine – und zwar auf **entgegengesetzte Seiten**.
 
-!!! danger "Auf die richtige Seite löten!"
+!!! danger "Nur beim Bausatz: auf die richtige Seite löten!"
     Der **Drehencoder** wird von der Seite eingesetzt, auf der das **Rechteck aufgedruckt** ist; die
     **JST-Buchse** kommt auf die **andere Seite**. Zur Kontrolle: Der Aufdruck (Rechteck bzw. Nummer)
     muss am Ende vom jeweiligen Bauteil **verdeckt** sein. Lötest du verkehrt herum, passt es nicht
@@ -104,7 +147,8 @@ Adapterplatine – und zwar auf **entgegengesetzte Seiten**.
     [Encoder-Thread (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/2414).
 
 Falls sich später herausstellt, dass „lauter" und „leiser" vertauscht sind, ist das kein Grund zum
-Umlöten: Die Drehrichtung lässt sich im Webinterface umkehren.
+Umlöten: Die Drehrichtung lässt sich im Webinterface umkehren
+([Kapitel 8 → Drehencoder & Taster](../bedienung/webinterface.md#drehencoder-taster)).
 
 Ist alles angeschlossen, geht es weiter mit dem [Einbau ins Gehäuse](gehaeuse.md) und der
 Feinjustierung unten.
