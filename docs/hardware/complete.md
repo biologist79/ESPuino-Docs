@@ -16,7 +16,7 @@ einiger Drähte und Stecker, und das ist in [Kapitel 5](aufbau.md) beschrieben.
 
 ## Technische Eckdaten
 
-Bevor wir ins Detail gehen, die harten Fakten auf einen Blick:
+Bevor wir ins Detail gehen, die Fakten auf einen Blick:
 
 | Merkmal | Wert |
 | --- | --- |
@@ -29,6 +29,7 @@ Bevor wir ins Detail gehen, die harten Fakten auf einen Blick:
 | Verstärker | MAX98357A, Mono, ~1 W an 4 Ω |
 | Audiospeicher | microSD (SD-MMC, 1-Bit), FAT32 |
 | Erweiterung | PCA9555-Port-Expander für zusätzliche Ein-/Ausgänge |
+| Anschlüsse | JST-PH-Steckverbinder für RFID-Reader, Lautsprecher, Drehencoder, Neopixel, bis zu 5 Taster, Kopfhörerplatine, Lade-LED, Power-Off-Schalter und Akku; dazu USB-C und der Erweiterungsanschluss Ext.Conn1. Der I²C-Anschluss bleibt ab Werk unbestückt ([Details](#die-anschlusse-im-uberblick)). |
 
 Alles Weitere – welche Leitung wohin gehört, welche Lötbrücke was bewirkt – steht in den folgenden
 Abschnitten, unter anderem in der [Pinout-Referenz](#pinout-referenz-complete).
@@ -87,11 +88,12 @@ dabei in den stromsparenden **Deep-Sleep** und wacht auf Tastendruck sofort wied
 ist das völlig ausreichend.
 
 Wer den Ruhestrom noch weiter senken möchte, kann einen **echten Ausschalter** vorsehen. Die Complete
-hat dafür einen **2-poligen Power-Off-Anschluss**: Ein daran angeschlossener Schalter trennt die
-zentrale 3,3-V-Versorgung vollständig – der ESP32 ist dann wirklich aus, nicht nur im Schlaf.
+hat dafür einen **2-poligen Power-Off-Anschluss**: Ein daran angeschlossener Schalter legt die
+zentrale 3,3-V-Versorgung still, indem er die **Ausgangsseite des Schaltreglers deaktiviert** – der
+ESP32 ist dann wirklich aus, nicht nur im Schlaf. Das **Laden über USB funktioniert dabei weiter**,
+auch wenn der Schalter auf „aus" steht.
 
 !!! note "Power-Off-Switch: die Kehrseiten"
-    - Das **Laden über USB funktioniert weiter**, auch wenn per Schalter „aus".
     - Der Start dauert danach **etwas länger** (voller Kaltstart statt Aufwachen aus dem Deep-Sleep).
     - Mit dem PN5180-**LPCD-Aufwecken** ist der harte Ausschalter **nicht kombinierbar** – beides
       schließt sich gegenseitig aus.
@@ -116,12 +118,27 @@ Ausgang liegen **beide Stereokanäle zusammengemischt** (Summe aus links und rec
 nichts verloren. Es ist damit ein einkanaliger Ausgang – für eine kompakte Hörbox genau das Richtige.
 Am **Kopfhörerausgang** (über die separate Kopfhörerplatine) steht dir Stereo zur Verfügung.
 
-Die **Grundverstärkung** stellst du per Lötbrücke ein: **ohne** Brücke sind es **+9 dB**, mit **JP2**
-**+3 dB** und mit **JP3** **+15 dB** – es darf immer nur eine der beiden gesetzt sein. **Ab Werk ist
-JP2 gesetzt** (+3 dB). Das ist für eine Hörbox erfahrungsgemäß laut genug und hat einen angenehmen
-Nebeneffekt: Bei der niedrigeren Grundverstärkung liegen die **21 Lautstärkestufen der Software enger
-beieinander**, sodass sich die Lautstärke **feiner regeln** lässt. Die Details zu diesen Lötbrücken
-stehen bei den [Lötbrücken in Kapitel 5](aufbau.md#die-lotbrucken).
+Der Ton muss dabei nicht zwingend über den eingebauten Verstärker laufen: ESPuino beherrscht auch
+**Bluetooth** – als **Quelle**, um an einen Bluetooth-Lautsprecher oder -Kopfhörer zu senden, und als
+**Senke**, bei der ESPuino selbst zum Lautsprecher wird und du etwa vom Handy auf ihn streamst. Beide
+Modi und worauf dabei zu achten ist, stehen in [Kapitel 9](../bedienung/am-geraet.md).
+
+Die **Grundverstärkung** stellst du per Lötbrücke ein:
+
+| Lötbrücke | Grundverstärkung |
+| --- | --- |
+| **JP2** – ab Werk gesetzt | **+3 dB** |
+| keine Brücke | +9 dB |
+| **JP3** | +15 dB |
+
+!!! warning "Niemals JP2 und JP3 zugleich"
+    Die beiden Brücken schließen sich gegenseitig aus: Es darf immer nur **eine von beiden** gesetzt
+    sein – oder eben keine, dann bleibt es bei +9 dB.
+
+Die Werkseinstellung JP2 (+3 dB) ist für eine Hörbox erfahrungsgemäß laut genug und hat einen
+angenehmen Nebeneffekt: Bei der niedrigeren Grundverstärkung liegen die **21 Lautstärkestufen der
+Software enger beieinander**, sodass sich die Lautstärke **feiner regeln** lässt. Die Details zu
+diesen Lötbrücken stehen bei den [Lötbrücken in Kapitel 5](aufbau.md#die-lotbrucken).
 
 ## Versionen & Lieferumfang
 
@@ -266,7 +283,7 @@ entnimmst du am besten dem 3D-Modell.
 
 ## Für Fortgeschrittene: weitere Anschlüsse
 
-??? info "Ext.Conn1, Ext.Conn2, Ext.USB und der Port-Expander"
+???+ info "Ext.Conn1, Ext.Conn2, Ext.USB und der Port-Expander"
     Diese Anschlüsse brauchst du für einen normalen Aufbau **nicht** – sie sind für Sonderfälle
     gedacht und teils ab Werk unbestückt (auf Wunsch bestückbar).
 

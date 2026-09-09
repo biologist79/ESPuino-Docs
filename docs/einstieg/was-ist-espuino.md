@@ -15,7 +15,7 @@ Selbstbauprojekt: Der Quellcode ist frei, die Hardware dokumentiert, und du ents
 groß, wie laut und wie bunt deine Box wird – wie vielfältig das ausfällt, zeigt die Galerie
 [„Zeigt her eure ESPuinos"](https://forum.espuino.de/t/zeigt-her-eure-espuinos/554).
 
-Ein Punkt ist wichtig zu verstehen, weil er später manches erklärt: **Auf die Karten selbst wird
+Ein Punkt ist wichtig zu verstehen, weil er später manches erklärt: **Auf die RFID-Karten selbst wird
 nichts geschrieben.** ESPuino liest lediglich die eindeutige Nummer (die ID) einer Karte
 und merkt sich intern, welcher Inhalt dazugehört. Du kannst also handelsübliche RFID-Karten, Chips
 oder Aufkleber verwenden – konkret die Standards **ISO-14443** und (nur mit dem PN5180-Reader)

@@ -78,7 +78,7 @@ technischen IDs dazu stehen im [Anhang](../referenz/anhang.md#playmodi).
 | 🎵 Einzelner Titel | Genau eine Datei, einmal. |
 | 🎵🔁 Einzelner Titel (Endlosschleife) | Eine Datei dauerhaft wiederholen. |
 | 🎲💤 Zufälliger Titel eines Ordners, danach schlafen | Ein zufälliger Titel, danach Deep Sleep – die ideale Einschlaf-Karte. |
-| 📖 Hörbuch | Titel eines Ordners sortiert; **die letzte Position wird gemerkt**. |
+| 📖 Hörbuch | Titel eines Ordners sortiert – oder auch nur eine einzelne Datei; **die letzte Position wird gemerkt**. |
 | 📚 Hörbuch rekursiv | Wie Hörbuch, inklusive Unterordner; Position wird gemerkt. |
 | 📖🔁 Hörbuch (Endlosschleife) | Hörbuch, beginnt nach dem letzten Titel wieder von vorn. |
 | 📁 Alle Titel (sortiert) | Ordner sortiert, **ohne** Positionsspeicherung. |
@@ -132,6 +132,12 @@ aktiv ist.*
 | 🔀 Modus wechseln | Schaltet der Reihe nach durch die Betriebsmodi (Normal ↔ Bluetooth). |
 
 *Die drei Bluetooth-Aktionen sind nur bei einer Firmware mit Bluetooth-Unterstützung verfügbar.*
+
+!!! warning "Mit „WLAN an/aus" kannst du dich aussperren"
+    Schaltest du das WLAN ab, ist damit auch das **Webinterface weg** – und genau dort würdest du es
+    normalerweise wieder einschalten. Zurück kommst du dann nur über denselben Weg, über den du es
+    ausgeschaltet hast: die **Modifikationskarte** (bzw. eine Tastenkombination oder einen Taster, dem
+    du diese Aktion zugewiesen hast). Bewahre die Karte also gut auf, bevor du das WLAN abschaltest.
 
 **Ansagen**
 
