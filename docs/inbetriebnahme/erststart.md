@@ -92,7 +92,7 @@ abgeschlossener Verbindungsversuch. Starte ESPuino testweise neu, geh näher an 
 notfalls die Zugangsdaten noch einmal in Ruhe ein. Eine ausführlichere Fehlersuche zum Thema WLAN
 findest du in [Kapitel 15 · Troubleshooting](../hilfe/troubleshooting.md#wlan-probleme).
 
-## Das Webinterface öffnen
+## Das Webinterface öffnen { #das-webinterface-offnen }
 
 Sobald ESPuino im WLAN ist, verwaltest du ihn über das **Webinterface** – die Bedien- und
 Konfigurationsoberfläche, die du einfach im Browser aufrufst. Es gibt zwei Wege dorthin.

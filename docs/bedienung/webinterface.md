@@ -93,7 +93,7 @@ technischen IDs dazu stehen im [Anhang](../referenz/anhang.md#playmodi).
 | 📃 Liste (.m3u) | Die Einträge einer lokalen `.m3u` – Dateien und Webstreams gemischt. |
 | 🌐 MediaHub | Inhalt **und** Abspielmodus kommen vom gewählten [MediaHub-Server](../inhalte/mediahub.md). |
 
-#### Modifikationskarten – alle Optionen
+#### Modifikationskarten – alle Optionen { #modifikationskarten-alle-optionen }
 
 Statt Musik lässt sich einer Karte eine Aktion zuordnen. Denselben Katalog findest du übrigens im Tab
 Steuerung unter „Modifikation ausführen", wo du die Aktion direkt und ohne Karte auslöst. Die
@@ -163,7 +163,7 @@ aktiv ist.*
 | 🏷 Virtuelle Karte 01–10 | Verweist auf eine von zehn **virtuellen Karten** – Zuordnungen, die sich ohne physische Karte auslösen lassen (etwa per Tastenkombination oder MQTT). |
 | 🗑 Zuordnung löschen | Weist du *diese* Aktion einer Karte zu, wird beim nächsten Auflegen die bestehende Zuordnung dieser Karte entfernt. |
 
-## Tab WLAN
+## Tab WLAN { #tab-wlan }
 
 <!-- Screenshot: WLAN-Tab -->
 
@@ -189,7 +189,7 @@ Mülleimer-Symbol löschst du Einträge.
     Eine **statische IP** solltest du nur setzen, wenn du weißt, was du tust. Passt die Konfiguration
     nicht zu deinem Netz, ist ESPuino unter Umständen nicht mehr erreichbar.
 
-## Tab MQTT
+## Tab MQTT { #tab-mqtt }
 
 *MQTT-Unterstützung ist standardmäßig einkompiliert, dieser Tab also normalerweise vorhanden – er
 fehlt nur, wenn die Firmware bewusst ohne MQTT gebaut wurde.*
@@ -209,7 +209,7 @@ sich aus deinen Eingaben ergeben. Welche Topics es gibt, steht im
     Änderungen an den MQTT-Einstellungen greifen erst nach einem Neustart – das Interface bietet ihn
     nach dem Speichern gleich an.
 
-## Tab FTP
+## Tab FTP { #tab-ftp }
 
 *FTP-Unterstützung ist standardmäßig einkompiliert, dieser Tab also normalerweise vorhanden – er
 fehlt nur, wenn die Firmware bewusst ohne FTP gebaut wurde.*
@@ -242,7 +242,7 @@ wechseln; alternativ genügt es, eine unbekannte RFID-Karte aufzulegen.
     Bluetooth und WLAN laufen **parallel**. Der Parallelbetrieb ist allerdings speicherknapp und
     ungetestet – mehr dazu in [Kapitel 9 → Betriebsmodi](am-geraet.md#betriebsmodi).
 
-## Tab Allgemein
+## Tab Allgemein { #tab-allgemein }
 
 <!-- Screenshot: Allgemein-Tab -->
 
@@ -252,7 +252,7 @@ lass dich davon nicht täuschen: Alle fünf gehören zu **einem** gemeinsamen Fo
 Speichern sichert deshalb **alle** allgemeinen Einstellungen auf einmal – nicht nur die gerade
 sichtbare Unterkladde. Du musst also nicht in jeder Unterkladde einzeln speichern.
 
-### Wiedergabe
+### Wiedergabe { #wiedergabe }
 
 Hier stellst du das grundlegende Abspielverhalten ein. Unter **Lautstärke** legst du die
 Startlautstärke und die Maximalwerte getrennt für Lautsprecher und Kopfhörer fest, dazu eine
@@ -313,7 +313,7 @@ In dieser Unterkladde geht es um den Kartenleser:
 !!! warning "Neustart nötig"
     Änderungen in dieser Unterkladde greifen erst nach einem Neustart.
 
-### Drehencoder & Taster
+### Drehencoder & Taster { #drehencoder-taster }
 
 <!-- Screenshot: Drehencoder & Taster -->
 
@@ -413,7 +413,7 @@ Ist die Batteriemessung aktiv, kommen unter **Batterie** diese Werte hinzu:
 | Korrekturwert | Feinkorrektur der gemessenen Spannung (± in Hundertstel-Volt). Weicht die Anzeige von einer Multimeter-Messung ab, trägst du hier die Differenz ein. Details in [Kapitel 5 · Feinjustierung](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
 | Messintervall | Wie oft die Batteriespannung gemessen wird. |
 
-## Tab Updates
+## Tab Updates { #tab-updates }
 
 <!-- Screenshot: Updates -->
 

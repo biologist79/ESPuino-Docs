@@ -88,7 +88,7 @@ mehr Arbeitsspeicher.
     Hast du nur eine `https://`-Adresse, probiere einfach, ob derselbe Sender auch über `http://`
     läuft – das schont den Arbeitsspeicher und funktioniert in der Praxis oft.
 
-## Backup & Restore: deine Kartenzuordnungen sichern
+## Backup & Restore: deine Kartenzuordnungen sichern { #backup-restore-deine-kartenzuordnungen-sichern }
 
 Ein Punkt, den man leicht übersieht, bis es zu spät ist: Die Zuordnungen zwischen Karten und Inhalten
 liegen **nicht** auf der SD-Karte, sondern im internen Speicher (NVS) des ESP32. Geht die Platine

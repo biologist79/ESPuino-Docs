@@ -30,7 +30,7 @@ einen wird I²C bislang schlicht nicht gebraucht. Zum anderen ist der I²C-Ansch
 **fünfpolig** wie der für den Drehencoder, die beiden ließen sich also leicht verwechseln. Bleibt der
 I²C-Stecker unbestückt, kann das gar nicht erst passieren.
 
-## Die Lötbrücken
+## Die Lötbrücken { #die-lotbrucken }
 
 Auf der Rückseite sitzen mehrere Lötbrücken (Jumper), über die grundlegende Eigenschaften der Platine
 festgelegt werden – vor allem der Akkutyp, die Verstärkung und die RFID-Versorgung. Die gute Nachricht
@@ -153,7 +153,7 @@ Umlöten: Die Drehrichtung lässt sich im Webinterface umkehren
 Ist alles angeschlossen, geht es weiter mit dem [Einbau ins Gehäuse](gehaeuse.md) und der
 Feinjustierung unten.
 
-## Nach dem Zusammenbau: die Feinjustierung
+## Nach dem Zusammenbau: die Feinjustierung { #nach-dem-zusammenbau-die-feinjustierung }
 
 Ist alles verbaut, folgt der [erste Start](../inbetriebnahme/erststart.md). Ein paar Einstellungen
 solltest du dabei einmalig an deine konkrete Hardware anpassen – am bequemsten gleich im Webinterface.

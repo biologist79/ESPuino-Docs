@@ -35,7 +35,7 @@ JSON mit Modus und Restzeit). Und wenn du ESPuino im Akkubetrieb nutzt, findest 
 (Tab Allgemein → Energie) die Warnschwellen, die Anzeige und die optionale automatische Abschaltung
 bei zu niedriger Spannung.
 
-## Virtuelle RFID-Karten
+## Virtuelle RFID-Karten { #virtuelle-rfid-karten }
 
 Nicht jede Aktion braucht eine physische Karte. ESPuino kennt zehn **virtuelle Karten** mit den IDs
 `900000000001` bis `900000000010`. Du weist ihnen im Webinterface Inhalte oder Modifikationen zu –

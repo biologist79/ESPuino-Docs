@@ -3,7 +3,7 @@
 Nachschlage-Referenz. Die Tabellen sind aus dem Firmware-Code abgeleitet – bei Code-Änderungen
 mitziehen.
 
-## Playmodi
+## Playmodi { #playmodi }
 
 Was die einzelnen Modi im Alltag bedeuten – mit Symbol und Beschreibung – steht in
 [Kapitel 8 → Die Abspielmodi](../bedienung/webinterface.md#abspielmodi). Hier stehen nur die
@@ -21,7 +21,7 @@ technischen IDs, wie sie in MQTT-Nachrichten, in der REST-API und in `backup.txt
 | MediaHub | 18 | `MEDIAHUB` |
 | intern | 0 / 10 | `NO_PLAYLIST` / `BUSY` |
 
-## Modifikationskarten
+## Modifikationskarten { #modifikationskarten }
 
 Karten, die eine Funktion auslösen statt Musik. Den vollständigen Katalog in Alltagssprache –
 sortiert nach Themen – findest du in
@@ -63,14 +63,14 @@ zugewiesen werden die Kommandos in
 | 184 / 185 | Nächster / Voriger Ordner (rekursive Modi) |
 | 186 | Sprung-Vorschau (nur Drehencoder-Geste) |
 
-## Virtuelle RFID-Karten
+## Virtuelle RFID-Karten { #virtuelle-rfid-karten }
 
 Wozu sie gut sind und wie man sie auslöst, erklärt
 [Kapitel 12 → Virtuelle RFID-Karten](../vertiefung/erweiterte-themen.md#virtuelle-rfid-karten).
 
 IDs `241`–`250` entsprechen den Karten `900000000001` … `900000000010`.
 
-## MQTT-Topics
+## MQTT-Topics { #mqtt-topics }
 
 Muster: `[<base_topic>/]device_id/topic[/<setter_token>]`. Kommandos nutzen den Setter-Token
 (Default `set`), Status-Topics werden ohne ihn veröffentlicht. Alle Topics **non-retained**.
@@ -130,7 +130,7 @@ mit dem Code synchron. *(Optional später: als interaktive Swagger-Seite ins Han
 - [LPCD #1664](https://forum.espuino.de/t/was-ist-lpcd-und-wie-funktioniert-es/1664)
 - [Preisliste #3344](https://forum.espuino.de/t/preisliste/3344)
 
-## Changelog
+## Changelog { #changelog }
 
 Der aktuelle Changelog wird im Firmware-Repo gepflegt und dort fortlaufend ergänzt:
 [changelog.md im `dev`-Branch](https://github.com/biologist79/ESPuino/blob/dev/changelog.md) – passend

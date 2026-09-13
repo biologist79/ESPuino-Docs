@@ -5,7 +5,7 @@ mit Karten, Tasten, dem Drehregler und mit einem Blick auf den LED-Ring. Dieses 
 diese Bedienelemente zusammenspielen und wie du die vielen Zustände deuten kannst, die dir der ESPuino
 über die Neopixel mitteilt.
 
-## Betriebsmodi
+## Betriebsmodi { #betriebsmodi }
 
 ESPuino kennt drei grundsätzliche Betriebsmodi. Im **Normalmodus** spielt er wie gewohnt Inhalte von
 der SD-Karte. Im Modus **Bluetooth-Quelle** sendet er den Ton an ein Bluetooth-Gerät, etwa an einen
@@ -39,7 +39,7 @@ entlang der alphabetischen Reihenfolge. Beide Aktionen kannst du im Webinterface
     Im rekursiven Hörbuch-Modus wird die Playlist bei jedem Laden neu erzeugt. Kommen nachträglich
     neue Ordner hinzu, kann sich die gemerkte Position dadurch verschieben.
 
-## Modifikationskarten
+## Modifikationskarten { #modifikationskarten }
 
 Nicht jede Karte muss Inhalte starten – eine Karte kann auch eine **Funktion** auslösen, etwa einen
 Schlaftimer setzen, die Tasten sperren oder das Licht umschalten. Diese „Modifikationskarten" sind ein
@@ -47,7 +47,7 @@ mächtiges Werkzeug, gerade für den Alltag mit Kindern. Den vollständigen Kata
 Kartenanlernen im [Webinterface](webinterface.md#modifikationskarten-alle-optionen); die technischen
 IDs listet der [Anhang](../referenz/anhang.md#modifikationskarten).
 
-## Tasten und Tastenkombinationen
+## Tasten und Tastenkombinationen { #tasten-und-tastenkombinationen }
 
 Die folgende Belegung ist der **Auslieferungszustand** – im Webinterface (Stichwort „dynamisches
 Button-Layout") kannst du sie komplett anpassen. Auf der [Complete](../hardware/complete.md) sind die Tasten physisch so

@@ -106,7 +106,7 @@ Datei-Schleife deiner Shell.
     [Forum](https://forum.espuino.de) – dort schauen wir es uns gemeinsam an und finden heraus, woran
     es liegt.
 
-## WLAN-Probleme
+## WLAN-Probleme { #wlan-probleme }
 
 Zwei Dinge übersieht man leicht. Erstens: Der ESP32 funkt **nur auf 2,4 GHz** – ein reines
 5-GHz-Netz sieht er gar nicht. Zweitens: Die Adresse muss immer mit **`http://`** aufgerufen werden,
