@@ -321,8 +321,8 @@ Hier legst du fest, was die Bedienelemente tun. Wichtig zu verstehen: Alles, was
 landet im internen Speicher (NVS) und **überschreibt die in der Firmware hinterlegte
 Standardbelegung** – du kannst die komplette Belegung also anpassen, ohne die Firmware neu zu bauen.
 
-Für den **Drehregler** gibt es nur eine Einstellung: die **Drehrichtung umkehren**, falls bei dir
-Rechtsdrehen leiser statt lauter macht. Darunter ordnest du in einer Tabelle jedem der sechs
+Für den **Drehregler** selbst gibt es die **Drehrichtung umkehren**, falls bei dir Rechtsdrehen leiser
+statt lauter macht – dazu weiter unten die Sprungweiten fürs Spulen. Darunter ordnest du in einer Tabelle jedem der sechs
 **Taster** (Btn0–Btn5) je eine Aktion für kurzen und langen Druck zu; `--` bedeutet „keine Aktion".
 Zusätzlich lassen sich Aktionen auf **gleichzeitig gedrückte Tasterpaare** legen (alle 15
 Kombinationen von 0+1 bis 4+5, jeweils eine Aktion) – praktisch für selten gebrauchte Funktionen wie
@@ -349,6 +349,28 @@ einiger Aktionen, die nur als Taster Sinn ergeben: Lauter/Leiser/Initiale Lautst
 Batteriespannung anzeigen, Stop und Neustart, Schlafen nach fünf Titeln sowie eine Debug-Anzeige der
 Taskauslastung. Die Standardbelegung, mit der ESPuino ausgeliefert wird, findest du in
 [Kapitel 9 → Tasten](am-geraet.md#tasten-und-tastenkombinationen).
+
+#### Sprungweiten beim Spulen { #sprungweiten }
+
+Wie weit ESPuino beim Spulen springt, hängt davon ab, *womit* du spulst – deshalb gibt es dafür zwei
+getrennte Blöcke auf dieser Seite.
+
+**Spulen mit den Tasten** betrifft die Taster, denen du die Aktion „Vorspulen" oder „Zurückspulen"
+zugewiesen hast. Hier legst du fest, um wie viele Sekunden ein einzelner Tastendruck springt
+(1–120, Standard **30**).
+
+**Spulen mit dem Drehimpulsgeber** betrifft die „Taste halten + drehen"-Geste. Dafür gibt es zwei
+Varianten, die sich gegenseitig ausschließen – welche greift, entscheidest du in der Dreh-Aktions-Tabelle
+weiter oben, indem du der Geste entweder „Positionsvorschau" oder „Vorspulen"/„Zurückspulen" zuweist:
+
+| Variante | Einstellungen | Standard |
+| --- | --- | --- |
+| **Positionsvorschau** (die komfortablere) | *Verzögerung bis zur Übernahme* – wie lange ESPuino nach der letzten Drehung wartet, bevor er springt.<br>*Anzahl Rasterungen für 0 bis 100 %* – wie viele Rasterungen einmal über den ganzen Titel führen. | 2000 ms<br>40 |
+| **Direktes Spulen** (ab Werk aktiv) | *Sprungweite pro Rastung* – um wie viele Sekunden jede einzelne Rasterung sofort springt. | 10 s (1–60) |
+
+Wie sich die beiden Varianten im Betrieb unterscheiden, steht in
+[Kapitel 9](am-geraet.md#tasten-und-tastenkombinationen). Alle Werte wirken **sofort nach dem
+Speichern**, ein Neustart ist dafür nicht nötig.
 
 ### LED
 

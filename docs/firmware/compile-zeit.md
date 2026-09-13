@@ -49,7 +49,6 @@ auch [Anhang → Pinout](../referenz/anhang.md).
 
 | Wert | Ort | Zweck |
 | --- | --- | --- |
-| `jumpOffset = 30` | `settings.h` | Sprung-Sekunden beim **Button**-Seek (kein NVS-Override) |
 | `deepsleepTimeAfterBootFails = 20` | `settings.h` | Auto-Neustart nach SD-Bootfehler (Sekunden) |
 | `rdiv1`, `rdiv2`, `inputAttenuation` | `settings-complete.h` | Batterie-Kalibrierung (Spannungsteiler/ADC) |
 | `RC_*`, `IR_DEBOUNCE` | `settings-complete.h` | IR-Fernbedienungscodes |
@@ -59,9 +58,14 @@ auch [Anhang → Pinout](../referenz/anhang.md).
     Der Batterie-**Korrekturwert** `offsetVoltage` ist **seit September 2026** im Webinterface
     einstellbar (Batterie-Einstellungen) und daher hier nicht mehr aufgeführt.
 
-!!! tip "Nuance Seek-Schritt"
-    Der **Rotary**-Seek-Schritt ist dagegen im Webinterface einstellbar (`rotSeekStep`, Default
-    `JUMP_OFFSET_ROTARY = 10`). Nur der **Button**-Seek `jumpOffset` bleibt fest.
+!!! info "Sprungweiten jetzt im Webinterface"
+    Auch die beiden **Sprungweiten fürs Spulen** sind **seit September 2026** im Webinterface
+    einstellbar ([Kapitel 8 → Sprungweiten](../bedienung/webinterface.md#sprungweiten)) und stehen
+    deshalb nicht mehr in dieser Tabelle: die per **Taste** (früher `jumpOffset`) und die per
+    **Drehencoder-Rastung** (früher `JUMP_OFFSET_ROTARY`). Beide Konstanten sind aus der `settings.h`
+    verschwunden und leben nur noch als interne Vorgabewerte (`SEEK_STEP_BUTTON_DEFAULT` /
+    `SEEK_STEP_ROTARY_DEFAULT`) in `values.h`. **Für Eigenbauten wichtig:** Eine
+    `settings-override.h`, die sie weiterhin definiert, bewirkt nichts mehr.
 
 ## Vorrangregel
 

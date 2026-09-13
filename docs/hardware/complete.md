@@ -26,7 +26,7 @@ Bevor wir ins Detail gehen, die Fakten auf einen Blick:
 | Stromversorgung | Buck/Boost-Schaltregler (TPS63000), konstant 3,3 V |
 | Eingänge | USB-C und/oder Akku (LiPo oder LFP), beide verpolgeschützt |
 | Laderegler | fest max. 1 A Ladestrom, Status-LED an Bord |
-| Verstärker | MAX98357A, Mono, ~1 W an 4 Ω |
+| Verstärker | MAX98357A, ein Lautsprecherausgang (beide Kanäle summiert), ~1 W an 4 Ω |
 | Audiospeicher | microSD (SD-MMC, 1-Bit), FAT32 |
 | Erweiterung | PCA9555-Port-Expander für zusätzliche Ein-/Ausgänge |
 | Anschlüsse | JST-PH-Steckverbinder für RFID-Reader, Lautsprecher, Drehencoder, Neopixel, bis zu 5 Taster, Kopfhörerplatine, Lade-LED, Power-Off-Schalter und Akku; dazu USB-C und der Erweiterungsanschluss Ext.Conn1. Der I²C-Anschluss bleibt ab Werk unbestückt ([Details](#die-anschlusse-im-uberblick)). |

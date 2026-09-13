@@ -66,14 +66,33 @@ Ein **kurzer** und ein **langer** Druck lösen jeweils unterschiedliche Aktionen
 | 4 (optional) | Sprung zurück (n Sekunden) | Lautstärke + |
 | 5 (optional) | Sprung vor (n Sekunden) | Lautstärke − |
 
+Wie weit die beiden Sprung-Tasten springen, legst du selbst fest: Ab Werk sind es **30 Sekunden** je
+Tastendruck, änderbar im Webinterface
+([Kapitel 8 → Drehencoder & Taster](webinterface.md#drehencoder-taster)).
+
 Dazu kommt eine besonders praktische Geste: **einen Button halten und gleichzeitig am Drehregler
 drehen.** Solange du die Taste hältst, führt das Drehen deren Sonderaktion aus. Standardmäßig steuert
 das Halten von Next ein Vor- und Zurückspulen im Titel, das Halten von Play/Pause die LED-Helligkeit.
 
-Beim Spulen zeigt dir der LED-Ring das Sprungziel an, noch bevor es übernommen wird: Der Ring färbt
-sich **gelb**, und eine **blaue** Markierung wandert beim Drehen an die Stelle, zu der gesprungen wird
-(hast du nur eine einzelne LED, leuchtet sie stattdessen einfach blau). Kurz nachdem du aufhörst zu
-drehen – standardmäßig rund zwei Sekunden –, springt die Wiedergabe an die markierte Stelle.
+Fürs Spulen per Drehregler gibt es dabei **zwei Varianten**, zwischen denen du dich entscheidest –
+zugewiesen wird das im Webinterface ([Kapitel 8 → Drehencoder & Taster](webinterface.md#drehencoder-taster)):
+
+| Variante | Was passiert | Ab Werk |
+| --- | --- | --- |
+| **Direktes Spulen** | Jede Rasterung springt **sofort** um eine feste Zeit vor oder zurück – ohne Anzeige, ohne Wartezeit. | ✔ auf Next gelegt |
+| **Positionsvorschau** | Die Wiedergabe läuft zunächst weiter, nur ein Cursor wandert zum Ziel; gesprungen wird erst am Ende. | – musst du selbst zuweisen |
+
+Die **Positionsvorschau** ist die komfortablere der beiden, du musst sie aber bewusst zuweisen. Ist sie
+aktiv, färbt sich der LED-Ring **gelb**, sobald du die Taste gedrückt hältst – noch bevor du überhaupt
+drehst. Beim Drehen wandert dann eine **blaue** Markierung (der Cursor) an die Stelle, zu der gesprungen
+würde (hast du nur eine einzelne LED, leuchtet sie währenddessen einfach blau). Erst wenn du die Taste
+loslässt oder eine Weile nicht mehr drehst – standardmäßig rund zwei Sekunden –, springt die Wiedergabe
+dorthin. So triffst du eine Stelle genau, statt dich blind vor- und zurückzutasten.
+
+Beim **direkten Spulen** passiert nichts dergleichen: Die LEDs zeigen weiterhin nur den normalen
+Fortschritt, und jede Rasterung springt unmittelbar. Das ist gröber – eine schnelle Drehung sind viele
+Rasterungen auf einmal –, funktioniert dafür aber auch auf einem ESPuino ganz ohne Neopixel, wo eine
+Vorschau nichts anzuzeigen hätte.
 
 Und schließlich lassen sich Aktionen auf **gleichzeitig gedrückte Tastenpaare** legen. Ab Werk starten
 Next und Play/Pause zusammen den FTP-Server, Previous und Play/Pause lassen die IP-Adresse ansagen.
@@ -86,10 +105,9 @@ Next und Play/Pause zusammen den FTP-Server, Previous und Play/Pause lassen die 
 
 Der Drehregler steuert im Normalfall die Lautstärke: nach rechts lauter, nach links leiser. Ist das
 bei dir vertauscht, musst du nichts umlöten – du kehrst die Drehrichtung einfach im Webinterface um.
-Neben dem reinen Drehen kann der Encoder aber mehr: die schon erwähnte „halten und drehen"-Geste sowie
-eine **Sprung-Vorschau**. Bei letzterer zeigt dir das Drehen zunächst die Zielposition per LED-Cursor an
-und springt erst dann dorthin, wenn du loslässt oder kurz wartest – so triffst du eine Stelle genauer,
-ohne blind hin- und herzuspulen.
+Neben dem reinen Drehen kann der Encoder aber mehr: die schon erwähnte „halten und drehen"-Geste, mit
+der sich unter anderem im laufenden Titel spulen lässt – wahlweise direkt oder über die oben
+beschriebene Positionsvorschau.
 
 ## Die Neopixel als Anzeige lesen
 

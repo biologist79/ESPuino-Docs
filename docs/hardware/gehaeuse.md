@@ -48,7 +48,9 @@ Gehäuse vorsehen:
 - **Kopfhörerbuchse** – falls du die Kopfhörerplatine verbaust. Anders als bei USB kannst du hier
   **nicht** mit einem dauerhaft steckenden Adapter oder einer Verlängerungsleitung arbeiten: Sobald ein
   Klinkenstecker in der Buchse sitzt, erkennt ESPuino das als „Kopfhörer angeschlossen" und der
-  Lautsprecher bleibt stumm. Die Buchse selbst muss also von außen erreichbar sein.
+  Lautsprecher bleibt stumm. Die Buchse selbst muss also von außen erreichbar sein. Damit die kleine
+  Platine im Gehäuse nicht lose herumliegt, gibt es einen **3D-druckbaren Träger** dafür:
+  [Träger für die Kopfhörerplatine (#3792)](https://forum.espuino.de/t/traeger-fuer-kopfhoererplatine/3792).
 - **SD-Karte** – der Slot *kann* zugänglich bleiben, etwa über eine Revisionsöffnung, damit du die
   Karte zum Bespielen herausnehmen kannst. Nötig ist das aber nicht: Inhalte lassen sich genauso gut
   über WLAN aufspielen ([Kapitel 10](../inhalte/verwalten.md)). Bedenke auch die Kehrseite – was

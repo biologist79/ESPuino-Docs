@@ -47,10 +47,10 @@ Karten, die eine Funktion auslösen statt Musik.
 | 175 / 176 / 177 | Lautstärke: init / + / − |
 | 178 | Batteriespannung messen |
 | 179 | Deep-Sleep (sofort) |
-| 180 / 181 | Seek vor / zurück (`jumpOffset` s) |
+| 180 / 181 | Sprung vor / zurück (Sprungweite im Webinterface einstellbar) |
 | 182 / 183 | Stop / Neustart |
 | 184 / 185 | Nächster / Voriger Ordner (rekursive Modi) |
-| 186 | Seek-Preview (nur Rotary-Geste) |
+| 186 | Sprung-Vorschau (nur Drehencoder-Geste) |
 
 ## Virtuelle RFID-Karten
 
@@ -110,7 +110,7 @@ mit dem Code synchron. *(Optional später: als interaktive Swagger-Seite ins Han
 
 - [Complete #3817](https://forum.espuino.de/t/espuino-complete/3817)
 - [mini4L #1661](https://forum.espuino.de/t/espuino-mini-4layer/1661) · [D32-Pro-Develboard #1109](https://forum.espuino.de/t/esp32-develboard-d32-pro-lifepo4/1109)
-- [Kopfhörerplatine #1099](https://forum.espuino.de/t/kopfhoererplatine-basierend-auf-ms6324-und-tda1308-bzw-lm4808m/1099)
+- [Kopfhörerplatine #1099](https://forum.espuino.de/t/kopfhoererplatine-basierend-auf-ms6324-und-tda1308-bzw-lm4808m/1099) · [Träger dafür #3792](https://forum.espuino.de/t/traeger-fuer-kopfhoererplatine/3792)
 - [Drehencoder-Bausatz #2414](https://forum.espuino.de/t/drehencoder-by-espuino/2414)
 - [MediaHub #4607](https://forum.espuino.de/t/espuino-mediahub/4607)
 - [LPCD #1664](https://forum.espuino.de/t/was-ist-lpcd-und-wie-funktioniert-es/1664)
