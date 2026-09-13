@@ -10,6 +10,14 @@
   --md-accent-fg-color:         #6f90f4;
 }
 
+/* Dezenter Rahmen um eingebettete Screenshots, damit sie sich vom weißen
+   Hintergrund der Seite abheben. */
+.md-typeset img {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
 /* Kompaktere Tabellen für die Referenz-Seiten */
 .md-typeset table:not([class]) {
   font-size: 0.78rem;
