@@ -52,7 +52,7 @@ starten, bei der Nachfrage den seriellen Port auswählen und den Fortschritt beo
 Läuft dein ESPuino bereits und ist im WLAN, geht ein Update auch ganz ohne USB – direkt im
 Webinterface, im **Tab Updates** ([Kapitel 8](../bedienung/webinterface.md#tab-updates)).
 
-<!-- Screenshot: Tab Updates / GitHub-Update -->
+![Der Tab Updates im ESPuino-Webinterface: manuelles Hochladen einer firmware.bin sowie „Firmware von GitHub laden" mit Branch-Auswahl](../assets/WebinterfaceUpdates.png)
 
 Am elegantesten ist die Variante **Firmware von GitHub laden**
 ([Forum #4582](https://forum.espuino.de/t/firmware-update-direkt-von-github/4582)): Du wählst den

@@ -418,7 +418,7 @@ automatique.
 
 ### Énergie
 
-<!-- Screenshot: énergie -->
+![Le sous-groupe Énergie dans l'onglet Général : inactivité avant veille profonde, et les réglages de batterie avec tension d'avertissement, seuils de LED de charge, valeur de correction et l'option d'extinction automatique en cas de tension critique](../assets/WebinterfaceEnergie.png)
 
 Sous **veille profonde**, tu définis après combien de minutes d'inactivité ESPuino s'endort. Si la
 mesure de batterie est active, ces valeurs apparaissent sous **batterie** :

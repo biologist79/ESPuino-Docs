@@ -57,7 +57,7 @@ Si ton ESPuino fonctionne déjà et est connecté au Wi-Fi, une mise à jour est
 aucun USB – directement dans l'interface web, dans l'**onglet Mises à jour**
 ([chapitre 8](../bedienung/webinterface.md#tab-updates)).
 
-<!-- Screenshot: onglet Mises à jour / mise à jour GitHub -->
+![L'onglet Mises à jour dans l'interface web ESPuino : téléversement manuel d'un firmware.bin, ainsi que « charger le firmware depuis GitHub » avec sélection de la branche](../assets/WebinterfaceUpdates.png)
 
 La variante la plus élégante est **charger le firmware depuis GitHub**
 ([forum #4582](https://forum.espuino.de/t/firmware-update-direkt-von-github/4582), en allemand) : tu

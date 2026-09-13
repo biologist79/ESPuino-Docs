@@ -397,7 +397,7 @@ A changed LED **count**, by the way, is applied by ESPuino via an automatic rest
 
 ### Power
 
-<!-- Screenshot: Power -->
+![The Power sub-group in the General tab: deep sleep inactivity, and the battery settings with warning voltage, charge-LED thresholds, correction value, and the option to shut down automatically at critical voltage](../assets/WebinterfaceEnergie.png)
 
 Under **deep sleep**, you set after how many minutes of inactivity ESPuino goes to sleep. If
 battery measurement is active, these values appear under **battery**:

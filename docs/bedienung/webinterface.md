@@ -402,7 +402,7 @@ Eine geänderte LED-**Anzahl** übernimmt ESPuino übrigens per automatischem Ne
 
 ### Energie
 
-<!-- Screenshot: Energie -->
+![Die Unterkladde Energie im Tab Allgemein: Deep-Sleep-Inaktivität sowie die Batterie-Einstellungen mit Warnspannung, Lade-LED-Schwellen, Korrekturwert und der Option zum automatischen Abschalten bei kritischer Spannung](../assets/WebinterfaceEnergie.png)
 
 Unter **Deep Sleep** legst du fest, nach wie vielen Minuten Inaktivität sich ESPuino schlafen legt.
 Ist die Batteriemessung aktiv, kommen unter **Batterie** diese Werte hinzu:
