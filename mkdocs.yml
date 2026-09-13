@@ -68,10 +68,76 @@ plugins:
           build: true
         - locale: en
           name: English
-          build: false   # auf true setzen, sobald *.en.md-Seiten existieren
+          build: false   # auf true setzen, sobald alle Kapitel als *.en.md vorliegen
+          site_name: ESPuino Handbook
+          site_description: >-
+            Handbook for ESPuino – the RFID-controlled audio player. Focus on the Complete board
+            (mini4L as predecessor).
+          nav_translations:
+            Start: Home
+            "Teil 1 · Einstieg": "Part 1 · Getting started"
+            "1 · Was ist ESPuino?": "1 · What is ESPuino?"
+            "2 · Quickstart": "2 · Quickstart"
+            "Teil 2 · Hardware (Complete)": "Part 2 · Hardware (Complete)"
+            "3 · Die Complete-Platine": "3 · The Complete board"
+            "4 · Der Akku": "4 · The battery"
+            "5 · Anschließen": "5 · Wiring it up"
+            "6 · Das Gehäuse": "6 · The enclosure"
+            "Teil 3 · Inbetriebnahme": "Part 3 · First setup"
+            "7 · Erststart": "7 · First start"
+            "Teil 4 · Bedienung": "Part 4 · Operation"
+            "8 · Das Webinterface": "8 · The web interface"
+            "9 · Bedienung am Gerät": "9 · Operation at the device"
+            "Teil 5 · Inhalte": "Part 5 · Content"
+            "10 · Inhalte verwalten": "10 · Managing content"
+            "11 · MediaHub": "11 · MediaHub"
+            "Teil 6 · Vertiefung": "Part 6 · Deep dive"
+            "12 · Erweiterte Themen": "12 · Advanced topics"
+            "Teil 7 · Firmware & Build": "Part 7 · Firmware & build"
+            "13 · Firmware aktualisieren": "13 · Updating the firmware"
+            "14 · Compile-Zeit-Konfiguration": "14 · Compile-time configuration"
+            "Teil 8 · Hilfe": "Part 8 · Help"
+            "15 · Troubleshooting": "15 · Troubleshooting"
+            "Teil 9 · Referenz & Legacy": "Part 9 · Reference & legacy"
+            "16 · Bestandsgeräte: mini4L": "16 · Existing devices: mini4L"
+            "17 · Entwicklung & Beitrag": "17 · Development & contributing"
+            "18 · Anhang": "18 · Appendix"
         - locale: fr
           name: Français
-          build: false   # auf true setzen, sobald *.fr.md-Seiten existieren
+          build: false   # auf true setzen, sobald alle Kapitel als *.fr.md vorliegen
+          site_name: Manuel ESPuino
+          site_description: >-
+            Manuel d'ESPuino – le lecteur audio piloté par RFID. Axé sur la carte Complete
+            (mini4L comme prédécesseur).
+          nav_translations:
+            Start: Accueil
+            "Teil 1 · Einstieg": "Partie 1 · Prise en main"
+            "1 · Was ist ESPuino?": "1 · Qu'est-ce qu'ESPuino ?"
+            "2 · Quickstart": "2 · Démarrage rapide"
+            "Teil 2 · Hardware (Complete)": "Partie 2 · Matériel (Complete)"
+            "3 · Die Complete-Platine": "3 · La carte Complete"
+            "4 · Der Akku": "4 · La batterie"
+            "5 · Anschließen": "5 · Câblage"
+            "6 · Das Gehäuse": "6 · Le boîtier"
+            "Teil 3 · Inbetriebnahme": "Partie 3 · Mise en service"
+            "7 · Erststart": "7 · Premier démarrage"
+            "Teil 4 · Bedienung": "Partie 4 · Utilisation"
+            "8 · Das Webinterface": "8 · L'interface web"
+            "9 · Bedienung am Gerät": "9 · Utilisation sur l'appareil"
+            "Teil 5 · Inhalte": "Partie 5 · Contenus"
+            "10 · Inhalte verwalten": "10 · Gérer les contenus"
+            "11 · MediaHub": "11 · MediaHub"
+            "Teil 6 · Vertiefung": "Partie 6 · Approfondissement"
+            "12 · Erweiterte Themen": "12 · Sujets avancés"
+            "Teil 7 · Firmware & Build": "Partie 7 · Firmware et compilation"
+            "13 · Firmware aktualisieren": "13 · Mettre à jour le firmware"
+            "14 · Compile-Zeit-Konfiguration": "14 · Configuration à la compilation"
+            "Teil 8 · Hilfe": "Partie 8 · Aide"
+            "15 · Troubleshooting": "15 · Dépannage"
+            "Teil 9 · Referenz & Legacy": "Partie 9 · Référence et héritage"
+            "16 · Bestandsgeräte: mini4L": "16 · Appareils existants : mini4L"
+            "17 · Entwicklung & Beitrag": "17 · Développement et contribution"
+            "18 · Anhang": "18 · Annexe"
 
 markdown_extensions:
   - admonition
