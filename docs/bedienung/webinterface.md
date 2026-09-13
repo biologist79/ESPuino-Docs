@@ -40,9 +40,9 @@ Zwei Kleinigkeiten sind besonders nützlich: Der **Fortschrittsbalken** ist ankl
 springt direkt an die gewählte Stelle im Titel. Und über **Modifikation ausführen** löst du jede
 Modifikation (Schlaftimer, Wiederholung, Tastensperre …) direkt aus, ganz ohne eine Karte aufzulegen.
 
-## Tab RFID
+## Tab RFID { #tab-rfid }
 
-<!-- Screenshot: RFID-Tab -->
+![Der Tab RFID im ESPuino-Webinterface: Dateibrowser mit Speicherplatzanzeige und Suchfeld oben, RFID-Zuweisung mit Chip-Nummer, Musik/Modifikation-Reitern und Abspielmodus darunter](../assets/WebinterfaceRfid.png)
 
 Dieser Tab ist das Herzstück, denn hier verknüpfst du Karten mit Inhalten. Er besteht aus zwei
 untereinander angeordneten Bereichen: dem Dateibrowser und der eigentlichen Zuweisung.
@@ -165,7 +165,7 @@ aktiv ist.*
 
 ## Tab WLAN { #tab-wlan }
 
-<!-- Screenshot: WLAN-Tab -->
+![Der Tab WLAN im ESPuino-Webinterface: WLAN-Einstellungen mit Hostname und Access-Point-Konfiguration, darunter die Netzwerke-Verwaltung](../assets/WebinterfaceWlan.png)
 
 Hier verwaltest du alles rund um die Netzwerkverbindung. Unter **WLAN-Einstellungen** legst du fest,
 ob ESPuino beim Start das **stärkste** von mehreren bekannten Netzen wählt, wie der **Hostname**
@@ -194,7 +194,7 @@ Mülleimer-Symbol löschst du Einträge.
 *MQTT-Unterstützung ist standardmäßig einkompiliert, dieser Tab also normalerweise vorhanden – er
 fehlt nur, wenn die Firmware bewusst ohne MQTT gebaut wurde.*
 
-<!-- Screenshot: MQTT-Tab -->
+![Der Tab MQTT im ESPuino-Webinterface: Eingabefelder für ClientId, Basis-Topic, Geräte-ID, Server, Zugangsdaten und Port, darunter die Live-Vorschau aller vollständigen Topics](../assets/WebinterfaceMqtt.jpeg)
 
 Hier bindest du ESPuino an deinen MQTT-Broker an, etwa für [Home Assistant](https://www.home-assistant.io/),
 [ioBroker](https://www.iobroker.net/) oder [openHAB](https://www.openhab.org/). Du
@@ -214,7 +214,7 @@ sich aus deinen Eingaben ergeben. Welche Topics es gibt, steht im
 *FTP-Unterstützung ist standardmäßig einkompiliert, dieser Tab also normalerweise vorhanden – er
 fehlt nur, wenn die Firmware bewusst ohne FTP gebaut wurde.*
 
-<!-- Screenshot: FTP-Tab -->
+![Der Tab FTP im ESPuino-Webinterface: FTP-Benutzername und -Passwort sowie der Button „FTP-Server starten“](../assets/WebinterfaceFtp.png)
 
 Hier legst du Benutzernamen und Passwort für den FTP-Zugang fest. Aus Speichergründen läuft der
 FTP-Server nicht dauerhaft mit: Du startest ihn bei Bedarf über den Button **FTP-Server starten**
@@ -229,7 +229,7 @@ ist er wieder aus.
 
 *Nur sichtbar, wenn die Firmware mit Bluetooth-Unterstützung gebaut wurde.*
 
-<!-- Screenshot: Bluetooth-Tab -->
+![Der Tab Bluetooth im ESPuino-Webinterface: Bluetooth-Kopfhörer-Einstellungen mit Gerätesuche, darunter die Buttons für den Kopfhörer- und den Lautsprecher-Modus](../assets/WebinterfaceBluetooth.png)
 
 ESPuino kann Bluetooth in zwei Richtungen. Im Modus **Bluetooth-Kopfhörer** sendet ESPuino den Ton an
 ein Bluetooth-Gerät – du trägst den Namen deines Kopfhörers ein oder, noch einfacher, klickst auf
@@ -244,7 +244,7 @@ wechseln; alternativ genügt es, eine unbekannte RFID-Karte aufzulegen.
 
 ## Tab Allgemein { #tab-allgemein }
 
-<!-- Screenshot: Allgemein-Tab -->
+![Der Tab Allgemein im ESPuino-Webinterface mit den fünf Unterkladden Wiedergabe, RFID-Reader, Drehencoder & Taster, LED und Energie; hier die Unterkladde Wiedergabe mit Lautstärke- und Optionen-Bereich](../assets/WebinterfaceAllgemein.png)
 
 Die allgemeinen Einstellungen sind optisch in fünf Unterkladden aufgeteilt (Wiedergabe, RFID-Reader,
 Drehencoder & Taster, LED, Energie). Jede hat zwar ihren eigenen Speichern- und Reset-Button, aber
@@ -277,7 +277,7 @@ Hilfetext am Fragezeichen:
 | Pause bei minimaler Lautstärke | Pausiert, sobald die Lautstärke das Minimum erreicht. |
 | Letzte Lautstärke wiederherstellen | Stellt nach einem Neustart die zuletzt genutzte Lautstärke wieder her. |
 | Mono-Wiedergabe | Für Aufbauten mit nur einem Lautsprecher. |
-| Lautstärkekurve | Linear oder logarithmisch. |
+| Feinere Abstufungen bei niedriger Lautstärke | Schaltet auf logarithmische Lautstärkeberechnung um – hilft, wenn dir die Stufen im unteren Lautstärkebereich zu grob sind. |
 
 Zusätzlich gibt es die Option **„Wiedergabeposition langer Hörbücher automatisch speichern alle _n_
 Sekunden"**, mit der ESPuino die Position im Hörbuch-Modus **zyklisch** sichert – gedacht für lange
@@ -299,7 +299,7 @@ Stunde kostet. Standardmäßig ist die Option aus; empfohlen werden 30–60 Seku
 
 ### RFID-Reader
 
-<!-- Screenshot: RFID-Reader -->
+![Die Unterkladde RFID-Reader im Tab Allgemein: Reader-Typ, MFRC522-Einstellungen sowie PN5180-Einstellungen inklusive LPCD und ICODE-SLIX2-Privacy-Passwort](../assets/WebinterfaceRfidReader.png)
 
 In dieser Unterkladde geht es um den Kartenleser:
 
@@ -308,14 +308,16 @@ In dieser Unterkladde geht es um den Kartenleser:
 | **PN5180 LPCD** | Aufwecken aus dem Deep-Sleep durch Kartenauflegen. Nur mit PN5180 und passend gesetzten Lötbrücken – bei der Complete musst du dafür die Lötbrücken **JP1/JP8** anpassen ([Kapitel 5](../hardware/aufbau.md#die-lotbrucken)); bei MFRC522 ist die Option ausgegraut. Einschränkungen: [Kapitel 12](../vertiefung/erweiterte-themen.md#lpcd). |
 | **Reader-Typ** | *Auto-detect* (Standard), MFRC522 (SPI oder I²C) oder PN5180. |
 | **MFRC522 Gain** | Empfindlichkeit des MFRC522 (0–7, Standard 7). |
+| **MFRC522 Scan-Intervall** | Zeit zwischen zwei Abfragen des MFRC522 in Millisekunden (Standard 100 ms). |
 | **PN5180 Debounce** | Wie lange eine Karte ununterbrochen *nicht* erkannt sein muss, bevor sie als entfernt gilt (Standard 500 ms). |
+| **ICODE-SLIX2 Privacy-Passwort** | Vier-Byte-Passwort (nur Hexadezimalwerte 00–FF) zum Deaktivieren des Privacy-Modus geschützter ICODE-SLIX2-Tags. |
 
 !!! warning "Neustart nötig"
     Änderungen in dieser Unterkladde greifen erst nach einem Neustart.
 
 ### Drehencoder & Taster { #drehencoder-taster }
 
-<!-- Screenshot: Drehencoder & Taster -->
+![Die Unterkladde Drehencoder & Taster im Tab Allgemein: Sprungweiten für Tasten und Drehimpulsgeber, Taster-Zuordnungen, „Taste halten + drehen“ sowie die Multi-Taster-Zuordnungen](../assets/WebinterfaceDrehencoder.png)
 
 Hier legst du fest, was die Bedienelemente tun. Wichtig zu verstehen: Alles, was du hier einstellst,
 landet im internen Speicher (NVS) und **überschreibt die in der Firmware hinterlegte
@@ -374,7 +376,7 @@ Speichern**, ein Neustart ist dafür nicht nötig.
 
 ### LED
 
-<!-- Screenshot: LED -->
+![Die Unterkladde LED im Tab Allgemein: Helligkeit für Normalbetrieb, Nachtmodus und Atmolight, LED-Einstellungen sowie die Farbtöne für Fortschritt und Ambient-Light](../assets/WebinterfaceLed.png)
 
 Hier stellst du die Neopixel ein. Die **Helligkeit** lässt sich getrennt für den Normalbetrieb, den
 Nachtmodus und das Ambient-Light festlegen. Unter **LED-Einstellungen** kommen die Details dazu:
@@ -415,7 +417,7 @@ Ist die Batteriemessung aktiv, kommen unter **Batterie** diese Werte hinzu:
 
 ## Tab Updates { #tab-updates }
 
-<!-- Screenshot: Updates -->
+![Der Tab Updates im ESPuino-Webinterface: manuelles Hochladen einer firmware.bin sowie „Firmware von GitHub laden“ mit Branch-Auswahl](../assets/WebinterfaceUpdates.png)
 
 An dieser Stelle findest du alles rund ums Firmware-Update. Du kannst entweder eine `firmware.bin` von
 Hand hochladen, oder – deutlich bequemer – über **Firmware von GitHub laden** direkt einen fertigen
@@ -425,7 +427,7 @@ erscheint nur bei OTA-fähiger Firmware.
 
 ## Tab Tools
 
-<!-- Screenshot: Tools -->
+![Der Tab Tools im ESPuino-Webinterface: Zuweisungen anzeigen, exportieren und importieren sowie der Button „Alle Zuweisungen löschen“](../assets/WebinterfaceTools.png)
 
 Dieser Tab dreht sich um die gespeicherten RFID-Zuweisungen, die – daran sei erinnert – nicht auf der
 SD-Karte liegen, sondern im internen Speicher (NVS). Du kannst dir alle **Zuweisungen anzeigen** (und
@@ -434,9 +436,26 @@ ergänzt und überschreibt nur, löscht nie), oder mit dem roten Button **alle Z
 Sicherheitsabfrage). Wie du diese Funktionen zum Sichern und Übertragen nutzt, steht in
 [Kapitel 10 → Backup & Restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern).
 
+## Tab MediaHub { #tab-mediahub }
+
+![Der Tab MediaHub im ESPuino-Webinterface: Mediaserver hinzufügen (Anzeigename, Adresse) und Liste der registrierten Mediaserver](../assets/MediahubEspuinoTab.png)
+
+Dieser Tab ist reine **Verwaltung der Server-Adressen** – die eigentliche Kartenzuweisung passiert
+weiterhin im [Tab RFID](#tab-rfid). Ohne einen laufenden MediaHub-Server bringt diese Seite nichts;
+was MediaHub ist und wie du den Server aufsetzt, steht in
+[Kapitel 11 · MediaHub](../inhalte/mediahub.md).
+
+Unter **Mediaserver hinzufügen** vergibst du einen frei wählbaren **Anzeigenamen** (erscheint später
+im Auswahl-Dropdown beim Kartenanlernen) sowie die **Adresse** – Protokoll (`http://` oder `https://`)
+per Dropdown, dahinter Host oder IP samt Port, etwa `192.168.1.50:8080`. Ein Klick auf
+**„Mediaserver speichern"** trägt den Server in die Liste **Registrierte Mediaserver** ein. Dort
+kannst du ihn über das Icon direkt in seiner eigenen Weboberfläche öffnen oder über das
+Mülleimer-Symbol wieder entfernen – bereits angelernte Karten bleiben davon unberührt, sie verweisen
+weiterhin auf den bisherigen Server.
+
 ## Tab Hilfe
 
-<!-- Screenshot: Hilfe -->
+![Der Tab Hilfe im ESPuino-Webinterface mit den Links zum Forum und zur Swagger-Dokumentation der REST-API](../assets/WebinterfaceHilfe.png)
 
 Der Tab Hilfe verweist auf das [Forum](https://forum.espuino.de) und auf die REST-API-Dokumentation
 (Swagger) – Letzteres für alle, die ESPuino skripten oder in ihre Hausautomatisierung einbinden wollen.

@@ -39,9 +39,9 @@ Two small things are especially handy: the **progress bar** is clickable – cli
 straight to that point in the title. And **run a modification** triggers any modification (sleep
 timer, repeat, button lock, …) directly, without placing a card at all.
 
-## RFID tab
+## RFID tab { #tab-rfid }
 
-<!-- Screenshot: RFID tab -->
+![The RFID tab in the ESPuino web interface: file browser with storage indicator and search field at the top, RFID assignment with chip number, Music/Modification tabs, and playback mode below](../assets/WebinterfaceRfid.png)
 
 This tab is the heart of the interface, since this is where you link cards to content. It consists
 of two areas stacked on top of each other: the file browser and the actual assignment.
@@ -162,7 +162,7 @@ active.*
 
 ## Wi-Fi tab { #tab-wlan }
 
-<!-- Screenshot: Wi-Fi tab -->
+![The Wi-Fi tab in the ESPuino web interface: Wi-Fi settings with hostname and access point configuration, below that the network management](../assets/WebinterfaceWlan.png)
 
 Here you manage everything related to the network connection. Under **Wi-Fi settings**, you decide
 whether ESPuino picks the **strongest** of several known networks on startup, what the **hostname**
@@ -189,7 +189,7 @@ the one currently connected is highlighted, and the trash icon deletes entries.
 *MQTT support is compiled in by default, so this tab is normally present – it's only missing if
 the firmware was deliberately built without MQTT.*
 
-<!-- Screenshot: MQTT tab -->
+![The MQTT tab in the ESPuino web interface: input fields for client ID, base topic, device ID, server, credentials, and port, below that the live preview of every full topic](../assets/WebinterfaceMqtt.jpeg)
 
 Here you connect ESPuino to your MQTT broker, say for [Home Assistant](https://www.home-assistant.io/),
 [ioBroker](https://www.iobroker.net/), or [openHAB](https://www.openhab.org/). You enable MQTT and
@@ -208,7 +208,7 @@ entries. Which topics exist is listed in the [appendix](../referenz/anhang.md#mq
 *FTP support is compiled in by default, so this tab is normally present – it's only missing if the
 firmware was deliberately built without FTP.*
 
-<!-- Screenshot: FTP tab -->
+![The FTP tab in the ESPuino web interface: FTP username and password, plus the "start FTP server" button](../assets/WebinterfaceFtp.png)
 
 Here you set the username and password for FTP access. For memory reasons, the FTP server doesn't
 run all the time: you start it when needed via the **start FTP server** button (or at the device
@@ -222,7 +222,7 @@ via a button combination), and after the next restart it's off again.
 
 *Only visible if the firmware was built with Bluetooth support.*
 
-<!-- Screenshot: Bluetooth tab -->
+![The Bluetooth tab in the ESPuino web interface: Bluetooth headphone settings with device search, below that the buttons for headphone mode and speaker mode](../assets/WebinterfaceBluetooth.png)
 
 ESPuino can do Bluetooth in two directions. In **Bluetooth headphones** mode, ESPuino sends audio to
 a Bluetooth device – you enter your headphones' name, or, even easier, click **search for devices**
@@ -238,7 +238,7 @@ just placing an unknown RFID card is enough.
 
 ## General tab { #tab-allgemein }
 
-<!-- Screenshot: General tab -->
+![The General tab in the ESPuino web interface with its five sub-groups Playback, RFID reader, Rotary encoder & buttons, LED, and Power; here the Playback sub-group with the volume and options sections](../assets/WebinterfaceAllgemein.png)
 
 The general settings are visually split into five sub-groups (playback, RFID reader, rotary
 encoder & buttons, LED, power). Each has its own save and reset button, but don't let that fool
@@ -270,7 +270,7 @@ question mark:
 | Pause at minimum volume | Pauses once the volume reaches the minimum. |
 | Restore last volume | Restores the last-used volume after a restart. |
 | Mono playback | For builds with only one speaker. |
-| Volume curve | Linear or logarithmic. |
+| Finer steps at low volume | Switches to logarithmic volume calculation – helps if the steps feel too coarse at the low end of the volume range. |
 
 There's also the option **"Automatically save playback position of long audiobooks every _n_
 seconds"**, which has ESPuino save the position in audiobook mode **periodically** – meant for long
@@ -292,7 +292,7 @@ progress. It's off by default; 30–60 seconds is recommended.
 
 ### RFID reader
 
-<!-- Screenshot: RFID reader -->
+![The RFID reader sub-group in the General tab: reader type, MFRC522 settings, and PN5180 settings including LPCD and the ICODE-SLIX2 privacy password](../assets/WebinterfaceRfidReader.png)
 
 This sub-group is about the card reader:
 
@@ -301,14 +301,16 @@ This sub-group is about the card reader:
 | **PN5180 LPCD** | Wake from deep sleep by placing a card. Only with the PN5180 and matching solder bridges set – on the Complete, you need to adjust solder bridges **JP1/JP8** for this ([chapter 5](../hardware/aufbau.md#die-lotbrucken)); with the MFRC522, this option is grayed out. Limitations: [chapter 12](../vertiefung/erweiterte-themen.md#lpcd). |
 | **Reader type** | *Auto-detect* (default), MFRC522 (SPI or I²C), or PN5180. |
 | **MFRC522 gain** | Sensitivity of the MFRC522 (0–7, default 7). |
+| **MFRC522 scan interval** | Time between two MFRC522 polls, in milliseconds (default 100 ms). |
 | **PN5180 debounce** | How long a card must go continuously *undetected* before it's considered removed (default 500 ms). |
+| **ICODE-SLIX2 privacy password** | Four-byte password (hexadecimal values 00–FF only) to disable privacy mode on protected ICODE-SLIX2 tags. |
 
 !!! warning "Restart required"
     Changes in this sub-group only take effect after a restart.
 
 ### Rotary encoder & buttons { #drehencoder-taster }
 
-<!-- Screenshot: Rotary encoder & buttons -->
+![The rotary encoder & buttons sub-group in the General tab: seek step sizes for buttons and the rotary encoder, button mapping, "hold button + turn", and the multi-button mapping](../assets/WebinterfaceDrehencoder.png)
 
 Here you set what the controls do. Important to understand: everything you set here goes into
 internal memory (NVS) and **overrides the default mapping baked into the firmware** – so you can
@@ -367,7 +369,7 @@ saving** – no restart is needed for this.
 
 ### LED
 
-<!-- Screenshot: LED -->
+![The LED sub-group in the General tab: brightness for normal operation, night mode, and ambient light, LED settings, and the color hues for progress and ambient light](../assets/WebinterfaceLed.png)
 
 Here you configure the Neopixels. **Brightness** can be set separately for normal operation, night
 mode, and ambient light. Under **LED settings** come the details:
@@ -410,7 +412,7 @@ battery measurement is active, these values appear under **battery**:
 
 ## Updates tab { #tab-updates }
 
-<!-- Screenshot: Updates -->
+![The Updates tab in the ESPuino web interface: manually uploading a firmware.bin, and "load firmware from GitHub" with branch selection](../assets/WebinterfaceUpdates.png)
 
 Here you'll find everything related to firmware updates. You can either upload a `firmware.bin`
 manually, or – much more conveniently – fetch a ready-made build directly from the repository via
@@ -420,7 +422,7 @@ with OTA-capable firmware.
 
 ## Tools tab
 
-<!-- Screenshot: Tools -->
+![The Tools tab in the ESPuino web interface: view, export, and import assignments, plus the "delete all assignments" button](../assets/WebinterfaceTools.png)
 
 This tab is about the stored RFID assignments, which – worth a reminder – don't live on the SD card
 but in internal memory (NVS). You can view all **assignments** (and delete individual ones
@@ -429,9 +431,25 @@ overwrites, never deletes), or use the red button to **delete all assignments** 
 confirmation prompt). How to use these functions for backing up and transferring data is covered in
 [chapter 10 → Backup & restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern).
 
+## MediaHub tab { #tab-mediahub }
+
+![The MediaHub tab in the ESPuino web interface: add a media server (display name, address) and the list of registered media servers](../assets/MediahubEspuinoTab.png)
+
+This tab is purely for **managing server addresses** – the actual card assignment still happens in
+the [RFID tab](#tab-rfid). Without a running MediaHub server, this page doesn't do anything; what
+MediaHub is and how to set up the server is covered in
+[chapter 11 · MediaHub](../inhalte/mediahub.md).
+
+Under **add media server**, you give it a freely chosen **display name** (this later shows up in
+the dropdown when teaching a card) and the **address** – protocol (`http://` or `https://`) via
+dropdown, followed by host or IP plus port, e.g. `192.168.1.50:8080`. Clicking **"save media
+server"** adds it to the **registered media servers** list. From there, you can open it directly in
+its own web interface via the icon, or remove it again via the trash icon – cards already taught
+are unaffected and keep pointing at the previous server.
+
 ## Help tab
 
-<!-- Screenshot: Help -->
+![The Help tab in the ESPuino web interface with links to the forum and the Swagger documentation for the REST API](../assets/WebinterfaceHilfe.png)
 
 The Help tab links to the [forum](https://forum.espuino.de) and to the REST API documentation
 (Swagger) – the latter for anyone who wants to script ESPuino or integrate it into their home

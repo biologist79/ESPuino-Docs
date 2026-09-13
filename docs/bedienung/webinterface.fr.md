@@ -43,9 +43,9 @@ clic saute directement à l'endroit choisi dans le titre. Et via **exécuter une
 déclenches directement n'importe quelle modification (minuterie de sommeil, répétition, verrouillage
 des boutons…), sans poser aucune carte.
 
-## Onglet RFID
+## Onglet RFID { #tab-rfid }
 
-<!-- Screenshot: onglet RFID -->
+![L'onglet RFID dans l'interface web ESPuino : explorateur de fichiers avec indicateur d'espace et champ de recherche en haut, attribution RFID avec numéro de puce, onglets Musique/Modification et mode de lecture en dessous](../assets/WebinterfaceRfid.png)
 
 Cet onglet est le cœur de l'interface, car c'est là que tu associes des cartes à des contenus. Il se
 compose de deux zones superposées : l'explorateur de fichiers et l'attribution proprement dite.
@@ -169,7 +169,7 @@ Bluetooth.*
 
 ## Onglet Wi-Fi { #tab-wlan }
 
-<!-- Screenshot: onglet Wi-Fi -->
+![L'onglet Wi-Fi dans l'interface web ESPuino : réglages Wi-Fi avec nom d'hôte et configuration du point d'accès, puis la gestion des réseaux en dessous](../assets/WebinterfaceWlan.png)
 
 Ici, tu gères tout ce qui concerne la connexion réseau. Sous **réglages Wi-Fi**, tu définis si
 ESPuino choisit le réseau **le plus puissant** parmi plusieurs réseaux connus au démarrage, quel est
@@ -198,7 +198,7 @@ est mis en évidence, et l'icône de corbeille supprime les entrées.
 *Le support MQTT est compilé par défaut, cet onglet est donc normalement présent – il ne manque que
 si le firmware a été volontairement compilé sans MQTT.*
 
-<!-- Screenshot: onglet MQTT -->
+![L'onglet MQTT dans l'interface web ESPuino : champs pour ClientId, topic de base, identifiant de l'appareil, serveur, identifiants et port, puis l'aperçu en direct de tous les topics complets](../assets/WebinterfaceMqtt.jpeg)
 
 Ici, tu connectes ESPuino à ton broker MQTT, par exemple pour [Home Assistant](https://www.home-assistant.io/),
 [ioBroker](https://www.iobroker.net/) ou [openHAB](https://www.openhab.org/). Tu actives le MQTT et
@@ -218,7 +218,7 @@ dans l'[annexe](../referenz/anhang.md#mqtt-topics).
 *Le support FTP est compilé par défaut, cet onglet est donc normalement présent – il ne manque que
 si le firmware a été volontairement compilé sans FTP.*
 
-<!-- Screenshot: onglet FTP -->
+![L'onglet FTP dans l'interface web ESPuino : nom d'utilisateur et mot de passe FTP, ainsi que le bouton « démarrer le serveur FTP »](../assets/WebinterfaceFtp.png)
 
 Ici, tu définis le nom d'utilisateur et le mot de passe pour l'accès FTP. Pour des raisons de
 mémoire, le serveur FTP ne fonctionne pas en permanence : tu le démarres en cas de besoin via le
@@ -233,7 +233,7 @@ prochain redémarrage, il est de nouveau désactivé.
 
 *Visible uniquement si le firmware a été compilé avec le support Bluetooth.*
 
-<!-- Screenshot: onglet Bluetooth -->
+![L'onglet Bluetooth dans l'interface web ESPuino : réglages du casque Bluetooth avec recherche d'appareils, puis les boutons pour le mode casque et le mode haut-parleur](../assets/WebinterfaceBluetooth.png)
 
 ESPuino gère le Bluetooth dans les deux sens. En mode **casque Bluetooth**, ESPuino envoie le son
 vers un appareil Bluetooth – tu saisis le nom de ton casque ou, plus simple encore, tu cliques sur
@@ -249,7 +249,7 @@ affiche un bouton pour revenir au mode normal ; il suffit sinon de poser une car
 
 ## Onglet Général { #tab-allgemein }
 
-<!-- Screenshot: onglet Général -->
+![L'onglet Général dans l'interface web ESPuino avec ses cinq sous-groupes Lecture, Lecteur RFID, Molette rotative & boutons, LED et Énergie ; ici le sous-groupe Lecture avec les sections volume et options](../assets/WebinterfaceAllgemein.png)
 
 Les réglages généraux sont répartis visuellement en cinq sous-groupes (lecture, lecteur RFID,
 molette rotative & boutons, LED, énergie). Chacun a son propre bouton d'enregistrement et de
@@ -283,7 +283,7 @@ texte d'aide accessible via le point d'interrogation :
 | Pause au volume minimal | Met en pause dès que le volume atteint le minimum. |
 | Restaurer le dernier volume | Restaure le dernier volume utilisé après un redémarrage. |
 | Lecture mono | Pour les montages avec un seul haut-parleur. |
-| Courbe de volume | Linéaire ou logarithmique. |
+| Paliers plus fins à faible volume | Bascule sur un calcul de volume logarithmique – utile si les paliers te semblent trop grossiers dans le bas de la plage de volume. |
 
 Il existe en outre l'option **« Sauvegarder automatiquement la position de lecture des livres audio
 longs toutes les _n_ secondes »**, qui permet à ESPuino de sauvegarder la position en mode livre
@@ -307,7 +307,7 @@ désactivée par défaut ; 30 à 60 secondes sont recommandées.
 
 ### Lecteur RFID
 
-<!-- Screenshot: lecteur RFID -->
+![Le sous-groupe Lecteur RFID dans l'onglet Général : type de lecteur, réglages MFRC522 et réglages PN5180 avec LPCD et le mot de passe de confidentialité ICODE-SLIX2](../assets/WebinterfaceRfidReader.png)
 
 Ce sous-groupe concerne le lecteur de carte :
 
@@ -316,14 +316,16 @@ Ce sous-groupe concerne le lecteur de carte :
 | **LPCD PN5180** | Réveil depuis la veille profonde en posant une carte. Uniquement avec le PN5180 et les ponts de soudure correctement réglés – sur la Complete, il faut adapter les ponts **JP1/JP8** pour cela ([chapitre 5](../hardware/aufbau.md#die-lotbrucken)) ; avec le MFRC522, cette option est grisée. Limitations : [chapitre 12](../vertiefung/erweiterte-themen.md#lpcd). |
 | **Type de lecteur** | *Détection automatique* (par défaut), MFRC522 (SPI ou I²C) ou PN5180. |
 | **Gain MFRC522** | Sensibilité du MFRC522 (0–7, valeur par défaut 7). |
+| **Intervalle de balayage MFRC522** | Temps entre deux interrogations du MFRC522, en millisecondes (valeur par défaut 100 ms). |
 | **Délai de rebond PN5180** | Combien de temps une carte doit rester *non détectée* en continu avant d'être considérée comme retirée (valeur par défaut 500 ms). |
+| **Mot de passe de confidentialité ICODE-SLIX2** | Mot de passe de quatre octets (valeurs hexadécimales 00–FF uniquement) pour désactiver le mode confidentialité des tags ICODE-SLIX2 protégés. |
 
 !!! warning "Redémarrage nécessaire"
     Les modifications de ce sous-groupe ne prennent effet qu'après un redémarrage.
 
 ### Molette rotative & boutons { #drehencoder-taster }
 
-<!-- Screenshot: molette rotative & boutons -->
+![Le sous-groupe Molette rotative & boutons dans l'onglet Général : distances de saut pour les boutons et la molette rotative, disposition des boutons, « maintenir le bouton + tourner » et les combinaisons multi-boutons](../assets/WebinterfaceDrehencoder.png)
 
 Ici, tu définis ce que font les éléments de commande. Important à comprendre : tout ce que tu
 règles ici est stocké dans la mémoire interne (NVS) et **remplace la disposition par défaut inscrite
@@ -386,7 +388,7 @@ La différence entre les deux variantes en pratique est décrite au
 
 ### LED
 
-<!-- Screenshot: LED -->
+![Le sous-groupe LED dans l'onglet Général : luminosité pour le fonctionnement normal, le mode nuit et l'éclairage d'ambiance, réglages LED et les teintes pour la progression et l'éclairage d'ambiance](../assets/WebinterfaceLed.png)
 
 Ici, tu configures les Neopixels. La **luminosité** peut être réglée séparément pour le
 fonctionnement normal, le mode nuit et l'éclairage d'ambiance. Sous **réglages LED** viennent les
@@ -431,7 +433,7 @@ mesure de batterie est active, ces valeurs apparaissent sous **batterie** :
 
 ## Onglet Mises à jour { #tab-updates }
 
-<!-- Screenshot: mises à jour -->
+![L'onglet Mises à jour dans l'interface web ESPuino : téléversement manuel d'un firmware.bin, ainsi que « charger le firmware depuis GitHub » avec sélection de la branche](../assets/WebinterfaceUpdates.png)
 
 Tu trouveras ici tout ce qui concerne la mise à jour du firmware. Tu peux soit envoyer manuellement
 un fichier `firmware.bin`, soit – bien plus pratique – récupérer directement un build tout fait
@@ -441,7 +443,7 @@ n'apparaît qu'avec un firmware compatible OTA.
 
 ## Onglet Outils
 
-<!-- Screenshot: outils -->
+![L'onglet Outils dans l'interface web ESPuino : afficher, exporter et importer les attributions, ainsi que le bouton « supprimer toutes les attributions »](../assets/WebinterfaceTools.png)
 
 Cet onglet concerne les attributions RFID enregistrées, qui – rappelons-le – ne se trouvent pas sur
 la carte SD, mais dans la mémoire interne (NVS). Tu peux **afficher toutes les attributions** (et en
@@ -451,9 +453,26 @@ toutes les attributions** (avec confirmation de sécurité). La façon d'utilise
 sauvegarder et transférer des données est décrite au
 [chapitre 10 → Sauvegarde et restauration](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern).
 
+## Onglet MediaHub { #tab-mediahub }
+
+![L'onglet MediaHub dans l'interface web ESPuino : ajouter un serveur de médias (nom d'affichage, adresse) et la liste des serveurs de médias enregistrés](../assets/MediahubEspuinoTab.png)
+
+Cet onglet sert uniquement à **gérer les adresses de serveurs** – l'attribution de carte proprement
+dite se fait toujours dans l'[onglet RFID](#tab-rfid). Sans serveur MediaHub en fonctionnement,
+cette page ne sert à rien ; ce qu'est MediaHub et comment configurer le serveur est décrit au
+[chapitre 11 · MediaHub](../inhalte/mediahub.md).
+
+Sous **ajouter un serveur de médias**, tu attribues un **nom d'affichage** librement choisi (il
+apparaîtra plus tard dans le menu déroulant lors de l'apprentissage d'une carte) ainsi que l'
+**adresse** – protocole (`http://` ou `https://`) via un menu déroulant, suivi de l'hôte ou de l'IP
+et du port, par exemple `192.168.1.50:8080`. Un clic sur **« enregistrer le serveur de médias »**
+l'ajoute à la liste **serveurs de médias enregistrés**. Tu peux ensuite l'ouvrir directement dans sa
+propre interface web via l'icône, ou le supprimer via l'icône de corbeille – les cartes déjà
+apprises ne sont pas affectées et continuent de pointer vers le serveur précédent.
+
 ## Onglet Aide
 
-<!-- Screenshot: aide -->
+![L'onglet Aide dans l'interface web ESPuino avec les liens vers le forum et la documentation Swagger de l'API REST](../assets/WebinterfaceHilfe.png)
 
 L'onglet Aide renvoie vers le [forum](https://forum.espuino.de) et vers la documentation de l'API
 REST (Swagger) – cette dernière pour ceux qui souhaitent scripter ESPuino ou l'intégrer dans leur
