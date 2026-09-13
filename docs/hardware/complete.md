@@ -62,7 +62,7 @@ unterschiedlichen Schwellen: bei **LFP etwa 2,75 V**, bei **LiPo etwa 3,15 V**. 
 bewusst mit etwas Reserve über der absoluten Entladegrenze – das schont den Akku und verhindert, dass
 kurze Stromspitzen (etwa bei lautem Ton) das Gerät gleich abschalten.
 
-## Laden & Lade-LED
+## Laden & Lade-LED { #laden-lade-led }
 
 An Bord sitzt eine kleine **Status-LED**, die dir den Ladezustand direkt an der Platine anzeigt:
 
@@ -205,7 +205,7 @@ einsetzen wie ein echter GPIO. Er taugt im Wesentlichen dazu, **auf einen Taster
     damit nur frei, solange du **kein LPCD** nutzt – im LPCD-Modus (JP1/JP8) belegt sie der Reader.
     **GPIO 5** schließlich ist der Eingang für den optionalen IR-Empfänger.
 
-### Die Anschlüsse im Überblick
+### Die Anschlüsse im Überblick { #die-anschlusse-im-uberblick }
 
 Fast alles wird über kleine **JST-PH-Steckverbinder** angeschlossen – jeder hat seine eigene Polzahl,
 sodass man sie kaum verwechselt. Diese Übersicht zeigt, was wohin gehört:
