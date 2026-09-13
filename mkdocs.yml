@@ -48,10 +48,10 @@ hooks:
 extra_css:
   - stylesheets/extra.css
 
-# Mehrsprachigkeit vorbereitet: Deutsch ist die Default-Sprache (die vorhandenen
-# .md-Dateien). Für Englisch/Französisch später einfach `seite.en.md` / `seite.fr.md`
-# daneben anlegen und unten `build: true` setzen. Fehlende Übersetzungen fallen auf
-# Deutsch zurück (fallback_to_default).
+# Mehrsprachigkeit: Deutsch ist die Default-Sprache (die vorhandenen .md-Dateien),
+# EN/FR liegen als seite.en.md / seite.fr.md daneben. Kommt ein neues deutsches
+# Kapitel dazu, zieht die Übersetzung erstmal automatisch nach (fallback_to_default) –
+# die passende seite.en.md / seite.fr.md sollte aber zeitnah ergänzt werden.
 plugins:
   - search:
       lang: [de, en, fr]
@@ -68,7 +68,7 @@ plugins:
           build: true
         - locale: en
           name: English
-          build: false   # auf true setzen, sobald alle Kapitel als *.en.md vorliegen
+          build: true
           site_name: ESPuino Handbook
           site_description: >-
             Handbook for ESPuino – the RFID-controlled audio player. Focus on the Complete board
@@ -104,7 +104,7 @@ plugins:
             "18 · Anhang": "18 · Appendix"
         - locale: fr
           name: Français
-          build: false   # auf true setzen, sobald alle Kapitel als *.fr.md vorliegen
+          build: true
           site_name: Manuel ESPuino
           site_description: >-
             Manuel d'ESPuino – le lecteur audio piloté par RFID. Axé sur la carte Complete
