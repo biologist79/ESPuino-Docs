@@ -9,6 +9,8 @@ dans les autres chapitres.
 
 ## Ce qui caractérise la mini4L
 
+![La carte support de la mini4L avec les emplacements pour la carte de développement D32 Pro, le lecteur SD, l'amplificateur MAX98357A, l'extenseur de ports PCA9555, ainsi que les connecteurs étiquetés pour les boutons, le casque, le lecteur RFID, l'I²C, le connecteur Ext, le reset et le haut-parleur](../assets/Mini4l.jpeg)
+
 Contrairement à la Complete, qui réunit tout sur une seule carte, la mini4L se compose de deux
 parties : une carte support et une **carte de développement enfichée** au-dessus (une carte
 D32 Pro spécialement développée, voir le

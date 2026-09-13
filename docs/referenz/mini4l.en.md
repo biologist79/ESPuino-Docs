@@ -9,6 +9,8 @@ chapters.
 
 ## What sets the mini4L apart
 
+![The mini4L carrier board with the sockets for the D32 Pro developer board, SD slot, MAX98357A amplifier, PCA9555 port expander, and the labeled connectors for buttons, headphones, RFID reader, I²C, the Ext header, reset, and speaker](../assets/Mini4l.jpeg)
+
 Unlike the Complete, which combines everything on one board, the mini4L consists of two parts: a
 carrier board and a **plugged-in developer board** on top of it (a purpose-built D32 Pro board, see
 [forum #1109](https://forum.espuino.de/t/esp32-develboard-d32-pro-lifepo4/1109), German-language).

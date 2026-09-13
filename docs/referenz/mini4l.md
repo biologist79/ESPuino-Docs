@@ -8,6 +8,8 @@ bis zum Webinterface –, funktioniert bei der mini4L genau wie in den übrigen 
 
 ## Was die mini4L ausmacht
 
+![Die mini4L-Trägerplatine mit den Steckplätzen für das D32-Pro-Entwicklerboard, SD-Slot, MAX98357A-Verstärker, PCA9555-Port-Expander sowie den beschrifteten Anschlüssen für Taster, Kopfhörer, RFID-Reader, I²C, Ext-Header, Reset und Lautsprecher](../assets/Mini4l.jpeg)
+
 Anders als die Complete, die alles auf einer Platine vereint, besteht die mini4L aus zwei Teilen: einer
 Trägerplatine und einem darauf **eingesteckten Entwicklerboard** (einem eigens entwickelten D32-Pro-Board,
 siehe [Forum #1109](https://forum.espuino.de/t/esp32-develboard-d32-pro-lifepo4/1109)). Das
