@@ -1,6 +1,6 @@
 # 1 · Qu'est-ce qu'ESPuino ?
 
-## L'idée en une phrase
+## L'idée de base
 
 ESPuino est un lecteur audio piloté par RFID, à construire soi-même : tu poses une carte, et une
 histoire, un livre audio ou une playlist se met à jouer. Tu retires la carte ou en poses une autre,

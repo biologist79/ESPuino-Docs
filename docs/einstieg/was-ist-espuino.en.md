@@ -1,6 +1,6 @@
 # 1 · What is ESPuino?
 
-## The idea in one sentence
+## The basic idea
 
 ESPuino is a self-built, RFID-controlled audio player: you place a card on it, and an audio drama,
 an audiobook, or a playlist starts playing. Take the card off, or place a different one on, and the

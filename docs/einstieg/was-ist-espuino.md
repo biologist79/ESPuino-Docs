@@ -1,6 +1,6 @@
 # 1 · Was ist ESPuino?
 
-## Die Idee in einem Satz
+## Die Grundidee
 
 ESPuino ist ein selbstgebauter, RFID-gesteuerter Audio-Player: Du legst eine Karte auf, und ein
 Hörspiel, ein Hörbuch oder eine Playlist beginnt zu spielen. Nimmst du die Karte wieder ab oder
