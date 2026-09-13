@@ -1,5 +1,7 @@
 # 3 · La carte Complete
 
+![La carte ESPuino Complete (rév. 5.1) vue de dessus : le module ESP32-WROVER, le lecteur microSD, l'USB-C, ainsi que les connecteurs étiquetés pour le Neopixel, la batterie, le haut-parleur, l'interrupteur d'extinction, les connecteurs Ext, la molette rotative, la carte casque et les boutons](../assets/CompletePlatine.jpeg)
+
 ## Ce qui rend la Complete particulière
 
 La Complete est la carte ESPuino actuelle et le point de référence de ce manuel. Son grand
@@ -263,6 +265,8 @@ Certains composants dépendent de tes propres préférences. Voici les décision
 - **Casque :** optionnel via la **carte casque** séparée (basée sur la puce MS6324,
   [forum #1099](https://forum.espuino.de/t/kopfhoererplatine-basierend-auf-ms6324-und-tda1308-bzw-lm4808m/1099),
   en allemand).
+
+![La carte casque : une petite carte additionnelle verte avec les puces MS6324 et LM4808M, une prise casque et un connecteur six broches](../assets/Kopfhoererplatine.jpeg)
 
 !!! info "Le type de lecteur RFID n'est plus une question de firmware"
     Auparavant, il fallait choisir la bonne variante de firmware pour RC522 ou PN5180 lors du

@@ -39,6 +39,8 @@ vorweg: Sie sind bei deiner Complete bereits **werkseitig passend zu deiner Best
 musst du hier also gar nichts anfassen. Willst du später etwas ändern – etwa den Akkutyp wechseln –,
 findest du unten, was jeder Jumper bedeutet. Vorher aber das Wichtigste:
 
+![Die Rückseite der Complete mit beschrifteten Lötbrücken JP1–JP8 sowie der Belegung von Ext.conn1; rechts daneben zum Vergleich die Vorderseite mit den Steckverbindern](../assets/CompleteLoetbruecken.jpeg)
+
 !!! danger "Erst lesen, dann löten"
     - **JP5 nur bei LiPo setzen – niemals bei LFP!** JP5 stellt die Ladeschluss-Spannung: gesetzt =
       **4,2 V** (LiPo), offen = **3,6 V** (LFP). Setzt du JP5, während ein **LFP-Akku** angeschlossen
@@ -84,6 +86,8 @@ Anzuschließen sind:
 - der **Drehencoder**: kommt in den fünfpoligen Anschluss. Mit dem ESPuino-Encoder-Bausatz wird er nur
   **gesteckt**, bei einem anderen Encoder lötest du die Leitungen selbst an (mehr dazu gleich unten).
 - optional die **Kopfhörerplatine**, die du in den sechspoligen Anschluss steckst.
+
+![Die Kopfhörerplatine mit der mitgelieferten, fertig konfektionierten Anschlussleitung – genau so wird sie geliefert](../assets/KopfhoererplatineKabel.jpeg)
 
 ### RFID-Steckerbelegung { #rfid-steckerbelegung }
 

@@ -1,5 +1,7 @@
 # 3 · The Complete board
 
+![The ESPuino Complete board (rev. 5.1) from above: the ESP32-WROVER module, microSD slot, USB-C, and the labeled connectors for Neopixel, battery, speaker, power-off switch, Ext connectors, rotary encoder, headphone board, and the buttons](../assets/CompletePlatine.jpeg)
+
 ## What makes the Complete special
 
 The Complete is the current ESPuino board and the point of reference for this handbook. Its main
@@ -254,6 +256,8 @@ Some of the parts depend on your own preferences. Here are the decisions ahead o
 - **Headphones:** optional via the separate **headphone board** (based on the MS6324 chip,
   [forum #1099](https://forum.espuino.de/t/kopfhoererplatine-basierend-auf-ms6324-und-tda1308-bzw-lm4808m/1099),
   German-language).
+
+![The headphone board: a small green add-on board with MS6324 and LM4808M chips, a headphone jack, and a six-pin connector](../assets/Kopfhoererplatine.jpeg)
 
 !!! info "The RFID reader type is no longer a firmware question"
     You used to have to pick the matching firmware variant for RC522 or PN5180 when flashing. Since

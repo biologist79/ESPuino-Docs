@@ -40,6 +40,8 @@ automatic, JP5 and JP6 depending on battery type, JP8 at the default). Normally,
 touch any of this. If you want to change something later – switching battery type, say – here's
 what each jumper means. But the most important thing first:
 
+![The back of the Complete with the labeled solder bridges JP1–JP8 and the Ext.conn1 pinout; next to it, for comparison, the front with the connectors](../assets/CompleteLoetbruecken.jpeg)
+
 !!! danger "Read first, solder second"
     - **Only set JP5 for LiPo – never for LFP!** JP5 sets the charge cutoff voltage: set = **4.2 V**
       (LiPo), open = **3.6 V** (LFP). If you set JP5 while an **LFP battery** is connected, it will
@@ -86,6 +88,8 @@ wire color. What needs connecting:
   **plugged in**; with a different encoder, you solder the wires yourself (more on that just
   below).
 - optionally the **headphone board**, which you plug into the six-pin connector.
+
+![The headphone board with the ready-made connecting cable it ships with – exactly how it's delivered](../assets/KopfhoererplatineKabel.jpeg)
 
 ### RFID connector pinout { #rfid-steckerbelegung }
 

@@ -1,5 +1,7 @@
 # 3 · Die Complete-Platine
 
+![Die ESPuino-Complete-Platine (Rev. 5.1) von oben: ESP32-WROVER-Modul, microSD-Slot, USB-C, sowie die beschrifteten Steckverbinder für Neopixel, Akku, Lautsprecher, Power-Off-Switch, Ext.-Anschlüsse, Drehencoder, Kopfhörerplatine und die Taster](../assets/CompletePlatine.jpeg)
+
 ## Was die Complete besonders macht
 
 Die Complete ist die aktuelle ESPuino-Platine und der Bezugspunkt dieses Handbuchs. Ihr großer
@@ -250,6 +252,8 @@ Ein Teil der Bauteile hängt von deinen Vorlieben ab. Hier die Entscheidungen, d
   nichts.
 - **Kopfhörer:** optional über die separate **Kopfhörerplatine** (mit dem MS6324-Chip,
   [Forum #1099](https://forum.espuino.de/t/kopfhoererplatine-basierend-auf-ms6324-und-tda1308-bzw-lm4808m/1099)).
+
+![Die Kopfhörerplatine: eine kleine grüne Zusatzplatine mit MS6324- und LM4808M-Chip, Klinkenbuchse und sechspoligem Anschluss](../assets/Kopfhoererplatine.jpeg)
 
 !!! info "Der RFID-Reader-Typ ist keine Firmware-Frage mehr"
     Früher musste man beim Flashen die passende Firmware-Variante für RC522 oder PN5180 wählen. Seit

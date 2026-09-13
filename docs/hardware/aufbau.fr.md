@@ -42,6 +42,8 @@ défaut). En temps normal, tu n'as donc rien à toucher ici. Si tu veux changer 
 tard – par exemple changer de type de batterie –, voici ce que signifie chaque jumper. Mais d'abord,
 l'essentiel :
 
+![L'arrière de la Complete avec les ponts de soudure JP1–JP8 étiquetés et le brochage d'Ext.conn1 ; à côté, pour comparaison, l'avant avec les connecteurs](../assets/CompleteLoetbruecken.jpeg)
+
 !!! danger "À lire avant de souder"
     - **Ne pose JP5 que pour du LiPo – jamais pour du LFP !** JP5 règle la tension de fin de charge :
       posé = **4,2 V** (LiPo), ouvert = **3,6 V** (LFP). Si tu poses JP5 alors qu'une **batterie
@@ -90,6 +92,8 @@ JST-PH (2 mm), et – comme indiqué dans l'avertissement ci-dessus – tu te ba
   ESPuino, elle se **branche simplement** ; avec un autre encodeur, tu soudes toi-même les fils
   (plus de détails juste en dessous).
 - éventuellement la **carte casque**, qui se branche dans le connecteur six broches.
+
+![La carte casque avec le câble de connexion tout fait fourni avec elle – exactement comme elle est livrée](../assets/KopfhoererplatineKabel.jpeg)
 
 ### Brochage du connecteur RFID { #rfid-steckerbelegung }
 
