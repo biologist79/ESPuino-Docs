@@ -5,6 +5,10 @@ mitziehen.
 
 ## Playmodi
 
+Was die einzelnen Modi im Alltag bedeuten – mit Symbol und Beschreibung – steht in
+[Kapitel 8 → Die Abspielmodi](../bedienung/webinterface.md#abspielmodi). Hier stehen nur die
+technischen IDs, wie sie in MQTT-Nachrichten, in der REST-API und in `backup.txt` auftauchen.
+
 | Kategorie | ID | Konstante |
 | --- | --- | --- |
 | Einzeltrack | 1 / 2 / 12 | `SINGLE_TRACK` / `_LOOP` / `_OF_DIR_RANDOM` |
@@ -19,7 +23,9 @@ mitziehen.
 
 ## Modifikationskarten
 
-Karten, die eine Funktion auslösen statt Musik.
+Karten, die eine Funktion auslösen statt Musik. Den vollständigen Katalog in Alltagssprache –
+sortiert nach Themen – findest du in
+[Kapitel 8 → Modifikationskarten](../bedienung/webinterface.md#modifikationskarten-alle-optionen).
 
 | ID | Wirkung |
 | --- | --- |
@@ -39,6 +45,11 @@ Karten, die eine Funktion auslösen statt Musik.
 
 ## Steuer-Kommandos (Buttons / Rotary / MQTT)
 
+Welche Taste ab Werk was tut, steht in
+[Kapitel 9 → Tasten und Tastenkombinationen](../bedienung/am-geraet.md#tasten-und-tastenkombinationen);
+zugewiesen werden die Kommandos in
+[Kapitel 8 → Drehencoder & Taster](../bedienung/webinterface.md#drehencoder-taster).
+
 | ID | Kommando |
 | --- | --- |
 | 170 | Play/Pause |
@@ -53,6 +64,9 @@ Karten, die eine Funktion auslösen statt Musik.
 | 186 | Sprung-Vorschau (nur Drehencoder-Geste) |
 
 ## Virtuelle RFID-Karten
+
+Wozu sie gut sind und wie man sie auslöst, erklärt
+[Kapitel 12 → Virtuelle RFID-Karten](../vertiefung/erweiterte-themen.md#virtuelle-rfid-karten).
 
 IDs `241`–`250` entsprechen den Karten `900000000001` … `900000000010`.
 
@@ -119,4 +133,7 @@ mit dem Code synchron. *(Optional später: als interaktive Swagger-Seite ins Han
 ## Changelog
 
 Der aktuelle Changelog wird im Firmware-Repo gepflegt und dort fortlaufend ergänzt:
-[changelog.md](https://github.com/biologist79/ESPuino/blob/master/changelog.md).
+[changelog.md im `dev`-Branch](https://github.com/biologist79/ESPuino/blob/dev/changelog.md) – passend
+zu dem Stand, den dieses Handbuch beschreibt. Die Fassung im
+[`master`-Branch](https://github.com/biologist79/ESPuino/blob/master/changelog.md) enthält nur das,
+was bereits als Release veröffentlicht wurde.

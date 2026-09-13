@@ -11,6 +11,13 @@ laufen weiter im [ESPuino-Forum](https://forum.espuino.de); dieses Handbuch ist 
     nur als Delta vor (Kapitel 16). Ältere Entwicklungsstufen (frühe Eigenbauten, Streifenraster,
     Carrier-PCBs) werden nicht behandelt.
 
+!!! warning "Stand der Beschreibung: der `dev`-Branch"
+    Dieses Handbuch beschreibt immer den **aktuellen Stand des `dev`-Branches** – also das, was
+    zuletzt in die Entwicklungsversion eingeflossen ist. Läuft bei dir eine Firmware aus dem
+    `master`-Branch, kann es deshalb vorkommen, dass eine hier beschriebene Einstellung bei dir noch
+    fehlt oder anders aussieht. Was wann dazugekommen ist, verrät der
+    [Changelog](https://github.com/biologist79/ESPuino/blob/dev/changelog.md).
+
 ## Schnell hin
 
 <div class="grid cards" markdown>
