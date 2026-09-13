@@ -48,6 +48,9 @@ hooks:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/lang-redirect.js
+
 # Mehrsprachigkeit: Deutsch ist die Default-Sprache (die vorhandenen .md-Dateien),
 # EN/FR liegen als seite.en.md / seite.fr.md daneben. Kommt ein neues deutsches
 # Kapitel dazu, zieht die Übersetzung erstmal automatisch nach (fallback_to_default) –
