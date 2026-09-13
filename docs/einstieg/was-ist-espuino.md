@@ -1,5 +1,8 @@
 # 1 · Was ist ESPuino?
 
+![Ein fertig gebauter ESPuino: ein hellblau-weißer Würfel mit Lautsprecher, drei Tasten und Drehregler](../assets/Biobox3d.jpg)
+*So könnte ein fertiger ESPuino aussehen – wie bunt, groß und individuell deiner wird, entscheidest du selbst.*
+
 ## Die Grundidee
 
 ESPuino ist ein selbstgebauter, RFID-gesteuerter Audio-Player: Du legst eine Karte auf, und ein

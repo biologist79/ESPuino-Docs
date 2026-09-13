@@ -1,5 +1,8 @@
 # 1 · What is ESPuino?
 
+![A finished ESPuino: a light blue and white cube with a speaker, three buttons, and a rotary knob](../assets/Biobox3d.jpg)
+*This is roughly what a finished ESPuino can look like – how colorful, big, and individual yours turns out is entirely up to you.*
+
 ## The basic idea
 
 ESPuino is a self-built, RFID-controlled audio player: you place a card on it, and an audio drama,

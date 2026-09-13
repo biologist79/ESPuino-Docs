@@ -1,5 +1,8 @@
 # 1 · Qu'est-ce qu'ESPuino ?
 
+![Un ESPuino terminé : un cube bleu clair et blanc avec haut-parleur, trois boutons et une molette rotative](../assets/Biobox3d.jpg)
+*Voici à peu près à quoi peut ressembler un ESPuino terminé – la couleur, la taille et le caractère unique du tien, c'est toi qui les décides.*
+
 ## L'idée de base
 
 ESPuino est un lecteur audio piloté par RFID, à construire soi-même : tu poses une carte, et une

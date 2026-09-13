@@ -21,6 +21,9 @@ holder on the bottom (for 18650, 26650, or 32700 cells). The print files are ava
 as a Fusion 360 file; recommended settings are PETG, five wall layers, and 35% infill (roughly 17
 hours of printing on a Bambu Lab P1S).
 
+![The BioBox 3D: a light blue and white, cube-shaped ESPuino with a honeycomb speaker grille, three buttons, and a rotary encoder](../assets/Biobox3d.jpg)
+*The BioBox 3D – the reference design for a 3D-printed ESPuino enclosure.*
+
 ## It doesn't have to be 3D printing: wood and more
 
 3D printing is the most common approach, but far from the only one. Some people use a **ready-made

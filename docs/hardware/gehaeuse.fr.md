@@ -23,6 +23,9 @@ d'impression sont disponibles au format STL et en fichier Fusion 360 ; les régl
 le PETG, cinq couches de paroi et 35 % de remplissage (environ 17 heures d'impression sur une Bambu
 Lab P1S).
 
+![La BioBox 3D : un ESPuino cubique bleu clair et blanc, avec grille en nid d'abeille pour le haut-parleur, trois boutons et une molette rotative](../assets/Biobox3d.jpg)
+*La BioBox 3D – le modèle de référence pour un boîtier ESPuino imprimé en 3D.*
+
 ## Pas obligatoirement de l'impression 3D : le bois et autres solutions
 
 L'impression 3D est l'approche la plus répandue, mais loin d'être la seule. Certains prennent un

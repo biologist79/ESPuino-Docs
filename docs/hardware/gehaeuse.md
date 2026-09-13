@@ -19,6 +19,9 @@ USB-C und Kopfhörerbuchse, unten eine Revisionsöffnung und eine Akkuhalterung 
 oder 32700-Zellen). Die Druckdateien gibt es als STL und als Fusion-360-Datei; empfohlen werden PETG,
 fünf Wandschichten und 35 % Infill (etwa 17 Stunden Druckzeit auf einem Bambu Lab P1S).
 
+![Die BioBox 3D: ein hellblau-weißer, würfelförmiger ESPuino mit Wabengitter für den Lautsprecher, drei Tasten und Drehencoder](../assets/Biobox3d.jpg)
+*Die BioBox 3D – das Referenz-Design für ein 3D-gedrucktes ESPuino-Gehäuse.*
+
 ## Es muss kein 3D-Druck sein: Holz & Co
 
 3D-Druck ist der verbreitetste, aber längst nicht der einzige Weg. Manche nehmen ein **fertiges
