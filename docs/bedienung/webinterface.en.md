@@ -107,7 +107,8 @@ The technical IDs are in the [appendix](../referenz/anhang.md#modifikationskarte
 | 💤 Sleep at end of playlist | ESPuino falls asleep once the current playlist has finished. |
 
 *For all sleep modes, ESPuino dims the LEDs – so you can tell at a glance that a sleep timer is
-active.*
+active. Strictly speaking they switch on **night mode**, which optionally limits the volume as well –
+see [General tab](#wiedergabe).*
 
 **Repeat**
 
@@ -120,7 +121,7 @@ active.*
 
 | Action | Effect |
 | --- | --- |
-| 🌙 Dim LEDs (night mode) | Dims the Neopixels permanently – pleasant, say, in a darkened child's room. |
+| 🌙 Dim LEDs (night mode) | Dims the Neopixels permanently – pleasant, say, in a darkened child's room. Optionally, night mode also limits the volume (see [General tab](#wiedergabe)). |
 | 📶 Wi-Fi on/off | Turns Wi-Fi on or off (off saves power and allows purely offline operation). |
 | 💡 Ambient light | Toggles a permanent mood-lighting effect for the LEDs. |
 | 📁 Enable FTP | Starts the FTP service (until the next restart). |
@@ -268,9 +269,28 @@ question mark:
 | Pause when card is removed | Pauses when the card is taken off the reader (RC522 and PN5180 – see warning below). |
 | Don't re-accept the same card | Ignores placing the same card again; optionally pause↔play instead of restarting. |
 | Pause at minimum volume | Pauses once the volume reaches the minimum. |
+| Limit volume in night mode | Caps the volume while night mode is active – explained in full right below this table. |
 | Restore last volume | Restores the last-used volume after a restart. |
 | Mono playback | For builds with only one speaker. |
 | Finer steps at low volume | Switches to logarithmic volume calculation – helps if the steps feel too coarse at the low end of the volume range. |
+
+The option **"Limit volume in night mode"** deserves an explanation of its own. It's meant for the
+case where the player is taken to bed and the speaker ends up right at someone's ear. When you switch
+night mode on, ESPuino remembers the volume set at **that very moment** and makes it a temporary
+upper limit – plus one step of headroom, so a slightly too quiet audiobook can still be nudged up a
+little. Beyond that it won't go, no matter whether you use the rotary encoder, the buttons, the web
+interface, MQTT or Bluetooth. Leave night mode again and the limit is lifted immediately.
+
+The advantage over a fixed maximum comes down to audiobooks differing so much in loudness: a fixed
+value would have to be set so low that it would constantly get in the way with quiet recordings. A
+limit that moves along adapts by itself to whatever is playing.
+
+!!! info "When night mode is active"
+    Not just via the 🌙 modification card or a button assigned to it: **every sleep timer** switches
+    it on as well, as does the
+    [🎲💤 Random title from a folder, then sleep](#abspielmodi) play mode. So the limit also applies
+    when you place "sleep after 30 min", for instance. The option takes effect the **next** time
+    night mode is switched on – one already running keeps the limit it started with.
 
 There's also the option **"Automatically save playback position of long audiobooks every _n_
 seconds"**, which has ESPuino save the position in audiobook mode **periodically** – meant for long

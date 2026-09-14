@@ -35,7 +35,7 @@ sortiert nach Themen – findest du in
 | 106 | Sleep nach Ende der Playlist |
 | 107 | Sleep nach 5 Tracks |
 | 110 / 111 | Endlosschleife Playlist / Track |
-| 120 | LED-Nachtmodus (Helligkeit) |
+| 120 | Nachtmodus (LED-Helligkeit, optional Lautstärkegrenze) |
 | 130 | WLAN an/aus |
 | 140 / 141 / 142 | BT-Senke / BT-Quelle / Modus durchschalten |
 | 150 | FTP-Server aktivieren |

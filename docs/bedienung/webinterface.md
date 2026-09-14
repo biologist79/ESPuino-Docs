@@ -110,7 +110,8 @@ technischen IDs stehen im [Anhang](../referenz/anhang.md#modifikationskarten).
 | 💤 Schlafen nach Ende der Playlist | ESPuino schläft ein, wenn die aktuelle Playlist durchgelaufen ist. |
 
 *Bei allen Schlaf-Modi dimmt ESPuino die LEDs – so erkennst du auf einen Blick, dass ein Schlaftimer
-aktiv ist.*
+aktiv ist. Genau genommen schalten sie den **Nachtmodus** ein, der auf Wunsch zusätzlich die
+Lautstärke begrenzt – siehe [Tab Allgemein](#wiedergabe).*
 
 **Wiederholung**
 
@@ -123,7 +124,7 @@ aktiv ist.*
 
 | Aktion | Wirkung |
 | --- | --- |
-| 🌙 LEDs dimmen (Nachtmodus) | Dimmt die Neopixel dauerhaft – angenehm etwa im abgedunkelten Kinderzimmer. |
+| 🌙 LEDs dimmen (Nachtmodus) | Dimmt die Neopixel dauerhaft – angenehm etwa im abgedunkelten Kinderzimmer. Optional begrenzt der Nachtmodus zusätzlich die Lautstärke (siehe [Tab Allgemein](#wiedergabe)). |
 | 📶 WLAN an/aus | Schaltet das WLAN ein oder aus (aus spart Strom und erlaubt reinen Offline-Betrieb). |
 | 💡 Ambient Light | Schaltet eine dauerhafte Stimmungsbeleuchtung der LEDs um. |
 | 📁 FTP aktivieren | Startet den FTP-Dienst (bis zum nächsten Neustart). |
@@ -275,9 +276,31 @@ Hilfetext am Fragezeichen:
 | Pause bei entfernter Karte | Pausiert, wenn die Karte vom Leser genommen wird (RC522 und PN5180 – siehe Warnung unten). |
 | Gleiche Karte nicht erneut akzeptieren | Ignoriert erneutes Auflegen derselben Karte; optional Pause↔Play statt Neustart. |
 | Pause bei minimaler Lautstärke | Pausiert, sobald die Lautstärke das Minimum erreicht. |
+| Lautstärke im Nachtmodus begrenzen | Deckelt die Lautstärke, solange der Nachtmodus aktiv ist – ausführlich erklärt direkt unter dieser Tabelle. |
 | Letzte Lautstärke wiederherstellen | Stellt nach einem Neustart die zuletzt genutzte Lautstärke wieder her. |
 | Mono-Wiedergabe | Für Aufbauten mit nur einem Lautsprecher. |
 | Feinere Abstufungen bei niedriger Lautstärke | Schaltet auf logarithmische Lautstärkeberechnung um – hilft, wenn dir die Stufen im unteren Lautstärkebereich zu grob sind. |
+
+Eine eigene Erklärung verdient die Option **„Lautstärke im Nachtmodus begrenzen"**. Sie ist für den
+Fall gedacht, dass die Box mit ins Bett genommen wird und der Lautsprecher dann direkt am Ohr liegt.
+Schaltest du den Nachtmodus ein, merkt sich ESPuino die Lautstärke, die **in genau diesem Moment**
+eingestellt ist, und macht sie zur vorübergehenden Obergrenze – eine Stufe Spielraum gibt es
+zusätzlich, damit ein etwas zu leises Hörbuch noch ein wenig lauter gedreht werden kann. Darüber
+hinaus geht es dann nicht mehr, egal ob über Drehencoder, Taster, Webinterface, MQTT oder Bluetooth.
+Verlässt du den Nachtmodus wieder, ist die Begrenzung sofort aufgehoben.
+
+Der Vorteil gegenüber einem fest eingestellten Maximalwert liegt darin, dass Hörbücher
+unterschiedlich laut sind: Ein fester Wert müsste so niedrig gewählt werden, dass er bei leisen
+Aufnahmen ständig im Weg wäre. Die mitwandernde Grenze passt sich dagegen von selbst an das an, was
+gerade läuft.
+
+!!! info "Wann der Nachtmodus aktiv ist"
+    Nicht nur über die Modifikationskarte 🌙 oder eine entsprechend belegte Taste: Auch **jeder
+    Schlaftimer** schaltet ihn mit ein, ebenso der Abspielmodus
+    [🎲💤 Zufälliger Titel eines Ordners, danach schlafen](#abspielmodi). Die Begrenzung greift also
+    beispielsweise auch, wenn du „Schlafen nach 30 min" auflegst. Die Option wirkt jeweils ab dem
+    **nächsten** Einschalten des Nachtmodus – ein bereits laufender behält die Grenze, mit der er
+    gestartet ist.
 
 Zusätzlich gibt es die Option **„Wiedergabeposition langer Hörbücher automatisch speichern alle _n_
 Sekunden"**, mit der ESPuino die Position im Hörbuch-Modus **zyklisch** sichert – gedacht für lange

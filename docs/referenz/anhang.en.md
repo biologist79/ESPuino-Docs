@@ -34,7 +34,7 @@ topic – is in
 | 106 | Sleep at end of playlist |
 | 107 | Sleep after 5 tracks |
 | 110 / 111 | Loop playlist / track |
-| 120 | LED night mode (brightness) |
+| 120 | Night mode (LED brightness, optionally a volume limit) |
 | 130 | Wi-Fi on/off |
 | 140 / 141 / 142 | BT sink / BT source / cycle mode |
 | 150 | Enable FTP server |

@@ -112,7 +112,8 @@ directement sans carte. Les identifiants techniques figurent dans l'[annexe](../
 | 💤 Dormir à la fin de la playlist | ESPuino s'endort une fois la playlist actuelle terminée. |
 
 *Pour tous les modes de sommeil, ESPuino atténue les LED – tu vois ainsi en un coup d'œil qu'une
-minuterie de sommeil est active.*
+minuterie de sommeil est active. À proprement parler, ils activent le **mode nuit**, qui limite en
+option également le volume – voir [onglet Général](#wiedergabe).*
 
 **Répétition**
 
@@ -125,7 +126,7 @@ minuterie de sommeil est active.*
 
 | Action | Effet |
 | --- | --- |
-| 🌙 Atténuer les LED (mode nuit) | Atténue durablement les Neopixels – agréable par exemple dans une chambre d'enfant obscurcie. |
+| 🌙 Atténuer les LED (mode nuit) | Atténue durablement les Neopixels – agréable par exemple dans une chambre d'enfant obscurcie. En option, le mode nuit limite en plus le volume (voir [onglet Général](#wiedergabe)). |
 | 📶 Wi-Fi activer/désactiver | Active ou désactive le Wi-Fi (désactivé économise l'énergie et permet un fonctionnement purement hors ligne). |
 | 💡 Éclairage d'ambiance | Bascule un éclairage d'ambiance permanent des LED. |
 | 📁 Activer le FTP | Démarre le service FTP (jusqu'au prochain redémarrage). |
@@ -281,9 +282,31 @@ texte d'aide accessible via le point d'interrogation :
 | Pause au retrait de la carte | Met en pause quand la carte est retirée du lecteur (RC522 et PN5180 – voir l'avertissement ci-dessous). |
 | Ne pas réaccepter la même carte | Ignore le fait de reposer la même carte ; option pause↔lecture au lieu d'un redémarrage. |
 | Pause au volume minimal | Met en pause dès que le volume atteint le minimum. |
+| Limiter le volume en mode nuit | Plafonne le volume tant que le mode nuit est actif – expliqué en détail juste sous ce tableau. |
 | Restaurer le dernier volume | Restaure le dernier volume utilisé après un redémarrage. |
 | Lecture mono | Pour les montages avec un seul haut-parleur. |
 | Paliers plus fins à faible volume | Bascule sur un calcul de volume logarithmique – utile si les paliers te semblent trop grossiers dans le bas de la plage de volume. |
+
+L'option **« Limiter le volume en mode nuit »** mérite une explication à part. Elle est pensée pour
+le cas où la boîte est emportée au lit et où le haut-parleur se retrouve juste contre l'oreille.
+Lorsque tu actives le mode nuit, ESPuino retient le volume réglé à **cet instant précis** et en fait
+une limite supérieure temporaire – avec un cran de marge en plus, pour qu'un livre audio un peu trop
+discret puisse encore être monté légèrement. Au-delà, ce n'est plus possible, que ce soit via la
+molette rotative, les boutons, l'interface web, MQTT ou le Bluetooth. Dès que tu quittes le mode
+nuit, la limite est levée.
+
+L'avantage par rapport à un maximum fixe tient au fait que les livres audio n'ont pas tous le même
+niveau sonore : une valeur fixe devrait être réglée si bas qu'elle gênerait en permanence avec les
+enregistrements discrets. Une limite qui suit le volume s'adapte au contraire d'elle-même à ce qui
+est en cours de lecture.
+
+!!! info "Quand le mode nuit est actif"
+    Pas seulement via la carte de modification 🌙 ou un bouton configuré en ce sens : **chaque
+    minuterie de sommeil** l'active également, tout comme le mode de lecture
+    [🎲💤 Titre aléatoire d'un dossier, puis sommeil](#abspielmodi). La limite s'applique donc aussi,
+    par exemple, quand tu poses « sommeil après 30 min ». L'option prend effet à la **prochaine**
+    activation du mode nuit – un mode nuit déjà en cours conserve la limite avec laquelle il a
+    démarré.
 
 Il existe en outre l'option **« Sauvegarder automatiquement la position de lecture des livres audio
 longs toutes les _n_ secondes »**, qui permet à ESPuino de sauvegarder la position en mode livre

@@ -36,7 +36,7 @@ courant – classé par thème – se trouve au
 | 106 | Sommeil à la fin de la playlist |
 | 107 | Sommeil après 5 titres |
 | 110 / 111 | Boucle playlist / titre |
-| 120 | Mode nuit LED (luminosité) |
+| 120 | Mode nuit (luminosité des LED, limite de volume en option) |
 | 130 | Wi-Fi activer/désactiver |
 | 140 / 141 / 142 | Récepteur BT / source BT / changer de mode |
 | 150 | Activer le serveur FTP |
