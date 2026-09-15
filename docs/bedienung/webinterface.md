@@ -399,7 +399,7 @@ Speichern**, ein Neustart ist dafür nicht nötig.
 
 ### LED
 
-![Die Unterkladde LED im Tab Allgemein: Helligkeit für Normalbetrieb, Nachtmodus und Atmolight, LED-Einstellungen sowie die Farbtöne für Fortschritt und Ambient-Light](../assets/WebinterfaceLed.png)
+![Die Unterkladde LED im Tab Allgemein: Helligkeit für Normalbetrieb, Nachtmodus und Atmolight, LED-Einstellungen mit Anzahl, Offset und den drei Verhaltens-Schaltern sowie die Farbtöne für Fortschritt und Ambient-Light](../assets/WebinterfaceLed.png)
 
 Hier stellst du die Neopixel ein. Die **Helligkeit** lässt sich getrennt für den Normalbetrieb, den
 Nachtmodus und das Ambient-Light festlegen. Unter **LED-Einstellungen** kommen die Details dazu:
@@ -415,6 +415,20 @@ Nachtmodus und das Ambient-Light festlegen. Unter **LED-Einstellungen** kommen d
 | Start-LED-Offset | Ab welcher physischen LED die Anzeige beginnt (siehe Tipp). |
 | Pause-Zentrierung | Zentriert die Pause-Anzeige. |
 | Laufrichtung | Kehrt die Drehrichtung der Effekte um. |
+| Kurzes Aufleuchten aller LEDs bei erkannter Karte | Quittiert eine angenommene Karte mit kurzem grünem Aufleuchten – siehe unten. |
+
+Die letzte Option verdient einen Satz mehr, weil sie zwei Fälle bewusst auslässt. Ist sie aktiv,
+leuchtet der Ring bei jeder **angenommenen** Karte kurz grün auf – eine sichtbare Bestätigung, die es
+vorher nur für Modifikationskarten gab. Eine **unbekannte** Karte wird weiterhin rot quittiert, beides
+zusammen ergibt also eine eindeutige Antwort auf jede aufgelegte Karte. Eine Karte, die wegen
+„Denselben RFID-Tag nicht erneut akzeptieren" abgelehnt wird, löst dagegen nichts aus – es ist ja
+auch nichts passiert.
+
+!!! info "Kein Geflacker bei liegender Karte"
+    Wenn du „Pause wenn RFID-Tag entfernt" nutzt und die Karte dauerhaft auf dem Leser liegt, kann
+    sie bei ungünstigen Funkverhältnissen zwischendurch neu erkannt werden. Das Aufleuchten hängt
+    deshalb nicht an der Erkennung durch den Leser, sondern an der tatsächlich angenommenen Karte –
+    solche Aussetzer bleiben dadurch unsichtbar.
 
 !!! tip "Das erste Pixel positionieren"
     Sitzt der Ring im Gehäuse „verdreht", legst du mit dem **Start-LED-Offset** fest, an welcher

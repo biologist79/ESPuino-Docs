@@ -389,7 +389,7 @@ saving** – no restart is needed for this.
 
 ### LED
 
-![The LED sub-group in the General tab: brightness for normal operation, night mode, and ambient light, LED settings, and the color hues for progress and ambient light](../assets/WebinterfaceLed.png)
+![The LED sub-group in the General tab: brightness for normal operation, night mode, and ambient light, LED settings with counts, offset and the three behaviour switches, and the color hues for progress and ambient light](../assets/WebinterfaceLed.png)
 
 Here you configure the Neopixels. **Brightness** can be set separately for normal operation, night
 mode, and ambient light. Under **LED settings** come the details:
@@ -405,6 +405,18 @@ mode, and ambient light. Under **LED settings** come the details:
 | Start LED offset | From which physical LED the display starts (see tip). |
 | Pause centering | Centers the pause display. |
 | Rotation direction | Reverses the direction of the effects. |
+| Briefly flash all LEDs when a tag is recognized | Acknowledges an accepted tag with a brief green flash – see below. |
+
+That last option deserves an extra sentence, because it deliberately leaves out two cases. With it
+on, the ring briefly flashes green for every **accepted** tag – visible confirmation that previously
+only modification cards gave. An **unknown** tag is still acknowledged in red, so together the two
+give an unambiguous answer to every tag you place. A tag refused by "Don't re-accept the same tag",
+on the other hand, triggers nothing – nothing happened, after all.
+
+!!! info "No flickering with a tag left in place"
+    If you use "Pause when RFID tag is removed" and leave the tag on the reader permanently, poor RF
+    conditions can make it get re-detected now and then. That's why the flash isn't tied to the
+    reader detecting a tag but to a tag actually being accepted – such hiccups stay invisible.
 
 !!! tip "Positioning the first pixel"
     If the ring sits "rotated" in the enclosure, the **start LED offset** lets you set which

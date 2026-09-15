@@ -411,7 +411,7 @@ La différence entre les deux variantes en pratique est décrite au
 
 ### LED
 
-![Le sous-groupe LED dans l'onglet Général : luminosité pour le fonctionnement normal, le mode nuit et l'éclairage d'ambiance, réglages LED et les teintes pour la progression et l'éclairage d'ambiance](../assets/WebinterfaceLed.png)
+![Le sous-groupe LED dans l'onglet Général : luminosité pour le fonctionnement normal, le mode nuit et l'éclairage d'ambiance, réglages LED avec les nombres, le décalage et les trois commutateurs de comportement, et les teintes pour la progression et l'éclairage d'ambiance](../assets/WebinterfaceLed.png)
 
 Ici, tu configures les Neopixels. La **luminosité** peut être réglée séparément pour le
 fonctionnement normal, le mode nuit et l'éclairage d'ambiance. Sous **réglages LED** viennent les
@@ -428,6 +428,20 @@ détails :
 | Décalage de la première LED | À partir de quelle LED physique l'affichage commence (voir l'astuce). |
 | Centrage en pause | Centre l'affichage de pause. |
 | Sens de rotation | Inverse le sens de rotation des effets. |
+| Bref clignotement de toutes les LED à la reconnaissance d'une carte | Accuse réception d'une carte acceptée par un bref clignotement vert – voir ci-dessous. |
+
+Cette dernière option mérite une phrase de plus, car elle laisse volontairement deux cas de côté.
+Quand elle est active, l'anneau clignote brièvement en vert pour chaque carte **acceptée** – une
+confirmation visible que seules les cartes de modification donnaient auparavant. Une carte
+**inconnue** reste signalée en rouge ; ensemble, les deux donnent donc une réponse sans ambiguïté à
+chaque carte posée. En revanche, une carte refusée par « Ne pas réaccepter la même carte » ne
+déclenche rien – il ne s'est de toute façon rien passé.
+
+!!! info "Pas de scintillement avec une carte laissée en place"
+    Si tu utilises « Pause au retrait de la carte » et que la carte reste posée en permanence sur le
+    lecteur, de mauvaises conditions radio peuvent la faire redétecter de temps à autre. C'est
+    pourquoi le clignotement n'est pas lié à la détection par le lecteur, mais à une carte réellement
+    acceptée – ces ratés restent ainsi invisibles.
 
 !!! tip "Positionner le premier pixel"
     Si l'anneau est monté « décalé » dans le boîtier, le **décalage de la première LED** te permet
