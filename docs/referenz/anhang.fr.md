@@ -30,6 +30,7 @@ courant – classé par thème – se trouve au
 
 | ID | Effet |
 | --- | --- |
+| 0 | Supprimer l'affectation de cette carte |
 | 100 | Verrouiller boutons + encodeur |
 | 101 / 102 / 103 / 104 | Sommeil après 15 / 30 / 60 / 120 min (+ atténuation LED) |
 | 105 | Sommeil à la fin du titre |
@@ -43,6 +44,11 @@ courant – classé par thème – se trouve au
 | 151 / 152 | Annoncer l'adresse IP / l'heure |
 | 153 | Basculer l'éclairage d'ambiance |
 | 154 / 155 | Luminosité LED + / − |
+
+La répartition en deux tableaux suit la nature de la commande, pas ce à quoi elle peut être affectée :
+presque toutes les commandes de contrôle ci-dessous peuvent tout aussi bien être placées sur une carte.
+Les actions disponibles **uniquement** en carte ou **uniquement** en bouton sont listées au
+[chapitre 8 → Molette rotative & boutons](../bedienung/webinterface.md#drehencoder-taster).
 
 ## Commandes de contrôle (boutons / molette / MQTT)
 

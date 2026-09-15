@@ -105,6 +105,7 @@ The technical IDs are in the [appendix](../referenz/anhang.md#modifikationskarte
 | 💤 Sleep after 15 min / 30 min / 1 h / 2 h | Starts a sleep timer; ESPuino shuts down after the chosen time. |
 | 💤 Sleep at end of title | ESPuino falls asleep once the current title finishes. |
 | 💤 Sleep at end of playlist | ESPuino falls asleep once the current playlist has finished. |
+| 💤 Sleep after five titles | ESPuino falls asleep once five more titles have played. |
 
 *For all sleep modes, ESPuino dims the LEDs – so you can tell at a glance that a sleep timer is
 active. Strictly speaking they switch on **night mode**, which optionally limits the volume as well –
@@ -124,6 +125,7 @@ see [General tab](#wiedergabe).*
 | 🌙 Dim LEDs (night mode) | Dims the Neopixels permanently – pleasant, say, in a darkened child's room. Optionally, night mode also limits the volume (see [General tab](#wiedergabe)). |
 | 📶 Wi-Fi on/off | Turns Wi-Fi on or off (off saves power and allows purely offline operation). |
 | 💡 Ambient light | Toggles a permanent mood-lighting effect for the LEDs. |
+| 🔆 / 🔅 LED brightness up / down | Changes the Neopixel brightness by one step. |
 | 📁 Enable FTP | Starts the FTP service (until the next restart). |
 | 🔊 BT speaker | Switches ESPuino into **Bluetooth speaker mode** (BT sink): it receives audio from a paired device, e.g. your phone, and plays it. |
 | 🎧 BT headphones | Switches ESPuino into **Bluetooth headphone mode** (BT source): it sends its audio to paired Bluetooth headphones or a speaker. |
@@ -153,6 +155,7 @@ see [General tab](#wiedergabe).*
 | ⏪ / ⏩ First / last title | Jumps to the first or last title of the playlist. |
 | 📁 Next / previous folder | Jumps a folder forward or backward (recursive modes only). |
 | » / « Seek forward / backward | Seeks a few seconds forward or backward. |
+| 🔊 / 🔉 Volume up / down | Changes the volume by one step. |
 
 **Virtual cards & other**
 
@@ -359,10 +362,11 @@ like restart or starting FTP, without sacrificing a dedicated button for them.
     default. If you want Wi-Fi to be toggleable at all, better put that on a **modification card**
     instead – just don't misplace it. 😄
 
-The available actions largely match the modification-card catalog, plus a few actions that only
-make sense as buttons: volume up/down/reset to initial volume, show battery voltage, stop and
-restart, sleep after five titles, and a debug display of task load. The default mapping ESPuino
-ships with is listed in
+The available actions largely match the modification-card catalog – the two lists differ only at the
+edges. **Buttons only**: reset to initial volume, show battery voltage, stop, restart, and a debug
+display of task load. The other way round, **cards only**: clearing an assignment. Everything else –
+including volume up/down and sleep after five titles – can go on either a button or a card. The
+default mapping ESPuino ships with is listed in
 [chapter 9 → Buttons](am-geraet.md#tasten-und-tastenkombinationen).
 
 #### Seek step sizes { #sprungweiten }

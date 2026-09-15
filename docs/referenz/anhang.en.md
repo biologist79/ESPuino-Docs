@@ -28,6 +28,7 @@ topic – is in
 
 | ID | Effect |
 | --- | --- |
+| 0 | Clear this card's assignment |
 | 100 | Lock buttons + encoder |
 | 101 / 102 / 103 / 104 | Sleep after 15 / 30 / 60 / 120 min (+ LED dimming) |
 | 105 | Sleep at end of track |
@@ -41,6 +42,11 @@ topic – is in
 | 151 / 152 | Announce IP address / time |
 | 153 | Toggle ambient light |
 | 154 / 155 | LED brightness + / − |
+
+The split into two tables follows the kind of command, not what it can be assigned to: nearly every
+control command below can go on a card just as well. Which action is available **only** as a card or
+**only** as a button is listed in
+[chapter 8 → Rotary encoder & buttons](../bedienung/webinterface.md#drehencoder-taster).
 
 ## Control commands (buttons / rotary / MQTT)
 

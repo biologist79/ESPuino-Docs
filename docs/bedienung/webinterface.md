@@ -108,6 +108,7 @@ technischen IDs stehen im [Anhang](../referenz/anhang.md#modifikationskarten).
 | 💤 Schlafen nach 15 min / 30 min / 1 h / 2 h | Startet einen Schlaftimer; nach der gewählten Zeit schaltet ESPuino ab. |
 | 💤 Schlafen nach Ende des Titels | ESPuino schläft ein, sobald der laufende Titel zu Ende ist. |
 | 💤 Schlafen nach Ende der Playlist | ESPuino schläft ein, wenn die aktuelle Playlist durchgelaufen ist. |
+| 💤 Schlafen nach fünf Titeln | ESPuino schläft ein, sobald fünf weitere Titel gespielt wurden. |
 
 *Bei allen Schlaf-Modi dimmt ESPuino die LEDs – so erkennst du auf einen Blick, dass ein Schlaftimer
 aktiv ist. Genau genommen schalten sie den **Nachtmodus** ein, der auf Wunsch zusätzlich die
@@ -127,6 +128,7 @@ Lautstärke begrenzt – siehe [Tab Allgemein](#wiedergabe).*
 | 🌙 LEDs dimmen (Nachtmodus) | Dimmt die Neopixel dauerhaft – angenehm etwa im abgedunkelten Kinderzimmer. Optional begrenzt der Nachtmodus zusätzlich die Lautstärke (siehe [Tab Allgemein](#wiedergabe)). |
 | 📶 WLAN an/aus | Schaltet das WLAN ein oder aus (aus spart Strom und erlaubt reinen Offline-Betrieb). |
 | 💡 Ambient Light | Schaltet eine dauerhafte Stimmungsbeleuchtung der LEDs um. |
+| 🔆 / 🔅 LED-Helligkeit heller / dunkler | Ändert die Helligkeit der Neopixel um eine Stufe. |
 | 📁 FTP aktivieren | Startet den FTP-Dienst (bis zum nächsten Neustart). |
 | 🔊 BT-Lautsprecher | Schaltet ESPuino in den **Bluetooth-Lautsprecher-Modus** (BT-Senke): Er empfängt Audio von einem gekoppelten Gerät, z. B. dem Handy, und gibt es aus. |
 | 🎧 BT-Kopfhörer | Schaltet ESPuino in den **Bluetooth-Kopfhörer-Modus** (BT-Quelle): Er sendet seinen Ton an einen gekoppelten Bluetooth-Kopfhörer oder -Lautsprecher. |
@@ -156,6 +158,7 @@ Lautstärke begrenzt – siehe [Tab Allgemein](#wiedergabe).*
 | ⏪ / ⏩ erster / letzter Titel | Springt zum ersten bzw. letzten Titel der Playlist. |
 | 📁 Ordner vor / zurück | Springt einen Ordner vor oder zurück (nur in rekursiven Modi). |
 | » / « Sekunden vor / zurück | Spult einige Sekunden vor bzw. zurück. |
+| 🔊 / 🔉 Lauter / Leiser | Ändert die Lautstärke um eine Stufe. |
 
 **Virtuelle Karten & Sonstiges**
 
@@ -369,10 +372,12 @@ Neustart oder FTP-Start, ohne dafür einen eigenen Taster zu opfern.
     ab Werk deaktiviert. Willst du WLAN überhaupt umschaltbar haben, leg das lieber auf eine
     **Modifikationskarte** – die solltest du dann allerdings nicht verlegen. 😄
 
-Die zur Auswahl stehenden Aktionen entsprechen im Wesentlichen dem Modifikationskarten-Katalog, plus
-einiger Aktionen, die nur als Taster Sinn ergeben: Lauter/Leiser/Initiale Lautstärke,
-Batteriespannung anzeigen, Stop und Neustart, Schlafen nach fünf Titeln sowie eine Debug-Anzeige der
-Taskauslastung. Die Standardbelegung, mit der ESPuino ausgeliefert wird, findest du in
+Die zur Auswahl stehenden Aktionen entsprechen weitgehend dem Modifikationskarten-Katalog – die
+beiden Listen unterscheiden sich nur an den Rändern. **Nur als Taster** gibt es: Initiale Lautstärke,
+Batteriespannung anzeigen, Stop, Neustart und eine Debug-Anzeige der Taskauslastung. Umgekehrt gibt es
+**nur als Karte** das Löschen einer Zuordnung. Alles andere – auch Lauter/Leiser und das Schlafen nach
+fünf Titeln – kannst du wahlweise auf eine Taste oder auf eine Karte legen. Die Standardbelegung, mit
+der ESPuino ausgeliefert wird, findest du in
 [Kapitel 9 → Tasten](am-geraet.md#tasten-und-tastenkombinationen).
 
 #### Sprungweiten beim Spulen { #sprungweiten }

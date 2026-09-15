@@ -29,6 +29,7 @@ sortiert nach Themen – findest du in
 
 | ID | Wirkung |
 | --- | --- |
+| 0 | Zuordnung dieser Karte löschen |
 | 100 | Tasten + Encoder sperren |
 | 101 / 102 / 103 / 104 | Sleep nach 15 / 30 / 60 / 120 min (+ LED-Dimm) |
 | 105 | Sleep nach Ende des Tracks |
@@ -42,6 +43,11 @@ sortiert nach Themen – findest du in
 | 151 / 152 | IP-Adresse / Uhrzeit ansagen |
 | 153 | Ambient-Light umschalten |
 | 154 / 155 | LED-Helligkeit + / − |
+
+Die Aufteilung auf zwei Tabellen folgt der Art des Kommandos, nicht der Zuweisbarkeit: Fast alle
+Steuer-Kommandos unten lassen sich ebenso auf eine Karte legen. Welche Aktion **nur** als Karte oder
+**nur** als Taste zur Verfügung steht, steht in
+[Kapitel 8 → Drehencoder & Taster](../bedienung/webinterface.md#drehencoder-taster).
 
 ## Steuer-Kommandos (Buttons / Rotary / MQTT)
 

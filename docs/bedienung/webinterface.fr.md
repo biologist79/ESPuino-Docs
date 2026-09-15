@@ -110,6 +110,7 @@ directement sans carte. Les identifiants techniques figurent dans l'[annexe](../
 | 💤 Dormir après 15 min / 30 min / 1 h / 2 h | Démarre une minuterie de sommeil ; ESPuino s'éteint après le délai choisi. |
 | 💤 Dormir à la fin du titre | ESPuino s'endort dès que le titre en cours se termine. |
 | 💤 Dormir à la fin de la playlist | ESPuino s'endort une fois la playlist actuelle terminée. |
+| 💤 Dormir après cinq titres | ESPuino s'endort une fois cinq titres supplémentaires joués. |
 
 *Pour tous les modes de sommeil, ESPuino atténue les LED – tu vois ainsi en un coup d'œil qu'une
 minuterie de sommeil est active. À proprement parler, ils activent le **mode nuit**, qui limite en
@@ -129,6 +130,7 @@ option également le volume – voir [onglet Général](#wiedergabe).*
 | 🌙 Atténuer les LED (mode nuit) | Atténue durablement les Neopixels – agréable par exemple dans une chambre d'enfant obscurcie. En option, le mode nuit limite en plus le volume (voir [onglet Général](#wiedergabe)). |
 | 📶 Wi-Fi activer/désactiver | Active ou désactive le Wi-Fi (désactivé économise l'énergie et permet un fonctionnement purement hors ligne). |
 | 💡 Éclairage d'ambiance | Bascule un éclairage d'ambiance permanent des LED. |
+| 🔆 / 🔅 Luminosité des LED plus / moins | Modifie la luminosité des Neopixels d'un cran. |
 | 📁 Activer le FTP | Démarre le service FTP (jusqu'au prochain redémarrage). |
 | 🔊 Haut-parleur BT | Bascule ESPuino en **mode haut-parleur Bluetooth** (récepteur BT) : il reçoit l'audio d'un appareil appairé, par exemple le téléphone, et le restitue. |
 | 🎧 Casque BT | Bascule ESPuino en **mode casque Bluetooth** (source BT) : il envoie son audio vers un casque ou un haut-parleur Bluetooth appairé. |
@@ -160,6 +162,7 @@ Bluetooth.*
 | ⏪ / ⏩ Premier / dernier titre | Passe au premier ou au dernier titre de la playlist. |
 | 📁 Dossier suivant / précédent | Passe un dossier en avant ou en arrière (modes récursifs uniquement). |
 | » / « Avance / retour de quelques secondes | Avance ou recule de quelques secondes. |
+| 🔊 / 🔉 Plus fort / moins fort | Modifie le volume d'un cran. |
 
 **Cartes virtuelles & divers**
 
@@ -380,11 +383,13 @@ bouton dédié pour cela.
     basculer le Wi-Fi, mets plutôt cela sur une **carte de modification** – à condition de ne pas la
     perdre. 😄
 
-Les actions disponibles correspondent globalement au catalogue des cartes de modification, plus
-quelques actions qui n'ont de sens que comme boutons : volume plus fort/moins fort/volume initial,
-afficher la tension de la batterie, arrêt et redémarrage, dormir après cinq titres, ainsi qu'un
-affichage de débogage de la charge des tâches. La disposition par défaut avec laquelle ESPuino est
-livré est listée au [chapitre 9 → Boutons](am-geraet.md#tasten-und-tastenkombinationen).
+Les actions disponibles correspondent largement au catalogue des cartes de modification – les deux
+listes ne diffèrent qu'à la marge. **Uniquement en bouton** : volume initial, afficher la tension de
+la batterie, arrêt, redémarrage et un affichage de débogage de la charge des tâches. À l'inverse,
+**uniquement en carte** : la suppression d'une affectation. Tout le reste – y compris plus fort /
+moins fort et dormir après cinq titres – peut être placé au choix sur un bouton ou sur une carte. La
+disposition par défaut avec laquelle ESPuino est livré est listée au
+[chapitre 9 → Boutons](am-geraet.md#tasten-und-tastenkombinationen).
 
 #### Distances de saut pour le défilement { #sprungweiten }
 
