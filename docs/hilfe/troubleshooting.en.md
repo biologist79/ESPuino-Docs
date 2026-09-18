@@ -128,8 +128,8 @@ cleanly at undervoltage. *(We'll add further special cases from the forum over t
 ## Accidentally stuck in Bluetooth mode
 
 If you're stuck in Bluetooth mode and can't get any further: just place an **unknown RFID card** –
-that brings ESPuino back to normal mode. Alternatively, this also works via the corresponding
-button in the Bluetooth tab.
+that brings ESPuino back to normal mode. Alternatively, this also works via the **Off** button of
+the mode switch in the Bluetooth tab.
 
 ## When nothing works anymore: resetting the device
 

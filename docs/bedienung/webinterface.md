@@ -233,18 +233,84 @@ ist er wieder aus.
 
 *Nur sichtbar, wenn die Firmware mit Bluetooth-Unterstützung gebaut wurde.*
 
-![Der Tab Bluetooth im ESPuino-Webinterface: Bluetooth-Kopfhörer-Einstellungen mit Gerätesuche, darunter die Buttons für den Kopfhörer- und den Lautsprecher-Modus](../assets/WebinterfaceBluetooth.png)
+![Der Tab Bluetooth im ESPuino-Webinterface im Normalbetrieb: nur der Modus-Umschalter mit den drei Schaltflächen Aus, Kopfhörer und Lautsprecher, wobei Aus ausgefüllt ist, darunter der Hinweis auf den Neustart](../assets/WebinterfaceBluetoothAus.png)
 
-ESPuino kann Bluetooth in zwei Richtungen. Im Modus **Bluetooth-Kopfhörer** sendet ESPuino den Ton an
-ein Bluetooth-Gerät – du trägst den Namen deines Kopfhörers ein oder, noch einfacher, klickst auf
-**Geräte suchen** und übernimmst dein Gerät aus der Trefferliste (bei Bedarf gibt es ein Feld für den
-PIN-Code). Im Modus **Bluetooth-Lautsprecher** wird ESPuino umgekehrt selbst zur Box, auf die du vom
-Handy streamst. Im Bluetooth-Modus zeigt der Tab einen Button, um wieder in den Normal-Modus zu
-wechseln; alternativ genügt es, eine unbekannte RFID-Karte aufzulegen.
+ESPuino beherrscht Bluetooth in beide Richtungen: Er kann seinen Ton an einen Kopfhörer **senden**,
+und er kann umgekehrt selbst zum Lautsprecher werden, auf den du vom Handy **streamst**. Beides
+steuerst du in diesem Tab über einen gemeinsamen Umschalter ganz oben.
 
-!!! note "Bluetooth und WLAN"
-    Bluetooth und WLAN laufen **parallel**. Der Parallelbetrieb ist allerdings speicherknapp und
-    ungetestet – mehr dazu in [Kapitel 9 → Betriebsmodi](am-geraet.md#betriebsmodi).
+### Den Modus umschalten
+
+Die drei Schaltflächen **Aus**, **Kopfhörer** und **Lautsprecher** liegen nebeneinander; die
+ausgefüllte zeigt, in welchem Modus ESPuino gerade läuft. „Aus" ist dabei kein eigener
+Bluetooth-Zustand, sondern schlicht der normale Betrieb mit der SD-Karte.
+
+Ein Klick auf einen anderen Modus **startet den ESPuino neu** – der Hinweis unter den Schaltflächen
+sagt das auch. Das lässt sich nicht umgehen: Der gewünschte Modus wird dauerhaft gespeichert und erst
+beim Hochfahren ausgewertet. Nach dem Umschalten dauert es also ein paar Sekunden, bis das
+Webinterface wieder erreichbar ist – und ESPuino startet auch beim nächsten Einschalten wieder in
+diesem Modus, solange du ihn nicht zurückstellst.
+
+### Kopfhörer-Modus: ESPuino sendet
+
+![Der Tab Bluetooth im Kopfhörer-Modus: unter dem Umschalter erscheinen die Bluetooth-Kopfhörer-Einstellungen mit der Verbindungsanzeige „Nicht verbunden“, dem Feld für den Gerätenamen samt Suchen-Knopf, dem Feld für den Pairing-PIN-Code und der Schaltfläche zum Speichern](../assets/WebinterfaceBluetoothKopfhoerer.png)
+
+Nur in diesem Modus blendet der Tab die Einstellungen unterhalb des Umschalters überhaupt ein – im
+Normalbetrieb und im Lautsprecher-Modus hätten sie nichts zu tun und bleiben deshalb verborgen.
+
+Ganz oben steht die **Verbindungsanzeige**: ein farbiger Punkt und daneben entweder „Nicht verbunden"
+oder „Verbunden mit: …" samt Gerätenamen. Sie wird beim Öffnen der Seite direkt beim ESPuino
+abgefragt und nicht aus zufällig mitgehörten Ereignissen abgeleitet. Ein frisch geladenes
+Webinterface zeigt also auch dann den richtigen Stand, wenn die Verbindung längst vor dem Öffnen der
+Seite zustande gekommen ist.
+
+Darunter trägst du den **Namen deines Kopfhörers** ein. Bequemer ist der Knopf **Suchen** direkt
+daneben: ESPuino durchsucht dann gut 13 Sekunden lang die Umgebung und listet auf, was sich meldet;
+ein Klick auf den passenden Eintrag übernimmt das Gerät ins Namensfeld. Die Suche funktioniert
+ausschließlich im Kopfhörer-Modus – versuchst du es in einem anderen, weist dich eine Meldung darauf
+hin. Verlangt dein Kopfhörer einen **PIN-Code**, trägst du ihn in das Feld darunter ein. Und dann
+nicht vergessen: **speichern**.
+
+Ist ein Gerät hinterlegt, verbindet sich ESPuino beim Start von allein damit. Wählst du eines aus der
+Trefferliste, versucht er es bei einem Fehlschlag **bis zu dreimal** im Abstand von anderthalb
+Sekunden, bevor er aufgibt – Bluetooth-Kopfhörer melden sich nach dem Aufwachen gerne erst im zweiten
+Anlauf.
+
+!!! tip "Die Lautstärke regelst du weiterhin am ESPuino"
+    Drehencoder, Taster und Webinterface wirken auch im Kopfhörer-Modus: ESPuino reicht die
+    eingestellte Lautstärke über Bluetooth an den Kopfhörer weiter. Der Ton selbst geht dagegen
+    unbearbeitet hinaus – Equalizer und Mono-Umschaltung gelten nur für den eingebauten Lautsprecher.
+
+### Lautsprecher-Modus: ESPuino empfängt
+
+![Der Tab Bluetooth im Lautsprecher-Modus: nur der Umschalter mit ausgefüllter Schaltfläche Lautsprecher, darunter keine weiteren Einstellungen](../assets/WebinterfaceBluetoothLautsprecher.png)
+
+Hier gibt es nichts einzustellen. ESPuino meldet sich als Bluetooth-Lautsprecher, und du koppelst ihn
+ganz normal vom Handy oder Tablet aus; alles, was dort läuft, kommt anschließend aus seinem
+Lautsprecher.
+
+Beachte aber, dass das Webinterface in diesem Modus **keine Wiedergabe steuern** kann – die Quelle
+ist ja das Handy und nicht die SD-Karte. Versuchst du es trotzdem, bietet ESPuino in einem Dialogfeld
+an, in den Normalmodus zurückzuwechseln.
+
+### Zurück in den Normalmodus
+
+Dafür gibt es drei Wege. Der naheliegendste ist die Schaltfläche **Aus** in diesem Tab. Genauso
+funktioniert eine **unbekannte RFID-Karte**: Legst du in einem der beiden Bluetooth-Modi eine Karte
+auf, die ESPuino nicht kennt, kehrt er in den Normalmodus zurück. Das ist der Rettungsweg für den
+Fall, dass du gerade kein Webinterface zur Hand hast. Im **Lautsprecher-Modus** genügt darüber hinaus
+eine ganz normale Musikkarte: Sie beendet den Bluetooth-Betrieb und startet ihren Inhalt. Im
+Kopfhörer-Modus ist das bewusst anders – dort spielt eine bekannte Karte einfach über den Kopfhörer,
+denn genau dafür ist dieser Modus ja da.
+
+!!! warning "Bluetooth braucht Speicher"
+    Der Bluetooth-Stack belegt einen erheblichen Teil des internen Arbeitsspeichers – und der ist
+    beim ESP32 die wirklich knappe Ressource, der PSRAM hilft dort nur begrenzt weiter. ESPuino
+    lagert deshalb aus, was sich auslagern lässt: Der 256 KB große Puffer für den Kopfhörer-Modus
+    etwa wird erst bei Bedarf und dann im PSRAM angelegt. Eng werden kann es trotzdem, und eng heißt
+    hier: Verbindungen kommen nicht zustande, oder ESPuino startet unvermittelt neu. Bluetooth und
+    WLAN laufen dabei **parallel** – das ist bequem, entspannt die Lage aber nicht und ist wenig
+    getestet. Mehr dazu in [Kapitel 9 → Betriebsmodi](am-geraet.md#betriebsmodi).
 
 ## Tab Allgemein { #tab-allgemein }
 

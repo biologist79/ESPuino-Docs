@@ -226,18 +226,77 @@ via a button combination), and after the next restart it's off again.
 
 *Only visible if the firmware was built with Bluetooth support.*
 
-![The Bluetooth tab in the ESPuino web interface: Bluetooth headphone settings with device search, below that the buttons for headphone mode and speaker mode](../assets/WebinterfaceBluetooth.png)
+![The Bluetooth tab in the ESPuino web interface during normal operation: just the mode switch with its three buttons Off, Headphones and Speaker, Off being the filled one, and below it the note about the restart](../assets/WebinterfaceBluetoothAus.png)
 
-ESPuino can do Bluetooth in two directions. In **Bluetooth headphones** mode, ESPuino sends audio to
-a Bluetooth device – you enter your headphones' name, or, even easier, click **search for devices**
-and pick your device from the results list (a PIN code field is available if needed). In
-**Bluetooth speaker** mode, ESPuino conversely becomes the speaker itself, which you stream to from
-your phone. In Bluetooth mode, the tab shows a button to switch back to normal mode; alternatively,
-just placing an unknown RFID card is enough.
+ESPuino handles Bluetooth in both directions: it can **send** its audio to a pair of headphones, and
+it can conversely become the speaker itself, which you **stream to** from your phone. You control
+both in this tab, through a single mode switch at the top.
 
-!!! note "Bluetooth and Wi-Fi"
-    Bluetooth and Wi-Fi run **in parallel**. That parallel operation is memory-tight and untested,
-    though – more on that in
+### Switching the mode
+
+The three buttons **Off**, **Headphones** and **Speaker** sit side by side; the filled one shows
+which mode ESPuino is currently in. "Off" isn't a Bluetooth state of its own here – it's simply
+normal operation from the SD card.
+
+Clicking another mode **restarts ESPuino** – the note below the buttons says so too. There's no way
+around it: the chosen mode is stored permanently and only evaluated at boot. After switching, it
+takes a few seconds until the web interface is reachable again – and ESPuino will come up in that
+same mode the next time you switch it on, until you change it back.
+
+### Headphone mode: ESPuino sends
+
+![The Bluetooth tab in headphone mode: below the switch, the Bluetooth headphone settings appear with the connection indicator reading "Not connected", the device-name field with its search button, the pairing PIN code field and the save button](../assets/WebinterfaceBluetoothKopfhoerer.png)
+
+Only in this mode does the tab show the settings below the switch at all – in normal operation and in
+speaker mode they'd have nothing to do, so they stay hidden.
+
+At the top sits the **connection indicator**: a colored dot, and next to it either "Not connected" or
+"Connected to: …" along with the device name. It is queried from ESPuino directly when the page
+loads, rather than inferred from events the browser happened to witness. So a freshly loaded web
+interface shows the right state even when the connection was established long before you opened the
+page.
+
+Below that you enter your **headphones' name**. The **Search** button right next to it is more
+convenient: ESPuino then scans its surroundings for a good 13 seconds and lists whatever announces
+itself; clicking the right entry puts that device into the name field. The search only works in
+headphone mode – try it in another one and a message tells you so. If your headphones need a **PIN
+code**, enter it in the field below. And then don't forget to **save**.
+
+Once a device is stored, ESPuino connects to it on its own at startup. If you pick one from the
+results list, it retries **up to three times** at one-and-a-half-second intervals before giving up –
+Bluetooth headphones tend to answer only on the second attempt after waking up.
+
+!!! tip "You still control the volume on ESPuino"
+    The rotary encoder, the buttons and the web interface all work in headphone mode too: ESPuino
+    passes the set volume on to the headphones over Bluetooth. The audio itself, on the other hand,
+    goes out unprocessed – the equalizer and the mono switch apply only to the built-in speaker.
+
+### Speaker mode: ESPuino receives
+
+![The Bluetooth tab in speaker mode: just the switch with the Speaker button filled, and no further settings below it](../assets/WebinterfaceBluetoothLautsprecher.png)
+
+There's nothing to configure here. ESPuino announces itself as a Bluetooth speaker, and you pair it
+from your phone or tablet as usual; whatever plays there then comes out of its speaker.
+
+Note, though, that the web interface **cannot control playback** in this mode – the source is the
+phone, not the SD card. If you try anyway, ESPuino offers in a dialog to switch back to normal mode.
+
+### Back to normal mode
+
+There are three ways. The obvious one is the **Off** button in this tab. An **unknown RFID card**
+works just as well: place a card ESPuino doesn't know while in either Bluetooth mode and it returns
+to normal mode. That's the escape hatch for when you have no web interface at hand. In **speaker
+mode**, an ordinary music card does it too: it ends Bluetooth operation and starts its content.
+Headphone mode deliberately behaves differently – there a known card simply plays through the
+headphones, which is exactly what that mode is for.
+
+!!! warning "Bluetooth needs memory"
+    The Bluetooth stack claims a sizeable share of the internal RAM – and on the ESP32 that, not the
+    PSRAM, is the genuinely scarce resource. ESPuino therefore moves out what can be moved out: the
+    256 KB buffer for headphone mode, for instance, is allocated on demand and in PSRAM. It can
+    still get tight, and tight means: connections fail to come up, or ESPuino restarts out of the
+    blue. Bluetooth and Wi-Fi run **in parallel** on top of that – convenient, but it doesn't ease
+    the situation, and it is barely tested. More on that in
     [chapter 9 → Operating modes](am-geraet.md#betriebsmodi).
 
 ## General tab { #tab-allgemein }

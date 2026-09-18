@@ -139,8 +139,8 @@ cas de sous-tension. *(D'autres cas particuliers seront ajoutés à partir du fo
 ## Coincé par erreur en mode Bluetooth
 
 Si tu es coincé en mode Bluetooth et que tu ne peux plus avancer : pose simplement une **carte RFID
-inconnue** – cela ramène ESPuino en mode normal. Cela fonctionne aussi via le bouton correspondant
-dans l'onglet Bluetooth.
+inconnue** – cela ramène ESPuino en mode normal. Cela fonctionne aussi via le bouton **Arrêt** du
+sélecteur de mode dans l'onglet Bluetooth.
 
 ## Quand plus rien ne fonctionne : réinitialiser l'appareil
 

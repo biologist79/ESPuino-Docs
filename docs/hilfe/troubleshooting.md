@@ -130,8 +130,8 @@ bei Unterspannung sauber ab. *(Weitere Spezialfälle ergänzen wir aus dem Forum
 ## Aus Versehen im Bluetooth-Modus gelandet
 
 Falls du im Bluetooth-Modus feststeckst und nicht mehr weiterkommst: Leg einfach eine **unbekannte
-RFID-Karte** auf – das bringt ESPuino zurück in den Normal-Modus. Alternativ geht das auch über den
-entsprechenden Button im Tab Bluetooth.
+RFID-Karte** auf – das bringt ESPuino zurück in den Normal-Modus. Alternativ geht das auch über die
+Schaltfläche **Aus** des Modus-Umschalters im Tab Bluetooth.
 
 ## Wenn nichts mehr geht: Gerät zurücksetzen
 

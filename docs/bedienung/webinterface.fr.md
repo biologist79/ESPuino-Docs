@@ -237,18 +237,84 @@ prochain redémarrage, il est de nouveau désactivé.
 
 *Visible uniquement si le firmware a été compilé avec le support Bluetooth.*
 
-![L'onglet Bluetooth dans l'interface web ESPuino : réglages du casque Bluetooth avec recherche d'appareils, puis les boutons pour le mode casque et le mode haut-parleur](../assets/WebinterfaceBluetooth.png)
+![L'onglet Bluetooth dans l'interface web ESPuino en fonctionnement normal : uniquement le sélecteur de mode avec ses trois boutons Arrêt, Casque et Haut-parleur, Arrêt étant celui qui est rempli, et en dessous la note sur le redémarrage](../assets/WebinterfaceBluetoothAus.png)
 
-ESPuino gère le Bluetooth dans les deux sens. En mode **casque Bluetooth**, ESPuino envoie le son
-vers un appareil Bluetooth – tu saisis le nom de ton casque ou, plus simple encore, tu cliques sur
-**rechercher des appareils** et sélectionnes le tien dans la liste des résultats (un champ pour le
-code PIN est disponible si besoin). En mode **haut-parleur Bluetooth**, ESPuino devient au contraire
-lui-même l'enceinte sur laquelle tu diffuses depuis ton téléphone. En mode Bluetooth, l'onglet
-affiche un bouton pour revenir au mode normal ; il suffit sinon de poser une carte RFID inconnue.
+ESPuino gère le Bluetooth dans les deux sens : il peut **envoyer** son son vers un casque, et il peut
+à l'inverse devenir lui-même l'enceinte sur laquelle tu **diffuses** depuis ton téléphone. Les deux
+se pilotent depuis cet onglet, via un sélecteur de mode commun placé tout en haut.
 
-!!! note "Bluetooth et Wi-Fi"
-    Le Bluetooth et le Wi-Fi fonctionnent **en parallèle**. Ce fonctionnement en parallèle est
-    toutefois gourmand en mémoire et peu testé – plus de détails au
+### Changer de mode
+
+Les trois boutons **Arrêt**, **Casque** et **Haut-parleur** sont côte à côte ; celui qui est rempli
+indique le mode dans lequel ESPuino fonctionne actuellement. « Arrêt » n'est pas ici un état
+Bluetooth à part entière, mais simplement le fonctionnement normal depuis la carte SD.
+
+Cliquer sur un autre mode **redémarre l'ESPuino** – la note sous les boutons le précise également.
+C'est inévitable : le mode choisi est enregistré durablement et n'est évalué qu'au démarrage. Après
+le basculement, il faut donc quelques secondes avant que l'interface web soit de nouveau joignable –
+et ESPuino redémarrera dans ce même mode à la prochaine mise en marche, tant que tu ne le remets pas
+en arrière.
+
+### Mode casque : ESPuino émet
+
+![L'onglet Bluetooth en mode casque : sous le sélecteur apparaissent les réglages du casque Bluetooth, avec l'indicateur de connexion affichant « Non connecté », le champ du nom de l'appareil et son bouton de recherche, le champ du code PIN d'appairage et le bouton d'enregistrement](../assets/WebinterfaceBluetoothKopfhoerer.png)
+
+Ce n'est que dans ce mode que l'onglet affiche les réglages situés sous le sélecteur – en
+fonctionnement normal et en mode haut-parleur, ils n'auraient rien à faire et restent donc masqués.
+
+Tout en haut se trouve l'**indicateur de connexion** : une pastille colorée et, à côté, soit « Non
+connecté », soit « Connecté à : … » avec le nom de l'appareil. Il est interrogé directement auprès de
+l'ESPuino au chargement de la page, et non déduit d'événements que le navigateur aurait par hasard
+captés. Une interface web fraîchement chargée affiche donc le bon état, même si la connexion a été
+établie bien avant l'ouverture de la page.
+
+En dessous, tu saisis le **nom de ton casque**. Le bouton **Rechercher** juste à côté est plus
+commode : ESPuino explore alors les environs pendant une bonne treizaine de secondes et liste tout ce
+qui se manifeste ; un clic sur la bonne entrée reprend l'appareil dans le champ du nom. La recherche
+ne fonctionne qu'en mode casque – si tu l'essaies dans un autre, un message te le signale. Si ton
+casque réclame un **code PIN**, saisis-le dans le champ en dessous. Et ensuite, n'oublie pas
+d'**enregistrer**.
+
+Une fois un appareil enregistré, ESPuino s'y connecte tout seul au démarrage. Si tu en choisis un
+dans la liste des résultats, il réessaie **jusqu'à trois fois** à une seconde et demie d'intervalle
+avant d'abandonner – les casques Bluetooth ne répondent souvent qu'à la deuxième tentative après leur
+réveil.
+
+!!! tip "Le volume se règle toujours sur l'ESPuino"
+    La molette rotative, les boutons et l'interface web fonctionnent aussi en mode casque : ESPuino
+    transmet le volume réglé au casque via Bluetooth. Le son, lui, sort en revanche sans traitement –
+    l'égaliseur et la commutation mono ne valent que pour le haut-parleur intégré.
+
+### Mode haut-parleur : ESPuino reçoit
+
+![L'onglet Bluetooth en mode haut-parleur : uniquement le sélecteur avec le bouton Haut-parleur rempli, et aucun autre réglage en dessous](../assets/WebinterfaceBluetoothLautsprecher.png)
+
+Il n'y a rien à régler ici. ESPuino s'annonce comme haut-parleur Bluetooth et tu l'appaires
+normalement depuis ton téléphone ou ta tablette ; tout ce qui y est joué sort ensuite de son
+haut-parleur.
+
+Note toutefois que l'interface web **ne peut pas piloter la lecture** dans ce mode – la source est le
+téléphone, pas la carte SD. Si tu essaies quand même, ESPuino te propose dans une boîte de dialogue
+de revenir au mode normal.
+
+### Revenir au mode normal
+
+Il y a trois chemins pour cela. Le plus évident est le bouton **Arrêt** de cet onglet. Une **carte
+RFID inconnue** fait tout aussi bien l'affaire : si tu poses, dans l'un des deux modes Bluetooth, une
+carte qu'ESPuino ne connaît pas, il revient au mode normal. C'est la porte de sortie lorsque tu n'as
+pas d'interface web sous la main. En **mode haut-parleur**, une carte musicale ordinaire suffit même :
+elle met fin au fonctionnement Bluetooth et lance son contenu. Le mode casque se comporte
+délibérément autrement – une carte connue y est simplement jouée dans le casque, ce qui est
+précisément la raison d'être de ce mode.
+
+!!! warning "Le Bluetooth a besoin de mémoire"
+    La pile Bluetooth occupe une part considérable de la mémoire vive interne – et sur l'ESP32,
+    c'est elle, et non la PSRAM, qui constitue la ressource vraiment rare. ESPuino déporte donc ce
+    qui peut l'être : le tampon de 256 Ko du mode casque, par exemple, n'est alloué qu'au besoin, et
+    en PSRAM. Cela peut malgré tout devenir juste, et juste signifie ici : des connexions qui
+    n'aboutissent pas, ou un ESPuino qui redémarre sans prévenir. À cela s'ajoute que le Bluetooth
+    et le Wi-Fi fonctionnent **en parallèle** – c'est commode, mais cela n'arrange rien et reste peu
+    testé. Plus de détails au
     [chapitre 9 → Modes de fonctionnement](am-geraet.md#betriebsmodi).
 
 ## Onglet Général { #tab-allgemein }
