@@ -127,7 +127,7 @@ Lautstärke begrenzt – siehe [Tab Allgemein](#wiedergabe).*
 | Aktion | Wirkung |
 | --- | --- |
 | 🌙 LEDs dimmen (Nachtmodus) | Dimmt die Neopixel dauerhaft – angenehm etwa im abgedunkelten Kinderzimmer. Optional begrenzt der Nachtmodus zusätzlich die Lautstärke (siehe [Tab Allgemein](#wiedergabe)). |
-| 📶 WLAN an/aus | Schaltet das WLAN ein oder aus (aus spart Strom und erlaubt reinen Offline-Betrieb). |
+| 📶 WLAN an/aus | Schaltet das WLAN ein oder aus (aus spart Strom und erlaubt reinen Offline-Betrieb). :material-alert:{ .warn-icon title="Mit „WLAN aus“ kannst du dich aussperren. Siehe Hinweis unten." } |
 | 💡 Ambient Light | Schaltet eine dauerhafte Stimmungsbeleuchtung der LEDs um. |
 | 🔆 / 🔅 LED-Helligkeit heller / dunkler | Ändert die Helligkeit der Neopixel um eine Stufe. |
 | 📁 FTP aktivieren | Startet den FTP-Dienst (bis zum nächsten Neustart). |
@@ -149,6 +149,14 @@ Lautstärke begrenzt – siehe [Tab Allgemein](#wiedergabe).*
 | --- | --- |
 | 🌐 IP-Adresse ansagen | Sagt die aktuelle IP-Adresse per Sprachausgabe an – praktisch, um die Adresse fürs Webinterface herauszufinden. |
 | 🕒 Uhrzeit ansagen | Sagt die aktuelle Uhrzeit an. |
+
+!!! note "Beide Ansagen brauchen Internet"
+    Die Sprachausgabe erzeugt ESPuino nicht selbst: Er lässt den Text von einem Online-Dienst
+    vorlesen und spielt das Ergebnis ab. Ohne **Internetverbindung** funktioniert deshalb keine der
+    beiden Ansagen – ein Heimnetz ohne Internetzugang genügt nicht. Geprüft wird vorher allerdings
+    nur, ob überhaupt WLAN besteht: Hängt ESPuino im WLAN, kommt aber nicht ins Internet, bleibt er
+    schlicht still. Bei der Uhrzeit kommt hinzu, dass sie per NTP gestellt wird – auch dafür braucht
+    es zumindest einmal nach dem Einschalten Internet.
 
 **Wiedergabesteuerung als Karte**
 
@@ -201,13 +209,35 @@ fehlt nur, wenn die Firmware bewusst ohne MQTT gebaut wurde.*
 
 ![Der Tab MQTT im ESPuino-Webinterface: Eingabefelder für ClientId, Basis-Topic, Geräte-ID, Server, Zugangsdaten und Port, darunter die Live-Vorschau aller vollständigen Topics](../assets/WebinterfaceMqtt.jpeg)
 
-Hier bindest du ESPuino an deinen MQTT-Broker an, etwa für [Home Assistant](https://www.home-assistant.io/),
-[ioBroker](https://www.iobroker.net/) oder [openHAB](https://www.openhab.org/). Du
-aktivierst MQTT und trägst ClientId, ein optionales Basis-Topic, die Geräte-ID, den Server, optional
-Benutzername und Passwort sowie den Port ein. In ClientId und Geräte-ID darfst du den Platzhalter
-`<MAC>` verwenden – er wird automatisch durch die MAC-Adresse ersetzt, was bei mehreren ESPuinos
-Gold wert ist. Praktischerweise siehst du unterhalb der Felder eine **Live-Vorschau der Topics**, die
-sich aus deinen Eingaben ergeben. Welche Topics es gibt, steht im
+**MQTT** ist ein schlankes Nachrichtenprotokoll, das in der Hausautomatisierung praktisch zum
+Standard geworden ist. Die Geräte reden dabei nicht direkt miteinander, sondern über eine zentrale
+Vermittlungsstelle, den **Broker**. Jede Nachricht wird unter einem **Topic** abgelegt – einem Pfad
+wie `espuino/state/volume` –, und zugestellt bekommt sie, wer dieses Topic abonniert hat. Wer etwas
+mitteilen will, *veröffentlicht* unter einem Topic; wer etwas wissen will, *abonniert* es.
+
+Für ESPuino bedeutet das zweierlei. Er meldet seinen Zustand fortlaufend an den Broker – Lautstärke,
+laufender Titel, Abspielmodus, Akkustand und einiges mehr –, und er hört umgekehrt auf
+Kommando-Topics. Alles, was sich per Karte oder Taste auslösen lässt, lässt sich damit auch aus der
+Hausautomatisierung heraus auslösen. Voraussetzung ist ein laufender Broker in deinem Netz: entweder
+ein eigenständiger (verbreitet ist [Mosquitto](https://mosquitto.org/)) oder der, den deine
+Hausautomatisierung ohnehin schon mitbringt – etwa [Home Assistant](https://www.home-assistant.io/), [ioBroker](https://www.iobroker.net/)
+oder [openHAB](https://www.openhab.org/). Hast du keinen und willst auch keinen, kannst du diesen
+Tab getrost ignorieren – ESPuino funktioniert ohne MQTT vollständig.
+
+Die Anbindung selbst richtest du in diesem Tab ein: MQTT aktivieren, dann ClientId, ein optionales
+Basis-Topic, die Geräte-ID, den Server, optional Benutzername und Passwort sowie den Port eintragen.
+Die **ClientId** ist der Name, unter dem ESPuino sich beim Broker anmeldet. **Basis-Topic** und
+**Geräte-ID** dagegen bilden den Anfang sämtlicher Topic-Pfade, denn die folgen dem Schema
+`Basis-Topic/Geräte-ID/Schlüsselwort` – und ohne Basis-Topic entsprechend nur
+`Geräte-ID/Schlüsselwort`. Topics, über die du ESPuino *steuerst*, statt nur seinen Zustand zu lesen,
+hängen zusätzlich ein `/set` an. Erst diese Aufteilung macht es möglich, mehrere Geräte am selben
+Broker sauber auseinanderzuhalten.
+
+In ClientId und Geräte-ID darfst du dabei den Platzhalter `<MAC>` verwenden, der automatisch durch
+die MAC-Adresse ersetzt wird – bei mehreren ESPuinos ist das Gold wert, weil so jedes Gerät von
+selbst eindeutige Topics bekommt. Wie die Pfade am Ende aussehen, musst du dir übrigens nicht
+zusammenreimen: Unterhalb der Felder steht eine **Live-Vorschau der Topics**, die sich aus deinen
+Eingaben ergeben. Welche es überhaupt gibt und was sie bedeuten, steht im
 [Anhang](../referenz/anhang.md#mqtt-topics).
 
 !!! warning "Neustart nötig"
@@ -225,6 +255,10 @@ Hier legst du Benutzernamen und Passwort für den FTP-Zugang fest. Aus Speicherg
 FTP-Server nicht dauerhaft mit: Du startest ihn bei Bedarf über den Button **FTP-Server starten**
 (oder am Gerät über eine Tastenkombination), und nach dem nächsten Neustart
 ist er wieder aus.
+
+Als Gegenstelle auf dem Rechner empfiehlt sich [FileZilla](https://filezilla-project.org/) –
+kostenlos und für Windows, macOS und Linux zu haben. Du trägst dort als Server die IP-Adresse deines ESPuino ein, dazu Port 21
+und die Zugangsdaten von dieser Seite.
 
 !!! tip "Für große Datenmengen"
     Für große Mengen ist inzwischen der **Web-Upload die bessere Wahl** – er wurde optimiert und ist
@@ -511,18 +545,23 @@ Eine geänderte LED-**Anzahl** übernimmt ESPuino übrigens per automatischem Ne
 
 ### Energie
 
-![Die Unterkladde Energie im Tab Allgemein: Deep-Sleep-Inaktivität sowie die Batterie-Einstellungen mit Warnspannung, Lade-LED-Schwellen, Korrekturwert und der Option zum automatischen Abschalten bei kritischer Spannung](../assets/WebinterfaceEnergie.png)
+![Die Unterkladde Energie im Tab Allgemein: Deep-Sleep-Inaktivität sowie die Batterie-Einstellungen mit Messintervall, Warnspannung, den beiden Spannungen für die Ladeanzeige, Korrekturwert, der Option zum automatischen Abschalten bei kritischer Spannung und darunter den Einstellungen für die Akku-Ansage](../assets/WebinterfaceEnergie.png)
 
-Unter **Deep Sleep** legst du fest, nach wie vielen Minuten Inaktivität sich ESPuino schlafen legt.
-Ist die Batteriemessung aktiv, kommen unter **Batterie** diese Werte hinzu:
+Diese Unterkladde bündelt alles, was mit dem Stromhaushalt zu tun hat: oben unter **Deep Sleep**,
+wann sich ESPuino bei Nichtstun schlafen legt, und darunter unter **Batterie** die Überwachung des
+Akkus – letztere nur, wenn die Batteriemessung in der Firmware aktiviert ist. Die Einstellungen in
+der Reihenfolge, in der sie auch im Webinterface stehen:
 
 | Einstellung | Bedeutung |
 | --- | --- |
-| Warnspannung | Ab dieser Spannung warnt der Neopixel vor niedrigem Akku. |
-| Spannung für 0 % / 100 % | Legt die Grenzen der Ladezustands-Anzeige fest (abhängig vom Akkutyp). |
-| Kritische Abschaltspannung | Optional: ESPuino schaltet unterhalb automatisch ab. |
-| Korrekturwert | Feinkorrektur der gemessenen Spannung (± in Hundertstel-Volt). Weicht die Anzeige von einer Multimeter-Messung ab, trägst du hier die Differenz ein. Details in [Kapitel 5 · Feinjustierung](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
-| Messintervall | Wie oft die Batteriespannung gemessen wird. |
+| Inaktivität nach (in Minuten) | Nach wie vielen Minuten ohne Bedienung sich ESPuino schlafen legt. |
+| Zeitabstand der Messung (in Minuten) | Wie oft die Akkuspannung gemessen wird. |
+| Unter dieser Spannung (in Volt) wird eine Warnung angezeigt | Ab hier warnt der Neopixelring vor niedrigem Akku – und, falls aktiviert, wird zusätzlich die [Ansage](#akku-ansage) abgespielt. |
+| Eine LED leuchtet bei dieser Spannung (in Volt) | Untere Grenze der Ladeanzeige: Hier leuchtet nur noch eine einzige LED (abhängig vom Akkutyp). |
+| Alle LEDs leuchten bei dieser Spannung (in Volt) | Obere Grenze der Ladeanzeige: Ab hier leuchten alle LEDs, der Akku gilt also als voll (abhängig vom Akkutyp). |
+| Korrekturwert für die gemessene Akkuspannung | Feinkorrektur der gemessenen Spannung (± in Hundertstel-Volt). Weicht die Anzeige von einer Multimeter-Messung ab, trägst du hier die Differenz ein – auch als negativen Wert, wenn ESPuino zu viel anzeigt. Details in [Kapitel 5 · Feinjustierung](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
+| Bei kritischer Spannung automatisch abschalten | Legt ESPuino selbsttätig schlafen, sobald der Akku eine kritische Spannung unterschreitet, und schützt ihn so vor einer Tiefentladung. Ist das Häkchen gesetzt, erscheint darunter der Regler **Unter dieser Spannung (in Volt) schaltet der ESPuino ab**, mit dem du diese Schwelle festlegst. |
+| Warnung bei leerem Akku ansagen | Spricht die Warnung zusätzlich aus – ausführlich im nächsten Abschnitt: [Ansage bei niedrigem Akku](#akku-ansage). |
 
 #### Ansage bei niedrigem Akku { #akku-ansage }
 
@@ -531,17 +570,19 @@ mitten im Hörspiel sieht niemand hin, Kinder am allerwenigsten. Deshalb kann ES
 zusätzlich **ansagen**: Er unterbricht die Wiedergabe kurz, spielt eine Audiodatei deiner Wahl ab und
 macht danach genau dort weiter, wo er aufgehört hat.
 
-![Der Dateibrowser mit geöffnetem Kontextmenü auf einer MP3-Datei; darin der Eintrag „Als Akku-Warnung festlegen“ zwischen „Abspielen“ und „Aktualisieren“](../assets/WebinterfaceAkkuWarnungFestlegen.png)
-
 Ab Werk ist die Funktion **deaktiviert**. Zum Einschalten setzt du hier das Häkchen bei **Warnung
 bei leerem Akku ansagen** und trägst darunter den Pfad zur Audiodatei ein. Bequemer geht es über den
 [Dateibrowser](#dateibrowser): ein Rechtsklick auf die Datei, dann **Als Akku-Warnung festlegen** –
 das trägt den Pfad ein, setzt das Häkchen und bringt dich gleich hierher.
 
+![Der Dateibrowser mit geöffnetem Kontextmenü auf einer MP3-Datei; darin der Eintrag „Als Akku-Warnung festlegen“ zwischen „Abspielen“ und „Aktualisieren“](../assets/WebinterfaceAkkuWarnungFestlegen.png)
+
 Fertige Ansagen in Deutsch, Englisch und Französisch liegen im Firmware-Repository im Ordner
 `announcements/`; du lädst sie einfach auf die SD-Karte hoch. Dort ist auch dokumentiert, mit welchen
 zwei Befehlen sie erzeugt wurden – wenn dir die synthetische Stimme nicht gefällt, sprichst du die
 Ansage also genauso gut selbst ein.
+
+![Die drei Einstellungen der Akku-Ansage in der Unterkladde Energie: das Häkchen „Warnung bei leerem Akku ansagen“, darunter das Feld „Datei für die Ansage“ mit dem Pfad /announcements/battery-low_de.mp3 und das eingerückte Häkchen „Nur einmal ansagen“](../assets/WebinterfaceAkkuAnsage.png)
 
 Mit **Nur einmal ansagen** bestimmst du, wie hartnäckig die Warnung ist. Ohne diese Option kommt sie
 bei **jeder** Messung, solange der Akku unter der Warnschwelle liegt – also im Takt des
@@ -590,9 +631,9 @@ Sicherheitsabfrage). Wie du diese Funktionen zum Sichern und Übertragen nutzt, 
 
 ![Der Tab MediaHub im ESPuino-Webinterface: Mediaserver hinzufügen (Anzeigename, Adresse) und Liste der registrierten Mediaserver](../assets/MediahubEspuinoTab.png)
 
-Dieser Tab ist reine **Verwaltung der Server-Adressen** – die eigentliche Kartenzuweisung passiert
-weiterhin im [Tab RFID](#tab-rfid). Ohne einen laufenden MediaHub-Server bringt diese Seite nichts;
-was MediaHub ist und wie du den Server aufsetzt, steht in
+Dieser Tab dient allein der **Verwaltung der Server-Adressen** – die eigentliche Kartenzuweisung
+passiert weiterhin im [Tab RFID](#tab-rfid). Ohne einen laufenden MediaHub-Server ist diese Seite
+für dich unwichtig; was MediaHub ist und wie du den Server aufsetzt, steht in
 [Kapitel 11 · MediaHub](../inhalte/mediahub.md).
 
 Unter **Mediaserver hinzufügen** vergibst du einen frei wählbaren **Anzeigenamen** (erscheint später
@@ -602,6 +643,12 @@ per Dropdown, dahinter Host oder IP samt Port, etwa `192.168.1.50:8080`. Ein Kli
 kannst du ihn über das Icon direkt in seiner eigenen Weboberfläche öffnen oder über das
 Mülleimer-Symbol wieder entfernen – bereits angelernte Karten bleiben davon unberührt, sie verweisen
 weiterhin auf den bisherigen Server.
+
+!!! warning "Möglichst `http://` statt `https://`"
+    Binde den MediaHub nach Möglichkeit **unverschlüsselt** an. Der TLS-Handshake verlangt viel
+    internen Arbeitsspeicher – auf dem ESP32 ohnehin die knappste Ressource –, außerdem bremst die
+    Verschlüsselung den Datentransfer erheblich aus. Da der MediaHub üblicherweise im eigenen
+    Heimnetz läuft, ist der Sicherheitsgewinn gering, der Preis dafür aber deutlich spürbar.
 
 ## Tab Hilfe
 

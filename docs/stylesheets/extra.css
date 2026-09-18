@@ -37,3 +37,10 @@
 @media screen and (max-width: 76.1875em) {
   .md-header__stand { display: none; }
 }
+
+/* Orangefarbenes Warnzeichen, etwa am Ende einer Tabellenzeile, die auf einen
+   Warnkasten weiter unten verweist. */
+.md-typeset .warn-icon {
+  color: #e8830c;
+  vertical-align: text-bottom;
+}

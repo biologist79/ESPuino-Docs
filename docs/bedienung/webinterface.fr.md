@@ -130,7 +130,7 @@ option également le volume – voir [onglet Général](#wiedergabe).*
 | Action | Effet |
 | --- | --- |
 | 🌙 Atténuer les LED (mode nuit) | Atténue durablement les Neopixels – agréable par exemple dans une chambre d'enfant obscurcie. En option, le mode nuit limite en plus le volume (voir [onglet Général](#wiedergabe)). |
-| 📶 Wi-Fi activer/désactiver | Active ou désactive le Wi-Fi (désactivé économise l'énergie et permet un fonctionnement purement hors ligne). |
+| 📶 Wi-Fi activer/désactiver | Active ou désactive le Wi-Fi (désactivé économise l'énergie et permet un fonctionnement purement hors ligne). :material-alert:{ .warn-icon title="Désactiver le Wi-Fi peut te bloquer l'accès. Voir la note ci-dessous." } |
 | 💡 Éclairage d'ambiance | Bascule un éclairage d'ambiance permanent des LED. |
 | 🔆 / 🔅 Luminosité des LED plus / moins | Modifie la luminosité des Neopixels d'un cran. |
 | 📁 Activer le FTP | Démarre le service FTP (jusqu'au prochain redémarrage). |
@@ -154,6 +154,14 @@ Bluetooth.*
 | --- | --- |
 | 🌐 Annoncer l'adresse IP | Annonce l'adresse IP actuelle par synthèse vocale – pratique pour retrouver l'adresse de l'interface web. |
 | 🕒 Annoncer l'heure | Annonce l'heure actuelle. |
+
+!!! note "Les deux annonces nécessitent Internet"
+    ESPuino ne génère pas la voix lui-même : il fait lire le texte par un service en ligne et en
+    restitue le résultat. Aucune des deux annonces ne fonctionne donc sans **connexion Internet** –
+    un réseau domestique sans accès à Internet ne suffit pas. Ce qui est vérifié au préalable, en
+    revanche, c'est uniquement la présence du Wi-Fi : si ESPuino est sur le réseau mais n'atteint pas
+    Internet, il reste tout simplement muet. Pour l'heure s'ajoute le fait qu'elle est réglée par
+    NTP – ce qui réclame également Internet, au moins une fois après la mise en marche.
 
 **Contrôle de lecture en carte**
 
@@ -206,14 +214,35 @@ si le firmware a été volontairement compilé sans MQTT.*
 
 ![L'onglet MQTT dans l'interface web ESPuino : champs pour ClientId, topic de base, identifiant de l'appareil, serveur, identifiants et port, puis l'aperçu en direct de tous les topics complets](../assets/WebinterfaceMqtt.jpeg)
 
-Ici, tu connectes ESPuino à ton broker MQTT, par exemple pour [Home Assistant](https://www.home-assistant.io/),
-[ioBroker](https://www.iobroker.net/) ou [openHAB](https://www.openhab.org/). Tu actives le MQTT et
-saisis un ClientId, un topic de base optionnel, l'identifiant de l'appareil, le serveur, en option
-un nom d'utilisateur et un mot de passe, ainsi que le port. Dans le ClientId et l'identifiant de
-l'appareil, tu peux utiliser le paramètre `<MAC>` – il est automatiquement remplacé par l'adresse
-MAC, ce qui est précieux avec plusieurs ESPuinos. Astuce pratique : sous les champs, tu vois un
-**aperçu en direct des topics** résultant de tes saisies. La liste des topics disponibles se trouve
-dans l'[annexe](../referenz/anhang.md#mqtt-topics).
+**MQTT** est un protocole de messagerie léger devenu la norme de fait en domotique. Les appareils
+n'y dialoguent pas directement entre eux, mais passent par un relais central, le **broker**. Chaque
+message est déposé sous un **topic** – un chemin comme `espuino/state/volume` – et parvient à
+quiconque s'est abonné à ce topic. Qui a quelque chose à dire *publie* sous un topic ; qui veut
+savoir quelque chose s'y *abonne*.
+
+Pour ESPuino, cela signifie deux choses. Il transmet son état au broker en continu – volume, titre en
+cours, mode de lecture, niveau de batterie et bien d'autres – et il écoute en retour des topics de
+commande. Tout ce qui se déclenche par une carte ou un bouton se déclenche donc aussi depuis ta
+domotique. La condition : un broker en service sur ton réseau, soit autonome
+([Mosquitto](https://mosquitto.org/) étant le plus répandu), soit celui que ta domotique embarque
+déjà – [Home Assistant](https://www.home-assistant.io/), [ioBroker](https://www.iobroker.net/) ou
+[openHAB](https://www.openhab.org/), par exemple. Si tu n'en as pas et n'en veux pas, tu peux ignorer cet onglet sans crainte – ESPuino
+fonctionne parfaitement sans MQTT.
+
+La connexion elle-même se configure dans cet onglet : active le MQTT, puis saisis un ClientId, un
+topic de base optionnel, l'identifiant de l'appareil, le serveur, en option un nom d'utilisateur et
+un mot de passe, ainsi que le port. Le **ClientId** est le nom sous lequel ESPuino s'annonce auprès
+du broker. Le **topic de base** et l'**identifiant de l'appareil**, eux, forment le début de tous les
+chemins de topics, car ceux-ci suivent le schéma `topic-de-base/identifiant/mot-clé` – et, sans topic
+de base, simplement `identifiant/mot-clé`. Les topics par lesquels tu *commandes* ESPuino, au lieu de
+seulement lire son état, y ajoutent un `/set`. C'est cette répartition qui permet de distinguer
+proprement plusieurs appareils sur le même broker.
+
+Dans le ClientId et l'identifiant de l'appareil, tu peux utiliser le paramètre `<MAC>`, remplacé
+automatiquement par l'adresse MAC – précieux avec plusieurs ESPuinos, puisque chaque appareil obtient
+alors de lui-même des topics uniques. Et tu n'as pas à deviner à quoi ressembleront les chemins :
+sous les champs, tu vois un **aperçu en direct des topics** résultant de tes saisies. Lesquels
+existent et ce qu'ils signifient, cela se trouve dans l'[annexe](../referenz/anhang.md#mqtt-topics).
 
 !!! warning "Redémarrage nécessaire"
     Les modifications des réglages MQTT ne prennent effet qu'après un redémarrage – l'interface le
@@ -230,6 +259,10 @@ Ici, tu définis le nom d'utilisateur et le mot de passe pour l'accès FTP. Pour
 mémoire, le serveur FTP ne fonctionne pas en permanence : tu le démarres en cas de besoin via le
 bouton **démarrer le serveur FTP** (ou sur l'appareil via une combinaison de boutons), et après le
 prochain redémarrage, il est de nouveau désactivé.
+
+Côté ordinateur, [FileZilla](https://filezilla-project.org/) est un bon choix – gratuit et disponible pour Windows,
+macOS et Linux. Tu y saisis comme serveur l'adresse IP de ton ESPuino, ainsi que le port 21 et les
+identifiants de cette page.
 
 !!! tip "Pour de grandes quantités de données"
     Pour de grandes quantités de données, l'**upload web est désormais le meilleur choix** – il a
@@ -528,18 +561,23 @@ automatique.
 
 ### Énergie
 
-![Le sous-groupe Énergie dans l'onglet Général : inactivité avant veille profonde, et les réglages de batterie avec tension d'avertissement, seuils de LED de charge, valeur de correction et l'option d'extinction automatique en cas de tension critique](../assets/WebinterfaceEnergie.png)
+![Le sous-groupe Énergie dans l'onglet Général : inactivité avant veille profonde, et les réglages de batterie avec intervalle de mesure, tension d'avertissement, les deux tensions de l'affichage de charge, valeur de correction, l'option d'extinction automatique en cas de tension critique et, en dessous, les réglages de l'annonce de batterie](../assets/WebinterfaceEnergie.png)
 
-Sous **veille profonde**, tu définis après combien de minutes d'inactivité ESPuino s'endort. Si la
-mesure de batterie est active, ces valeurs apparaissent sous **batterie** :
+Ce sous-groupe rassemble tout ce qui touche à l'énergie : en haut, sous **Veille profonde**, le
+moment où ESPuino s'endort lorsqu'il ne fait rien, et en dessous, sous **Batterie**, la surveillance
+de l'accu – cette dernière uniquement si la mesure de batterie est activée dans le firmware. Les
+réglages dans l'ordre où ils apparaissent aussi dans l'interface web :
 
 | Réglage | Signification |
 | --- | --- |
-| Tension d'avertissement | En dessous de cette tension, le Neopixel avertit d'une batterie faible. |
-| Tension pour 0 % / 100 % | Définit les bornes de l'affichage du niveau de charge (dépend du type de batterie). |
-| Tension de coupure critique | Optionnel : ESPuino s'éteint automatiquement en dessous. |
-| Valeur de correction | Correction fine de la tension mesurée (± en centièmes de volt). Si l'affichage diverge d'une mesure au multimètre, saisis ici la différence. Détails au [chapitre 5 · Réglage fin](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
-| Intervalle de mesure | À quelle fréquence la tension de la batterie est mesurée. |
+| Après n minutes d'inactivité | Après combien de minutes sans manipulation ESPuino s'endort. |
+| Intervalle entre les mesures (en minutes) | À quelle fréquence la tension de la batterie est mesurée. |
+| Afficher un avertissement en dessous de ce seuil (en volt) | À partir d'ici, l'anneau Neopixel avertit d'une batterie faible – et, si elle est activée, l'[annonce](#akku-ansage) est jouée en plus. |
+| Tension la plus basse (en volt), indiquée par une LED | Borne inférieure de l'affichage de charge : ici, une seule LED reste allumée (dépend du type de batterie). |
+| Tension indiquée par toutes les LED (en volt) | Borne supérieure de l'affichage de charge : à partir d'ici, toutes les LED s'allument, la batterie est donc considérée comme pleine (dépend du type de batterie). |
+| Valeur de correction pour la tension mesurée de la batterie | Correction fine de la tension mesurée (± en centièmes de volt). Si l'affichage diverge d'une mesure au multimètre, saisis ici la différence – y compris une valeur négative si ESPuino affiche une tension trop élevée. Détails au [chapitre 5 · Réglage fin](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
+| Éteindre automatiquement en cas de tension critique | Met ESPuino en veille de lui-même dès que l'accu passe sous une tension critique, ce qui le protège d'une décharge profonde. Si la case est cochée, le curseur **En dessous de cette tension (en volt), ESPuino s'éteint** apparaît en dessous, pour définir ce seuil. |
+| Annoncer une batterie faible | Énonce l'avertissement en plus des LED – détaillé dans la section suivante : [Annonce de batterie faible](#akku-ansage). |
 
 #### Annonce de batterie faible { #akku-ansage }
 
@@ -548,17 +586,19 @@ en plein milieu d'une histoire, personne ne regarde, les enfants moins que quico
 donc aussi **annoncer** l'avertissement : il interrompt brièvement la lecture, joue un fichier audio
 de ton choix, puis reprend exactement là où il s'était arrêté.
 
-![L'explorateur de fichiers avec le menu contextuel ouvert sur un fichier MP3 ; on y voit l'entrée « Définir comme alerte batterie », entre « Jouer » et « Actualiser »](../assets/WebinterfaceAkkuWarnungFestlegen.png)
-
 La fonction est **désactivée** d'origine. Pour l'activer, coche ici **Annoncer une batterie faible**
 et saisis en dessous le chemin du fichier audio. L'[explorateur de fichiers](#dateibrowser) est plus
 commode : un clic droit sur le fichier, puis **Définir comme alerte batterie** – cela renseigne le
 chemin, coche la case et t'amène directement ici.
 
+![L'explorateur de fichiers avec le menu contextuel ouvert sur un fichier MP3 ; on y voit l'entrée « Définir comme alerte batterie », entre « Jouer » et « Actualiser »](../assets/WebinterfaceAkkuWarnungFestlegen.png)
+
 Des annonces toutes prêtes en allemand, en anglais et en français se trouvent dans le dépôt du
 firmware, dans le dossier `announcements/` ; il suffit de les téléverser sur la carte SD. Les deux
 commandes qui ont servi à les produire y sont également documentées – si la voix de synthèse ne te
 plaît pas, tu peux donc tout aussi bien enregistrer l'annonce toi-même.
+
+![Les trois réglages de l'annonce de batterie dans le sous-groupe Énergie : la case « Annoncer une batterie faible », en dessous le champ « Fichier de l'annonce » contenant le chemin /announcements/battery-low_de.mp3, et la case indentée « N'annoncer qu'une fois »](../assets/WebinterfaceAkkuAnsage.png)
 
 **N'annoncer qu'une fois** détermine l'insistance de l'avertissement. Sans cette option, il revient à
 **chaque** mesure tant que la batterie reste sous le seuil d'alerte – donc au rythme de l'intervalle
@@ -621,6 +661,13 @@ et du port, par exemple `192.168.1.50:8080`. Un clic sur **« enregistrer le ser
 l'ajoute à la liste **serveurs de médias enregistrés**. Tu peux ensuite l'ouvrir directement dans sa
 propre interface web via l'icône, ou le supprimer via l'icône de corbeille – les cartes déjà
 apprises ne sont pas affectées et continuent de pointer vers le serveur précédent.
+
+!!! warning "Privilégie `http://` plutôt que `https://`"
+    Connecte le MediaHub **sans chiffrement** dès que c'est possible. La poignée de main TLS réclame
+    beaucoup de mémoire interne – sur l'ESP32 la ressource la plus rare de toutes –, et le
+    chiffrement ralentit en outre considérablement le transfert des données. Comme le MediaHub tourne
+    généralement sur ton propre réseau domestique, le gain de sécurité est faible tandis que le prix
+    à payer se remarque nettement.
 
 ## Onglet Aide
 

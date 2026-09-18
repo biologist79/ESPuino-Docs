@@ -124,7 +124,7 @@ see [General tab](#wiedergabe).*
 | Action | Effect |
 | --- | --- |
 | 🌙 Dim LEDs (night mode) | Dims the Neopixels permanently – pleasant, say, in a darkened child's room. Optionally, night mode also limits the volume (see [General tab](#wiedergabe)). |
-| 📶 Wi-Fi on/off | Turns Wi-Fi on or off (off saves power and allows purely offline operation). |
+| 📶 Wi-Fi on/off | Turns Wi-Fi on or off (off saves power and allows purely offline operation). :material-alert:{ .warn-icon title="Turning Wi-Fi off can lock you out. See the note below." } |
 | 💡 Ambient light | Toggles a permanent mood-lighting effect for the LEDs. |
 | 🔆 / 🔅 LED brightness up / down | Changes the Neopixel brightness by one step. |
 | 📁 Enable FTP | Starts the FTP service (until the next restart). |
@@ -146,6 +146,14 @@ see [General tab](#wiedergabe).*
 | --- | --- |
 | 🌐 Announce IP address | Announces the current IP address via speech – handy for finding out the address for the web interface. |
 | 🕒 Announce time | Announces the current time. |
+
+!!! note "Both announcements need internet"
+    ESPuino doesn't generate the speech itself: it has an online service read the text out and plays
+    back the result. So neither announcement works without an **internet connection** – a home
+    network without internet access is not enough. What gets checked beforehand, though, is only
+    whether there is Wi-Fi at all: if ESPuino is on the network but cannot reach the internet, it
+    simply stays silent. For the time there's the added catch that it is set via NTP – which also
+    needs internet, at least once after switching on.
 
 **Playback control as a card**
 
@@ -196,13 +204,34 @@ the firmware was deliberately built without MQTT.*
 
 ![The MQTT tab in the ESPuino web interface: input fields for client ID, base topic, device ID, server, credentials, and port, below that the live preview of every full topic](../assets/WebinterfaceMqtt.jpeg)
 
-Here you connect ESPuino to your MQTT broker, say for [Home Assistant](https://www.home-assistant.io/),
-[ioBroker](https://www.iobroker.net/), or [openHAB](https://www.openhab.org/). You enable MQTT and
-enter a client ID, an optional base topic, the device ID, the server, optionally a username and
-password, and the port. In the client ID and device ID, you can use the placeholder `<MAC>` – it's
-automatically replaced with the MAC address, which is invaluable when running several ESPuinos.
-Conveniently, below the fields you see a **live preview of the topics** that result from your
-entries. Which topics exist is listed in the [appendix](../referenz/anhang.md#mqtt-topics).
+**MQTT** is a lightweight messaging protocol that has become the de-facto standard in home
+automation. Devices don't talk to each other directly, but through a central relay, the **broker**.
+Every message is filed under a **topic** – a path such as `espuino/state/volume` – and gets
+delivered to whoever subscribed to that topic. Anyone with something to say *publishes* under a
+topic; anyone who wants to know *subscribes* to it.
+
+For ESPuino this means two things. It continuously reports its state to the broker – volume, current
+track, play mode, battery level and quite a bit more – and it listens on command topics in return.
+Anything you can trigger with a card or a button can therefore also be triggered from your home
+automation. The prerequisite is a broker running on your network: either a standalone one
+([Mosquitto](https://mosquitto.org/) being the common choice) or the one your home automation
+already brings along – [Home Assistant](https://www.home-assistant.io/), [ioBroker](https://www.iobroker.net/) or
+[openHAB](https://www.openhab.org/), for instance. If you have none and want none, you can safely ignore this tab – ESPuino works
+perfectly well without MQTT.
+
+Setting up that connection is what this tab is for: enable MQTT, then enter a client ID, an optional
+base topic, the device ID, the server, optionally a username and password, and the port. The
+**client ID** is the name ESPuino signs in under at the broker. **Base topic** and **device ID**, by
+contrast, make up the beginning of every topic path, because those follow the scheme
+`base-topic/device-id/keyword` – and without a base topic simply `device-id/keyword`. Topics you
+*control* ESPuino with, rather than just read its state from, append a `/set` on top. It is this
+split that makes it possible to keep several devices apart on the same broker.
+
+In the client ID and device ID you may use the placeholder `<MAC>`, which is automatically replaced
+with the MAC address – invaluable when running several ESPuinos, since every device then gets unique
+topics by itself. And you don't have to work out what the paths end up looking like: below the
+fields you see a **live preview of the topics** that result from your entries. Which ones exist at
+all, and what they mean, is listed in the [appendix](../referenz/anhang.md#mqtt-topics).
 
 !!! warning "Restart required"
     Changes to the MQTT settings only take effect after a restart – the interface offers one right
@@ -218,6 +247,10 @@ firmware was deliberately built without FTP.*
 Here you set the username and password for FTP access. For memory reasons, the FTP server doesn't
 run all the time: you start it when needed via the **start FTP server** button (or at the device
 via a button combination), and after the next restart it's off again.
+
+On the computer side, [FileZilla](https://filezilla-project.org/) is a good choice – free, and available for Windows,
+macOS and Linux. Enter your ESPuino's IP address as the server there, along with port 21 and the
+credentials from this page.
 
 !!! tip "For large amounts of data"
     For large amounts of data, the **web upload is now the better choice** – it's been optimized
@@ -493,18 +526,23 @@ A changed LED **count**, by the way, is applied by ESPuino via an automatic rest
 
 ### Power
 
-![The Power sub-group in the General tab: deep sleep inactivity, and the battery settings with warning voltage, charge-LED thresholds, correction value, and the option to shut down automatically at critical voltage](../assets/WebinterfaceEnergie.png)
+![The Power sub-group in the General tab: deep sleep inactivity, and the battery settings with measurement interval, warning voltage, the two voltages for the charge display, correction value, the option to shut down automatically at critical voltage, and below them the settings for the battery announcement](../assets/WebinterfaceEnergie.png)
 
-Under **deep sleep**, you set after how many minutes of inactivity ESPuino goes to sleep. If
-battery measurement is active, these values appear under **battery**:
+This sub-group gathers everything to do with power: at the top, under **Deep Sleep**, when ESPuino
+puts itself to sleep while idle, and below it, under **Battery**, how it watches the battery – the
+latter only if battery measurement is enabled in the firmware. The settings in the order they appear
+in the web interface as well:
 
 | Setting | Meaning |
 | --- | --- |
-| Warning voltage | Below this voltage, the Neopixel warns of a low battery. |
-| Voltage for 0% / 100% | Sets the bounds of the charge-level display (depends on battery type). |
-| Critical shutdown voltage | Optional: ESPuino automatically shuts down below this. |
-| Correction value | Fine correction of the measured voltage (± in hundredths of a volt). If the display deviates from a multimeter reading, enter the difference here. Details in [chapter 5 · Fine-tuning](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
-| Measurement interval | How often the battery voltage is measured. |
+| After n minutes inactivity | After how many minutes without any operation ESPuino goes to sleep. |
+| Interval between measurements (in minutes) | How often the battery voltage is measured. |
+| Show warning below this threshold (in volt) | From here on the Neopixel ring warns of a low battery – and, if enabled, the [announcement](#akku-ansage) is played as well. |
+| Lowest voltage (in volt), that is indicated by one LED | Lower bound of the charge display: here only a single LED remains lit (depends on battery type). |
+| Voltage (in volt), that is indicated by all LEDs | Upper bound of the charge display: from here on all LEDs light up, so the battery counts as full (depends on battery type). |
+| Correction value for the measured battery voltage | Fine correction of the measured voltage (± in hundredths of a volt). If the display deviates from a multimeter reading, enter the difference here – as a negative value too, if ESPuino reads too high. Details in [chapter 5 · Fine-tuning](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
+| Automatically shut down on critical voltage | Puts ESPuino to sleep by itself as soon as the battery falls below a critical voltage, protecting it from deep discharge. With the box ticked, the slider **Below this voltage (in volt), ESPuino turns off** appears underneath, where you set that threshold. |
+| Announce a low battery | Speaks the warning on top of the LEDs – covered in detail in the next section: [Low-battery announcement](#akku-ansage). |
 
 #### Low-battery announcement { #akku-ansage }
 
@@ -513,17 +551,19 @@ in the middle of an audio play nobody is, children least of all. So ESPuino can 
 as well: it briefly interrupts playback, plays an audio file of your choosing, and afterwards carries
 on at exactly the point it left off.
 
-![The file browser with the context menu open on an MP3 file; among its entries "Use as battery warning", between "Play" and "Refresh"](../assets/WebinterfaceAkkuWarnungFestlegen.png)
-
 The feature is **off** by default. To switch it on, tick **Announce a low battery**
 here and enter the path to the audio file below it. The [file browser](#dateibrowser) is more
 convenient: right-click the file, then **Use as battery warning** – that enters the path, ticks the
 box and takes you straight here.
 
+![The file browser with the context menu open on an MP3 file; among its entries "Use as battery warning", between "Play" and "Refresh"](../assets/WebinterfaceAkkuWarnungFestlegen.png)
+
 Ready-made announcements in German, English and French live in the firmware repository under
 `announcements/`; you simply upload them to the SD card. The two commands used to produce them are
 documented there as well – so if you don't like the synthetic voice, you can just as easily record
 the announcement yourself.
+
+![The three settings of the battery announcement in the Power sub-group: the checkbox "Announce a low battery", below it the field "Announcement file" holding the path /announcements/battery-low_de.mp3, and the indented checkbox "Announce only once"](../assets/WebinterfaceAkkuAnsage.png)
 
 **Announce only once** determines how persistent the warning is. Without that option it comes with
 **every** measurement for as long as the battery stays below the warning threshold – that is, at the
@@ -582,6 +622,12 @@ dropdown, followed by host or IP plus port, e.g. `192.168.1.50:8080`. Clicking *
 server"** adds it to the **registered media servers** list. From there, you can open it directly in
 its own web interface via the icon, or remove it again via the trash icon – cards already taught
 are unaffected and keep pointing at the previous server.
+
+!!! warning "Prefer `http://` over `https://`"
+    Connect to the MediaHub **unencrypted** wherever you can. The TLS handshake demands a lot of
+    internal memory – on the ESP32 the scarcest resource of all – and on top of that, the encryption
+    slows the transfer down considerably. Since the MediaHub usually runs on your own home network,
+    the security gained is small while the price for it is clearly noticeable.
 
 ## Help tab
 
