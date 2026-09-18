@@ -46,12 +46,13 @@ timer, repeat, button lock, …) directly, without placing a card at all.
 This tab is the heart of the interface, since this is where you link cards to content. It consists
 of two areas stacked on top of each other: the file browser and the actual assignment.
 
-### The file browser
+### The file browser { #dateibrowser }
 
 The file browser shows the contents of the SD card. The **search field** lets you filter, **upload**
 brings individual files or entire directories (including subfolders) onto the ESPuino, and a
 **right-click** (on a phone: long-press) on an entry opens a context menu for creating, playing,
-refreshing, renaming, deleting, and downloading.
+refreshing, renaming, deleting, and downloading. For audio files it also offers **Use as battery
+warning** – the shortcut to the [low-battery announcement](#akku-ansage).
 
 ### Assigning a card
 
@@ -504,6 +505,46 @@ battery measurement is active, these values appear under **battery**:
 | Critical shutdown voltage | Optional: ESPuino automatically shuts down below this. |
 | Correction value | Fine correction of the measured voltage (± in hundredths of a volt). If the display deviates from a multimeter reading, enter the difference here. Details in [chapter 5 · Fine-tuning](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
 | Measurement interval | How often the battery voltage is measured. |
+
+#### Low-battery announcement { #akku-ansage }
+
+The Neopixel ring does warn about an empty battery, but that only helps if someone is looking – and
+in the middle of an audio play nobody is, children least of all. So ESPuino can **speak** the warning
+as well: it briefly interrupts playback, plays an audio file of your choosing, and afterwards carries
+on at exactly the point it left off.
+
+![The file browser with the context menu open on an MP3 file; among its entries "Use as battery warning", between "Play" and "Refresh"](../assets/WebinterfaceAkkuWarnungFestlegen.png)
+
+The feature is **off** by default. To switch it on, tick **Announce a low battery**
+here and enter the path to the audio file below it. The [file browser](#dateibrowser) is more
+convenient: right-click the file, then **Use as battery warning** – that enters the path, ticks the
+box and takes you straight here.
+
+Ready-made announcements in German, English and French live in the firmware repository under
+`announcements/`; you simply upload them to the SD card. The two commands used to produce them are
+documented there as well – so if you don't like the synthetic voice, you can just as easily record
+the announcement yourself.
+
+**Announce only once** determines how persistent the warning is. Without that option it comes with
+**every** measurement for as long as the battery stays below the warning threshold – that is, at the
+rate of the measurement interval. With it, the warning comes once and then only again after the
+voltage has risen back above the threshold and dropped below it again. There is deliberately no
+"once per charge" option: ESPuino cannot tell whether it is being charged at all – a voltage that
+rises again may just as well be a battery recovering under a lighter load.
+
+!!! info "From the outside, the interruption stays invisible"
+    While the announcement plays, title, position and progress stay frozen, and the playlist, track
+    number and play mode are never touched in the first place. So neither the web interface nor MQTT
+    ever notices that something else was playing in between.
+
+!!! warning "Only while something is playing"
+    The announcement only happens when something is actually playing. If ESPuino sits unused on a
+    shelf or is paused, nothing happens – there would be no point to return to either. And if the
+    given file is missing, playback carries on undisturbed; all that happens is an entry in the
+    error log.
+
+With **web radio** the return works too, just differently: a live stream has no position, so ESPuino
+reconnects after the announcement. That takes a brief moment – how brief depends on the station.
 
 ## Updates tab { #tab-updates }
 

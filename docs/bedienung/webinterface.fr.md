@@ -50,12 +50,14 @@ des boutons…), sans poser aucune carte.
 Cet onglet est le cœur de l'interface, car c'est là que tu associes des cartes à des contenus. Il se
 compose de deux zones superposées : l'explorateur de fichiers et l'attribution proprement dite.
 
-### L'explorateur de fichiers
+### L'explorateur de fichiers { #dateibrowser }
 
 L'explorateur de fichiers affiche le contenu de la carte SD. Le **champ de recherche** permet de
 filtrer, l'**upload** amène des fichiers individuels ou des répertoires entiers (avec leurs
 sous-dossiers) sur l'ESPuino, et un **clic droit** (sur téléphone : appui long) sur une entrée ouvre
-un menu contextuel pour créer, jouer, actualiser, renommer, supprimer et télécharger.
+un menu contextuel pour créer, jouer, actualiser, renommer, supprimer et télécharger. Pour les
+fichiers audio s'y ajoute **Définir comme alerte batterie** – le raccourci vers
+l'[annonce de batterie faible](#akku-ansage).
 
 ### Attribuer une carte
 
@@ -538,6 +540,48 @@ mesure de batterie est active, ces valeurs apparaissent sous **batterie** :
 | Tension de coupure critique | Optionnel : ESPuino s'éteint automatiquement en dessous. |
 | Valeur de correction | Correction fine de la tension mesurée (± en centièmes de volt). Si l'affichage diverge d'une mesure au multimètre, saisis ici la différence. Détails au [chapitre 5 · Réglage fin](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
 | Intervalle de mesure | À quelle fréquence la tension de la batterie est mesurée. |
+
+#### Annonce de batterie faible { #akku-ansage }
+
+L'anneau Neopixel prévient bien d'une batterie vide, mais cela n'aide que si quelqu'un regarde – et
+en plein milieu d'une histoire, personne ne regarde, les enfants moins que quiconque. ESPuino peut
+donc aussi **annoncer** l'avertissement : il interrompt brièvement la lecture, joue un fichier audio
+de ton choix, puis reprend exactement là où il s'était arrêté.
+
+![L'explorateur de fichiers avec le menu contextuel ouvert sur un fichier MP3 ; on y voit l'entrée « Définir comme alerte batterie », entre « Jouer » et « Actualiser »](../assets/WebinterfaceAkkuWarnungFestlegen.png)
+
+La fonction est **désactivée** d'origine. Pour l'activer, coche ici **Annoncer une batterie faible**
+et saisis en dessous le chemin du fichier audio. L'[explorateur de fichiers](#dateibrowser) est plus
+commode : un clic droit sur le fichier, puis **Définir comme alerte batterie** – cela renseigne le
+chemin, coche la case et t'amène directement ici.
+
+Des annonces toutes prêtes en allemand, en anglais et en français se trouvent dans le dépôt du
+firmware, dans le dossier `announcements/` ; il suffit de les téléverser sur la carte SD. Les deux
+commandes qui ont servi à les produire y sont également documentées – si la voix de synthèse ne te
+plaît pas, tu peux donc tout aussi bien enregistrer l'annonce toi-même.
+
+**N'annoncer qu'une fois** détermine l'insistance de l'avertissement. Sans cette option, il revient à
+**chaque** mesure tant que la batterie reste sous le seuil d'alerte – donc au rythme de l'intervalle
+de mesure. Avec l'option, il ne survient qu'une fois, puis de nouveau seulement lorsque la tension
+est entre-temps repassée au-dessus du seuil avant de retomber en dessous. Il n'y a délibérément pas
+d'option « une fois par charge » : ESPuino ne peut pas du tout détecter s'il est en charge – une
+tension qui remonte peut tout aussi bien être une batterie qui se rétablit sous une charge plus
+légère.
+
+!!! info "Vue de l'extérieur, l'interruption reste invisible"
+    Pendant l'annonce, le titre, la position et la progression restent figés, et la playlist, le
+    numéro de piste et le mode de lecture ne sont même pas touchés. Ni l'interface web ni MQTT ne
+    remarquent donc que quelque chose d'autre a été joué entre-temps.
+
+!!! warning "Uniquement pendant une lecture en cours"
+    L'annonce n'a lieu que si quelque chose est effectivement en train de jouer. Si ESPuino est
+    posé sur une étagère sans être utilisé, ou s'il est en pause, rien ne se passe – il n'y aurait
+    d'ailleurs aucun point de reprise. Et si le fichier indiqué est introuvable, la lecture se
+    poursuit sans être dérangée ; il ne reste qu'une entrée dans le journal d'erreurs.
+
+Avec la **webradio**, le retour fonctionne aussi, mais autrement : un flux en direct n'a pas de
+position, ESPuino se reconnecte donc après l'annonce. Cela prend un court instant – sa durée dépend
+de la station.
 
 ## Onglet Mises à jour { #tab-updates }
 

@@ -47,13 +47,14 @@ Modifikation (Schlaftimer, Wiederholung, Tastensperre …) direkt aus, ganz ohne
 Dieser Tab ist das Herzstück, denn hier verknüpfst du Karten mit Inhalten. Er besteht aus zwei
 untereinander angeordneten Bereichen: dem Dateibrowser und der eigentlichen Zuweisung.
 
-### Der Dateibrowser
+### Der Dateibrowser { #dateibrowser }
 
 Der Dateibrowser zeigt den Inhalt der SD-Karte. Über das **Suchfeld** filterst du, per **Upload**
 bringst du
 einzelne Dateien oder ganze Verzeichnisse (samt Unterordnern) auf den ESPuino, und ein **Rechtsklick**
 (am Handy: langes Antippen) auf einen Eintrag öffnet ein Kontextmenü zum Anlegen, Abspielen,
-Aktualisieren, Umbenennen, Löschen und Herunterladen.
+Aktualisieren, Umbenennen, Löschen und Herunterladen. Bei Audiodateien steht dort außerdem **Als
+Akku-Warnung festlegen** – die Abkürzung zur [Ansage bei niedrigem Akku](#akku-ansage).
 
 ### Eine Karte zuweisen
 
@@ -522,6 +523,47 @@ Ist die Batteriemessung aktiv, kommen unter **Batterie** diese Werte hinzu:
 | Kritische Abschaltspannung | Optional: ESPuino schaltet unterhalb automatisch ab. |
 | Korrekturwert | Feinkorrektur der gemessenen Spannung (± in Hundertstel-Volt). Weicht die Anzeige von einer Multimeter-Messung ab, trägst du hier die Differenz ein. Details in [Kapitel 5 · Feinjustierung](../hardware/aufbau.md#nach-dem-zusammenbau-die-feinjustierung). |
 | Messintervall | Wie oft die Batteriespannung gemessen wird. |
+
+#### Ansage bei niedrigem Akku { #akku-ansage }
+
+Der Neopixelring warnt zwar vor einem leeren Akku, aber das hilft nur, wenn jemand hinsieht – und
+mitten im Hörspiel sieht niemand hin, Kinder am allerwenigsten. Deshalb kann ESPuino die Warnung
+zusätzlich **ansagen**: Er unterbricht die Wiedergabe kurz, spielt eine Audiodatei deiner Wahl ab und
+macht danach genau dort weiter, wo er aufgehört hat.
+
+![Der Dateibrowser mit geöffnetem Kontextmenü auf einer MP3-Datei; darin der Eintrag „Als Akku-Warnung festlegen“ zwischen „Abspielen“ und „Aktualisieren“](../assets/WebinterfaceAkkuWarnungFestlegen.png)
+
+Ab Werk ist die Funktion **deaktiviert**. Zum Einschalten setzt du hier das Häkchen bei **Warnung
+bei leerem Akku ansagen** und trägst darunter den Pfad zur Audiodatei ein. Bequemer geht es über den
+[Dateibrowser](#dateibrowser): ein Rechtsklick auf die Datei, dann **Als Akku-Warnung festlegen** –
+das trägt den Pfad ein, setzt das Häkchen und bringt dich gleich hierher.
+
+Fertige Ansagen in Deutsch, Englisch und Französisch liegen im Firmware-Repository im Ordner
+`announcements/`; du lädst sie einfach auf die SD-Karte hoch. Dort ist auch dokumentiert, mit welchen
+zwei Befehlen sie erzeugt wurden – wenn dir die synthetische Stimme nicht gefällt, sprichst du die
+Ansage also genauso gut selbst ein.
+
+Mit **Nur einmal ansagen** bestimmst du, wie hartnäckig die Warnung ist. Ohne diese Option kommt sie
+bei **jeder** Messung, solange der Akku unter der Warnschwelle liegt – also im Takt des
+Messintervalls. Mit der Option kommt sie einmal und danach erst wieder, wenn die Spannung
+zwischenzeitlich über die Warnschwelle gestiegen und anschließend erneut darunter gefallen ist. Eine
+Option „einmal je Ladung“ gibt es bewusst nicht: ESPuino kann gar nicht erkennen, ob geladen wird –
+eine Spannung, die wieder steigt, kann genauso gut ein Akku sein, der sich bei geringerer Last erholt.
+
+!!! info "Von außen bleibt die Unterbrechung unsichtbar"
+    Während der Ansage bleiben Titel, Position und Fortschritt eingefroren, und Playlist,
+    Titelnummer und Abspielmodus werden gar nicht erst angefasst. Weder das Webinterface noch MQTT
+    bekommen also mit, dass zwischendurch etwas anderes lief.
+
+!!! warning "Nur bei laufender Wiedergabe"
+    Angesagt wird nur, wenn tatsächlich etwas spielt. Steht ESPuino ungenutzt im Regal oder ist er
+    pausiert, passiert nichts – dort gäbe es auch keine Stelle, zu der zurückgesprungen werden
+    könnte. Und fehlt die angegebene Datei, läuft die Wiedergabe ungestört weiter; es bleibt bei
+    einem Eintrag im Fehlerprotokoll.
+
+Bei **Webradio** klappt der Rücksprung ebenfalls, nur anders: Eine Position gibt es bei einem
+Livestream nicht, also verbindet sich ESPuino nach der Ansage neu. Das dauert einen kurzen Moment –
+wie kurz, hängt vom Sender ab.
 
 ## Tab Updates { #tab-updates }
 
