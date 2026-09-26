@@ -47,7 +47,8 @@ Der Ablauf besteht aus sechs Schritten:
    der Kennung des anfragenden ESPuino, aber noch ohne Inhalt.
 4. **Zuweisung am MediaHub.** Im MediaHub-Webinterface verknüpfst du die wartende Karte mit einem
    Inhalt – einer Datei, einem Ordner oder einem Webradio-Stream – und legst den Abspielmodus fest,
-   genauso wie du es sonst im ESPuino-Webinterface tätest.
+   genauso wie du es sonst im ESPuino-Webinterface tätest. Hast du mehrere Geräte, kannst du sie im
+   selben Schritt gleich mitversorgen (siehe unten).
 5. **Zweites Auflegen: Download.** Beim nächsten Auflegen fragt der ESPuino erneut an und bekommt
    diesmal ein **Manifest** zurück – die Liste aller benötigten Dateien. Er lädt sie herunter und
    legt sie in einem versteckten Verzeichnis auf der eigenen SD-Karte ab. Während des Downloads ist
@@ -195,6 +196,12 @@ Wartende Karten entstehen übrigens auch dann, wenn ein ESPuino mit der oben gen
 einer ihm unbekannten Karte fragt und kein Server sie kennt. Das Auflegen einer neuen Karte meldet
 sie also hier an, noch bevor sie irgendwo zugewiesen ist.
 
+Die Liste hält sich dabei selbst aktuell: Legst du eine Karte auf, während diese Seite offen ist,
+erscheint sie nach wenigen Sekunden von allein – neu laden musst du nichts. Tippst du in diesem
+Moment gerade eine Karten-ID ein oder hast ein Dialogfenster offen, wird dir die Seite nicht unter
+den Händen weggezogen; stattdessen erscheint oben ein Streifen mit dem Knopf **„Jetzt
+aktualisieren"**.
+
 ![Die Karten-und-Zuweisungen-Liste im MediaHub mit einer bereits zugewiesenen Karte und den Aktionen Bearbeiten, Force Refresh, Manifest, Duplizieren und Löschen](../assets/MediahubKartenListe.png)
 
 Ist eine Karte zugewiesen, stehen dir pro Zeile fünf Aktionen zur Verfügung:
@@ -204,12 +211,12 @@ Ist eine Karte zugewiesen, stehen dir pro Zeile fünf Aktionen zur Verfügung:
 | **Bearbeiten** | Ändert die Zuweisung nachträglich. Wurden die Daten bereits auf den ESPuino übertragen, ist danach ein „Force Refresh" nötig, damit die Änderung auch ankommt. |
 | **Force Refresh** | Erzwingt einen erneuten Download, obwohl der ESPuino die Daten schon einmal geladen hat – der übliche Weg, um eine Änderung zu verteilen. |
 | **Manifest** | Zeigt die Download-Datei, die der ESPuino für diese Karte bekommt. |
-| **Duplizieren** | Kopiert die Zuweisung, praktisch, wenn mehrere ESPuinos dieselbe Karte mit demselben Inhalt anlernen sollen. |
+| **Duplizieren** | Kopiert eine fertige Zuweisung nachträglich auf ein weiteres Gerät – etwa, wenn ein ESPuino erst später dazukommt. Beim Anlegen und Bearbeiten gehst du stattdessen direkt über die Geräte-Häkchen im Formular (siehe unten). |
 | **Löschen** | Entfernt die Zuordnung (beachte dabei die Lösch-Einstellung, siehe unten). |
 
 #### Das Zuweisungs-Formular
 
-![Das Zuweisungsformular im MediaHub: Name, Inhaltstyp, Abspielmodus und ein Ordnerbaum der eingebundenen Medienbibliothek](../assets/MediahubZuweisungsformular.png)
+![Das Zuweisungsformular im MediaHub: Name, Inhaltstyp, Abspielmodus, ein Ordnerbaum der eingebundenen Medienbibliothek und die Häkchen der Zielgeräte](../assets/MediahubZuweisungsformular.png)
 
 Beim Zuweisen füllst du folgende Felder aus:
 
@@ -221,6 +228,9 @@ Beim Zuweisen füllst du folgende Felder aus:
   [Kapitel 8 → Die Abspielmodi](../bedienung/webinterface.md#abspielmodi)).
 - **Medienbibliothek** – ein Ordnerbaum deiner unter `MEDIAHUB_MEDIA` eingebundenen Sammlung. Über
   „Ordner verwenden" übernimmst du einen ganzen Ordner für Modi wie „Alle Titel eines Ordners".
+- **Auf diese ESPuinos schreiben** – alle übrigen bekannten Geräte als Häkchen. Jedes angehakte
+  Gerät erhält dieselbe Zuweisung, so dass eine Karte mit einem einzigen Speichern auf mehreren
+  ESPuinos landet. Der Block erscheint nur, wenn überhaupt ein zweites Gerät bekannt ist.
 
 !!! tip "Auch einzelne Dateien statt eines ganzen Ordners"
     Bei ordnerbasierten Modi wie „Alle Titel eines Ordners (sortiert)" musst du nicht zwingend den
@@ -228,7 +238,22 @@ Beim Zuweisen füllst du folgende Felder aus:
     werden dann übertragen, nicht der Rest des Ordners. Praktisch, wenn eine Karte nur eine Auswahl
     aus einer größeren Sammlung abdecken soll.
 
-    ![Mehrere einzeln angehakte Dateien innerhalb eines Ordners im Zuweisungsformular des MediaHub](../assets/MediahubMehrereDateien.png)
+![Mehrere einzeln angehakte Dateien innerhalb eines Ordners im Zuweisungsformular des MediaHub](../assets/MediahubMehrereDateien.png)
+
+!!! note "Mehrere Geräte, mehrere Einträge"
+    Jedes angehakte Gerät bekommt eine **eigene** Zuweisung mit demselben Inhalt, keinen gemeinsamen
+    Eintrag für alle. Das ist Absicht: So behält jeder ESPuino bei Hörbüchern seine eigene
+    Abspielposition und seinen eigenen Download-Cache. Trägt ein Gerät die Karte schon, ist sein
+    Häkchen von vornherein gesetzt – damit eine nachträgliche Änderung am Inhalt nicht nur auf einem
+    Gerät ankommt und die Einträge auseinanderlaufen. Das Gerät, dessen Karte du gerade bearbeitest,
+    ist immer angehakt und lässt sich nicht abwählen.
+
+    **Ein Abwählen löscht nichts.** Ein leeres Häkchen heißt „dieses Gerät nicht anfassen", nicht
+    „Zuweisung dort entfernen" – zum Löschen nimmst du **„Löschen"** in der Kartenliste. Der Grund:
+    Löschen kann je nach Einstellung den ESPuino selbst kontaktieren, und das soll nicht als
+    Nebenwirkung eines Speichern-Knopfs passieren.
+
+![Der Block „Auf diese ESPuinos schreiben" im Zuweisungsformular: das bearbeitete Gerät fest angehakt, ein weiteres Gerät zusätzlich ausgewählt](../assets/MediahubGeraeteHaekchen.png)
 
 ### Medien
 
@@ -240,10 +265,11 @@ direkt bei der Kartenzuweisung, indem du Dateien aus deiner bestehenden Biblioth
 
 ### Einstellungen
 
-![Die Einstellungen-Seite im MediaHub: Löschverhalten (Lazy/Secure Delete), Rekursionstiefe und optionales Hub-Passwort](../assets/MediahubEinstellungen.png)
+![Die Einstellungen-Seite im MediaHub: Löschverhalten (Lazy/Secure Delete), Rekursionstiefe, Vorauswahl der Geräte beim Zuweisen und optionales Hub-Passwort](../assets/MediahubEinstellungen.png)
 
-Hier legst du fest, wie sich MediaHub beim Löschen einer Kartenzuweisung verhält und wie tief er bei
-rekursiven Abspielmodi in Unterordner schaut:
+Hier legst du fest, wie sich MediaHub beim Löschen einer Kartenzuweisung verhält, wie tief er bei
+rekursiven Abspielmodi in Unterordner schaut und für welche Geräte eine neue Zuweisung vorausgewählt
+ist:
 
 - **Löschverhalten** – **Lazy Delete** (Standard) löscht nur den Eintrag im MediaHub; die Karte
   spielt am ESPuino unverändert aus dem lokalen Cache weiter, auch offline, und wird dort nicht
@@ -254,6 +280,11 @@ rekursiven Abspielmodi in Unterordner schaut:
   wie „Hörbuch rekursiv" oder „Alle Titel rekursiv" beim Download einbeziehen. Nicht-rekursive Modi
   nutzen unabhängig davon immer nur den gewählten Ordner selbst. Setze den Wert nicht unnötig hoch –
   sonst kann eine einzelne Zuweisung ungewollt viele Daten nach sich ziehen.
+- **Vorauswahl der Geräte beim Zuweisen** – bestimmt nur, welche Häkchen das Zuweisungs-Formular
+  von vornherein mitbringt. **Nur das bearbeitete Gerät** (Standard) verhält sich wie bisher; **Alle
+  bekannten ESPuinos** hakt jedes Gerät gleich an, so dass ein einziges Speichern den ganzen
+  Haushalt versorgt. Geschrieben wird in beiden Fällen nur, was beim Speichern tatsächlich angehakt
+  ist.
 - **Hub-Passwort** (optional) – schützt nur die **Weboberfläche** von MediaHub selbst. Die
   API-Schnittstelle, über die sich die ESPuinos melden, bleibt davon unberührt erreichbar, da Geräte
   sich nicht anmelden können.

@@ -51,7 +51,8 @@ Le processus se compose de six étapes :
    l'identifiant de l'ESPuino demandeur, mais sans contenu pour l'instant.
 4. **Attribution sur MediaHub.** Dans l'interface web de MediaHub, tu associes la carte en attente à
    un contenu – un fichier, un dossier ou un flux de radio web – et définis le mode de lecture,
-   exactement comme tu le ferais sinon dans l'interface web de l'ESPuino.
+   exactement comme tu le ferais sinon dans l'interface web de l'ESPuino. Si tu as plusieurs
+   appareils, tu peux les servir tous dans la même étape (voir plus bas).
 5. **Deuxième pose : téléchargement.** La prochaine fois que la carte est posée, l'ESPuino
    redemande et reçoit cette fois un **manifeste** – la liste de tous les fichiers nécessaires. Il
    les télécharge et les stocke dans un répertoire caché sur sa propre carte SD. La lecture est
@@ -206,6 +207,12 @@ Des cartes en attente apparaissent d'ailleurs aussi lorsqu'un ESPuino, avec l'op
 s'enquiert d'une carte qu'il ne connaît pas et qu'aucun serveur ne la connaît non plus. Poser une
 nouvelle carte la signale donc ici avant même qu'elle ne soit assignée où que ce soit.
 
+La liste se tient elle-même à jour : pose une carte alors que cette page est ouverte et elle
+apparaît d'elle-même au bout de quelques secondes – aucun rechargement nécessaire. Si tu es
+justement en train de saisir un ID de carte ou qu'une fenêtre de dialogue est ouverte, la page ne
+t'est pas retirée des mains ; un bandeau apparaît alors en haut avec le bouton **« Actualiser
+maintenant »**.
+
 ![La liste des cartes et attributions dans MediaHub avec une carte déjà attribuée et les actions Modifier, Force Refresh, Manifeste, Dupliquer et Supprimer](../assets/MediahubKartenListe.png)
 
 Une fois une carte attribuée, cinq actions sont disponibles par ligne :
@@ -215,12 +222,12 @@ Une fois une carte attribuée, cinq actions sont disponibles par ligne :
 | **Modifier** | Change l'attribution après coup. Si les données ont déjà été transférées sur l'ESPuino, un « Force Refresh » est ensuite nécessaire pour que le changement arrive réellement. |
 | **Force Refresh** | Force un nouveau téléchargement bien que l'ESPuino ait déjà chargé les données une fois – le moyen habituel de diffuser un changement. |
 | **Manifeste** | Affiche le fichier de téléchargement que l'ESPuino reçoit pour cette carte. |
-| **Dupliquer** | Copie l'attribution, pratique quand plusieurs ESPuinos doivent apprendre la même carte avec le même contenu. |
+| **Dupliquer** | Copie après coup une attribution terminée vers un autre appareil – par exemple lorsqu'un ESPuino arrive plus tard. Lors de la création et de la modification, tu passes plutôt directement par les cases des appareils dans le formulaire (voir ci-dessous). |
 | **Supprimer** | Supprime l'attribution (attention au réglage de suppression, voir ci-dessous). |
 
 #### Le formulaire d'attribution
 
-![Le formulaire d'attribution dans MediaHub : nom, type de contenu, mode de lecture et une arborescence de la bibliothèque de médias montée](../assets/MediahubZuweisungsformular.png)
+![Le formulaire d'attribution dans MediaHub : nom, type de contenu, mode de lecture, une arborescence de la bibliothèque de médias montée et les cases des appareils cibles](../assets/MediahubZuweisungsformular.png)
 
 Lors de l'attribution, tu remplis les champs suivants :
 
@@ -233,6 +240,9 @@ Lors de l'attribution, tu remplis les champs suivants :
 - **Bibliothèque de médias** – une arborescence de ta collection montée via `MEDIAHUB_MEDIA`.
   « Utiliser le dossier » adopte un dossier entier pour des modes comme « tous les titres d'un
   dossier ».
+- **Écrire sur ces ESPuinos** – tous les autres appareils connus sous forme de cases à cocher. Chaque
+  appareil coché reçoit la même attribution, de sorte qu'une carte se retrouve sur plusieurs
+  ESPuinos en un seul enregistrement. Ce bloc n'apparaît que si un deuxième appareil est connu.
 
 !!! tip "Aussi des fichiers individuels au lieu d'un dossier entier"
     Pour les modes basés sur un dossier comme « tous les titres d'un dossier (triés) », tu n'es pas
@@ -240,7 +250,22 @@ Lors de l'attribution, tu remplis les champs suivants :
     l'arborescence – seuls ceux-ci seront alors transférés, pas le reste du dossier. Pratique quand
     une carte ne doit couvrir qu'une sélection au sein d'une collection plus large.
 
-    ![Plusieurs fichiers cochés individuellement au sein d'un dossier dans le formulaire d'attribution de MediaHub](../assets/MediahubMehrereDateien.png)
+![Plusieurs fichiers cochés individuellement au sein d'un dossier dans le formulaire d'attribution de MediaHub](../assets/MediahubMehrereDateien.png)
+
+!!! note "Plusieurs appareils, plusieurs entrées"
+    Chaque appareil coché reçoit sa **propre** attribution avec le même contenu, et non une entrée
+    commune à tous. C'est voulu : chaque ESPuino conserve ainsi sa propre position de lecture pour
+    les livres audio et son propre cache de téléchargement. Un appareil qui porte déjà la carte est
+    coché d'emblée – ainsi une modification ultérieure du contenu n'atteint pas un seul appareil, ce
+    qui ferait diverger les entrées. L'appareil dont tu modifies la carte est toujours coché et ne
+    peut pas être décoché.
+
+    **Décocher ne supprime rien.** Une case vide signifie « ne pas toucher à cet appareil », pas
+    « retirer l'attribution là-bas » – pour supprimer, utilise **« Supprimer »** dans la liste des
+    cartes. La raison : selon le réglage, la suppression peut contacter l'ESPuino lui-même, et cela
+    ne doit pas se produire comme effet secondaire d'un bouton d'enregistrement.
+
+![Le bloc « Écrire sur ces ESPuinos » dans le formulaire d'attribution : l'appareil modifié coché et figé, un autre appareil sélectionné en plus](../assets/MediahubGeraeteHaekchen.png)
 
 ### Médias
 
@@ -253,10 +278,11 @@ bibliothèque existante.
 
 ### Réglages
 
-![La page des réglages dans MediaHub : comportement de suppression (lazy/secure delete), profondeur de récursion et mot de passe optionnel du hub](../assets/MediahubEinstellungen.png)
+![La page des réglages dans MediaHub : comportement de suppression (lazy/secure delete), profondeur de récursion, appareils présélectionnés lors de l'attribution et mot de passe optionnel du hub](../assets/MediahubEinstellungen.png)
 
-Tu définis ici comment MediaHub se comporte lors de la suppression d'une attribution de carte, et
-jusqu'à quelle profondeur il explore les sous-dossiers pour les modes de lecture récursifs :
+Tu définis ici comment MediaHub se comporte lors de la suppression d'une attribution de carte,
+jusqu'à quelle profondeur il explore les sous-dossiers pour les modes de lecture récursifs, et pour
+quels appareils une nouvelle attribution est présélectionnée :
 
 - **Comportement de suppression** – **Lazy Delete** (par défaut) ne supprime que l'entrée sur
   MediaHub ; la carte continue de jouer sans changement sur l'ESPuino depuis le cache local, même
@@ -268,6 +294,11 @@ jusqu'à quelle profondeur il explore les sous-dossiers pour les modes de lectur
   incluent lors du téléchargement. Les modes non récursifs n'utilisent toujours que le dossier
   choisi lui-même, indépendamment de ce réglage. Ne règle pas cette valeur inutilement haute –
   sinon une seule attribution peut entraîner involontairement beaucoup de données.
+- **Appareils présélectionnés lors de l'attribution** – détermine uniquement les cases que le
+  formulaire d'attribution apporte au départ. **Uniquement l'appareil modifié** (par défaut) se
+  comporte comme avant ; **Tous les ESPuinos connus** coche d'emblée chaque appareil, de sorte qu'un
+  seul enregistrement couvre toute la maison. Dans les deux cas, seul ce qui est effectivement coché
+  au moment de l'enregistrement est écrit.
 - **Mot de passe du hub** (optionnel) – protège uniquement l'**interface web** de MediaHub
   elle-même. L'API à laquelle s'adressent les ESPuinos reste accessible sans restriction, car les
   appareils ne peuvent pas se connecter.

@@ -47,7 +47,8 @@ The process consists of six steps:
    requesting ESPuino, but no content yet.
 4. **Assignment on MediaHub.** In the MediaHub web interface, you link the pending card to some
    content – a file, a folder, or a web radio stream – and set the playback mode, exactly as you
-   would otherwise do in the ESPuino web interface.
+   would otherwise do in the ESPuino web interface. If you have several devices, you can cover them
+   all in the same step (see below).
 5. **Second tap: download.** The next time the card is placed, ESPuino asks again and this time gets
    back a **manifest** – the list of all the files it needs. It downloads them and stores them in a
    hidden directory on its own SD card. Playback is locked during the download; the Neopixel ring
@@ -193,6 +194,11 @@ Pending cards also appear when an ESPuino with the option above asks about a car
 and no server knows it either. Placing a new card therefore announces it here before it has been
 assigned anywhere.
 
+The list keeps itself up to date while you watch: place a card while this page is open and it shows
+up by itself within a few seconds – no reload needed. If you happen to be typing a card ID at that
+moment, or have a dialog open, the page isn't pulled out from under you; instead a bar appears at the
+top with a **"Refresh now"** button.
+
 ![The cards & assignments list in MediaHub with an already-assigned card and the actions Edit, Force Refresh, Manifest, Duplicate, and Delete](../assets/MediahubKartenListe.png)
 
 Once a card is assigned, five actions are available per row:
@@ -202,12 +208,12 @@ Once a card is assigned, five actions are available per row:
 | **Edit** | Changes the assignment afterward. If the data has already been transferred to the ESPuino, a "Force Refresh" is needed afterward so the change actually arrives. |
 | **Force Refresh** | Forces a fresh download even though the ESPuino has already loaded the data once – the usual way to roll out a change. |
 | **Manifest** | Shows the download file the ESPuino gets for this card. |
-| **Duplicate** | Copies the assignment, handy when several ESPuinos should teach the same card with the same content. |
+| **Duplicate** | Copies a finished assignment to another device after the fact – for instance when an ESPuino joins later. While creating or editing, you use the device tick boxes in the form instead (see below). |
 | **Delete** | Removes the assignment (mind the delete setting, see below). |
 
 #### The assignment form
 
-![The assignment form in MediaHub: name, content type, playback mode, and a folder tree of the mounted media library](../assets/MediahubZuweisungsformular.png)
+![The assignment form in MediaHub: name, content type, playback mode, a folder tree of the mounted media library, and the target devices' tick boxes](../assets/MediahubZuweisungsformular.png)
 
 When assigning, you fill in the following fields:
 
@@ -219,6 +225,9 @@ When assigning, you fill in the following fields:
   [chapter 8 → playback modes](../bedienung/webinterface.md#abspielmodi)).
 - **Media library** – a folder tree of your collection mounted via `MEDIAHUB_MEDIA`. "Use folder"
   adopts an entire folder for modes like "all titles of a folder".
+- **Write to these ESPuinos** – every other known device as a tick box. Each ticked device gets the
+  same assignment, so one save puts a card on several ESPuinos at once. The block only appears if a
+  second device is known at all.
 
 !!! tip "Individual files instead of a whole folder, too"
     For folder-based modes such as "all titles of a folder (sorted)", you don't have to adopt the
@@ -226,7 +235,21 @@ When assigning, you fill in the following fields:
     not the rest of the folder. Handy when a card should only cover a selection from a larger
     collection.
 
-    ![Several individually checked files within a folder in MediaHub's assignment form](../assets/MediahubMehrereDateien.png)
+![Several individually checked files within a folder in MediaHub's assignment form](../assets/MediahubMehrereDateien.png)
+
+!!! note "Several devices, several entries"
+    Every ticked device gets its **own** assignment with the same content, not one shared entry for
+    all of them. That's deliberate: it lets each ESPuino keep its own play position for audiobooks
+    and its own download cache. A device that already carries the card is ticked from the start – so
+    a later change to the content doesn't reach just one device and let the entries drift apart. The
+    device whose card you are editing is always ticked and can't be unticked.
+
+    **Unticking deletes nothing.** An empty box means "don't touch this device", not "remove the
+    assignment there" – for deleting, use **"Delete"** in the card list. The reason: depending on the
+    setting, deleting can contact the ESPuino itself, and that shouldn't happen as a side effect of a
+    Save button.
+
+![The "Write to these ESPuinos" block in the assignment form: the device being edited ticked and fixed, another device selected on top](../assets/MediahubGeraeteHaekchen.png)
 
 ### Media
 
@@ -238,10 +261,10 @@ by picking files from your existing library.
 
 ### Settings
 
-![The settings page in MediaHub: delete behavior (lazy/secure delete), recursion depth, and an optional hub password](../assets/MediahubEinstellungen.png)
+![The settings page in MediaHub: delete behavior (lazy/secure delete), recursion depth, pre-selected devices when assigning, and an optional hub password](../assets/MediahubEinstellungen.png)
 
-Here you set how MediaHub behaves when deleting a card assignment, and how deep it looks into
-subfolders for recursive playback modes:
+Here you set how MediaHub behaves when deleting a card assignment, how deep it looks into subfolders
+for recursive playback modes, and which devices a new assignment is pre-selected for:
 
 - **Delete behavior** – **lazy delete** (default) only removes the entry on MediaHub; the card keeps
   playing unchanged on the ESPuino from its local cache, even offline, and isn't removed there.
@@ -252,6 +275,10 @@ subfolders for recursive playback modes:
   "audiobook, recursive" or "all titles, recursive" include when downloading. Non-recursive modes
   always use only the chosen folder itself, regardless of this setting. Don't set the value
   unnecessarily high – otherwise a single assignment can unintentionally pull in a lot of data.
+- **Pre-selected devices when assigning** – only decides which boxes the assignment form starts out
+  with. **Only the device being edited** (default) behaves as before; **all known ESPuinos** ticks
+  every device right away, so a single save covers the whole household. Either way, only what is
+  actually ticked when you save gets written.
 - **Hub password** (optional) – protects only MediaHub's own **web interface**. The API that the
   ESPuinos talk to stays reachable regardless, since devices can't log in.
 
