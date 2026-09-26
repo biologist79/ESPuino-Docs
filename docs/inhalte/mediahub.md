@@ -156,6 +156,13 @@ füllt sich dabei automatisch – als Kombination aus dem Präfix `mediahub://` 
 etwa `mediahub://http://nas2:8090`. Das trägst du nicht selbst ein, es ist reine interne
 Buchführung: So weiß ESPuino beim nächsten Auflegen, an welchen Server er sich wenden muss.
 
+!!! tip "Das Anlernen kannst du dir auch sparen"
+    Aktivierst du im Tab MediaHub die Option
+    [„Unbekannte Karten ohne Anlernen direkt beim MediaHub nachfragen"](../bedienung/webinterface.md#mediahub-optionen),
+    entfällt dieser Schritt ganz: Eine unbekannte Karte fragt dann von sich aus bei den
+    registrierten Servern nach und übernimmt eine dort vorhandene Zuweisung selbst. Das lohnt sich
+    vor allem bei mehreren Geräten – sonst müsstest du jede Karte auf jedem Gerät einzeln anlernen.
+
 ## Das MediaHub-Webinterface
 
 Die Weboberfläche des MediaHub-Servers selbst gliedert sich in fünf Bereiche: **ESPuinos**, **Karten
@@ -183,6 +190,10 @@ ein, blendest mit **„Nur wartende"** unzugewiesene Karten ein, oder stößt mi
 (alle)"** für sämtliche Karten einen erneuten Download an. Kennst du die zwölfstellige Karten-ID
 bereits (zu finden im ESPuino-Webinterface selbst, sobald du die Karte dort auflegst), kannst du
 eine Karte auch ganz ohne vorheriges Auflegen manuell hinzufügen.
+
+Wartende Karten entstehen übrigens auch dann, wenn ein ESPuino mit der oben genannten Option nach
+einer ihm unbekannten Karte fragt und kein Server sie kennt. Das Auflegen einer neuen Karte meldet
+sie also hier an, noch bevor sie irgendwo zugewiesen ist.
 
 ![Die Karten-und-Zuweisungen-Liste im MediaHub mit einer bereits zugewiesenen Karte und den Aktionen Bearbeiten, Force Refresh, Manifest, Duplizieren und Löschen](../assets/MediahubKartenListe.png)
 

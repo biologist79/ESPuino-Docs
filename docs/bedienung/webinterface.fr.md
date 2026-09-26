@@ -647,7 +647,7 @@ sauvegarder et transférer des données est décrite au
 
 ## Onglet MediaHub { #tab-mediahub }
 
-![L'onglet MediaHub dans l'interface web ESPuino : ajouter un serveur de médias (nom d'affichage, adresse) et la liste des serveurs de médias enregistrés](../assets/MediahubEspuinoTab.png)
+![L'onglet MediaHub dans l'interface web ESPuino : les deux options, le formulaire d'ajout d'un serveur de médias avec nom d'affichage et adresse, et en dessous la liste des serveurs de médias enregistrés](../assets/MediahubEspuinoTab.png)
 
 Cet onglet sert uniquement à **gérer les adresses de serveurs** – l'attribution de carte proprement
 dite se fait toujours dans l'[onglet RFID](#tab-rfid). Sans serveur MediaHub en fonctionnement,
@@ -661,6 +661,53 @@ et du port, par exemple `192.168.1.50:8080`. Un clic sur **« enregistrer le ser
 l'ajoute à la liste **serveurs de médias enregistrés**. Tu peux ensuite l'ouvrir directement dans sa
 propre interface web via l'icône, ou le supprimer via l'icône de corbeille – les cartes déjà
 apprises ne sont pas affectées et continuent de pointer vers le serveur précédent.
+
+Avec plusieurs serveurs enregistrés, leur **ordre dans la liste** n'est pas qu'un détail : lorsqu'il
+doit se renseigner sur une carte, ESPuino les parcourt de haut en bas et retient le premier qui la
+connaît. Cet ordre correspond à celui dans lequel tu as saisi les serveurs.
+
+Si un serveur ne répond pas du tout, ESPuino le retient et **cesse de l'interroger jusqu'au prochain
+redémarrage**. C'est voulu : sinon, chaque pose d'une carte inconnue resterait de nouveau bloquée sur
+le délai d'attente de ce serveur. Comme ESPuino s'endort de toute façon après quelques minutes
+d'inactivité et redémarre au réveil, cela se résout tout seul à l'usage. Si le serveur revient
+entre-temps et que tu ne veux pas attendre, un clic sur **Enregistrer les options** réinitialise
+cela.
+
+### Les deux options { #mediahub-optionen }
+
+Tout en haut de l'onglet se trouvent deux interrupteurs, tous deux désactivés d'origine.
+
+**Interroger directement le MediaHub sur les cartes inconnues, sans apprentissage préalable**
+t'épargne une à deux étapes par carte et par appareil.
+
+Sans cette option, cela se passe ainsi : tu poses une nouvelle carte, tu l'apprends à la main dans
+l'onglet RFID avec le mode de lecture **MediaHub**, puis tu la reposes. C'est seulement cette
+deuxième pose qui envoie une requête au serveur – et qui fait apparaître la carte là-bas, pour que
+tu puisses lui attribuer du contenu.
+
+Avec l'option, l'apprentissage disparaît : toute carte inconnue fait **immédiatement** l'objet d'une
+demande auprès de tous les serveurs enregistrés. Il faut savoir qu'ensuite la carte reste malgré
+tout inconnue de l'ESPuino – si aucun serveur ne la connaît, le message « carte inconnue » subsiste
+et **rien** n'est enregistré sur l'appareil. Le serveur l'a toutefois notée comme carte en attente.
+Ce n'est qu'après lui avoir attribué du contenu là-bas et reposé la carte **une nouvelle fois**
+qu'un manifeste revient : ESPuino apprend alors la carte en arrière-plan, télécharge les fichiers,
+puis les joue. Ce téléchargement se fait au premier plan – l'anneau LED en montre la progression, et
+avec un gros livre audio, il faut un certain temps avant que le son ne démarre.
+
+C'est avec **plusieurs ESPuino** que le gain devient réel. Pose la carte sur l'appareil A et
+attribue-lui du contenu dans MediaHub – en l'assignant du même coup à l'appareil B. Pose ensuite
+cette même carte sur l'appareil B : dès la toute première pose, un manifeste revient – apprentissage,
+téléchargement, lecture, sans que tu aies rien réglé sur l'appareil B.
+
+**Afficher le dossier interne MediaHub dans l'explorateur de fichiers** rend visible le dossier
+`/.mediahub`, normalement masqué. Il contient, pour chaque carte, le manifeste mis en cache et les
+fichiers médias téléchargés – pratique pour vérifier ce qui est réellement arrivé pour une carte.
+
+!!! warning "Ce dossier est fait pour être consulté"
+    Le triangle d'avertissement orange à côté de cette option n'est pas là par hasard. Modifier quoi
+    que ce soit dans ce répertoire peut avoir des effets indésirables – un fichier audio à toi
+    déposé là serait par exemple simplement lu avec les modes de lecture par dossier, sans qu'ESPuino
+    s'en aperçoive.
 
 !!! warning "Privilégie `http://` plutôt que `https://`"
     Connecte le MediaHub **sans chiffrement** dès que c'est possible. La poignée de main TLS réclame

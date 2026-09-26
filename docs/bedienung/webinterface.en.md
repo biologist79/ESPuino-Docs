@@ -609,7 +609,7 @@ confirmation prompt). How to use these functions for backing up and transferring
 
 ## MediaHub tab { #tab-mediahub }
 
-![The MediaHub tab in the ESPuino web interface: add a media server (display name, address) and the list of registered media servers](../assets/MediahubEspuinoTab.png)
+![The MediaHub tab in the ESPuino web interface: the two options, the form for adding a media server with display name and address, and below it the list of registered media servers](../assets/MediahubEspuinoTab.png)
 
 This tab is purely for **managing server addresses** – the actual card assignment still happens in
 the [RFID tab](#tab-rfid). Without a running MediaHub server, this page doesn't do anything; what
@@ -622,6 +622,50 @@ dropdown, followed by host or IP plus port, e.g. `192.168.1.50:8080`. Clicking *
 server"** adds it to the **registered media servers** list. From there, you can open it directly in
 its own web interface via the icon, or remove it again via the trash icon – cards already taught
 are unaffected and keep pointing at the previous server.
+
+With several servers entered, their **order in the list** isn't just decoration: when ESPuino has to
+ask around about a card, it works through them top to bottom and takes the first one that knows it.
+That order follows whenever you entered each server.
+
+If a server doesn't answer at all, ESPuino remembers that and **stops asking it until the next
+restart**. That's deliberate: otherwise every placing of an unknown card would get stuck on that
+server's timeout again. Since ESPuino goes to sleep after a few idle minutes anyway and restarts on
+waking, this clears itself in everyday use. If the server comes back in the meantime and you don't
+want to wait, a click on **Save options** resets it.
+
+### The two options { #mediahub-optionen }
+
+At the top of the tab sit two switches, both off by default.
+
+**Ask the MediaHub about unknown cards directly, without teaching them first** saves you one or two
+steps per card and device.
+
+Without the option it goes like this: you place a new card, teach it by hand in the RFID tab with
+play mode **MediaHub**, and place it again. Only that second placing sends a request to the server -
+and only then does the card show up there at all, so that you can assign content to it.
+
+With the option, the teaching falls away: every unknown card is asked about at all registered
+servers **immediately**. What matters to know is that the card is still unknown to the ESPuino
+afterwards - if no server knows it, you get the "card unknown" message and **nothing** is stored on
+the device. The server has now noted it as a pending card, though. Only once you have assigned
+content to it there and place the card **again** does a manifest come back: ESPuino then learns the
+card in the background, downloads the files and plays them afterwards. That download runs in the
+foreground - the LED ring shows its progress, and with a large audiobook it takes a while before
+any sound comes out.
+
+Where this really pays off is with **several ESPuinos**. Place the card on device A and assign
+content to it in MediaHub - and, right there, assign it to device B as well. Place that same card on
+device B now and a manifest comes back on the very first placing: learn, download, play, without you
+having configured anything on device B.
+
+**Show the internal MediaHub folder in the file browser** reveals the otherwise hidden `/.mediahub`
+folder. It holds the cached manifest and the downloaded media files for each card - useful for
+checking what actually made it across for a given card.
+
+!!! warning "That folder is for looking at"
+    The orange warning triangle next to this option is there for a reason. Changing anything in that
+    directory can have unintended effects - an audio file of your own put in there, for instance,
+    would simply be played along with folder-based play modes, without ESPuino noticing.
 
 !!! warning "Prefer `http://` over `https://`"
     Connect to the MediaHub **unencrypted** wherever you can. The TLS handshake demands a lot of

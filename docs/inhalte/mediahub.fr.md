@@ -166,6 +166,13 @@ apparaît en dessous : **serveur de médias**, listant tous les serveurs enregis
 pas cela toi-même, c'est une comptabilité purement interne : ainsi, l'ESPuino sait quel serveur
 contacter la prochaine fois que la carte est posée.
 
+!!! tip "L'apprentissage aussi peut être évité"
+    Active dans l'onglet MediaHub l'option
+    [« Interroger directement le MediaHub sur les cartes inconnues, sans apprentissage préalable »](../bedienung/webinterface.md#mediahub-optionen)
+    et cette étape disparaît complètement : une carte inconnue interroge alors d'elle-même les
+    serveurs enregistrés et reprend l'assignation qu'elle y trouve. Cela vaut surtout avec plusieurs
+    appareils – sinon, chaque carte doit être apprise séparément sur chacun d'eux.
+
 ## L'interface web de MediaHub
 
 L'interface web du serveur MediaHub lui-même est organisée en cinq sections : **ESPuinos**,
@@ -194,6 +201,10 @@ de déclencher un nouveau téléchargement pour toutes les cartes à la fois ave
 (toutes) »**. Si tu connais déjà l'ID de carte à douze chiffres (disponible dans l'interface web de
 l'ESPuino lui-même dès que tu y poses la carte), tu peux aussi ajouter une carte manuellement sans
 la poser au préalable.
+
+Des cartes en attente apparaissent d'ailleurs aussi lorsqu'un ESPuino, avec l'option ci-dessus,
+s'enquiert d'une carte qu'il ne connaît pas et qu'aucun serveur ne la connaît non plus. Poser une
+nouvelle carte la signale donc ici avant même qu'elle ne soit assignée où que ce soit.
 
 ![La liste des cartes et attributions dans MediaHub avec une carte déjà attribuée et les actions Modifier, Force Refresh, Manifeste, Dupliquer et Supprimer](../assets/MediahubKartenListe.png)
 

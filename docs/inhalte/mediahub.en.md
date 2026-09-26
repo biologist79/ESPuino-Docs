@@ -155,6 +155,13 @@ automatically – as a combination of the `mediahub://` prefix and the server ad
 `mediahub://http://nas2:8090`. You don't enter this yourself; it's purely internal bookkeeping, so
 ESPuino knows which server to contact the next time the card is placed.
 
+!!! tip "You can skip the teaching, too"
+    Turn on
+    ["Ask the MediaHub about unknown cards directly, without teaching them first"](../bedienung/webinterface.md#mediahub-optionen)
+    in the MediaHub tab and this step disappears entirely: an unknown card then asks the registered
+    servers by itself and adopts an assignment it finds there. Worth it above all with several
+    devices - otherwise every card has to be taught on each of them separately.
+
 ## The MediaHub web interface
 
 The MediaHub server's own web interface is organized into five areas: **ESPuinos**, **cards &
@@ -181,6 +188,10 @@ unassigned cards with **"pending only"**, or trigger a fresh download for every 
 **"Force Refresh (all)"**. If you already know the twelve-digit card ID (found in the ESPuino web
 interface itself once you place the card there), you can also add a card manually without placing
 it first.
+
+Pending cards also appear when an ESPuino with the option above asks about a card it doesn't know
+and no server knows it either. Placing a new card therefore announces it here before it has been
+assigned anywhere.
 
 ![The cards & assignments list in MediaHub with an already-assigned card and the actions Edit, Force Refresh, Manifest, Duplicate, and Delete](../assets/MediahubKartenListe.png)
 
