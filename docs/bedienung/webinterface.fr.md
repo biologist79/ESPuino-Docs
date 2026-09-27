@@ -645,6 +645,35 @@ toutes les attributions** (avec confirmation de sécurité). La façon d'utilise
 sauvegarder et transférer des données est décrite au
 [chapitre 10 → Sauvegarde et restauration](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern).
 
+### Ce que montre la liste { #zuweisungsliste }
+
+![La liste de toutes les attributions RFID enregistrées : pour chaque entrée l'ID de la carte, le mode de lecture avec son symbole et le chemin ; pour les cartes MediaHub, le serveur média et l'état de la copie locale à la place ; la carte actuellement saisie dans l'onglet RFID est surlignée en bleu](../assets/WebinterfaceZuweisungsliste.png)
+
+Chaque entrée commence par l'ID de carte à douze chiffres. En dessous figure ce que la carte
+déclenche – soit le mode de lecture avec son symbole, soit, pour une carte de modification, sa
+fonction. La ligne suivante donne le fichier, le dossier ou l'URL attribué. À droite, le bouton
+corbeille supprime cette seule entrée.
+
+Une entrée est **surlignée en bleu** : celle dont le numéro se trouve actuellement dans le champ
+« Numéro RFID » de l'onglet RFID. Pose une carte sur le lecteur pendant que l'interface web est
+ouverte et l'ESPuino y inscrit son numéro automatiquement – la liste te montre ainsi d'un coup d'œil
+si cette carte est déjà connue et à quoi elle est attribuée.
+
+Pour une carte en mode de lecture **MediaHub**, le serveur média prend la place du chemin – avec son
+nom d'affichage s'il est encore enregistré dans l'[onglet MediaHub](#tab-mediahub), sinon avec son
+adresse. La ligne grise en dessous résume ce que cet appareil sait de la carte : le nom issu du
+manifeste, s'il s'agit d'une webradio ou quel mode de lecture s'applique réellement, et à quel point
+la copie locale est à jour :
+
+| Affichage | Signification |
+| --- | --- |
+| **synchronisé** | La copie locale correspond à ce que MediaHub a livré en dernier. |
+| **mise à jour en attente** | Lors de la dernière pose, l'ESPuino a constaté qu'une version plus récente attend sur MediaHub. La pose suivante la télécharge, celle d'après la joue. |
+| **jamais lue sur cet appareil** | La carte pointe vers un serveur média, mais n'a encore jamais été posée sur cet ESPuino – rien n'est donc encore stocké localement. |
+
+Pour cet affichage, l'ESPuino n'interroge pas MediaHub – toutes ces indications proviennent du cache
+local. La liste reste donc parlante lorsque le serveur n'est momentanément pas joignable.
+
 ## Onglet MediaHub { #tab-mediahub }
 
 ![L'onglet MediaHub dans l'interface web ESPuino : les deux options, le formulaire d'ajout d'un serveur de médias avec nom d'affichage et adresse, et en dessous la liste des serveurs de médias enregistrés](../assets/MediahubEspuinoTab.png)

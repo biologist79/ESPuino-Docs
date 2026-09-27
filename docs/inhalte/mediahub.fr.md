@@ -15,8 +15,9 @@ individuellement sur chaque appareil, et remplir chaque carte SD séparément.
 
 C'est exactement ce problème que résout **MediaHub**. MediaHub est un composant additionnel
 **optionnel** qui te permet de gérer les attributions de cartes **de façon centralisée** en un seul
-endroit, au lieu de le faire séparément sur chaque appareil. Si tu n'as qu'un seul ESPuino, tu n'as
-pas besoin de MediaHub – pour tous les autres cas, cela peut considérablement simplifier la gestion.
+endroit, au lieu de le faire séparément sur chaque appareil. Si tu n'as qu'un seul ESPuino, MediaHub
+ne t'apportera sans doute pas grand-chose. En revanche, si tu en possèdes plusieurs, ou si tu
+envisages d'en acquérir un autre, cela peut considérablement simplifier la gestion.
 La fonction ne s'appelle volontairement pas « cloud » : MediaHub fonctionne **localement sur ton
 propre réseau**, tes fichiers médias restent chez toi.
 
@@ -45,7 +46,10 @@ Le processus se compose de six étapes :
 2. **Apprendre une carte en mode « MediaHub ».** Dans l'[onglet RFID](../bedienung/webinterface.md#tab-rfid),
    apprends une nouvelle carte – comme mode de lecture, choisis **MediaHub**, puis en dessous, le
    serveur de médias souhaité dans la liste des serveurs enregistrés. Tu n'indiques pas de chemin
-   ici ; l'ESPuino sait seulement quel serveur contacter.
+   ici ; l'ESPuino sait seulement quel serveur contacter. Tu peux t'épargner cette étape si tu as
+   activé l'option
+   [« Interroger directement le MediaHub sur les cartes inconnues, sans apprentissage préalable »](../bedienung/webinterface.md#mediahub-optionen)
+   – la simple pose suffit alors.
 3. **Première pose : enregistrement.** La première fois que tu poses la carte, l'ESPuino envoie une
    requête à MediaHub. La carte y apparaît alors comme « en attente » – avec l'ID de la carte et
    l'identifiant de l'ESPuino demandeur, mais sans contenu pour l'instant.
@@ -59,13 +63,16 @@ Le processus se compose de six étapes :
    verrouillée pendant le téléchargement ; l'anneau Neopixel affiche la progression en bleu.
 6. **Lecture.** Une fois le téléchargement terminé, la lecture démarre – désormais **localement
    depuis sa propre carte SD**, indépendamment de MediaHub. Si tu modifies l'attribution plus tard
-   sur MediaHub, l'ESPuino ne le remarque pas automatiquement de lui-même à la pose suivante ; tu
-   déclenches cela délibérément avec **« Force Refresh »** (plus de détails plus bas).
+   sur MediaHub, l'ESPuino s'en aperçoit de lui-même : à la pose suivante, il joue encore l'ancienne
+   version, mais compare les versions en arrière-plan et retient qu'une plus récente attend. La pose
+   d'après la télécharge sans encore la jouer ; seule la suivante joue le nouveau contenu.
 
 !!! note "Ce qui est centralisé – et ce qui ne l'est pas"
     MediaHub ne te dispense pas de **poser les cartes** : tu dois toujours poser chaque carte **une
-    fois par appareil** et la faire pointer vers MediaHub à cet endroit (étape 2 ci-dessus). La
-    raison : sinon, MediaHub lui-même aurait besoin de son propre lecteur RFID juste pour connaître
+    fois par appareil** – soit pour la faire pointer vers MediaHub à cette occasion, comme à
+    l'étape 2, soit, si tu as activé l'option
+    [« Interroger directement le MediaHub sur les cartes inconnues, sans apprentissage préalable »](../bedienung/webinterface.md#mediahub-optionen),
+    par la simple pose. La raison : sinon, MediaHub lui-même aurait besoin de son propre lecteur RFID juste pour connaître
     l'ID de la carte. Ce qui est centralisé, c'est uniquement le **lien réel vers le contenu** –
     c'est-à-dire quels fichiers ou quel flux, et quel mode de lecture, correspondent à une carte. Tu
     maintiens cette association une seule fois sur MediaHub, et chaque appareil la récupère à partir
@@ -156,7 +163,10 @@ lui-même.
 Sur l'ESPuino lui-même, MediaHub te concerne à deux endroits : l'
 [onglet MediaHub](../bedienung/webinterface.md#tab-mediahub), pour enregistrer des serveurs, et l'
 [onglet RFID](../bedienung/webinterface.md#tab-rfid), pour attribuer réellement une carte à un
-serveur.
+serveur. Quelles cartes de cet appareil pointent déjà vers un serveur média, et à quel point leur
+copie locale est à jour, c'est la
+[liste des attributions enregistrées](../bedienung/webinterface.md#zuweisungsliste) de l'onglet
+Outils qui te le montre.
 
 ![Attribution de carte dans l'interface web de l'ESPuino avec le mode de lecture « MediaHub » et la sélection du serveur de médias ; le chemin est composé automatiquement à partir de l'adresse et du protocole du serveur](../assets/MediahubRfidZuweisung.png)
 
@@ -170,9 +180,10 @@ contacter la prochaine fois que la carte est posée.
 !!! tip "L'apprentissage aussi peut être évité"
     Active dans l'onglet MediaHub l'option
     [« Interroger directement le MediaHub sur les cartes inconnues, sans apprentissage préalable »](../bedienung/webinterface.md#mediahub-optionen)
-    et cette étape disparaît complètement : une carte inconnue interroge alors d'elle-même les
-    serveurs enregistrés et reprend l'assignation qu'elle y trouve. Cela vaut surtout avec plusieurs
-    appareils – sinon, chaque carte doit être apprise séparément sur chacun d'eux.
+    et cette étape disparaît complètement : pose une carte que l'ESPuino ne connaît pas et il
+    interroge de lui-même les serveurs enregistrés, puis reprend automatiquement une attribution qui
+    y est déposée. Cela vaut surtout avec plusieurs appareils – sinon, chaque carte doit être
+    apprise séparément sur chacun d'eux.
 
 ## L'interface web de MediaHub
 
@@ -219,11 +230,20 @@ Une fois une carte attribuée, cinq actions sont disponibles par ligne :
 
 | Action | Effet |
 | --- | --- |
-| **Modifier** | Change l'attribution après coup. Si les données ont déjà été transférées sur l'ESPuino, un « Force Refresh » est ensuite nécessaire pour que le changement arrive réellement. |
-| **Force Refresh** | Force un nouveau téléchargement bien que l'ESPuino ait déjà chargé les données une fois – le moyen habituel de diffuser un changement. |
+| **Modifier** | Change l'attribution après coup. Si les données ont déjà été transférées sur l'ESPuino, il récupère la nouvelle version de lui-même – au fil des poses suivantes, comme décrit à l'étape 6 ci-dessus. |
+| **Force Refresh** | Force un nouveau téléchargement bien que rien n'ait changé au contenu – prévu pour le cas où la copie locale sur l'ESPuino est endommagée ou manquante. |
 | **Manifeste** | Affiche le fichier de téléchargement que l'ESPuino reçoit pour cette carte. |
 | **Dupliquer** | Copie après coup une attribution terminée vers un autre appareil – par exemple lorsqu'un ESPuino arrive plus tard. Lors de la création et de la modification, tu passes plutôt directement par les cases des appareils dans le formulaire (voir ci-dessous). |
 | **Supprimer** | Supprime l'attribution (attention au réglage de suppression, voir ci-dessous). |
+
+!!! warning "Fichier remplacé ? Enregistre à nouveau l'attribution"
+    Si tu remplaces un fichier de ta bibliothèque par une nouvelle version sans réenregistrer
+    l'attribution dans le formulaire, un « Force Refresh » n'aide pas non plus : l'ESPuino vérifie
+    chaque fichier téléchargé par rapport à la taille et à la somme de contrôle du manifeste, et
+    MediaHub les connaît encore dans leur ancien état. Le téléchargement échoue à cette vérification
+    et l'ancienne copie reste en place. Dans ce cas, ouvre l'attribution une fois et enregistre-la de
+    nouveau – MediaHub relit alors la taille et la somme de contrôle, et l'ESPuino récupère la
+    nouvelle version tout seul.
 
 #### Le formulaire d'attribution
 

@@ -15,8 +15,9 @@ separately.
 
 That's exactly the problem **MediaHub** addresses. MediaHub is an **optional** add-on component
 that lets you manage card assignments **centrally** in one place, instead of on every device
-separately. If you only have one ESPuino, you don't need MediaHub – for everyone else, it can make
-management considerably easier. The feature is deliberately not called "cloud": MediaHub runs
+separately. If you only have one ESPuino, MediaHub probably won't gain you much. If you already own
+several, though, or are planning to buy another, it can make management considerably easier. The
+feature is deliberately not called "cloud": MediaHub runs
 **locally on your own network**, and your media files stay at home with you.
 
 !!! info "Where the full guide lives"
@@ -41,7 +42,9 @@ The process consists of six steps:
 2. **Teach a card as "MediaHub".** In the [RFID tab](../bedienung/webinterface.md#tab-rfid), teach a
    new card – as the playback mode, choose **MediaHub**, and below that, pick the desired media
    server from the list of registered servers. You don't specify a path here; ESPuino only knows
-   which server to contact.
+   which server to contact. You can skip this step entirely if you have enabled the option
+   ["Ask the MediaHub about unknown cards directly, without teaching them first"](../bedienung/webinterface.md#mediahub-optionen)
+   – the tap alone is then enough.
 3. **First tap: registration.** The first time you place the card, ESPuino sends a request to
    MediaHub. There, the card now shows up as "pending" – with the card ID and the identifier of the
    requesting ESPuino, but no content yet.
@@ -55,12 +58,16 @@ The process consists of six steps:
    shows the progress in blue.
 6. **Playback.** Once the download finishes, playback starts – from then on **locally from its own
    SD card**, independent of MediaHub. If you later change the assignment on MediaHub, ESPuino
-   doesn't automatically notice on its own the next time the card is placed; you trigger that
-   deliberately with **"Force Refresh"** (more on that below).
+   notices on its own: the next tap still plays the old version, but compares versions in the
+   background and remembers that a newer one is waiting. The tap after that downloads it without
+   playing yet; only the one following plays the new content.
 
 !!! note "What's centralized – and what isn't"
     MediaHub doesn't take **placing the cards** off your hands: you still need to place each card
-    **once per device** and point it at MediaHub there (step 2 above). The reason: otherwise
+    **once per device** – either to point it at MediaHub as in step 2 while you're there, or, if you
+    have enabled the option
+    ["Ask the MediaHub about unknown cards directly, without teaching them first"](../bedienung/webinterface.md#mediahub-optionen),
+    through the tap alone. The reason: otherwise
     MediaHub itself would need its own RFID reader just to know the card's ID at all. What's
     centralized is only the **actual link to the content** – i.e. which files or stream and which
     playback mode belong to a card. You maintain that assignment once on MediaHub, and every device
@@ -146,7 +153,10 @@ somewhere outside the server itself.
 
 On the ESPuino itself, MediaHub concerns you in two places: the
 [MediaHub tab](../bedienung/webinterface.md#tab-mediahub), for registering servers, and the
-[RFID tab](../bedienung/webinterface.md#tab-rfid), for actually assigning a card to a server.
+[RFID tab](../bedienung/webinterface.md#tab-rfid), for actually assigning a card to a server. Which
+of this device's cards already point at a media server, and how current their local copy is, is
+shown by the [list of stored assignments](../bedienung/webinterface.md#zuweisungsliste) in the Tools
+tab.
 
 ![Card assignment in the ESPuino web interface with the "MediaHub" playback mode and media server selection; the path is composed automatically from the server's address and protocol](../assets/MediahubRfidZuweisung.png)
 
@@ -159,9 +169,10 @@ ESPuino knows which server to contact the next time the card is placed.
 !!! tip "You can skip the teaching, too"
     Turn on
     ["Ask the MediaHub about unknown cards directly, without teaching them first"](../bedienung/webinterface.md#mediahub-optionen)
-    in the MediaHub tab and this step disappears entirely: an unknown card then asks the registered
-    servers by itself and adopts an assignment it finds there. Worth it above all with several
-    devices - otherwise every card has to be taught on each of them separately.
+    in the MediaHub tab and this step disappears entirely: place a card ESPuino doesn't know and it
+    queries the registered servers on its own, then adopts an assignment held there automatically.
+    Worth it above all with several devices - otherwise every card has to be taught on each of them
+    separately.
 
 ## The MediaHub web interface
 
@@ -205,11 +216,19 @@ Once a card is assigned, five actions are available per row:
 
 | Action | Effect |
 | --- | --- |
-| **Edit** | Changes the assignment afterward. If the data has already been transferred to the ESPuino, a "Force Refresh" is needed afterward so the change actually arrives. |
-| **Force Refresh** | Forces a fresh download even though the ESPuino has already loaded the data once – the usual way to roll out a change. |
+| **Edit** | Changes the assignment afterward. If the data has already been transferred to the ESPuino, it fetches the new version by itself – over the next taps, as described in step 6 above. |
+| **Force Refresh** | Forces a fresh download even though nothing about the content changed – meant for a local copy on the ESPuino that is damaged or missing. |
 | **Manifest** | Shows the download file the ESPuino gets for this card. |
 | **Duplicate** | Copies a finished assignment to another device after the fact – for instance when an ESPuino joins later. While creating or editing, you use the device tick boxes in the form instead (see below). |
 | **Delete** | Removes the assignment (mind the delete setting, see below). |
+
+!!! warning "Swapped a file? Save the assignment again"
+    If you replace a file in your library with a new version without saving the assignment in the
+    form again, a "Force Refresh" won't help either: ESPuino checks every downloaded file against
+    the size and checksum from the manifest, and MediaHub still knows those from the old state. The
+    download fails that check and the old copy stays. In such a case, open the assignment once and
+    save it again – MediaHub then reads size and checksum afresh, and ESPuino fetches the new
+    version by itself.
 
 #### The assignment form
 

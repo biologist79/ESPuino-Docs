@@ -13,7 +13,8 @@ neue Karte müsstest du auf jedem Gerät einzeln anlernen, und die SD-Karten get
 
 Genau hier setzt **MediaHub** an. MediaHub ist eine **optionale** Zusatzkomponente, mit der du die
 Kartenzuordnungen **zentral** an einer Stelle verwaltest, statt auf jedem Gerät für sich. Wer nur
-einen ESPuino hat, braucht MediaHub nicht – für alle anderen kann es die Verwaltung deutlich
+einen ESPuino hat, für den bringt MediaHub vermutlich wenig Zugewinn. Wer hingegen mehrere
+besitzt oder die Anschaffung eines weiteren plant, für den kann es die Verwaltung deutlich
 entspannen. Bewusst heißt die Funktion nicht „Cloud": MediaHub läuft **lokal in deinem eigenen
 Netzwerk**, deine Mediendateien bleiben bei dir zu Hause.
 
@@ -41,7 +42,10 @@ Der Ablauf besteht aus sechs Schritten:
 2. **Karte als „MediaHub" anlernen.** Im [Tab RFID](../bedienung/webinterface.md#tab-rfid) lernst du
    eine neue Karte an – als Abspielmodus wählst du **MediaHub** und darunter den gewünschten
    Mediaserver aus der Liste der registrierten Server. Einen Pfad gibst du dabei nicht an; ESPuino
-   weiß nur, an welchen Server er sich wenden soll.
+   weiß nur, an welchen Server er sich wenden soll. Diesen Schritt kannst du dir sparen, wenn du die
+   Option
+   [„Unbekannte Karten ohne Anlernen direkt beim MediaHub nachfragen"](../bedienung/webinterface.md#mediahub-optionen)
+   aktiviert hast – dann genügt das Auflegen selbst.
 3. **Erstes Auflegen: Registrierung.** Legst du die Karte zum ersten Mal auf, schickt ESPuino eine
    Anfrage an den MediaHub. Dort taucht die Karte jetzt als „wartend" auf – mit der Karten-ID und
    der Kennung des anfragenden ESPuino, aber noch ohne Inhalt.
@@ -55,12 +59,17 @@ Der Ablauf besteht aus sechs Schritten:
    die Wiedergabe gesperrt; der Neopixel-Ring zeigt den Fortschritt in Blau.
 6. **Wiedergabe.** Sobald der Download fertig ist, startet die Wiedergabe – von da an **lokal von
    der eigenen SD-Karte**, unabhängig vom MediaHub. Änderst du die Zuweisung später am MediaHub,
-   bemerkt das der ESPuino erst beim nächsten Auflegen von selbst nicht automatisch; du stößt das
-   gezielt mit **„Force Refresh"** an (mehr dazu weiter unten).
+   bemerkt der ESPuino das von selbst: Beim nächsten Auflegen spielt er noch die alte Fassung,
+   vergleicht dabei aber im Hintergrund die Version und merkt sich, dass eine neuere bereitliegt.
+   Das übernächste Auflegen lädt sie herunter und spielt noch nicht; erst das darauffolgende spielt
+   den neuen Inhalt.
 
 !!! note "Was zentral ist – und was nicht"
     MediaHub nimmt dir das **Auflegen der Karten nicht** ab: Jede Karte musst du weiterhin **einmal
-    pro Gerät** auflegen und dort auf MediaHub verweisen (Schritt 2 oben). Der Grund: Sonst bräuchte
+    pro Gerät** auflegen – entweder, um sie dabei wie in Schritt 2 auf MediaHub zu verweisen, oder,
+    wenn du die Option
+    [„Unbekannte Karten ohne Anlernen direkt beim MediaHub nachfragen"](../bedienung/webinterface.md#mediahub-optionen)
+    aktiviert hast, allein durch das Auflegen selbst. Der Grund: Sonst bräuchte
     MediaHub selbst einen eigenen RFID-Reader, um die ID der Karte überhaupt zu kennen. Zentral ist
     nur die **eigentliche Verknüpfung zum Inhalt** – also welche Dateien bzw. welcher Stream und
     welcher Abspielmodus zu einer Karte gehören. Diese Zuordnung pflegst du einmal am MediaHub, und
@@ -148,6 +157,9 @@ Ordner deshalb regelmäßig, am besten außerhalb des Servers.
 Am ESPuino selbst betrifft dich MediaHub an zwei Stellen: der [Tab
 MediaHub](../bedienung/webinterface.md#tab-mediahub), um Server zu registrieren, und der [Tab
 RFID](../bedienung/webinterface.md#tab-rfid), um eine Karte tatsächlich einem Server zuzuweisen.
+Welche Karten dieses Geräts bereits auf einen Mediaserver zeigen und wie aktuell ihre lokale Kopie
+ist, verrät dir die
+[Liste der gespeicherten Zuweisungen](../bedienung/webinterface.md#zuweisungsliste) im Tab Tools.
 
 ![Kartenzuweisung im ESPuino-Webinterface mit Abspielmodus „MediaHub" und Mediaserver-Auswahl; der Pfad wird automatisch aus Server-Adresse und -Protokoll zusammengesetzt](../assets/MediahubRfidZuweisung.png)
 
@@ -160,9 +172,10 @@ Buchführung: So weiß ESPuino beim nächsten Auflegen, an welchen Server er sic
 !!! tip "Das Anlernen kannst du dir auch sparen"
     Aktivierst du im Tab MediaHub die Option
     [„Unbekannte Karten ohne Anlernen direkt beim MediaHub nachfragen"](../bedienung/webinterface.md#mediahub-optionen),
-    entfällt dieser Schritt ganz: Eine unbekannte Karte fragt dann von sich aus bei den
-    registrierten Servern nach und übernimmt eine dort vorhandene Zuweisung selbst. Das lohnt sich
-    vor allem bei mehreren Geräten – sonst müsstest du jede Karte auf jedem Gerät einzeln anlernen.
+    entfällt dieser Schritt ganz: Legst du eine Karte auf, die der ESPuino nicht kennt, fragt er
+    von sich aus bei den registrierten Servern nach und übernimmt eine dort hinterlegte Zuweisung
+    automatisch. Das lohnt sich vor allem bei mehreren Geräten – sonst müsstest du jede Karte auf
+    jedem Gerät einzeln anlernen.
 
 ## Das MediaHub-Webinterface
 
@@ -208,11 +221,19 @@ Ist eine Karte zugewiesen, stehen dir pro Zeile fünf Aktionen zur Verfügung:
 
 | Aktion | Wirkung |
 | --- | --- |
-| **Bearbeiten** | Ändert die Zuweisung nachträglich. Wurden die Daten bereits auf den ESPuino übertragen, ist danach ein „Force Refresh" nötig, damit die Änderung auch ankommt. |
-| **Force Refresh** | Erzwingt einen erneuten Download, obwohl der ESPuino die Daten schon einmal geladen hat – der übliche Weg, um eine Änderung zu verteilen. |
+| **Bearbeiten** | Ändert die Zuweisung nachträglich. Wurden die Daten bereits auf den ESPuino übertragen, holt er sich die neue Fassung von selbst – wie in Schritt 6 oben beschrieben, über die nächsten Auflegevorgänge. |
+| **Force Refresh** | Erzwingt einen erneuten Download, obwohl sich am Inhalt nichts geändert hat – gedacht für den Fall, dass die lokale Kopie auf dem ESPuino beschädigt ist oder fehlt. |
 | **Manifest** | Zeigt die Download-Datei, die der ESPuino für diese Karte bekommt. |
 | **Duplizieren** | Kopiert eine fertige Zuweisung nachträglich auf ein weiteres Gerät – etwa, wenn ein ESPuino erst später dazukommt. Beim Anlegen und Bearbeiten gehst du stattdessen direkt über die Geräte-Häkchen im Formular (siehe unten). |
 | **Löschen** | Entfernt die Zuordnung (beachte dabei die Lösch-Einstellung, siehe unten). |
+
+!!! warning "Datei ausgetauscht? Zuweisung neu speichern"
+    Ersetzt du eine Datei in deiner Bibliothek durch eine neue Fassung, ohne die Zuweisung im
+    Formular erneut zu speichern, hilft auch ein „Force Refresh" nicht weiter: Der ESPuino prüft
+    jede geladene Datei gegen Größe und Prüfsumme aus dem Manifest, und die kennt MediaHub noch vom
+    alten Stand. Der Download scheitert an dieser Prüfung, und es bleibt bei der alten Kopie. Öffne
+    in so einem Fall die Zuweisung einmal und speichere sie erneut – dabei liest MediaHub Größe und
+    Prüfsumme frisch ein, und der ESPuino holt sich die neue Fassung von allein.
 
 #### Das Zuweisungs-Formular
 

@@ -607,6 +607,35 @@ overwrites, never deletes), or use the red button to **delete all assignments** 
 confirmation prompt). How to use these functions for backing up and transferring data is covered in
 [chapter 10 → Backup & restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern).
 
+### What the list shows { #zuweisungsliste }
+
+![The list of all stored RFID assignments: per entry the card ID, the playback mode with its icon and the path; for MediaHub cards the media server and the state of the local copy instead; the card currently entered in the RFID tab is highlighted in blue](../assets/WebinterfaceZuweisungsliste.png)
+
+Every entry starts with the twelve-digit card ID. Below it stands what the card triggers – either
+the playback mode with its icon or, for a modification card, its function. The line below that
+holds the assigned file, folder, or URL. On the right, the trash-can button deletes this one
+entry.
+
+One entry is **highlighted in blue**: the card whose number currently sits in the "RFID-number"
+field of the RFID tab. Place a card on the reader while the web interface is open and ESPuino
+enters its number there automatically – so the list tells you at a glance whether that card is
+already known and what it is assigned to.
+
+For a card in **MediaHub** playback mode, the media server takes the place of the path – by its
+display name if it is still registered in the [MediaHub tab](#tab-mediahub), otherwise by its
+address. The grey line below sums up what this device knows about the card: the name from the
+manifest, whether it is a web radio or which playback mode actually applies, and how current the
+local copy is:
+
+| Display | Meaning |
+| --- | --- |
+| **synced** | The local copy matches what MediaHub last delivered. |
+| **update pending** | On the last tap, ESPuino noticed that a newer version is waiting on MediaHub. The next tap downloads it, the one after that plays it. |
+| **not played on this device yet** | The card points at a media server but has never been placed on this ESPuino – so nothing is stored locally yet. |
+
+ESPuino doesn't query MediaHub for this view – every detail comes from the local cache. The list
+therefore still tells you something when the server happens to be unreachable.
+
 ## MediaHub tab { #tab-mediahub }
 
 ![The MediaHub tab in the ESPuino web interface: the two options, the form for adding a media server with display name and address, and below it the list of registered media servers](../assets/MediahubEspuinoTab.png)

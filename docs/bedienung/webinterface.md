@@ -627,6 +627,36 @@ ergänzt und überschreibt nur, löscht nie), oder mit dem roten Button **alle Z
 Sicherheitsabfrage). Wie du diese Funktionen zum Sichern und Übertragen nutzt, steht in
 [Kapitel 10 → Backup & Restore](../inhalte/verwalten.md#backup-restore-deine-kartenzuordnungen-sichern).
 
+### Was die Liste zeigt { #zuweisungsliste }
+
+![Die Liste aller gespeicherten RFID-Zuweisungen: je Eintrag die Karten-ID, der Abspielmodus mit Symbol und der Pfad; bei MediaHub-Karten stattdessen der Mediaserver und der Stand der lokalen Kopie; die aktuell im Tab RFID eingetragene Karte ist blau hervorgehoben](../assets/WebinterfaceZuweisungsliste.png)
+
+Jeder Eintrag beginnt mit der zwölfstelligen Karten-ID. Darunter steht, was die Karte auslöst –
+entweder der Abspielmodus mit seinem Symbol oder, bei einer Modifikationskarte, deren Funktion. In
+der Zeile darunter folgt die zugeordnete Datei, der Ordner oder die URL. Rechts löschst du über das
+Mülleimer-Symbol diesen einen Eintrag.
+
+Ein Eintrag ist **blau hervorgehoben**: die Karte, deren Nummer gerade im Tab RFID im Feld
+„RFID-Chip-Nummer" steht. Legst du bei geöffnetem Webinterface eine Karte auf den Leser, trägt
+ESPuino ihre Nummer dort automatisch ein – in der Liste erkennst du damit auf einen Blick, ob diese
+Karte schon bekannt ist und was ihr zugeordnet ist.
+
+Bei einer Karte im Abspielmodus **MediaHub** steht anstelle des Pfades der Mediaserver, und zwar mit
+seinem Anzeigenamen, sofern er im [Tab MediaHub](#tab-mediahub) noch registriert ist, andernfalls mit
+seiner Adresse. Die graue Zeile darunter fasst zusammen, was dieses Gerät über die Karte weiß: den
+Namen aus dem Manifest, ob es sich um ein Webradio handelt oder welcher Abspielmodus tatsächlich
+gilt, und wie aktuell die lokale Kopie ist:
+
+| Anzeige | Bedeutung |
+| --- | --- |
+| **synchronisiert** | Die lokale Kopie entspricht dem, was der MediaHub zuletzt geliefert hat. |
+| **Aktualisierung ausstehend** | Der ESPuino hat beim letzten Auflegen bemerkt, dass am MediaHub eine neuere Fassung bereitliegt. Das nächste Auflegen lädt sie herunter, das darauffolgende spielt sie ab. |
+| **noch nicht von diesem Gerät abgespielt** | Die Karte verweist auf einen Mediaserver, wurde auf diesem ESPuino aber noch nie aufgelegt – lokal liegt also noch nichts vor. |
+
+Für diese Anzeige fragt der ESPuino nicht beim MediaHub nach – alle Angaben stammen aus dem lokalen
+Zwischenspeicher. Die Liste bleibt deshalb auch dann aussagekräftig, wenn der Server gerade nicht
+erreichbar ist.
+
 ## Tab MediaHub { #tab-mediahub }
 
 ![Der Tab MediaHub im ESPuino-Webinterface: die beiden Optionen, das Formular zum Hinzufügen eines Mediaservers mit Anzeigename und Adresse, und darunter die Liste der registrierten Mediaserver](../assets/MediahubEspuinoTab.png)
