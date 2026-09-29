@@ -134,19 +134,20 @@ RST, BUSY, and IRQ are left unconnected (they do nothing there). Source:
 The ESPuino board has a **five-pin, reverse-polarity-safe JST-PH connector** for the rotary
 encoder. How the encoder gets connected to it depends on what you choose:
 
-- With the **[ESPuino encoder kit](https://forum.espuino.de/t/drehencoder-by-espuino/2414)**,
-  **nothing needs soldering as far as the wiring goes**: it comes with a ready-made cable with
-  **connectors on both ends** – one side goes into the ESPuino board, the other into the encoder's
-  adapter board. Only the kit itself needs soldering, see just below.
 - If you use **any other rotary encoder**, you only get a five-pin **JST-PH connecting cable**: its
   connector goes into the ESPuino board, and you **solder the loose wires at the other end
   yourself** onto your encoder.
 
-!!! warning "Own encoder: don't forget the pull-up resistors"
-    If you use your own rotary encoder, make sure its board has **pull-up resistors** populated.
-    Ready-made encoder modules normally have this, but it's still worth a quick check: if they're
-    missing, you get **"ghost touches"** – ESPuino registers rotation that never actually happened.
-    The ESPuino encoder kit already has them on board, so you don't need to worry about it there.
+    !!! warning "Own encoder: don't forget the pull-up resistors"
+        If you use your own rotary encoder, make sure its board has **pull-up resistors** populated.
+        Ready-made encoder modules normally have this, but it's still worth a quick check: if they're
+        missing, you get **"ghost touches"** – ESPuino registers rotation that never actually happened.
+        The ESPuino encoder kit already has them on board, so you don't need to worry about it there.
+
+- With the **[ESPuino encoder kit](https://forum.espuino.de/t/drehencoder-by-espuino/2414)**,
+  **nothing needs soldering as far as the wiring goes**: it comes with a ready-made cable with
+  **connectors on both ends** – one side goes into the ESPuino board, the other into the encoder's
+  adapter board. Only the kit itself needs soldering, see just below.
 
 The kit consists of:
 
@@ -155,6 +156,8 @@ The kit consists of:
 - a five-pin **JST-PH socket**, and
 - the matching **connecting cable**.
 
+![The contents of the encoder kit side by side: the JST socket, the adapter board, the rotary encoder with its nut in a bag, and the ready-made connecting cable with plugs at both ends](../assets/EncoderBausatzTeile.jpeg)
+
 You do need to solder it together yourself, though: the rotary encoder and the JST socket go onto
 the adapter board – on **opposite sides**.
 
@@ -162,9 +165,27 @@ the adapter board – on **opposite sides**.
     The **rotary encoder** is inserted from the side that has the **rectangle printed on it**; the
     **JST socket** goes on the **other side**. To check: the printed marking (the rectangle or
     number) must end up **covered** by the respective component. Solder it the wrong way around,
-    and it won't fit together cleanly, and the encoder won't work. The exact pictures for this are
-    in the [encoder thread (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/2414)
-    (German).
+    and it won't fit together cleanly, and the encoder won't work.
+
+Which side is which is told by the printing on the bare board. One side has a **rectangle with a
+number** marking the spot for the rotary encoder, the other has the **outline of the JST socket**
+printed on it:
+
+![The bare adapter board from both sides: on the left the rectangle with the number where the rotary encoder goes, next to it the pinout 1: GND through 5: DT; on the right the printed outline of the JST socket and the note rev 1.0](../assets/EncoderPlatineBeideSeiten.jpeg)
+
+Soldered up, it looks like this – the encoder side on the left, the socket side on the right. In
+both cases the printing ends up covered by the component:
+
+<div class="grid" markdown>
+
+![The encoder side: the body of the rotary encoder sits over the rectangle and covers it; the five contacts for the socket next to it are still bare and numbered 5 through 1](../assets/EncoderMitDrehencoder.jpeg)
+
+![The opposite side with the JST socket soldered over its outline; above it the three pull-up resistors already populated at SW, CLK and DT](../assets/EncoderMitJstBuchse.jpeg)
+
+</div>
+
+There are more pictures in the
+[encoder thread (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/2414) (German).
 
 If it later turns out that "louder" and "quieter" are swapped, that's no reason to re-solder
 anything: the rotation direction can be reversed in the web interface

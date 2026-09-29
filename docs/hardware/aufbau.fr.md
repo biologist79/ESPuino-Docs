@@ -140,21 +140,22 @@ allemand).
 La carte ESPuino dispose d'un **connecteur JST-PH cinq broches, protégé contre l'inversion de
 polarité**, pour la molette rotative. La façon dont l'encodeur s'y raccorde dépend de ton choix :
 
+- Si tu prends **un autre encodeur rotatif quelconque**, tu ne reçois qu'un **câble de connexion
+  JST-PH** cinq broches : son connecteur se branche sur la carte ESPuino, et tu **soudes toi-même
+  les fils nus à l'autre extrémité** sur ton encodeur.
+
+    !!! warning "Encodeur personnel : ne pas oublier les résistances de tirage (pull-up)"
+        Si tu utilises ton propre encodeur rotatif, vérifie que sa carte comporte bien des
+        **résistances de tirage (pull-up)**. C'est normalement le cas sur les modules d'encodeur tout
+        faits, mais un petit contrôle reste utile : si elles manquent, des **« faux contacts »**
+        apparaissent, ESPuino enregistrant alors des rotations qui n'ont jamais eu lieu. Sur le kit
+        d'encodeur ESPuino, elles sont déjà présentes, tu n'as donc pas à t'en soucier dans ce cas.
+
 - Avec le **[kit d'encodeur ESPuino](https://forum.espuino.de/t/drehencoder-by-espuino/2414)**,
   **rien n'est à souder côté câblage** : il est livré avec un câble tout fait, muni de
   **connecteurs aux deux extrémités** – un côté se branche sur la carte ESPuino, l'autre sur la
   carte adaptatrice de l'encodeur. Seul le kit lui-même nécessite de la soudure, voir juste en
   dessous.
-- Si tu prends **un autre encodeur rotatif quelconque**, tu ne reçois qu'un **câble de connexion
-  JST-PH** cinq broches : son connecteur se branche sur la carte ESPuino, et tu **soudes toi-même
-  les fils nus à l'autre extrémité** sur ton encodeur.
-
-!!! warning "Encodeur personnel : ne pas oublier les résistances de tirage (pull-up)"
-    Si tu utilises ton propre encodeur rotatif, vérifie que sa carte comporte bien des
-    **résistances de tirage (pull-up)**. C'est normalement le cas sur les modules d'encodeur tout
-    faits, mais un petit contrôle reste utile : si elles manquent, des **« faux contacts »**
-    apparaissent, ESPuino enregistrant alors des rotations qui n'ont jamais eu lieu. Sur le kit
-    d'encodeur ESPuino, elles sont déjà présentes, tu n'as donc pas à t'en soucier dans ce cas.
 
 Le kit se compose :
 
@@ -163,6 +164,8 @@ Le kit se compose :
 - d'une **prise JST-PH** cinq broches, et
 - du **câble de connexion** correspondant.
 
+![Le contenu du kit encodeur côte à côte : la prise JST, la carte adaptatrice, la molette rotative avec son écrou dans un sachet et le câble de connexion tout fait, avec une fiche à chaque extrémité](../assets/EncoderBausatzTeile.jpeg)
+
 Tu dois cependant l'assembler toi-même par soudure : la molette rotative et la prise JST se
 placent sur la carte adaptatrice, chacune sur un **côté opposé**.
 
@@ -170,9 +173,28 @@ placent sur la carte adaptatrice, chacune sur un **côté opposé**.
     La **molette rotative** s'insère du côté où le **rectangle est imprimé** ; la **prise JST**
     se place sur **l'autre côté**. Pour vérifier : le marquage imprimé (le rectangle ou le numéro)
     doit finir **recouvert** par le composant correspondant. Si tu soudes à l'envers, l'assemblage
-    ne s'ajustera pas correctement et l'encodeur ne fonctionnera pas. Les illustrations précises se
-    trouvent dans le [fil de discussion sur l'encodeur (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/2414)
-    (en allemand).
+    ne s'ajustera pas correctement et l'encodeur ne fonctionnera pas.
+
+C'est le marquage de la carte nue qui indique quel côté est lequel. D'un côté, un **rectangle avec
+un numéro** entoure l'emplacement de la molette rotative ; de l'autre est imprimé le **contour de
+la prise JST** :
+
+![La carte adaptatrice nue vue des deux côtés : à gauche le rectangle avec le numéro, là où vient la molette rotative, et à côté le brochage 1: GND à 5: DT ; à droite le contour imprimé de la prise JST et la mention rev 1.0](../assets/EncoderPlatineBeideSeiten.jpeg)
+
+Une fois soudé, cela donne ceci – à gauche le côté molette, à droite le côté prise. Dans les deux
+cas, le marquage finit recouvert par le composant :
+
+<div class="grid" markdown>
+
+![Le côté molette : le boîtier de la molette rotative se place sur le rectangle et le recouvre ; à côté, les cinq contacts destinés à la prise sont encore libres et numérotés de 5 à 1](../assets/EncoderMitDrehencoder.jpeg)
+
+![Le côté opposé, avec la prise JST soudée sur son contour ; au-dessus, les trois résistances pull-up déjà présentes sur SW, CLK et DT](../assets/EncoderMitJstBuchse.jpeg)
+
+</div>
+
+D'autres photos se trouvent dans le
+[fil de discussion sur l'encodeur (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/2414)
+(en allemand).
 
 S'il s'avère plus tard que « plus fort » et « moins fort » sont inversés, ce n'est pas une raison
 pour ressouder : le sens de rotation peut être inversé dans l'interface web

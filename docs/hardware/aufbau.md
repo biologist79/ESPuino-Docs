@@ -132,20 +132,21 @@ nötig; RST, BUSY und IRQ lässt man weg (sie bewirken dort nichts). Quelle:
 Für den Drehencoder sitzt auf der ESPuino-Platine ein **fünfpoliger, verpolsicherer JST-PH-Anschluss**.
 Wie der Encoder dort hineinkommt, hängt davon ab, wofür du dich entscheidest:
 
-- Mit dem **[ESPuino-Encoder-Bausatz](https://forum.espuino.de/t/drehencoder-by-espuino/2414)** wird
-  **nichts gelötet, was die Verkabelung angeht**: Ihm liegt eine fertig konfektionierte Leitung mit
-  **Steckern an beiden Enden** bei – eine Seite in die ESPuino-Platine, die andere in die
-  Adapterplatine des Encoders. Gelötet wird nur der Bausatz selbst, siehe gleich unten.
 - Nimmst du einen **beliebigen anderen Drehencoder**, bekommst du lediglich eine fünfpolige
   **JST-PH-Anschlussleitung**: Deren Stecker kommt in die ESPuino-Platine, die **losen Drähte am
   anderen Ende lötest du selbst** an deinen Encoder an.
 
-!!! warning "Eigener Encoder: Pull-up-Widerstände nicht vergessen"
-    Setzt du einen eigenen Drehencoder ein, achte darauf, dass auf dessen Platine
-    **Pull-up-Widerstände** bestückt sind. Bei fertigen Encoder-Modulen ist das normalerweise der Fall –
-    ein kurzer Blick lohnt sich trotzdem: Fehlen sie, kommt es zu **„Ghost-Touches"**, ESPuino
-    registriert dann Drehbewegungen, die gar nicht stattgefunden haben. Beim ESPuino-Encoder-Bausatz
-    sind sie bereits an Bord, dort musst du dich darum nicht kümmern.
+    !!! warning "Eigener Encoder: Pull-up-Widerstände nicht vergessen"
+        Setzt du einen eigenen Drehencoder ein, achte darauf, dass auf dessen Platine
+        **Pull-up-Widerstände** bestückt sind. Bei fertigen Encoder-Modulen ist das normalerweise der Fall –
+        ein kurzer Blick lohnt sich trotzdem: Fehlen sie, kommt es zu **„Ghost-Touches"**, ESPuino
+        registriert dann Drehbewegungen, die gar nicht stattgefunden haben. Beim ESPuino-Encoder-Bausatz
+        sind sie bereits an Bord, dort musst du dich darum nicht kümmern.
+
+- Mit dem **[ESPuino-Encoder-Bausatz](https://forum.espuino.de/t/drehencoder-by-espuino/2414)** wird
+  **nichts gelötet, was die Verkabelung angeht**: Ihm liegt eine fertig konfektionierte Leitung mit
+  **Steckern an beiden Enden** bei – eine Seite in die ESPuino-Platine, die andere in die
+  Adapterplatine des Encoders. Gelötet wird nur der Bausatz selbst, siehe gleich unten.
 
 Der Bausatz besteht aus:
 
@@ -154,6 +155,8 @@ Der Bausatz besteht aus:
 - einer fünfpoligen **JST-PH-Buchse** und
 - der passenden **Anschlussleitung**.
 
+![Der Inhalt des Encoder-Bausatzes nebeneinander: die JST-Buchse, die Adapterplatine, der Drehencoder samt Mutter im Tütchen und die fertig konfektionierte Anschlussleitung mit Steckern an beiden Enden](../assets/EncoderBausatzTeile.jpeg)
+
 Zusammenlöten musst du ihn allerdings selbst: Drehencoder und JST-Buchse kommen auf die
 Adapterplatine – und zwar auf **entgegengesetzte Seiten**.
 
@@ -161,8 +164,27 @@ Adapterplatine – und zwar auf **entgegengesetzte Seiten**.
     Der **Drehencoder** wird von der Seite eingesetzt, auf der das **Rechteck aufgedruckt** ist; die
     **JST-Buchse** kommt auf die **andere Seite**. Zur Kontrolle: Der Aufdruck (Rechteck bzw. Nummer)
     muss am Ende vom jeweiligen Bauteil **verdeckt** sein. Lötest du verkehrt herum, passt es nicht
-    sauber zusammen und der Encoder funktioniert nicht. Die genaue Bebilderung dazu steht im
-    [Encoder-Thread (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/2414).
+    sauber zusammen und der Encoder funktioniert nicht.
+
+Welche Seite welche ist, verrät der Aufdruck der unbestückten Platine. Auf der einen Seite umrandet
+ein **Rechteck mit Nummer** den Platz des Drehencoders, auf der anderen ist der **Umriss der
+JST-Buchse** aufgedruckt:
+
+![Die unbestückte Adapterplatine von beiden Seiten: links das Rechteck mit der Nummer, wo der Drehencoder hinkommt, daneben die Belegung 1: GND bis 5: DT; rechts der aufgedruckte Umriss der JST-Buchse und der Vermerk rev 1.0](../assets/EncoderPlatineBeideSeiten.jpeg)
+
+Fertig gelötet sieht es so aus – links die Encoder-Seite, rechts die Buchsen-Seite. Der Aufdruck ist
+jeweils vom Bauteil verdeckt:
+
+<div class="grid" markdown>
+
+![Die Encoder-Seite: das Gehäuse des Drehencoders sitzt über dem Rechteck und verdeckt es; die fünf Kontakte für die Buchse daneben sind noch frei und von 5 bis 1 durchnummeriert](../assets/EncoderMitDrehencoder.jpeg)
+
+![Die Gegenseite mit aufgelöteter JST-Buchse über ihrem Umriss; darüber die drei bereits bestückten Pull-up-Widerstände an SW, CLK und DT](../assets/EncoderMitJstBuchse.jpeg)
+
+</div>
+
+Noch mehr Bilder dazu stehen im
+[Encoder-Thread (#2414)](https://forum.espuino.de/t/drehencoder-by-espuino/2414).
 
 Falls sich später herausstellt, dass „lauter" und „leiser" vertauscht sind, ist das kein Grund zum
 Umlöten: Die Drehrichtung lässt sich im Webinterface umkehren
