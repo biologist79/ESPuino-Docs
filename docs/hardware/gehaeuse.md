@@ -30,7 +30,7 @@ hinein; andere **bauen ihr Gehäuse komplett aus Holz**. Ein schönes Beispiel i
 **[BioBox v2 (#1654)](https://forum.espuino.de/t/biobox-v2/1654)** – der hölzerne Vorgänger der
 heutigen BioBox 3D.
 
-## Woran du beim Gehäuse denken solltest
+## Woran du beim Gehäuse denken solltest { #gehaeuse-hinweise }
 
 Egal ob BioBox oder Eigenentwurf – ein paar Aussparungen, Zugänge und freie Flächen sollte jedes
 Gehäuse vorsehen:

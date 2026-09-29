@@ -89,6 +89,20 @@ Anzuschließen sind:
 
 ![Die Kopfhörerplatine mit der mitgelieferten, fertig konfektionierten Anschlussleitung – genau so wird sie geliefert](../assets/KopfhoererplatineKabel.jpeg)
 
+Die Kopfhörerplatine lässt sich im Gehäuse auch direkt festschrauben – das funktioniert, ist aber
+keine schöne Lösung. Angenehmer ist ein **3D-druckbarer Träger**, auf dem die Platine sitzt:
+[Träger für die Kopfhörerplatine (#3792)](https://forum.espuino.de/t/traeger-fuer-kopfhoererplatine/3792).
+Worauf du beim Einbau sonst noch achten solltest, steht in
+[Kapitel 6 → Woran du beim Gehäuse denken solltest](gehaeuse.md#gehaeuse-hinweise).
+
+<div class="grid" markdown>
+
+![Alle Teile nebeneinander: die 3D-gedruckte Trägerplatte, die Kopfhörerplatine, zwei Messingeinsätze und die Abstandshalter](../assets/KopfhoererplatineTraegerTeile.jpeg)
+
+![Dieselben Teile montiert: die Kopfhörerplatine sitzt auf den Abstandshaltern über der Trägerplatte, die Klinkenbuchse zeigt nach vorn](../assets/KopfhoererplatineTraeger.jpeg)
+
+</div>
+
 ### RFID-Steckerbelegung { #rfid-steckerbelegung }
 
 Der RFID-Anschluss der [Complete](complete.md) ist ein **10-poliger Stecker**. Die Belegung orientiert

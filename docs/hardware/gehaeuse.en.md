@@ -32,7 +32,7 @@ others **build their enclosure entirely out of wood**. A nice example is the
 **[BioBox v2 (#1654)](https://forum.espuino.de/t/biobox-v2/1654)** (German-language forum) – the
 wooden predecessor of today's BioBox 3D.
 
-## What to keep in mind for the enclosure
+## What to keep in mind for the enclosure { #gehaeuse-hinweise }
 
 Whether BioBox or your own design – every enclosure should provide a few cutouts, access points,
 and open surfaces:

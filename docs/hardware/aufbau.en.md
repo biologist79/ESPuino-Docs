@@ -91,6 +91,20 @@ wire color. What needs connecting:
 
 ![The headphone board with the ready-made connecting cable it ships with – exactly how it's delivered](../assets/KopfhoererplatineKabel.jpeg)
 
+You can also screw the headphone board straight onto the case – that works, but it isn't a pretty
+solution. A **3D-printable holder** for the board to sit on is the nicer way:
+[holder for the headphone board (#3792)](https://forum.espuino.de/t/traeger-fuer-kopfhoererplatine/3792).
+What else to keep in mind when fitting it is covered in
+[chapter 6 → What to keep in mind for the enclosure](gehaeuse.md#gehaeuse-hinweise).
+
+<div class="grid" markdown>
+
+![All the parts side by side: the 3D-printed base plate, the headphone board, two brass inserts and the spacers](../assets/KopfhoererplatineTraegerTeile.jpeg)
+
+![The same parts assembled: the headphone board sits on the spacers above the base plate, jack socket facing forward](../assets/KopfhoererplatineTraeger.jpeg)
+
+</div>
+
 ### RFID connector pinout { #rfid-steckerbelegung }
 
 The [Complete](complete.md)'s RFID connector is a **10-pin connector**. The pinout is based on the

@@ -34,7 +34,7 @@ pratiquent eux-mêmes les découpes nécessaires ; d'autres **construisent leur 
 bois**. La **[BioBox v2 (#1654)](https://forum.espuino.de/t/biobox-v2/1654)** (forum en allemand) en
 est un bel exemple – la prédécesseure en bois de l'actuelle BioBox 3D.
 
-## Ce à quoi penser pour le boîtier
+## Ce à quoi penser pour le boîtier { #gehaeuse-hinweise }
 
 Qu'il s'agisse de la BioBox ou d'une création personnelle – chaque boîtier devrait prévoir quelques
 découpes, accès et surfaces libres :

@@ -95,6 +95,21 @@ JST-PH (2 mm), et – comme indiqué dans l'avertissement ci-dessus – tu te ba
 
 ![La carte casque avec le câble de connexion tout fait fourni avec elle – exactement comme elle est livrée](../assets/KopfhoererplatineKabel.jpeg)
 
+La carte casque peut aussi se visser directement sur le boîtier – cela fonctionne, mais ce n'est pas
+une belle solution. Un **support imprimable en 3D**, sur lequel la carte prend place, est plus
+élégant :
+[support pour la carte casque (#3792)](https://forum.espuino.de/t/traeger-fuer-kopfhoererplatine/3792).
+Ce à quoi il faut penser d'autre lors du montage est décrit au
+[chapitre 6 → Ce à quoi penser pour le boîtier](gehaeuse.md#gehaeuse-hinweise).
+
+<div class="grid" markdown>
+
+![Toutes les pièces côte à côte : la plaque imprimée en 3D, la carte casque, deux inserts en laiton et les entretoises](../assets/KopfhoererplatineTraegerTeile.jpeg)
+
+![Les mêmes pièces montées : la carte casque repose sur les entretoises au-dessus de la plaque, prise jack vers l'avant](../assets/KopfhoererplatineTraeger.jpeg)
+
+</div>
+
 ### Brochage du connecteur RFID { #rfid-steckerbelegung }
 
 Le connecteur RFID de la [Complete](complete.md) est un **connecteur 10 broches**. Le brochage
