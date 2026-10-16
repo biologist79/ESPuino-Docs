@@ -140,8 +140,8 @@ dans ton navigateur à l'adresse `http://<ton-ip>:8080`.
 
 La section ci-dessus suppose que Docker tourne déjà sur ton serveur et que la ligne de commande te
 soit familière. Si ce n'est pas le cas, cette section te prend en charge bien plus tôt. Elle va d'un
-Raspberry Pi tout neuf et encore vide jusqu'à un MediaHub en service, en expliquant au passage les
-notions qui comptent – et si tu as un NAS Synology ou QNAP, ou si Docker tourne déjà ailleurs chez
+**Raspberry Pi** tout neuf et encore vide jusqu'à un MediaHub en service, en expliquant au passage les
+notions qui comptent – et si tu as un NAS **Synology** ou **QNAP**, ou si **Docker** tourne déjà ailleurs chez
 toi, la section suivante te dit quelles étapes tu peux t'épargner. Aucune connaissance préalable de
 Linux n'est nécessaire ; ce n'est pas non plus un cours complet sur Linux. Ce qui est expliqué, c'est
 ce que tu dois comprendre pour cet usage précis.
@@ -157,16 +157,16 @@ sous-employé. Le service se résume à un seul conteneur qui, la plupart du tem
 tout – il ne se réveille que lorsqu'un ESPuino signale une carte ou que tu modifies quelque chose
 dans le navigateur.
 
-C'est exactement à cela que sert Docker : une même machine peut faire tourner autant de conteneurs
-côte à côte que la mémoire et la puissance de calcul le permettent – chacun avec ses propres
-dépendances et sans se disputer avec les autres. Un
-[Pi-hole](https://pi-hole.net/){ target="_blank" rel="noopener" },
-[Home Assistant](https://www.home-assistant.io/){ target="_blank" rel="noopener" }, un
-[Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx){ target="_blank" rel="noopener" },
-une station météo, et MediaHub avec eux. La mémoire est la limite que tu atteindras en premier – sur
-un Pi doté d'1 Go, c'est plus vite fini que sur un modèle à 8 Go. MediaHub lui-même fait partie des
-colocataires sobres : un processus Python à deux ouvriers, qui ne calcule rien en arrière-plan. Et
-chaque service a besoin de son propre port (pour MediaHub, via `MEDIAHUB_PORT` dans le `.env`).
+Une même machine peut faire tourner autant de conteneurs côte à côte que la mémoire et la puissance
+de calcul le permettent – chacun avec ses propres dépendances et sans se disputer avec les autres.
+Un [Pi-hole](https://pi-hole.net/){ target="_blank" rel="noopener" }, [Home
+Assistant](https://www.home-assistant.io/){ target="_blank" rel="noopener" }, un
+[Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx){ target="_blank" rel="noopener" }, une
+station météo – pour ne citer que quelques exemples –, et MediaHub avec eux. La mémoire est la
+limite que tu atteindras en premier : sur un Pi doté d'1 Go, c'est plus vite fini que sur un modèle
+à 8 Go. La deuxième règle du jeu, c'est le port – chaque service a besoin du sien, et pour MediaHub
+tu le règles avec `MEDIAHUB_PORT` dans le `.env`. MediaHub lui-même est le moindre de tes soucis à
+ce sujet : un processus Python à deux ouvriers, qui ne calcule rien en arrière-plan.
 
 À l'inverse, cela signifie : **si Docker tourne déjà quelque part chez toi** – sur un Pi, sur un
 petit serveur, dans une machine virtuelle –, tu n'as besoin que des étapes 5 à 7 de ce guide.
@@ -188,13 +188,16 @@ Quatre remarques à ce sujet :
   L'interface du NAS suffit alors : tu y crées un « projet », tu y colles le `docker-compose.yml` du
   projet et tu le démarres. L'image est récupérée automatiquement au premier démarrage.
 - Les réglages de ton `.env` (nous y venons) peuvent en général être saisis directement comme
-  variables d'environnement dans ces interfaces, au lieu d'entretenir un fichier. Les deux se
-  valent.
+  variables d'environnement dans ces interfaces, au lieu d'entretenir un fichier – ce sont les
+  mêmes valeurs qui arrivent dans le conteneur.
 - La question des droits de fichiers de l'étape 6 ne t'est pas épargnée sur un NAS non plus. Là-bas,
   c'est l'identifiant d'utilisateur et de groupe du partage qui décide de ce que le conteneur a le
   droit de lire.
 - Si l'interface du NAS ne s'accommode pas du fichier Compose, passe par SSH : Docker sur un NAS,
-  c'est le même Docker, et les commandes des étapes 5 à 7 s'appliquent sans changement.
+  c'est le même Docker, et les commandes des étapes 5 à 7 s'appliquent donc sans changement. Les
+  **chemins** qu'elles contiennent, en revanche, non – sur un Synology, les partages se trouvent
+  généralement sous `/volume1/…`, sur un QNAP sous `/share/…`. Un `ls /volume1` ou `ls /share` te
+  montre comment les tiens s'appellent.
 
 ### Ce qu'il te faut
 
@@ -226,9 +229,12 @@ automatiquement chez GitHub, après chaque modification du projet. Le résultat 
 **registre** – un entrepôt d'images, ici celui de GitHub lui-même. Il ne te reste qu'à le
 télécharger.
 
-Quand tu démarres une image, il en naît un **conteneur** – en gros un petit ordinateur cloisonné qui
-contient exactement ce seul programme et rien d'autre. Contrairement à une machine virtuelle, il
-n'embarque toutefois pas son propre système d'exploitation : il utilise le noyau du Pi. C'est
+Quand tu démarres une image, il en naît un **conteneur** – en gros un petit ordinateur cloisonné
+dans lequel tourne ce seul programme, et avec lui tout ce qu'il lui faut pour cela : précisément les
+briques évoquées plus haut, donc Python, Flask, le serveur web et les bibliothèques, plus un système
+Debian de base réduit. Ce qu'il ne contient pas, c'est tout le reste – pas de bureau, pas d'autres
+services. Contrairement à une machine virtuelle, le conteneur n'embarque toutefois pas son propre
+noyau : il utilise celui du Pi. C'est
 pourquoi il consomme très peu de ressources et démarre en quelques secondes.
 
 Pour toi, trois points comptent là-dedans :
@@ -688,9 +694,27 @@ S'il tourne, c'est ceci qui te le dit :
 docker compose ps
 ```
 
-Si un état comme `Up` ou `running` y figure, ouvre MediaHub dans le navigateur – à l'adresse
-`http://mediahub.local:8080` ou à l'adresse IP du Pi avec le port de ton `.env`. La suite dans
-l'interface web de MediaHub est décrite dans la section
+Si tout est en ordre, la sortie ressemble à ceci :
+
+```text
+NAME               IMAGE                                         COMMAND                  SERVICE    CREATED          STATUS          PORTS
+espuino-mediahub   ghcr.io/biologist79/espuino-mediahub:latest   "/entrypoint.sh guni…"   mediahub   19 minutes ago   Up 19 minutes   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+```
+
+La colonne décisive est **STATUS** : un `Up …` signifie que le conteneur tourne. S'il y est écrit
+`Exited` ou `Restarting`, quelque chose s'est mal passé, et `docker compose logs` t'en dira plus.
+Deux autres colonnes méritent un regard. **IMAGE** montre quelle version tourne réellement – ici
+`:latest` ; avec un tag figé, ce serait le `sha-…`. Et **PORTS** se lit de gauche à droite :
+`0.0.0.0:8080->8080/tcp` signifie que le port 8080 du Pi mène au port 8080 dans le conteneur. Que le
+même nombre apparaisse deux fois n'est que le cas par défaut : à l'intérieur, le port est toujours
+8080, et à l'extérieur c'est celui de `MEDIAHUB_PORT`. Si tu y inscris 8090, par exemple, la colonne
+se lit `0.0.0.0:8090->8080/tcp`. C'est donc la même idée que pour `/media` et `/data` : ton choix à
+l'extérieur, une valeur fixe à l'intérieur. La seconde indication, avec `[::]`, est la même chose
+pour l'IPv6.
+
+Ouvre maintenant MediaHub dans le navigateur, avec le port de **gauche** de cette ligne – ici
+`http://mediahub.local:8080`, ou à l'adresse IP du Pi avec le port de ton `.env`. La suite
+dans l'interface web de MediaHub est décrite dans la section
 [L'interface web de MediaHub](#das-mediahub-webinterface).
 
 Du redémarrage automatique après une coupure de courant, tu n'as d'ailleurs pas à te soucier : le
