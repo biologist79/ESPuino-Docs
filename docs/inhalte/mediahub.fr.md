@@ -560,6 +560,113 @@ sinon faire tourner le conteneur sous l'identifiant à qui ta collection apparti
 `id -u` et `id -g` affichent le tien, que tu indiques alors comme `MEDIAHUB_UID` et `MEDIAHUB_GID`
 dans le `.env`. Les deux se valent ; prends le chemin qui te demande le moins de travail.
 
+**Et comment le dossier arrive-t-il maintenant dans le conteneur ?** C'est le rôle de la ligne
+`MEDIAHUB_MEDIA` de ton `.env`. Elle indique le chemin **sur le Pi** – d'après l'exemple ci-dessus,
+donc `/mnt/mediatheque`. Docker passe ce dossier dans le conteneur au démarrage, et il y aboutit
+toujours au même endroit : sous `/media`, et en lecture seule. À l'intérieur du conteneur, ta
+collection s'appelle donc `/media`, peu importe où elle se trouve sur le Pi. C'est la seconde moitié
+de l'idée de volume vue plus haut – ton chemin à l'extérieur, un chemin fixe à l'intérieur.
+
+Il en va de même pour le dossier de données : `MEDIAHUB_DATA` indique l'endroit sur le Pi, dans le
+conteneur c'est toujours `/data`. Deux conséquences pour le quotidien :
+
+- Les chemins que tu verras plus tard dans l'interface web de MediaHub sont **relatifs à cette
+  racine**. Si tu déplaces un jour ta collection ailleurs, tu ne changes que `MEDIAHUB_MEDIA` et les
+  cartes déjà attribuées continuent de fonctionner – la base de données ne contient aucun chemin
+  absolu.
+- Après une modification du `.env`, un `docker compose restart` ne suffit **pas**. Un volume modifié
+  n'est repris que lorsque le conteneur est recréé. `docker compose up -d` détecte la configuration
+  modifiée et le remplace – ton dossier `data` reste intact au passage.
+
+**Et si les fichiers se trouvent à plusieurs endroits ?** C'est le cas normal dès qu'un deuxième
+disque arrive, ou qu'une partie de la collection est sur le NAS et une autre sur le Pi. Mais MediaHub
+ne connaît qu'**une seule** racine. La solution n'est donc pas d'en déclarer une deuxième, mais de
+faire de toutes les sources des sous-dossiers de la même racine.
+
+Pour cela, tu crées un dossier parent et tu y montes les sources. Tous les chemins et noms des
+exemples qui suivent sont libres – `/srv/mediahub` avec `usb`, `nas` et `livres-audio` en dessous
+n'est qu'une possibilité ; la seule chose qui compte, c'est que toutes les sources se retrouvent sous
+**un** même dossier – dans l'exemple qui suit, donc sous `/srv/mediahub` :
+
+```bash
+sudo mkdir -p /srv/mediahub/usb /srv/mediahub/nas /srv/mediahub/livres-audio
+```
+
+Cet unique appel crée trois dossiers d'un coup – et, grâce à `-p`, le dossier parent
+`/srv/mediahub` par-dessus le marché, s'il n'existe pas encore. Trois n'a rien de magique : tu
+écris simplement autant de chemins à la suite que tu as de sources – deux, dix, ou autant qu'il en
+faudra.
+
+Dans le `fstab`, les entrées pointent alors sur ces sous-dossiers – le support USB sur
+`/srv/mediahub/usb`, le partage réseau sur `/srv/mediahub/nas`. Et pour un dossier qui se trouve déjà
+quelque part sur le disque système et n'est pas un support à part, il y a la ligne « **bind** ».
+Elle agit comme une seconde porte vers la même pièce : le dossier reste là où il est, mais devient
+en plus accessible sous le nouveau chemin. Les deux chemins mènent alors aux mêmes fichiers – rien
+n'est copié, il n'existe pas de seconde version, et ce que tu modifies à un endroit est déjà modifié
+à l'autre, puisqu'il s'agit du même dossier :
+
+```
+/home/utilisateur/livres-audio  /srv/mediahub/livres-audio  none  bind,ro  0  0
+```
+
+À gauche se trouve le dossier qui existe déjà, à droite l'endroit où il doit apparaître en plus. Le
+`ro` signifie que cette seconde porte est en lecture seule – le chemin d'origine n'en est pas
+affecté, et lire est de toute façon tout ce dont MediaHub a besoin.
+
+Ensuite, le `.env` n'a plus besoin que de `MEDIAHUB_MEDIA=/srv/mediahub`, et l'interface web affiche
+`usb`, `nas` et `livres-audio` comme trois dossiers d'une seule médiathèque.
+
+Pour que cela ne reste pas abstrait, voici l'ensemble en image. Voilà à quoi ressemble
+l'arborescence **sur le Pi** si tu as suivi l'exemple :
+
+```text
+/
+├── etc/
+│   └── fstab                     c'est ici que figurent les entrées de montage
+├── home/
+│   └── utilisateur/
+│       ├── ESPuino-Mediahub/     ton dossier de travail
+│       │   ├── docker-compose.yml
+│       │   ├── .env              contenant : MEDIAHUB_MEDIA=/srv/mediahub
+│       │   └── data/             la base de données (db.json)
+│       └── livres-audio/         se trouve simplement sur le disque système
+└── srv/
+    └── mediahub/                 la racine de ta médiathèque
+        ├── usb/                  disque USB, monté via le fstab
+        ├── nas/                  partage réseau, monté via le fstab
+        └── livres-audio/         seconde porte vers ~/livres-audio (bind)
+```
+
+Et voici l'arborescence que **MediaHub voit dans le conteneur** – deux de ces dossiers viennent de
+l'extérieur, le reste se trouve dans l'image :
+
+```text
+/
+├── app/                          le programme, issu de l'image
+├── data/     ◄── ~/ESPuino-Mediahub/data      en écriture
+└── media/    ◄── /srv/mediahub                en lecture seule
+    ├── usb/
+    ├── nas/
+    └── livres-audio/
+```
+
+MediaHub ne sait donc rien de ton Pi – hormis ces deux dossiers. Et à l'intérieur, ils s'appellent
+toujours `/data` et `/media`, quels que soient les chemins à l'extérieur.
+
+!!! warning "Choisir la racine large dès le départ"
+    Les cartes attribuées enregistrent leurs chemins **par rapport à la racine**. Si tu remontes la
+    racine d'un niveau plus tard – par exemple de `/mnt/mediatheque` vers `/srv/mediahub`, parce
+    qu'une deuxième source arrive –, tous les chemins enregistrés changent du même coup et les
+    attributions existantes pointent dans le vide. Si tu prévois d'avoir plus d'une source, crée donc
+    le dossier parent **tout de suite**, même si une seule source y est montée au début. Cela te
+    coûte un dossier maintenant et t'épargne de réattribuer toutes les cartes plus tard.
+
+Ce qui ne fonctionne **pas**, ce sont les liens symboliques qui sortent de la médiathèque. MediaHub
+résout chaque chemin et refuse tout ce qui mène hors de la racine – c'est voulu, car un lien
+permettrait sinon de servir l'intégralité du contenu du conteneur. Un lien vers
+`/home/utilisateur/livres-audio` placé dans `/srv/mediahub` est donc rejeté ; la ligne « bind »
+ci-dessus en est précisément le remplacement qui marche.
+
 ### Étape 7 · Démarrer et vérifier
 
 Voici le grand moment :

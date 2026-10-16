@@ -542,6 +542,113 @@ unter der ID laufen, der deine Sammlung sowieso gehört – `id -u` und `id -g` 
 die du dann als `MEDIAHUB_UID` und `MEDIAHUB_GID` in die `.env` einträgst. Beides ist in Ordnung;
 nimm den Weg, der dir weniger Arbeit macht.
 
+**Und wie kommt der Ordner jetzt in den Container?** Dafür sorgt die Zeile `MEDIAHUB_MEDIA` in
+deiner `.env`. Sie nennt den Pfad **auf dem Pi** – nach dem Beispiel von oben also `/mnt/medien`.
+Docker hängt diesen Ordner beim Start in den Container ein, und dort landet er immer an derselben
+Stelle: unter `/media`, und nur lesbar. Innerhalb des Containers heißt deine Sammlung also `/media`,
+ganz egal, wo sie auf dem Pi liegt. Das ist die zweite Hälfte des Volume-Gedankens von weiter oben –
+außen dein Pfad, innen ein fester.
+
+Dasselbe gilt für den Datenordner: `MEDIAHUB_DATA` nennt die Stelle auf dem Pi, im Container ist es
+immer `/data`. Daraus folgen zwei Dinge für den Alltag:
+
+- Die Pfade, die du später im MediaHub-Webinterface siehst, sind **relativ zu dieser Wurzel**.
+  Verschiebst du deine Sammlung irgendwann an eine andere Stelle, änderst du nur `MEDIAHUB_MEDIA`,
+  und die bereits zugewiesenen Karten funktionieren weiter – in der Datenbank stehen keine absoluten
+  Pfade.
+- Nach einer Änderung an der `.env` reicht **kein** `docker compose restart`. Ein geändertes Volume
+  wird erst übernommen, wenn der Container neu erzeugt wird. `docker compose up -d` erkennt die
+  geänderte Konfiguration und ersetzt ihn – dein `data`-Ordner bleibt dabei unangetastet.
+
+**Und wenn die Dateien an mehreren Stellen liegen?** Das ist der Normalfall, sobald eine zweite
+Festplatte dazukommt oder ein Teil der Sammlung auf dem NAS liegt und ein Teil am Pi. MediaHub kennt
+aber nur **eine** Wurzel. Der Weg ist deshalb nicht, eine zweite anzumelden, sondern alle Quellen zu
+Unterordnern derselben Wurzel zu machen.
+
+Dafür legst du einen Elternordner an und hängst die Quellen dort hinein. Alle Pfade und Namen in
+den folgenden Beispielen sind frei wählbar – `/srv/mediahub` mit `usb`, `nas` und `hoerspiele`
+darunter ist nur eine Möglichkeit; entscheidend ist allein, dass alle Quellen unterhalb **eines**
+Ordners liegen – im nachfolgenden Beispiel also unterhalb von `/srv/mediahub`:
+
+```bash
+sudo mkdir -p /srv/mediahub/usb /srv/mediahub/nas /srv/mediahub/hoerspiele
+```
+
+Dieser eine Aufruf legt gleich drei Ordner an – und dank `-p` den Elternordner `/srv/mediahub`
+obendrein, falls er noch nicht existiert. Drei ist dabei keine magische Zahl: Du schreibst einfach so
+viele Pfade hintereinander, wie du Quellen hast, also zum Beispiel auch zwei, zehn oder wie viele
+auch immer.
+
+In der `fstab` zeigen die Einträge dann auf diese Unterordner – der USB-Datenträger auf
+`/srv/mediahub/usb`, die Netzwerkfreigabe auf `/srv/mediahub/nas`. Und für einen Ordner, der schon
+irgendwo auf der Systemplatte liegt und gar kein eigener Datenträger ist, gibt es die
+**Bind-Zeile**. Sie wirkt wie ein zweiter Eingang zum selben Raum: Der Ordner bleibt da, wo er ist,
+wird aber zusätzlich unter dem neuen Pfad erreichbar. Beide Pfade führen danach zu denselben
+Dateien – es wird nichts kopiert, es gibt keine zweite Fassung, und was du an der einen Stelle
+änderst, ist an der anderen schon geändert, weil es derselbe Ordner ist:
+
+```
+/home/benutzername/hoerspiele  /srv/mediahub/hoerspiele  none  bind,ro  0  0
+```
+
+Links steht der Ordner, den es schon gibt, rechts die Stelle, an der er zusätzlich erscheinen soll.
+Das `ro` heißt, dass über diesen zweiten Eingang nur gelesen werden darf – der ursprüngliche Pfad
+bleibt davon unberührt, und für MediaHub ist Lesen ohnehin alles, was es braucht.
+
+Anschließend steht in der `.env` nur noch `MEDIAHUB_MEDIA=/srv/mediahub`, und im
+Webinterface erscheinen `usb`, `nas` und `hoerspiele` als drei Ordner einer einzigen Bibliothek.
+
+Damit es nicht abstrakt bleibt, hier das Ganze als Bild. So sieht der Verzeichnisbaum **auf dem Pi**
+aus, wenn du dem Beispiel gefolgt bist:
+
+```text
+/
+├── etc/
+│   └── fstab                     hier stehen die Einhänge-Einträge
+├── home/
+│   └── benutzername/
+│       ├── ESPuino-Mediahub/     dein Arbeitsordner
+│       │   ├── docker-compose.yml
+│       │   ├── .env              darin: MEDIAHUB_MEDIA=/srv/mediahub
+│       │   └── data/             die Datenbank (db.json)
+│       └── hoerspiele/           liegt einfach auf der Systemplatte
+└── srv/
+    └── mediahub/                 die Wurzel deiner Bibliothek
+        ├── usb/                  USB-Platte, per fstab eingehängt
+        ├── nas/                  Netzwerkfreigabe, per fstab eingehängt
+        └── hoerspiele/           zweiter Eingang zu ~/hoerspiele (bind)
+```
+
+Und das ist der Baum, den **MediaHub im Container** sieht – zwei Ordner davon kommen von außen
+herein, der Rest steckt im Image:
+
+```text
+/
+├── app/                          das Programm, aus dem Image
+├── data/     ◄── ~/ESPuino-Mediahub/data      beschreibbar
+└── media/    ◄── /srv/mediahub                nur lesbar
+    ├── usb/
+    ├── nas/
+    └── hoerspiele/
+```
+
+Von deinem Pi weiß MediaHub also nichts – außer diesen zwei Ordnern. Und die heißen innen immer
+`/data` und `/media`, ganz gleich, wie die Pfade außen lauten.
+
+!!! warning "Die Wurzel von Anfang an großzügig wählen"
+    Zugewiesene Karten speichern ihre Pfade **relativ zur Wurzel**. Hängst du die Wurzel später eine
+    Ebene höher – etwa von `/mnt/medien` auf `/srv/mediahub`, weil eine zweite Quelle dazukommt –,
+    dann ändern sich dadurch alle gespeicherten Pfade, und die bestehenden Zuweisungen zeigen ins
+    Leere. Wer absehbar mehr als eine Quelle haben wird, legt den Elternordner deshalb **sofort** an,
+    auch wenn zunächst nur eine Quelle darin hängt. Das kostet jetzt einen Ordner und erspart später
+    das Neuzuweisen aller Karten.
+
+Was **nicht** funktioniert, sind Verknüpfungen (Symlinks) aus der Bibliothek heraus. MediaHub löst
+jeden Pfad auf und weist alles ab, was aus der Wurzel hinausführt – das ist Absicht, denn über eine
+Verknüpfung ließe sich sonst der gesamte Container-Inhalt ausliefern. Eine Verknüpfung auf
+`/home/benutzername/hoerspiele` innerhalb von `/srv/mediahub` wird also abgelehnt; die Bind-Zeile
+von oben ist genau ihr funktionierender Ersatz.
+
 ### Schritt 7 · Starten und nachsehen
 
 Jetzt der große Moment:

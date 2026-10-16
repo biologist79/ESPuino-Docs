@@ -534,6 +534,109 @@ every MP3 file into a program. Alternatively you run the container under the ID 
 collection anyway – `id -u` and `id -g` show your own, which you then enter as `MEDIAHUB_UID` and
 `MEDIAHUB_GID` in the `.env`. Both are fine; take whichever means less work for you.
 
+**And how does the folder get into the container now?** That's what the `MEDIAHUB_MEDIA` line in
+your `.env` is for. It names the path **on the Pi** – following the example above, `/mnt/media-library`.
+Docker hands that folder into the container at startup, where it always ends up in the same place:
+at `/media`, and read-only. So inside the container your collection is called `/media` no matter
+where it sits on the Pi. That's the second half of the volume idea from further up – your path on
+the outside, a fixed one on the inside.
+
+The same goes for the data folder: `MEDIAHUB_DATA` names the place on the Pi, inside the container
+it's always `/data`. Two things follow from that for everyday use:
+
+- The paths you later see in the MediaHub web interface are **relative to that root**. If you ever
+  move your collection somewhere else, you only change `MEDIAHUB_MEDIA` and the cards already
+  assigned keep working – there are no absolute paths in the database.
+- After a change to the `.env`, a `docker compose restart` is **not** enough. A changed volume is
+  only picked up when the container is created anew. `docker compose up -d` notices the changed
+  configuration and replaces it – your `data` folder stays untouched in the process.
+
+**And what if the files live in more than one place?** That's the normal case as soon as a second
+hard drive turns up, or part of the collection sits on the NAS and part of it on the Pi. MediaHub,
+however, knows only **one** root. So the way to go isn't to register a second one, but to make all
+the sources subfolders of the same root.
+
+For that you create a parent folder and mount the sources into it. All the paths and names in the
+examples below are yours to choose – `/srv/mediahub` with `usb`, `nas` and `audiobooks` underneath is
+just one possibility; the only thing that matters is that all the sources end up below **one**
+folder – in the example that follows, below `/srv/mediahub`:
+
+```bash
+sudo mkdir -p /srv/mediahub/usb /srv/mediahub/nas /srv/mediahub/audiobooks
+```
+
+That single call creates three folders at once – and thanks to `-p` the parent `/srv/mediahub`
+along with them, in case it doesn't exist yet. Three is no magic number here: you simply list as many
+paths in a row as you have sources – two, ten, or however many it happens to be.
+
+In the `fstab`, the entries then point at those subfolders – the USB medium at `/srv/mediahub/usb`,
+the network share at `/srv/mediahub/nas`. And for a folder that already sits somewhere on the system
+disk and isn't a medium of its own at all, there's the **bind line**. It acts like a second door
+into the same room: the folder stays where it is but becomes reachable under the new path as well.
+Both paths then lead to the same files – nothing is copied, there is no second copy, and whatever you
+change in one place is already changed in the other, because it is the same folder:
+
+```
+/home/username/audiobooks  /srv/mediahub/audiobooks  none  bind,ro  0  0
+```
+
+On the left is the folder that already exists, on the right the place where it should additionally
+appear. The `ro` means that this second door is read-only – the original path is unaffected by it,
+and reading is all MediaHub needs anyway.
+
+After that, all the `.env` needs is `MEDIAHUB_MEDIA=/srv/mediahub`, and the web interface shows
+`usb`, `nas` and `audiobooks` as three folders of a single library.
+
+So that it doesn't stay abstract, here's the whole thing as a picture. This is what the directory
+tree **on the Pi** looks like if you followed the example:
+
+```text
+/
+├── etc/
+│   └── fstab                     this is where the mount entries live
+├── home/
+│   └── username/
+│       ├── ESPuino-Mediahub/     your working folder
+│       │   ├── docker-compose.yml
+│       │   ├── .env              containing: MEDIAHUB_MEDIA=/srv/mediahub
+│       │   └── data/             the database (db.json)
+│       └── audiobooks/           simply sits on the system disk
+└── srv/
+    └── mediahub/                 the root of your library
+        ├── usb/                  USB drive, mounted via fstab
+        ├── nas/                  network share, mounted via fstab
+        └── audiobooks/           second door into ~/audiobooks (bind)
+```
+
+And this is the tree that **MediaHub sees inside the container** – two of those folders come in from
+outside, the rest sits in the image:
+
+```text
+/
+├── app/                          the program, from the image
+├── data/     ◄── ~/ESPuino-Mediahub/data      writable
+└── media/    ◄── /srv/mediahub                read-only
+    ├── usb/
+    ├── nas/
+    └── audiobooks/
+```
+
+So MediaHub knows nothing about your Pi – apart from these two folders. And on the inside they are
+always called `/data` and `/media`, no matter what the paths outside are.
+
+!!! warning "Choose the root generously from the start"
+    Assigned cards store their paths **relative to the root**. If you move the root up a level later
+    on – say from `/mnt/media-library` to `/srv/mediahub`, because a second source joins – all the
+    stored paths change along with it and the existing assignments point into the void. So if you can
+    foresee having more than one source, create the parent folder **right away**, even if only one
+    source is mounted inside it at first. That costs you one folder now and saves reassigning every
+    card later.
+
+What does **not** work is symlinks leading out of the library. MediaHub resolves every path and
+rejects anything that leads outside the root – that's deliberate, because a symlink would otherwise
+let the entire contents of the container be served. So a symlink to `/home/username/audiobooks`
+inside `/srv/mediahub` is turned down; the bind line above is precisely its working replacement.
+
 ### Step 7 · Starting it and taking a look
 
 Now for the big moment:
