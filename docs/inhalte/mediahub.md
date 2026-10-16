@@ -306,9 +306,12 @@ Bei der allerersten Verbindung fragt SSH, ob du dem Gerät vertraust, und zeigt 
 an. Bestätige mit `yes`. Danach wirst du nach dem Passwort gefragt. Dass dabei **nichts** erscheint –
 nicht einmal Sternchen – ist normal und kein Fehler; tippe einfach weiter und drücke Enter.
 
-Begrüßt dich eine Zeile wie `benutzername@mediahub:~ $`, bist du drin. Das `~` steht für dein
-persönliches Verzeichnis, in dem du als normaler Benutzer schreiben darfst; dort legen wir MediaHub
-gleich ab. Mit `exit` kannst du die Sitzung jederzeit beenden.
+Begrüßt dich eine Zeile wie `benutzername@mediahub:~ $`, bist du drin. Das `~` ist die Abkürzung für
+dein Benutzerverzeichnis, ausgeschrieben `/home/benutzername` – das Verzeichnis, in dem du als
+normaler Benutzer schreiben darfst und in dem wir MediaHub gleich ablegen. Die Abkürzung gilt
+überall, nicht nur in der Begrüßungszeile: `cd ~` bringt dich jederzeit dorthin zurück, und
+`~/ESPuino-Mediahub` meint denselben Ordner wie `/home/benutzername/ESPuino-Mediahub`. Mit `exit`
+kannst du die Sitzung jederzeit beenden.
 
 !!! tip "`mediahub.local` funktioniert nicht?"
     Die Auflösung von `.local`-Namen funktioniert nicht in jedem Netz und nicht auf jedem Rechner

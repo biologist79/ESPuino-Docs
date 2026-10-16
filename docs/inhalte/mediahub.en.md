@@ -300,9 +300,11 @@ Confirm with `yes`. After that you're asked for the password. The fact that **no
 while you type it – not even asterisks – is normal and not an error; just keep typing and press
 Enter.
 
-If a line like `username@mediahub:~ $` greets you, you're in. The `~` stands for your personal
-directory, the one you're allowed to write to as an ordinary user; that's where we'll put MediaHub
-shortly. With `exit` you can end the session at any time.
+If a line like `username@mediahub:~ $` greets you, you're in. The `~` is shorthand for your home
+directory, written out `/home/username` – the directory you're allowed to write to as an ordinary
+user, and the one we'll put MediaHub in shortly. The shorthand works everywhere, not just in the
+prompt: `cd ~` takes you back there at any time, and `~/ESPuino-Mediahub` means the same folder as
+`/home/username/ESPuino-Mediahub`. With `exit` you can end the session at any time.
 
 !!! tip "`mediahub.local` doesn't work?"
     Resolving `.local` names doesn't work reliably on every network and every computer. In that

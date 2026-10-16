@@ -314,10 +314,12 @@ ssh utilisateur@mediahub.local
 pendant la saisie – pas même des astérisques – est normal et n'est pas une erreur : continue
 simplement à taper, puis appuie sur Entrée.
 
-Si une ligne du genre `utilisateur@mediahub:~ $` t'accueille, tu es entré. Le `~` désigne ton
-répertoire personnel, celui dans lequel tu as le droit d'écrire en tant qu'utilisateur ordinaire ;
-c'est là que nous installerons MediaHub tout à l'heure. Avec `exit`, tu peux terminer la session à
-tout moment.
+Si une ligne du genre `utilisateur@mediahub:~ $` t'accueille, tu es entré. Le `~` est l'abréviation
+de ton répertoire personnel, soit `/home/utilisateur` en entier – le répertoire dans lequel tu as le
+droit d'écrire en tant qu'utilisateur ordinaire, et celui où nous installerons MediaHub tout à
+l'heure. L'abréviation vaut partout, pas seulement dans la ligne d'accueil : `cd ~` t'y ramène à tout
+moment, et `~/ESPuino-Mediahub` désigne le même dossier que
+`/home/utilisateur/ESPuino-Mediahub`. Avec `exit`, tu peux terminer la session à tout moment.
 
 !!! tip "`mediahub.local` ne fonctionne pas ?"
     La résolution des noms en `.local` ne fonctionne pas de façon fiable sur tous les réseaux ni sur
