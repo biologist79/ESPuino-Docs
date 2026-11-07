@@ -242,11 +242,96 @@ Dans le ClientId et l'identifiant de l'appareil, tu peux utiliser le paramètre 
 automatiquement par l'adresse MAC – précieux avec plusieurs ESPuinos, puisque chaque appareil obtient
 alors de lui-même des topics uniques. Et tu n'as pas à deviner à quoi ressembleront les chemins :
 sous les champs, tu vois un **aperçu en direct des topics** résultant de tes saisies. Lesquels
-existent et ce qu'ils signifient, cela se trouve dans l'[annexe](../referenz/anhang.md#mqtt-topics).
+existent et ce qu'ils signifient, cela se trouve [plus bas](#mqtt-topics).
 
 !!! warning "Redémarrage nécessaire"
     Les modifications des réglages MQTT ne prennent effet qu'après un redémarrage – l'interface le
     propose directement après l'enregistrement.
+
+### Les topics en détail { #mqtt-topics }
+
+ESPuino connaît deux sortes de topics. Avec les **topics de commande**, tu lui dis ce qu'il doit
+faire ; ils se terminent toujours par `/set`. Avec les **topics d'état**, il te dit ce qui se passe ;
+ils portent le même nom, simplement sans `/set`. Beaucoup de sujets existent dans les deux sens : si
+tu envoies `12` à `…/loudness/set`, ESPuino règle le volume puis le renvoie sous `…/loudness`. Ainsi,
+ta domotique reste à jour même quand quelqu'un tourne l'encodeur rotatif directement sur l'appareil.
+
+Les tableaux n'indiquent que le **mot-clé**, c'est-à-dire la dernière partie du chemin. Le topic de
+base et l'identifiant de l'appareil se placent devant. Avec le topic de base `home` et l'identifiant
+`ESPuino-01`, `loudness` devient donc le topic d'état `home/ESPuino-01/loudness` et le topic de
+commande `home/ESPuino-01/loudness/set`. L'aperçu en direct de l'onglet te montre les chemins
+complets pour tes propres réglages.
+
+#### Piloter : topics de commande
+
+| Mot-clé | Ce que tu envoies | Ce qui se passe |
+| --- | --- | --- |
+| `sleep` | `0` ou `OFF` | ESPuino s'éteint. Il ignore les autres valeurs. |
+| `rfid` | identifiant de carte à 12 chiffres, p. ex. `123789456089` | Agit exactement comme si tu avais posé cette carte. Cela vaut aussi pour les cartes de modification et pour les [cartes virtuelles](../referenz/anhang.md#virtuelle-rfid-karten) `900000000001` à `900000000010`. ESPuino répond à un identifiant trop court par un clignotement d'erreur. |
+| `trackcontrol` | `1` stop, `3` lecture/pause, `4` titre suivant, `5` titre précédent, `6` premier titre, `7` dernier titre, `8` dossier suivant, `9` dossier précédent | Pilote la lecture comme les boutons de l'appareil. `8` et `9` ne fonctionnent que dans les modes de lecture récursifs, `2` n'est pas utilisé. |
+| `loudness` | nombre, p. ex. `12` | Règle le volume. Les valeurs hors du volume minimal et maximal configurés (0 à 21 par défaut) sont ramenées à la limite. |
+| `sleep_timer` | minutes (`1` à `255`), `EOT`, `EOP`, `EO5T` ou `0` | Règle la minuterie de sommeil : après autant de minutes, à la fin du titre (`EOT`), à la fin de la playlist (`EOP`) ou après cinq titres (`EO5T`). `0` la désactive, tout comme le même nombre de minutes envoyé une seconde fois. Chaque minuterie fait passer les LED en mode nuit. Cela ne fonctionne que pendant une lecture – sinon, clignotement d'erreur. |
+| `lock_controls` | `ON` ou `OFF` | Verrouille les boutons (et, selon la configuration du firmware, aussi l'encodeur rotatif) ou les déverrouille. |
+| `repeatmode` | `0` pas de répétition, `1` titre, `2` playlist, `3` les deux | Règle la répétition. Sans playlist en cours, ESPuino ignore la commande. |
+| `led_brightness` | `0` à `255` | Règle la luminosité des LED. |
+| `ambient_light` | `ON`/`1` ou `OFF`/`0` | Allume ou éteint l'éclairage d'ambiance. |
+
+En mode récepteur Bluetooth, c'est-à-dire quand un téléphone diffuse vers ESPuino, celui-ci
+n'accepte pas `loudness` ni `trackcontrol` : c'est alors le téléphone qui décide du volume et de la
+lecture.
+
+#### Suivre : topics d'état
+
+| Mot-clé | Contenu | Quand ESPuino l'envoie |
+| --- | --- | --- |
+| `state` | `Online` ou `Offline` | `Online` après chaque connexion au broker, `Offline` à l'extinction. En cas de coupure de courant, de plantage ou de perte du Wi-Fi, c'est le broker qui publie `Offline` – mais seulement après environ une minute et demie sans nouvelles d'ESPuino. |
+| `sleep` | `ON` ou `OFF` | `ON` après chaque connexion au broker, `OFF` à l'extinction. Prévu pour les interrupteurs de ta domotique qui éteignent ESPuino et indiquent en même temps s'il fonctionne. |
+| `track` | titre actuel, avec sa position dans une playlist, p. ex. `(2/10): /mp3/Histoire/Episode 2.mp3` | à chaque changement de titre ; `---` à l'extinction |
+| `pauseplay` | `idle` (rien de chargé), `play` ou `pause` | à chaque changement |
+| `playmode` | numéro du mode de lecture | quand une nouvelle playlist démarre ou se termine. La correspondance numéro/mode se trouve dans l'[annexe](../referenz/anhang.md#playmodi). |
+| `repeatmode` | `0` à `3`, comme pour la commande | à chaque changement |
+| `loudness` | volume actuel | à chaque changement, que ce soit par l'encodeur, l'interface web ou MQTT |
+| `rfid` | identifiant de la dernière carte acceptée | quand une carte a été reconnue et acceptée, y compris une carte envoyée par MQTT |
+| `sleep_timer` | minutes réglées, `EOT`, `EOP`, `EO5T` ou `0` | quand la minuterie est réglée ou désactivée |
+| `sleep_timer_state` | JSON avec mode et temps restant (exemple sous le tableau) | à chaque changement, donc chaque minute pour une minuterie en minutes |
+| `lock_controls` | `ON` ou `OFF` | à chaque changement et après chaque connexion au broker |
+| `led_brightness` | luminosité actuelle des LED (`0` à `255`) | à chaque changement, y compris lors du passage en mode nuit |
+| `ambient_light` | `ON` ou `OFF` | à chaque changement, que ce soit par bouton, carte ou MQTT, et après chaque connexion au broker |
+| `cover_changed` | vide | quand la pochette a peut-être changé. Prévu pour les interfaces qui affichent la pochette et la rechargent alors. |
+| `ipv4` | adresse IP, p. ex. `192.168.2.78` | après chaque connexion au broker |
+| `wifi_rssi` | force du signal Wi-Fi en dBm, p. ex. `-61` | une fois par minute |
+| `software_revision` | révision du firmware | après chaque connexion au broker |
+| `battery_voltage` | tension de la batterie en volts, p. ex. `3.81` | à l'intervalle de contrôle de l'onglet Réglages, la première fois environ dix secondes après le démarrage. Uniquement avec un firmware qui mesure la batterie. |
+| `battery_soc` | charge estimée en pourcentage, p. ex. `83.00` | en même temps que `battery_voltage` |
+
+ESPuino ne dépose aucun message de façon permanente chez le broker (pas de *retain*). Qui s'abonne
+plus tard ne reçoit donc pas automatiquement le dernier état. C'est pourquoi ESPuino renvoie une
+fois l'état actuel des principaux topics après chaque (re)connexion.
+
+#### Exemple : `sleep_timer_state`
+
+`sleep_timer` indique seulement *ce qui* a été réglé. Ce qu'il reste se trouve dans
+`sleep_timer_state`. Ce topic fournit un objet JSON ; selon le mode, soit `remainingMinutes`, soit
+`remainingTracks` est renseigné, l'autre champ vaut `0` :
+
+```json
+{"mode":"OFF","remainingMinutes":0,"remainingTracks":0}
+{"mode":"MINUTES","remainingMinutes":29,"remainingTracks":0}
+{"mode":"EOT","remainingMinutes":0,"remainingTracks":1}
+{"mode":"EO5T","remainingMinutes":0,"remainingTracks":3}
+{"mode":"EOP","remainingMinutes":0,"remainingTracks":7}
+```
+
+`mode` vaut **OFF** (aucune minuterie), **MINUTES** (minutes restantes), **EOT** (fin du titre),
+**EO5T** (après cinq titres) ou **EOP** (fin de la playlist). Pour `EO5T` et `EOP`,
+`remainingTracks` compte les titres restants.
+
+!!! tip "Quand une commande reste sans effet"
+    ESPuino ne s'abonne chez le broker qu'aux topics de commande du tableau ci-dessus. Si une faute
+    de frappe s'est glissée dans un chemin – mauvais topic de base, mauvais identifiant ou `/set`
+    oublié –, le message n'atteint jamais ESPuino, et il ne se passe tout simplement rien. Compare
+    alors le chemin avec l'aperçu en direct. Si un message arrive, il apparaît dans le journal
+    d'ESPuino. Les messages sans contenu sont d'ailleurs ignorés volontairement.
 
 ## Onglet FTP { #tab-ftp }
 

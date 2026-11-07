@@ -15,7 +15,7 @@ sur un tableau de bord.
 
 La configuration se fait dans l'interface web elle-même
 ([chapitre 8 → Onglet MQTT](../bedienung/webinterface.md#tab-mqtt)) ; la liste complète des topics
-disponibles et leur signification se trouve dans l'[annexe → Topics MQTT](../referenz/anhang.md#mqtt-topics).
+disponibles et leur signification se trouve dans le [chapitre 8 → Les topics en détail](../bedienung/webinterface.md#mqtt-topics).
 Pour des systèmes concrets, des guides tout faits existent : pour **Home Assistant**, une
 [intégration sur le forum](https://forum.espuino.de/t/home-assistant-integration/3763) (en
 allemand), et pour **openHAB**, une configuration d'exemple dans le

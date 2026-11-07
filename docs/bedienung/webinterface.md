@@ -237,12 +237,97 @@ In ClientId und Geräte-ID darfst du dabei den Platzhalter `<MAC>` verwenden, de
 die MAC-Adresse ersetzt wird – bei mehreren ESPuinos ist das Gold wert, weil so jedes Gerät von
 selbst eindeutige Topics bekommt. Wie die Pfade am Ende aussehen, musst du dir übrigens nicht
 zusammenreimen: Unterhalb der Felder steht eine **Live-Vorschau der Topics**, die sich aus deinen
-Eingaben ergeben. Welche es überhaupt gibt und was sie bedeuten, steht im
-[Anhang](../referenz/anhang.md#mqtt-topics).
+Eingaben ergeben. Welche es überhaupt gibt und was sie bedeuten, steht
+[weiter unten](#mqtt-topics).
 
 !!! warning "Neustart nötig"
     Änderungen an den MQTT-Einstellungen greifen erst nach einem Neustart – das Interface bietet ihn
     nach dem Speichern gleich an.
+
+### Die Topics im Einzelnen { #mqtt-topics }
+
+ESPuino kennt zwei Sorten von Topics. Über **Kommando-Topics** sagst du ihm, was er tun soll; sie
+enden immer auf `/set`. Über **Status-Topics** erzählt er dir, was gerade los ist; sie tragen
+denselben Namen, nur ohne `/set`. Viele Themen gibt es in beiden Richtungen: Schickst du etwa `12`
+an `…/loudness/set`, stellt ESPuino die Lautstärke ein und meldet sie anschließend unter
+`…/loudness` zurück. So bleibt deine Hausautomatisierung auch dann auf dem richtigen Stand, wenn
+jemand am Gerät selbst am Drehencoder dreht.
+
+In den Tabellen steht jeweils nur das **Schlüsselwort**, also der letzte Teil des Pfads. Davor
+gehören Basis-Topic und Geräte-ID. Mit dem Basis-Topic `home` und der Geräte-ID `ESPuino-01` wird
+aus `loudness` also das Status-Topic `home/ESPuino-01/loudness` und das Kommando-Topic
+`home/ESPuino-01/loudness/set`. Die Live-Vorschau im Tab zeigt dir die vollständigen Pfade für deine
+eigenen Einstellungen.
+
+#### Steuern: Kommando-Topics
+
+| Schlüsselwort | Was du sendest | Was passiert |
+| --- | --- | --- |
+| `sleep` | `0` oder `OFF` | ESPuino schaltet sich aus. Andere Werte ignoriert er. |
+| `rfid` | 12-stellige Karten-ID, z. B. `123789456089` | Wirkt genau so, als hättest du diese Karte aufgelegt. Das gilt auch für Modifikationskarten und für die [virtuellen Karten](../referenz/anhang.md#virtuelle-rfid-karten) `900000000001` bis `900000000010`. Eine zu kurze ID quittiert ESPuino mit Fehler-Blinken. |
+| `trackcontrol` | `1` Stopp, `3` Play/Pause, `4` nächster Titel, `5` vorheriger Titel, `6` erster Titel, `7` letzter Titel, `8` nächster Ordner, `9` vorheriger Ordner | Steuert die Wiedergabe wie die Tasten am Gerät. `8` und `9` wirken nur in den rekursiven Abspielmodi, `2` ist nicht belegt. |
+| `loudness` | Zahl, z. B. `12` | Setzt die Lautstärke. Werte außerhalb der eingestellten Mindest- und Höchstlautstärke (ab Werk 0 bis 21) werden auf die Grenze gesetzt. |
+| `sleep_timer` | Minuten (`1` bis `255`), `EOT`, `EOP`, `EO5T` oder `0` | Stellt den Schlaftimer: nach so vielen Minuten, am Ende des Titels (`EOT`), am Ende der Playlist (`EOP`) oder nach fünf Titeln (`EO5T`). `0` schaltet ihn wieder aus, dieselbe Minutenzahl ein zweites Mal ebenso. Jeder Timer dimmt die LEDs in den Nachtmodus. Das klappt nur, während etwas abgespielt wird – sonst gibt es Fehler-Blinken. |
+| `lock_controls` | `ON` oder `OFF` | Sperrt Tasten (und je nach Firmware-Einstellung auch den Drehencoder) bzw. gibt sie wieder frei. |
+| `repeatmode` | `0` keine Wiederholung, `1` Titel, `2` Playlist, `3` beides | Stellt die Wiederholung ein. Ohne laufende Playlist ignoriert ESPuino das Kommando. |
+| `led_brightness` | `0` bis `255` | Setzt die Helligkeit der LEDs. |
+| `ambient_light` | `ON`/`1` oder `OFF`/`0` | Schaltet das Ambient-Light ein oder aus. |
+
+Im Bluetooth-Empfangsmodus, wenn also ein Handy auf ESPuino streamt, nimmt er `loudness` und
+`trackcontrol` nicht an: Lautstärke und Wiedergabe bestimmt dann das Handy.
+
+#### Mitlesen: Status-Topics
+
+| Schlüsselwort | Inhalt | Wann ESPuino es sendet |
+| --- | --- | --- |
+| `state` | `Online` oder `Offline` | `Online` nach jeder Verbindung mit dem Broker, `Offline` beim Ausschalten. Fällt der Strom weg, stürzt ESPuino ab oder verliert er das WLAN, meldet der Broker selbst `Offline` – allerdings erst, wenn er etwa anderthalb Minuten nichts mehr von ESPuino gehört hat. |
+| `sleep` | `ON` oder `OFF` | `ON` nach jeder Verbindung mit dem Broker, `OFF` beim Ausschalten. Gedacht für Schalter in der Hausautomatisierung, die ESPuino ausschalten und zugleich anzeigen sollen, ob er läuft. |
+| `track` | aktueller Titel, in einer Playlist mit Position, z. B. `(2/10): /mp3/Hörspiel/Folge 2.mp3` | bei jedem Titelwechsel; beim Ausschalten `---` |
+| `pauseplay` | `idle` (nichts geladen), `play` oder `pause` | bei jeder Änderung |
+| `playmode` | Nummer des Abspielmodus | wenn eine neue Playlist startet oder endet. Welche Nummer welcher Modus ist, steht im [Anhang](../referenz/anhang.md#playmodi). |
+| `repeatmode` | `0` bis `3`, wie beim Kommando | bei jeder Änderung |
+| `loudness` | aktuelle Lautstärke | bei jeder Änderung, egal ob per Drehencoder, Webinterface oder MQTT |
+| `rfid` | ID der zuletzt angenommenen Karte | wenn eine Karte erkannt und angenommen wurde, auch eine per MQTT geschickte |
+| `sleep_timer` | eingestellte Minuten, `EOT`, `EOP`, `EO5T` oder `0` | wenn der Timer gestellt oder ausgeschaltet wird |
+| `sleep_timer_state` | JSON mit Modus und Restlaufzeit (Beispiel unterhalb der Tabelle) | bei jeder Änderung, bei einem Minuten-Timer also jede Minute |
+| `lock_controls` | `ON` oder `OFF` | bei jeder Änderung und nach jeder Verbindung mit dem Broker |
+| `led_brightness` | aktuelle LED-Helligkeit (`0` bis `255`) | bei jeder Änderung, auch beim Wechsel in den Nachtmodus |
+| `ambient_light` | `ON` oder `OFF` | bei jeder Änderung, egal ob per Taste, Karte oder MQTT, und nach jeder Verbindung mit dem Broker |
+| `cover_changed` | leer | wenn sich das Cover geändert haben könnte. Gedacht für Oberflächen, die das Cover anzeigen und es dann neu laden. |
+| `ipv4` | IP-Adresse, z. B. `192.168.2.78` | nach jeder Verbindung mit dem Broker |
+| `wifi_rssi` | WLAN-Signalstärke in dBm, z. B. `-61` | einmal pro Minute |
+| `software_revision` | Firmware-Stand | nach jeder Verbindung mit dem Broker |
+| `battery_voltage` | Akkuspannung in Volt, z. B. `3.81` | im Prüfintervall aus dem Tab Einstellungen, zum ersten Mal etwa zehn Sekunden nach dem Start. Nur bei Firmware mit Akkumessung. |
+| `battery_soc` | geschätzter Ladestand in Prozent, z. B. `83.00` | zusammen mit `battery_voltage` |
+
+ESPuino legt keine Nachricht dauerhaft beim Broker ab (kein *retain*). Wer sich erst später
+anmeldet, bekommt also nicht automatisch den letzten Stand. Deshalb schickt ESPuino nach jeder
+(Wieder-)Verbindung den aktuellen Zustand der wichtigsten Topics einmal komplett hinterher.
+
+#### Beispiel: `sleep_timer_state`
+
+`sleep_timer` meldet nur, *was* eingestellt wurde. Wie viel noch übrig ist, steht in
+`sleep_timer_state`. Das Topic liefert ein JSON-Objekt; je nach Modus ist entweder
+`remainingMinutes` oder `remainingTracks` gesetzt, das jeweils andere Feld ist `0`:
+
+```json
+{"mode":"OFF","remainingMinutes":0,"remainingTracks":0}
+{"mode":"MINUTES","remainingMinutes":29,"remainingTracks":0}
+{"mode":"EOT","remainingMinutes":0,"remainingTracks":1}
+{"mode":"EO5T","remainingMinutes":0,"remainingTracks":3}
+{"mode":"EOP","remainingMinutes":0,"remainingTracks":7}
+```
+
+`mode` ist einer von **OFF** (kein Timer), **MINUTES** (Restminuten), **EOT** (Ende des Titels),
+**EO5T** (nach fünf Titeln) und **EOP** (Ende der Playlist). Bei `EO5T` und `EOP` zählt
+`remainingTracks` die verbleibenden Titel.
+
+!!! tip "Wenn ein Kommando nichts bewirkt"
+    ESPuino abonniert beim Broker nur genau die Kommando-Topics aus der Tabelle oben. Hat sich in
+    einem Pfad ein Tippfehler eingeschlichen – falsches Basis-Topic, falsche Geräte-ID oder das
+    `/set` vergessen –, erreicht die Nachricht ESPuino gar nicht erst, und es passiert schlicht
+    nichts. Vergleiche den Pfad dann mit der Live-Vorschau. Kommt eine Nachricht an, steht sie im
+    Log von ESPuino. Nachrichten ohne Inhalt verwirft er übrigens absichtlich.
 
 ## Tab FTP { #tab-ftp }
 

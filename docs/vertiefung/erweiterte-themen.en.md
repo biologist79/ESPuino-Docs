@@ -14,7 +14,7 @@ dashboard.
 
 You set this up in the web interface itself
 ([chapter 8 → MQTT tab](../bedienung/webinterface.md#tab-mqtt)); which topics exist and what they
-mean is listed in full in the [appendix → MQTT topics](../referenz/anhang.md#mqtt-topics). For
+mean is listed in full in [chapter 8 → The topics in detail](../bedienung/webinterface.md#mqtt-topics). For
 specific systems, ready-made guides exist: for **Home Assistant**, an
 [integration in the forum](https://forum.espuino.de/t/home-assistant-integration/3763)
 (German-language), and for **openHAB**, an example configuration in the

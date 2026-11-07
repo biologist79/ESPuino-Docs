@@ -20,7 +20,7 @@ dans `backup.txt`.
 | Radio web | 8 | `WEBSTREAM` |
 | m3u local | 11 | `LOCAL_M3U` |
 | MediaHub | 18 | `MEDIAHUB` |
-| Interne | 0 / 10 | `NO_PLAYLIST` / `BUSY` |
+| Interne | 0 / 10 | `NO_PLAYLIST` / `PLAYLIST_BUSY` |
 
 ## Cartes de modification { #modifikationskarten }
 
@@ -76,51 +76,6 @@ Leur utilité et la façon de les déclencher sont expliquées au
 [chapitre 12 → cartes RFID virtuelles](../vertiefung/erweiterte-themen.md#virtuelle-rfid-karten).
 
 Les identifiants `241`–`250` correspondent aux cartes `900000000001` … `900000000010`.
-
-## Topics MQTT { #mqtt-topics }
-
-Modèle : `[<base_topic>/]device_id/topic[/<setter_token>]`. Les commandes utilisent le jeton de
-réglage (`set` par défaut), les topics d'état sont publiés sans lui. Tous les topics sont **non
-retenus (non-retained)**.
-
-| Topic | Direction / plage de valeurs | Signification |
-| --- | --- | --- |
-| `sleep` | Cmnd `0`/`OFF` ; State `ON`/`OFF` | Extinction / état d'alimentation |
-| `rfid` | 12 chiffres | Émuler une carte / carte actuelle |
-| `trackcontrol` | 1–9 | Stop/Play/Pause/Next/Prev/First/Last/dossier± |
-| `loudness` | 0…max | Définir/signaler le volume |
-| `sleep_timer` | `EOP`/`EOT`/`EO5T`/minutes/`0` | Définir/signaler la minuterie de sommeil |
-| `sleep_timer_state` | JSON (état) | `{mode,remainingMinutes,remainingTracks}` ; mode = OFF/MINUTES/EOT/EOP/EO5T |
-| `lock_controls` | `ON`/`OFF` | Verrouiller les commandes |
-| `repeatmode` | 0–3 | aucune / titre / playlist / les deux |
-| `led_brightness` | 0–255 | Luminosité des Neopixels |
-| `ambient_light` | `ON`/`OFF` | Éclairage d'ambiance |
-| `track` | State | Titre actuel |
-| `cover_changed` | State | La pochette a peut-être changé |
-| `state` | `Online`/`Offline` | État de fonctionnement |
-| `ipv4` | State | Adresse IP |
-| `pauseplay` | `idle`/`play`/`pause` | État de lecture |
-| `playmode` | State | Mode de lecture numérique |
-| `wifi_rssi` | State | Signal Wi-Fi (dBm) |
-| `software_revision` | State | Révision du firmware |
-| `battery_voltage` / `battery_soc` | State | Tension / charge % (si la mesure de batterie est active) |
-
-### Exemple : `sleep_timer_state`
-
-Le topic `sleep_timer_state` renvoie la minuterie de sommeil sous forme d'objet JSON. Selon le mode,
-soit `remainingMinutes`, soit `remainingTracks` est renseigné (l'autre champ vaut `0`) :
-
-```json
-{"mode":"OFF","remainingMinutes":0,"remainingTracks":0}
-{"mode":"MINUTES","remainingMinutes":29,"remainingTracks":0}
-{"mode":"EOT","remainingMinutes":0,"remainingTracks":1}
-{"mode":"EO5T","remainingMinutes":0,"remainingTracks":3}
-{"mode":"EOP","remainingMinutes":0,"remainingTracks":7}
-```
-
-`mode` vaut soit **OFF** (aucune minuterie), **MINUTES** (minutes restantes), **EOT** (fin du
-titre), **EO5T** (après cinq titres) ou **EOP** (fin de la playlist). Pour `EO5T`/`EOP`,
-`remainingTracks` compte les titres restants.
 
 ## API REST
 

@@ -18,7 +18,7 @@ technical IDs, as they appear in MQTT messages, in the REST API, and in `backup.
 | Web radio | 8 | `WEBSTREAM` |
 | Local m3u | 11 | `LOCAL_M3U` |
 | MediaHub | 18 | `MEDIAHUB` |
-| Internal | 0 / 10 | `NO_PLAYLIST` / `BUSY` |
+| Internal | 0 / 10 | `NO_PLAYLIST` / `PLAYLIST_BUSY` |
 
 ## Modification cards { #modifikationskarten }
 
@@ -74,50 +74,6 @@ What they're good for and how to trigger them is explained in
 [chapter 12 → virtual RFID cards](../vertiefung/erweiterte-themen.md#virtuelle-rfid-karten).
 
 IDs `241`–`250` correspond to cards `900000000001` … `900000000010`.
-
-## MQTT topics { #mqtt-topics }
-
-Pattern: `[<base_topic>/]device_id/topic[/<setter_token>]`. Commands use the setter token (default
-`set`), status topics are published without it. All topics are **non-retained**.
-
-| Topic | Direction / value range | Meaning |
-| --- | --- | --- |
-| `sleep` | Cmnd `0`/`OFF`; State `ON`/`OFF` | Power off / power state |
-| `rfid` | 12 digits | Emulate a card / current card |
-| `trackcontrol` | 1–9 | Stop/Play/Pause/Next/Prev/First/Last/folder± |
-| `loudness` | 0…max | Set/report volume |
-| `sleep_timer` | `EOP`/`EOT`/`EO5T`/minutes/`0` | Set/report sleep timer |
-| `sleep_timer_state` | JSON (state) | `{mode,remainingMinutes,remainingTracks}`; mode = OFF/MINUTES/EOT/EOP/EO5T |
-| `lock_controls` | `ON`/`OFF` | Lock controls |
-| `repeatmode` | 0–3 | none / track / playlist / both |
-| `led_brightness` | 0–255 | Neopixel brightness |
-| `ambient_light` | `ON`/`OFF` | Ambient light |
-| `track` | State | Current track |
-| `cover_changed` | State | Cover art may have changed |
-| `state` | `Online`/`Offline` | Operating state |
-| `ipv4` | State | IP address |
-| `pauseplay` | `idle`/`play`/`pause` | Playback status |
-| `playmode` | State | Numeric playback mode |
-| `wifi_rssi` | State | Wi-Fi signal (dBm) |
-| `software_revision` | State | Firmware revision |
-| `battery_voltage` / `battery_soc` | State | Voltage / charge % (if battery measurement is active) |
-
-### Example: `sleep_timer_state`
-
-The `sleep_timer_state` topic reports the sleep timer as a JSON object. Depending on the mode,
-either `remainingMinutes` or `remainingTracks` is set (the other field is `0`):
-
-```json
-{"mode":"OFF","remainingMinutes":0,"remainingTracks":0}
-{"mode":"MINUTES","remainingMinutes":29,"remainingTracks":0}
-{"mode":"EOT","remainingMinutes":0,"remainingTracks":1}
-{"mode":"EO5T","remainingMinutes":0,"remainingTracks":3}
-{"mode":"EOP","remainingMinutes":0,"remainingTracks":7}
-```
-
-`mode` is one of **OFF** (no timer), **MINUTES** (minutes remaining), **EOT** (end of title),
-**EO5T** (after five titles), and **EOP** (end of playlist). For `EO5T`/`EOP`, `remainingTracks`
-counts the remaining titles.
 
 ## REST API
 

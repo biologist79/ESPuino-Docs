@@ -15,7 +15,7 @@ Hausautomatisierung einbinden, etwa um ihn abends automatisch leiser zu stellen 
 
 Die Einrichtung selbst nimmst du im Webinterface vor
 ([Kapitel 8 → Tab MQTT](../bedienung/webinterface.md#tab-mqtt)); welche Themen (Topics) es gibt und
-was sie bedeuten, steht vollständig im [Anhang → MQTT-Topics](../referenz/anhang.md#mqtt-topics). Für
+was sie bedeuten, steht vollständig im [Kapitel 8 → Die Topics im Einzelnen](../bedienung/webinterface.md#mqtt-topics). Für
 konkrete Systeme gibt es fertige Hilfestellungen: für **Home Assistant** eine
 [Integration im Forum](https://forum.espuino.de/t/home-assistant-integration/3763), und für **openHAB**
 eine Beispiel-Konfiguration im [openHAB-Verzeichnis des Repos](https://github.com/biologist79/ESPuino/tree/master/openHAB).

@@ -19,7 +19,7 @@ technischen IDs, wie sie in MQTT-Nachrichten, in der REST-API und in `backup.txt
 | Webradio | 8 | `WEBSTREAM` |
 | Lokale m3u | 11 | `LOCAL_M3U` |
 | MediaHub | 18 | `MEDIAHUB` |
-| intern | 0 / 10 | `NO_PLAYLIST` / `BUSY` |
+| intern | 0 / 10 | `NO_PLAYLIST` / `PLAYLIST_BUSY` |
 
 ## Modifikationskarten { #modifikationskarten }
 
@@ -75,50 +75,6 @@ Wozu sie gut sind und wie man sie auslöst, erklärt
 [Kapitel 12 → Virtuelle RFID-Karten](../vertiefung/erweiterte-themen.md#virtuelle-rfid-karten).
 
 IDs `241`–`250` entsprechen den Karten `900000000001` … `900000000010`.
-
-## MQTT-Topics { #mqtt-topics }
-
-Muster: `[<base_topic>/]device_id/topic[/<setter_token>]`. Kommandos nutzen den Setter-Token
-(Default `set`), Status-Topics werden ohne ihn veröffentlicht. Alle Topics **non-retained**.
-
-| Topic | Richtung / Wertebereich | Bedeutung |
-| --- | --- | --- |
-| `sleep` | Cmnd `0`/`OFF`; State `ON`/`OFF` | Ausschalten / Power-State |
-| `rfid` | 12 Ziffern | Karte emulieren / aktuelle Karte |
-| `trackcontrol` | 1–9 | Stop/Play/Pause/Next/Prev/First/Last/Ordner± |
-| `loudness` | 0…max | Lautstärke setzen/melden |
-| `sleep_timer` | `EOP`/`EOT`/`EO5T`/Minuten/`0` | Sleep-Timer setzen/melden |
-| `sleep_timer_state` | JSON (State) | `{mode,remainingMinutes,remainingTracks}`; mode = OFF/MINUTES/EOT/EOP/EO5T |
-| `lock_controls` | `ON`/`OFF` | Bedienelemente sperren |
-| `repeatmode` | 0–3 | kein / Track / Playlist / beide |
-| `led_brightness` | 0–255 | Neopixel-Helligkeit |
-| `ambient_light` | `ON`/`OFF` | Ambient-Light |
-| `track` | State | aktueller Track |
-| `cover_changed` | State | Cover evtl. geändert |
-| `state` | `Online`/`Offline` | Betriebszustand |
-| `ipv4` | State | IP-Adresse |
-| `pauseplay` | `idle`/`play`/`pause` | Wiedergabestatus |
-| `playmode` | State | numerischer Playmode |
-| `wifi_rssi` | State | WLAN-Signal (dBm) |
-| `software_revision` | State | Firmware-Revision |
-| `battery_voltage` / `battery_soc` | State | Spannung / Ladung % (falls Batteriemessung) |
-
-### Beispiel: `sleep_timer_state`
-
-Das Topic `sleep_timer_state` liefert den Schlaftimer als ein JSON-Objekt. Je nach Modus ist entweder
-`remainingMinutes` oder `remainingTracks` gesetzt (das jeweils andere Feld ist `0`):
-
-```json
-{"mode":"OFF","remainingMinutes":0,"remainingTracks":0}
-{"mode":"MINUTES","remainingMinutes":29,"remainingTracks":0}
-{"mode":"EOT","remainingMinutes":0,"remainingTracks":1}
-{"mode":"EO5T","remainingMinutes":0,"remainingTracks":3}
-{"mode":"EOP","remainingMinutes":0,"remainingTracks":7}
-```
-
-`mode` ist einer von **OFF** (kein Timer), **MINUTES** (Restminuten), **EOT** (Ende des Titels),
-**EO5T** (nach fünf Titeln) und **EOP** (Ende der Playlist). Bei `EO5T`/`EOP` zählt `remainingTracks`
-die verbleibenden Titel.
 
 ## REST-API
 
